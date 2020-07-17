@@ -1,5 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState, useEffect } from 'react';
+import Dialog, { DialogContent } from 'react-native-popup-dialog';
 import {
   StyleSheet,
   Text,
@@ -7,6 +8,7 @@ import {
   ActivityIndicator,
   FlatList,
   Appearance,
+  Linking
 } from 'react-native';
 import { Header, Input } from 'react-native-elements';
 
@@ -23,7 +25,6 @@ export default function App() {
       flex: 1,
     },
   });
-
   useEffect(() => {
     if (text.length === 5) {
       fetch(`http://uni.hys.cz/includes/get-api?user=${text}`)
@@ -61,9 +62,14 @@ export default function App() {
           defaultValue={text}
           errorStyle={{ color: 'red' }}
           autoCapitalize="none"
-          errorMessage="ENTER A VALID CODE HERE"
+          autoFocus={true}
+          value={text.replace(" ", "")}
+          enablesReturnKeyAutomatically={true}
+          onSubmitEditing={() => {!isLoading ? Linking.openURL(data) : alert("bruh")}}
         />
+        
         <View style={{ padding: 24 }}>
+
           <Text>{text}</Text>
         </View>
         <View style={{ padding: 24 }}>
