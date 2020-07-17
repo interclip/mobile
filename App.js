@@ -16,6 +16,8 @@ export default function App() {
       .then((json) => setData(json))
       .catch((error) => console.error(error))
       .finally(() => setLoading(false));
+      } else {
+        setLoading(true);
       }
   }, [text]);
 
