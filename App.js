@@ -6,9 +6,9 @@ import {
   Text,
   View,
   ActivityIndicator,
-  Linking
+  Linking,
 } from 'react-native';
-import { Header, Input } from 'react-native-elements';
+import { Header, Input, Icon } from 'react-native-elements';
 
 export default function App() {
   const [isLoading, setLoading] = useState(true);
@@ -37,20 +37,26 @@ export default function App() {
   return (
     <View>
       <Header
-        centerComponent={{
-          text: 'Interclip',
-          style: { color: '#fff', fontSize: 32 },
-        }}
         containerStyle={{
           backgroundColor: '#333333',
           justifyContent: 'space-around',
-        }}
-      />
+        }}>
+        <Icon
+          onPress={() => {
+            alert('Qr code more like bruhr code');
+          }}
+          type="font-awesome"
+          name="qrcode"
+          color="#fff"
+        />
+
+        <Text style={{ color: 'white', fontSize: 30 }}>Interclip</Text>
+      </Header>
 
       <View>
         <Input
           style={styles.container}
-          placeholder="Ur code here"
+          placeholder="Your code here"
           maxLength={5}
           inputStyle={{ fontSize: 50 }}
           autoCorrect={false}
@@ -60,17 +66,31 @@ export default function App() {
           errorStyle={{ color: 'red' }}
           autoCapitalize="none"
           autoFocus={true}
-          value={text.replace(" ", "").toLowerCase()}
+          value={text.replace(' ', '').toLowerCase()}
           enablesReturnKeyAutomatically={true}
-          onSubmitEditing={() => {!isLoading ? Linking.openURL(data) : alert("bruh")}}
+          onSubmitEditing={() => {
+            !isLoading
+              ? Linking.openURL(data)
+              : alert(
+                  'No URL set yet, make sure your code is 5 characters long!'
+                );
+          }}
         />
-        
-        <View style={{ padding: 24 }}>
 
+        <View style={{ padding: 24 }}>
           <Text>{text}</Text>
         </View>
         <View style={{ padding: 24 }}>
-          {isLoading ? <ActivityIndicator /> : <Text>{data}</Text>}
+          {isLoading ? (
+            <Text></Text>
+          ) : (
+            <Text
+              onPress={() => {
+                Linking.openURL(data);
+              }}>
+              {data}
+            </Text>
+          )}
         </View>
         <StatusBar style="auto" />
       </View>
