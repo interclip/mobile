@@ -1,8 +1,14 @@
 import { StatusBar } from 'expo-status-bar';
-import React, {useState, useEffect} from 'react';
-import { StyleSheet, Text, View, ActivityIndicator, FlatList, Appearance  } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import {
+  StyleSheet,
+  Text,
+  View,
+  ActivityIndicator,
+  FlatList,
+  Appearance,
+} from 'react-native';
 import { Header, Input } from 'react-native-elements';
-
 
 export default function App() {
   const [isLoading, setLoading] = useState(true);
@@ -10,25 +16,24 @@ export default function App() {
   const [text, setText] = useState('');
   const colorScheme = Appearance.getColorScheme();
 
-
   const styles = StyleSheet.create({
     container: {
-    alignItems: 'center', // Centered horizontally
-    justifyContent: 'center',
-    flex:1
-    }
+      alignItems: 'center', // Centered horizontally
+      justifyContent: 'center',
+      flex: 1,
+    },
   });
 
-    useEffect(() => {
-      if(text.length === 5) {
-    fetch(`http://uni.hys.cz/includes/get-api?user=${text}`)
-      .then((response) => response.text())
-      .then((json) => setData(json))
-      .catch((error) => console.error(error))
-      .finally(() => setLoading(false));
-      } else {
-        setLoading(true);
-      }
+  useEffect(() => {
+    if (text.length === 5) {
+      fetch(`http://uni.hys.cz/includes/get-api?user=${text}`)
+        .then((response) => response.text())
+        .then((json) => setData(json))
+        .catch((error) => console.error(error))
+        .finally(() => setLoading(false));
+    } else {
+      setLoading(true);
+    }
   }, [text]);
 
   return (
@@ -44,35 +49,28 @@ export default function App() {
         }}
       />
 
-        <View>
-          <Input style={styles.container}
-          placeholder='Ur code here'
+      <View>
+        <Input
+          style={styles.container}
+          placeholder="Ur code here"
           maxLength={5}
-          inputStyle={{fontSize: 50}}
+          inputStyle={{ fontSize: 50 }}
           autoCorrect={false}
-          returnKeyType={"go"}
-          onChangeText={text => setText(text)}
+          returnKeyType={'go'}
+          onChangeText={(text) => setText(text)}
           defaultValue={text}
           errorStyle={{ color: 'red' }}
-          autoCapitalize = 'none'
-          errorMessage='ENTER A VALID CODE HERE'
+          autoCapitalize="none"
+          errorMessage="ENTER A VALID CODE HERE"
         />
-      <View style={{padding: 24 }}>
-        <Text>
-          {text}
-          </Text>
+        <View style={{ padding: 24 }}>
+          <Text>{text}</Text>
         </View>
-            <View style={{ padding: 24 }}>
-      {isLoading ? <ActivityIndicator/> : (
-          <Text>
-            {data}
-          </Text>
-      )}
+        <View style={{ padding: 24 }}>
+          {isLoading ? <ActivityIndicator /> : <Text>{data}</Text>}
+        </View>
+        <StatusBar style="auto" />
+      </View>
     </View>
-         <StatusBar style="auto" />
-      </View>
-      </View>
-             
   );
 }
-
