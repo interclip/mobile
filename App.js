@@ -63,7 +63,7 @@ export default function App() {
           errorStyle={{ color: 'red' }}
           autoCapitalize="none"
           autoFocus={true}
-          value={text.replace(" ", "")}
+          value={text.replace(" ", "").toLowerCase()}
           enablesReturnKeyAutomatically={true}
           onSubmitEditing={() => {!isLoading ? Linking.openURL(data) : alert("bruh")}}
         />
