@@ -16,7 +16,6 @@ export default function App() {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   const [text, setText] = useState('');
-  const colorScheme = Appearance.getColorScheme();
 
   const styles = StyleSheet.create({
     container: {
