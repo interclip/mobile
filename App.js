@@ -6,8 +6,6 @@ import {
   Text,
   View,
   ActivityIndicator,
-  FlatList,
-  Appearance,
   Linking
 } from 'react-native';
 import { Header, Input } from 'react-native-elements';
