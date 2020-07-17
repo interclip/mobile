@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {useState, useEffect} from 'react';
-import { StyleSheet, Text, View, ActivityIndicator, FlatList } from 'react-native';
+import { StyleSheet, Text, View, ActivityIndicator, FlatList, Appearance  } from 'react-native';
 import { Header, Input } from 'react-native-elements';
 
 
@@ -8,6 +8,16 @@ export default function App() {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   const [text, setText] = useState('');
+  const colorScheme = Appearance.getColorScheme();
+
+
+  const styles = StyleSheet.create({
+    container: {
+    alignItems: 'center', // Centered horizontally
+    justifyContent: 'center',
+    flex:1
+    }
+  });
 
     useEffect(() => {
       if(text.length === 5) {
@@ -44,6 +54,7 @@ export default function App() {
           onChangeText={text => setText(text)}
           defaultValue={text}
           errorStyle={{ color: 'red' }}
+          autoCapitalize = 'none'
           errorMessage='ENTER A VALID CODE HERE'
         />
       <View style={{padding: 24 }}>
@@ -65,10 +76,3 @@ export default function App() {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-   alignItems: 'center', // Centered horizontally
-   justifyContent: 'center',
-   flex:1
-  },
-});
