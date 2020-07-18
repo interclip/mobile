@@ -1,6 +1,7 @@
+/* 1st party libraries and dependencies: react, react native and Expo stuff */
+
 import { StatusBar } from 'expo-status-bar';
 import React, { useState, useEffect } from 'react';
-import Dialog, { DialogContent } from 'react-native-popup-dialog';
 import {
   StyleSheet,
   Text,
@@ -9,26 +10,59 @@ import {
   Linking,
   Clipboard,
 } from 'react-native';
-import { Header, Input, Icon } from 'react-native-elements';
 
+/* 3rd party libraries */
+
+import { Header, Input, Icon } from 'react-native-elements';
+import Dialog, { DialogContent } from 'react-native-popup-dialog';
+
+/* Function and config */
 const checkError = (msg) => {
   return msg.indexOf('Error: ') > -1;
 };
 
-export default function App() {
-  const [isLoading, setLoading] = useState(true);
-  const [data, setData] = useState([]);
-  const [text, setText] = useState('');
+const ValidationMsg = (txt) => {
+  if ((txt.length < config.codeMaxLength) & (txt.length > 0)) {
+    return `${config.codeMaxLength - txt.length} more characters please UwU`;
+  } else if (txt.length === 0) {
+    return `Nothing entered.`;
+  } else {
+    if (!txt.match(config.charRegex))
+      return `There are some characters, that shouldn't be there.`;
+  }
+};
 
-  const styles = StyleSheet.create({
-    container: {
-      alignItems: 'center', // Centered horizontally
-      justifyContent: 'center',
-      flex: 1,
-    },
-  });
+const config = {
+  codeMaxLength: 5, // The code's length has to be always 5 characters
+  charRegex: new RegExp(''), // Only allow ascii characters to be entered as the code
+};
+/* Styles */
+const styles = StyleSheet.create({
+  container: {
+    alignItems: 'center', // Centered horizontally
+    justifyContent: 'center',
+    flex: 1,
+  },
+});
+/* Colors and stuff */
+const colors = {
+  bg: 'white',
+  headerBg: '#333333',
+  text: 'black',
+  errorColor: '#f44336',
+  light: 'white',
+};
+
+/* App component */
+
+export default function App() {
+  /* Variable set */
+  const [isLoading, setLoading] = useState(true); // Loading status => only show the responce of the API after the request completes
+  const [data, setData] = useState(''); // Dynamically loaded data from the Interclip REST API
+  const [text, setText] = useState(''); // The code entered in the <Input>
+
   useEffect(() => {
-    if (text.length === 5) {
+    if (text.length === config.codeMaxLength) {
       fetch(`http://uni.hys.cz/includes/get-api?user=${text}`)
         .then((response) => response.text())
         .then((json) => setData(json))
@@ -43,16 +77,16 @@ export default function App() {
     <View>
       <Header
         containerStyle={{
-          backgroundColor: '#333333',
+          backgroundColor: colors.headerBg,
           justifyContent: 'space-around',
         }}>
         <Icon
           onPress={() => {
             alert('QR code more like bruh-r code');
           }}
-          type="font-awesome"
-          name="qrcode"
-          color="#fff"
+          type="font-awesome" // The icon is loaded from the font awesome icon library
+          name="qrcode" // Icon fa-qrcode
+          color="#fff" // White color for contrast on the Header
         />
 
         <Text style={{ color: 'white', fontSize: 30 }}>Interclip</Text>
@@ -62,7 +96,7 @@ export default function App() {
         <Input
           style={styles.container}
           placeholder="Your code here"
-          maxLength={5}
+          maxLength={config.codeMaxLength}
           inputStyle={{ fontSize: 50 }}
           autoCorrect={false}
           returnKeyType={'go'}
@@ -77,13 +111,13 @@ export default function App() {
             !isLoading
               ? Linking.openURL(data)
               : alert(
-                  'No URL set yet, make sure your code is 5 characters long!'
+                  `No URL set yet, make sure your code is ${config.codeMaxLength} characters long!`
                 );
           }}
         />
 
         <View style={{ padding: 24 }}>
-          <Text>{text}</Text>
+          <Text>{ValidationMsg(text)}</Text>
         </View>
         <View style={{ padding: 24 }}>
           {isLoading ? (
@@ -95,7 +129,8 @@ export default function App() {
                 alert('Copied to Clipboard!');
               }}
               style={{
-                color: checkError(data) ? 'red' : 'black',
+                color: checkError(data) ? colors.light : colors.text,
+                backgroundColor: checkError(data) ? colors.errorColor : null,
                 fontSize: 20,
               }}>
               {checkError(data) ? "This code doesn't seem to exist 🤔" : data}
