@@ -132,10 +132,10 @@ export default function App() {
               }}
               style={{
                 color: checkError(data) ? colors.light : colors.text,
-                backgroundColor: checkError(data) ? colors.errorColor : null,
+                backgroundColor: checkError(data) & !ValidationMsg(text) ? colors.errorColor : null,
                 fontSize: 20,
               }}>
-              {checkError(data) ? "This code doesn't seem to exist 🤔" : data}
+              {!ValidationMsg(text) && (checkError(data) ? "This code doesn't seem to exist 🤔" : data)}
             </Text>
           )}
         </View>
