@@ -7,8 +7,13 @@ import {
   View,
   ActivityIndicator,
   Linking,
+  Clipboard,
 } from 'react-native';
 import { Header, Input, Icon } from 'react-native-elements';
+
+const checkError = (msg) => {
+  return msg.indexOf('Error: ') > -1;
+};
 
 export default function App() {
   const [isLoading, setLoading] = useState(true);
@@ -43,7 +48,7 @@ export default function App() {
         }}>
         <Icon
           onPress={() => {
-            alert('Qr code more like bruhr code');
+            alert('QR code more like bruh-r code');
           }}
           type="font-awesome"
           name="qrcode"
@@ -86,13 +91,18 @@ export default function App() {
           ) : (
             <Text
               onPress={() => {
-                Linking.openURL(data);
+                Clipboard.setString(data);
+                alert('Copied to Clipboard!');
+              }}
+              style={{
+                color: checkError(data) ? 'red' : 'black',
+                fontSize: 20,
               }}>
-              {data}
+              {checkError(data) ? "This code doesn't seem to exist 🤔" : data}
             </Text>
           )}
         </View>
-        <StatusBar style="auto" />
+        <StatusBar style="light" />
       </View>
     </View>
   );
