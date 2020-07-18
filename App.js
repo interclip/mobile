@@ -14,7 +14,6 @@ import {
 /* 3rd party libraries */
 
 import { Header, Input, Icon } from 'react-native-elements';
-import Dialog, { DialogContent } from 'react-native-popup-dialog';
 
 /* Function and config */
 const checkError = (msg) => {
