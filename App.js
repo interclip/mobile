@@ -35,7 +35,7 @@ const ValidationMsg = (txt) => {
 
 const config = {
   codeMaxLength: 5, // The code's length has to be always 5 characters
-  charRegex: new RegExp(''), // Only allow ascii characters to be entered as the code
+  charRegex: new RegExp('([a-z]|[0-9]|[A-Z]){5}'), // Only allow ascii characters to be entered as the code
 };
 /* Styles */
 const styles = StyleSheet.create({
