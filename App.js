@@ -23,8 +23,9 @@ const checkError = (msg) => {
 
 const ValidationMsg = (txt) => {
   txt = txt.replace(' ', '').toLowerCase();
+  const diff = config.codeMaxLength - txt.length;
   if ((txt.length < config.codeMaxLength) & (txt.length > 0)) {
-    return `${config.codeMaxLength - txt.length} more characters please UwU`;
+    return `${diff} more character${diff === 1 ? "": "s"} please`;
   } else if (txt.length === 0) {
     return `Just type in the code above and see the magic happen.`;
   } else {
