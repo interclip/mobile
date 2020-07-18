@@ -72,6 +72,8 @@ export default function App() {
   const [isLoading, setLoading] = useState(true); // Loading status => only show the responce of the API after the request completes
   const [data, setData] = useState(''); // Dynamically loaded data from the Interclip REST API
   const [text, setText] = useState(''); // The code entered in the <Input>
+  const [progress, setProgress] = useState('');
+
   useEffect(() => {
     if (text.length === config.codeMaxLength) {
       setText(text.replace(' ', '').toLowerCase());
@@ -148,9 +150,13 @@ export default function App() {
             <Text></Text>
           ) : (
             <Text
-              onPress={() => {
+              onLongPress={() => {
+                /* Handle functionality, when user presses for a longer period of time */
                 Clipboard.setString(data);
                 alert('Copied to Clipboard!');
+              }}
+              onPress={() => {
+                Linking.openURL(data)
               }}
               style={{
                 color: checkError(data) ? colors.light : colors.text,
