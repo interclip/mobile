@@ -14,6 +14,7 @@ import {
 /* 3rd party libraries */
 
 import { Header, Input, Icon } from 'react-native-elements';
+import Dialog, { DialogContent } from 'react-native-popup-dialog';
 
 /* Function and config */
 const checkError = (msg) => {
@@ -21,10 +22,11 @@ const checkError = (msg) => {
 };
 
 const ValidationMsg = (txt) => {
+  txt = txt.replace(' ', '').toLowerCase();
   if ((txt.length < config.codeMaxLength) & (txt.length > 0)) {
     return `${config.codeMaxLength - txt.length} more characters please UwU`;
   } else if (txt.length === 0) {
-    return `Nothing entered.`;
+    return `Just type in the code above and see the magic happen.`;
   } else {
     if (!txt.match(config.charRegex))
       return `There are some characters, that shouldn't be there.`;
@@ -59,9 +61,9 @@ export default function App() {
   const [isLoading, setLoading] = useState(true); // Loading status => only show the responce of the API after the request completes
   const [data, setData] = useState(''); // Dynamically loaded data from the Interclip REST API
   const [text, setText] = useState(''); // The code entered in the <Input>
-
   useEffect(() => {
     if (text.length === config.codeMaxLength) {
+      setText(text.replace(' ', '').toLowerCase())
       fetch(`http://uni.hys.cz/includes/get-api?user=${text}`)
         .then((response) => response.text())
         .then((json) => setData(json))
