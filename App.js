@@ -2,11 +2,7 @@
 
 import { StatusBar } from 'expo-status-bar';
 
-import React, { useState, useEffect } from 'react';
-
 /* 3rd party libraries */
-
-import { Header, Input, Icon } from 'react-native-elements';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';

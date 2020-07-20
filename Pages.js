@@ -1,21 +1,17 @@
 import { StatusBar } from 'expo-status-bar';
 import { BarCodeScanner } from 'expo-barcode-scanner';
-import { NavigationContainer } from '@react-navigation/native';
 
 import React, { useState, useEffect } from 'react';
 import {
   StyleSheet,
   Text,
   View,
-  ActivityIndicator,
   Linking,
   Clipboard,
   Image,
   Dimensions,
   Platform,
-  Button,
   Alert,
-  DynamicColorIOS,
   Vibration,
 } from 'react-native';
 
