@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 
+
 import React, { useState, useEffect } from 'react';
 import {
   StyleSheet,
@@ -69,19 +70,6 @@ const colors = {
   errorColor: '#f44336',
   light: 'white',
 };
-/*
-if(Platform.OS === "ios") {
-const customDynamicTextColor = DynamicColorIOS({
-  dark: '#fff',
-  light: colors.text
-});
-
-const dynamicBgColor = DynamicColorIOS({
-  dark: '#444444',
-  light: colors.bg
-});
-}
-*/
 export function HomeScreen({ navigation }) {
   /* Variable set */
   const [isLoading, setLoading] = useState(true); // Loading status => only show the responce of the API after the request completes
@@ -101,7 +89,6 @@ export function HomeScreen({ navigation }) {
       setLoading(true);
     }
   }, [text]);
-
   return (
     <View style={{ backgroundColor: '' }}>
       <Header
@@ -118,7 +105,7 @@ export function HomeScreen({ navigation }) {
           color="#000" // White color for contrast on the Header
         />
 
-        <Text style={{ fontSize: 30 }}>Interclip</Text>
+      <Text style={{ fontSize: 30 }}>Interclip</Text>
 
         <Image
           style={styles.tinyLogo}
