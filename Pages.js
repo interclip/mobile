@@ -5,6 +5,8 @@ import { BarCodeScanner } from 'expo-barcode-scanner';
 import React, { useState, useEffect } from 'react';
 import {
   StyleSheet,
+  Settings,
+  Switch,
   Text,
   View,
   Linking,
@@ -14,6 +16,7 @@ import {
   Platform,
   Alert,
   Vibration,
+  TouchableOpacity
 } from 'react-native';
 
 /* 3rd party libraries */
@@ -106,13 +109,14 @@ export function HomeScreen({ navigation }) {
         />
 
       <Text style={{ fontSize: 30 }}>Interclip</Text>
-
+        <TouchableOpacity activeOpacity = { .5 } onPress={() => navigation.navigate('Settings')}>
         <Image
           style={styles.tinyLogo}
           source={{
             uri: iclipUri,
           }}
         />
+        </TouchableOpacity>
       </Header>
 
       <View>
@@ -195,7 +199,8 @@ export function QRScreen({ navigation }) {
     setScanned(true);
     if (
       (data.indexOf('https://iclip.netlify.com') > -1) |
-      (data.indexOf('http://iclip.netlify.app') > -1)
+      (data.indexOf('http://iclip.netlify.app') > -1) |
+      Settings.get("data")
     ) {
       Vibration.vibrate();
       navigation.navigate('Home');
@@ -232,6 +237,30 @@ export function QRScreen({ navigation }) {
       <BarCodeScanner
         onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
         style={StyleSheet.absoluteFillObject}
+      />
+    </View>
+  );
+}
+export function SettingsPage() {
+  const [isEnabled, setIsEnabled] = useState();
+  const toggleSwitch = () => {
+    setIsEnabled((previousState) => !previousState);
+    storeData({ data: isEnabled });
+  };
+  const [data, setData] = useState(Settings.get('data'));
+  const storeData = (data) => {
+    data.data = !data.data
+    Settings.set(data);
+    setData(Settings.get('data'));
+  };
+
+  return (
+    <View style={styles.container}>
+      <Text style={{}}>Open all QR Codes automatically</Text>
+      <Switch
+        ios_backgroundColor="#3e3e3e"
+        onValueChange={toggleSwitch}
+        value={data}
       />
     </View>
   );
