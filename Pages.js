@@ -208,11 +208,29 @@ export function QRScreen({ navigation }) {
       Settings.get("data")
     ) {
       Vibration.vibrate();
-      navigation.navigate("Home");
-      Linking.openURL(data);
-      setScanned(false);
+      Linking.openURL(data)
+      .then(() => 
+        {
+        navigation.navigate("Home")
+        setScanned(false)      
+        })
+      .catch(e => 
+        {
+          Alert.alert(
+            "An error has occured",
+            "This link is probably broken or isn't even a link",
+            [
+              {
+              text: "OK bro",
+              onPress: () => {
+                setScanned(false);
+              },
+            }]
+          );
+        })
+
     } else if (isURL(data)) {
-      Alert.alert("It isn't even a URL");
+      Alert.alert("It is't even a URL");
     } else {
       Alert.alert(
         "This doesn't appear to be an Interclip URL",
