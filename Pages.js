@@ -22,7 +22,6 @@ import {
 import { isURL } from "./functions";
 import { Header, Input, Icon } from "react-native-elements";
 import Clipboard from "@react-native-community/clipboard";
-import Navigator from './components/nav.js'
 
 /* Function and config */
 const checkError = (msg) => {
@@ -94,7 +93,6 @@ export function HomeScreen({ navigation }) {
   }, [text]);
   return (
     <View style={{ backgroundColor: "" }}>
-    <Navigator />    
       <Header
         containerStyle={{
           //backgroundColor: colors.headerBg,
@@ -280,7 +278,6 @@ export function QRScreen({ navigation }) {
         justifyContent: "flex-end",
       }}
     >
-    <Navigator />
       <BarCodeScanner
         onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
         barCodeTypes={[BarCodeScanner.Constants.BarCodeType.qr]}
@@ -304,7 +301,6 @@ export function SettingsPage() {
 
   return (
     <View style={styles.container}>
-      <Navigator />
       <Text style={{}}>Open all QR Codes automatically</Text>
       <Switch
         ios_backgroundColor="#3e3e3e"
