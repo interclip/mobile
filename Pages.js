@@ -19,10 +19,10 @@ import {
 
 /* 3rd party libraries */
 
-import { iclipUri } from "./Vars";
 import { isURL } from "./functions";
 import { Header, Input, Icon } from "react-native-elements";
 import Clipboard from "@react-native-community/clipboard";
+import Navigator from './components/nav.js'
 
 /* Function and config */
 const checkError = (msg) => {
@@ -94,12 +94,13 @@ export function HomeScreen({ navigation }) {
   }, [text]);
   return (
     <View style={{ backgroundColor: "" }}>
+    <Navigator />    
       <Header
         containerStyle={{
           //backgroundColor: colors.headerBg,
           backgroundColor: "white",
           justifyContent: "space-around",
-          marginBottom: Platform.OS === "ios" ? "45%" : "25%",
+          marginBottom: Platform.OS === "ios" ? "65%" : "25%",
         }}
       >
         <Icon
@@ -108,18 +109,18 @@ export function HomeScreen({ navigation }) {
           name="qrcode" // Icon fa-qrcode
           color="#000" // White color for contrast on the Header
         />
-
+        <View>
         <Text style={{ fontSize: 30 }}>Interclip</Text>
+        </View>
         <TouchableOpacity
           activeOpacity={0.5}
           onPress={() => navigation.navigate("Settings")}
         >
-          <Image
-            style={styles.tinyLogo}
-            source={{
-              uri: iclipUri,
-            }}
-          />
+        <Icon
+          type="font-awesome" // The icon is loaded from the font awesome icon library
+          name="cog" // Icon fa-qrcode
+          color="#000" // White color for contrast on the Header
+        />
         </TouchableOpacity>
       </Header>
 
@@ -279,6 +280,7 @@ export function QRScreen({ navigation }) {
         justifyContent: "flex-end",
       }}
     >
+    <Navigator />
       <BarCodeScanner
         onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
         barCodeTypes={[BarCodeScanner.Constants.BarCodeType.qr]}
@@ -302,6 +304,7 @@ export function SettingsPage() {
 
   return (
     <View style={styles.container}>
+      <Navigator />
       <Text style={{}}>Open all QR Codes automatically</Text>
       <Switch
         ios_backgroundColor="#3e3e3e"

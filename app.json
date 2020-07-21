@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "iclip",
+    "name": "Interclip mobile",
     "slug": "iclip",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -22,6 +22,7 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "description": "A mobile client for Interclip"
   }
 }

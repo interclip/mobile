@@ -11,6 +11,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 /* Pages */
 import { HomeScreen, QRScreen, SettingsPage } from './Pages.js';
+
 /* App component */
 
 const Stack = createStackNavigator();
