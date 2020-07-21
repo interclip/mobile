@@ -237,7 +237,13 @@ export function QRScreen({ navigation }) {
         })
 
     } else if (isURL(data)) {
-      Alert.alert("It is't even a URL");
+      Alert.alert("It is't even a URL", "Of a sort we know of", [
+        {
+          text: "OK then",
+          onPress: () => {
+            setScanned(false);
+          }
+        }])
     } else {
       Alert.alert(
         "This doesn't appear to be an Interclip URL",
