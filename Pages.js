@@ -9,7 +9,6 @@ import {
   Text,
   View,
   Linking,
-  Clipboard,
   Image,
   Dimensions,
   Platform,
@@ -23,6 +22,7 @@ import {
 import { iclipUri } from "./Vars";
 import { isURL } from "./functions";
 import { Header, Input, Icon } from "react-native-elements";
+import Clipboard from "@react-native-community/clipboard";
 
 /* Function and config */
 const checkError = (msg) => {
