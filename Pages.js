@@ -224,8 +224,16 @@ export function QRScreen({ navigation }) {
               text: "OK bro",
               onPress: () => {
                 setScanned(false);
+              }
               },
-            }]
+              {
+                text: "Copy the error to clipboard",
+                onPress: () => {
+                  Clipboard.setString(e);
+                  setScanned(false);
+                }
+              }
+            ]
           );
         })
 
