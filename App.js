@@ -11,7 +11,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 /* Pages */
 import { HomeScreen, QRScreen, SettingsPage } from './Pages.js';
-
+ 
 /* App component */
 
 const Stack = createStackNavigator();
@@ -30,7 +30,7 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen name="Home" component={HomeScreen} options={{headerShown:false}} />
-        <Stack.Screen name="QR" component={QRScreen} />
+        <Stack.Screen name="QR" component={QRScreen} options={{ title: 'Scan QR' }} />
         <Stack.Screen name="Settings" component={SettingsPage} />
       </Stack.Navigator>
     </NavigationContainer>
