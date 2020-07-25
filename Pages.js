@@ -1,27 +1,26 @@
-import { StatusBar } from "expo-status-bar";
+import Clipboard from "@react-native-community/clipboard";
 import { BarCodeScanner } from "expo-barcode-scanner";
-
-import React, { useState, useEffect } from "react";
+import { StatusBar } from "expo-status-bar";
+import React, { useEffect, useState } from "react";
 import {
-  StyleSheet,
+  Alert,
+  Dimensions,
+  Image,
+  Linking,
+  Platform,
   Settings,
+  StyleSheet,
   Switch,
   Text,
-  View,
-  Linking,
-  Image,
-  Dimensions,
-  Platform,
-  Alert,
-  Vibration,
   TouchableOpacity,
+  Vibration,
+  View,
 } from "react-native";
+import { Header, Icon, Input } from "react-native-elements";
 
 /* 3rd party libraries */
 
 import { isURL } from "./functions";
-import { Header, Input, Icon } from "react-native-elements";
-import Clipboard from "@react-native-community/clipboard";
 
 /* Function and config */
 const checkError = (msg) => {
@@ -74,7 +73,8 @@ const colors = {
 };
 export function HomeScreen({ navigation }) {
   /* Variable set */
-  const [isLoading, setLoading] = useState(true); // Loading status => only show the responce of the API after the request completes
+  const [isLoading, setLoading] = useState(true); // Loading status => only show the responce of the API
+  // after the request completes
   const [data, setData] = useState(""); // Dynamically loaded data from the Interclip REST API
   const [text, setText] = useState(""); // The code entered in the <Input>
   const [progress, setProgress] = useState("");
@@ -92,36 +92,42 @@ export function HomeScreen({ navigation }) {
     }
   }, [text]);
   return (
-    <View style={{ backgroundColor: "" }}>
+    <View
+      style={{
+        backgroundColor: "",
+      }}
+    >
+      {" "}
       <Header
         containerStyle={{
-          //backgroundColor: colors.headerBg,
+          // backgroundColor: colors.headerBg,
           backgroundColor: "white",
           justifyContent: "space-around",
           marginBottom: Platform.OS === "ios" ? "65%" : "25%",
         }}
       >
+        {" "}
         <Icon
           onPress={() => navigation.navigate("QR")}
           type="font-awesome" // The icon is loaded from the font awesome icon library
           name="qrcode" // Icon fa-qrcode
           color="#000" // White color for contrast on the Header
-        />
+        />{" "}
         <View>
-        <Text style={{ fontSize: 30 }}>Interclip</Text>
+          <Text style={{ fontSize: 30 }}>Interclip</Text>
         </View>
         <TouchableOpacity
           activeOpacity={0.5}
           onPress={() => navigation.navigate("Settings")}
         >
-        <Icon
-          type="font-awesome" // The icon is loaded from the font awesome icon library
-          name="cog" // Icon fa-qrcode
-          color="#000" // White color for contrast on the Header
-        />
+          {" "}
+          <Icon
+            type="font-awesome" // The icon is loaded from the font awesome icon library
+            name="cog" // Icon fa-qrcode
+            color="#000" // White color for contrast on the Header
+          />{" "}
         </TouchableOpacity>
       </Header>
-
       <View>
         <Input
           keyboardType={
@@ -207,43 +213,43 @@ export function QRScreen({ navigation }) {
       Settings.get("data")
     ) {
       Vibration.vibrate();
-      Linking.openURL(data)
-      .then(() => 
-        {
-        navigation.navigate("Home")
-        setScanned(false)      
-        })
-      .catch(e => 
-        {
-          Alert.alert(
-            "An error has occured",
-            "This link is probably broken or isn't even a link",
-            [
-              {
-              text: "OK bro",
-              onPress: () => {
-                setScanned(false);
-              }
-              },
-              {
-                text: "Copy the error to clipboard",
-                onPress: () => {
-                  Clipboard.setString(e);
-                  setScanned(false);
-                }
-              }
-            ]
-          );
-        })
-
+      data.indexOf("http") > -1
+        ? Linking.openURL(data)
+        : Link.openURL("http://" + data)
+            .then(() => {
+              navigation.navigate("Home");
+              setScanned(false);
+            })
+            .catch((e) => {
+              Alert.alert(
+                "An error has occured",
+                "This link is probably broken or isn't even a link",
+                [
+                  {
+                    text: "OK bro",
+                    onPress: () => {
+                      setScanned(false);
+                    },
+                  },
+                  {
+                    text: "Copy the error to clipboard",
+                    onPress: () => {
+                      Clipboard.setString(e);
+                      setScanned(false);
+                    },
+                  },
+                ]
+              );
+            });
     } else if (isURL(data)) {
       Alert.alert("It is't even a URL", "Of a sort we know of", [
         {
           text: "OK then",
           onPress: () => {
             setScanned(false);
-          }
-        }])
+          },
+        },
+      ]);
     } else {
       Alert.alert(
         "This doesn't appear to be an Interclip URL",
@@ -278,12 +284,9 @@ export function QRScreen({ navigation }) {
 
   return (
     <View
-      style={{
-        flex: 1,
-        flexDirection: "column",
-        justifyContent: "flex-end",
-      }}
+      style={{ flex: 1, flexDirection: "column", justifyContent: "flex-end" }}
     >
+      {" "}
       <BarCodeScanner
         onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
         barCodeTypes={[BarCodeScanner.Constants.BarCodeType.qr]}

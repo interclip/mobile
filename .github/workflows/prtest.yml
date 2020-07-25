@@ -17,5 +17,4 @@ jobs:
         with:
           expo-version: 3.x
       - run: yarn install
-      - run: yarn test
       - run: expo doctor
