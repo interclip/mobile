@@ -92,11 +92,8 @@ export function HomeScreen({ navigation }) {
     }
   }, [text]);
   return (
-    <View
-      style={{
-        backgroundColor: "",
-      }}
-    >
+    <View style={{ backgroundColor: "" }}>
+      {" "}
       <Header
         containerStyle={{
           // backgroundColor: colors.headerBg,
@@ -127,7 +124,6 @@ export function HomeScreen({ navigation }) {
           />{" "}
         </TouchableOpacity>
       </Header>
-
       <View>
         <Input
           keyboardType={
@@ -286,6 +282,7 @@ export function QRScreen({ navigation }) {
     <View
       style={{ flex: 1, flexDirection: "column", justifyContent: "flex-end" }}
     >
+      {" "}
       <BarCodeScanner
         onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
         barCodeTypes={[BarCodeScanner.Constants.BarCodeType.qr]}
