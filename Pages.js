@@ -1,32 +1,29 @@
-import { StatusBar } from "expo-status-bar";
-import { BarCodeScanner } from "expo-barcode-scanner";
-
-import React, { useState, useEffect } from "react";
+import Clipboard from "@react-native-community/clipboard";
+import {BarCodeScanner} from "expo-barcode-scanner";
+import {StatusBar} from "expo-status-bar";
+import React, {useEffect, useState} from "react";
 import {
-  StyleSheet,
+  Alert,
+  Dimensions,
+  Image,
+  Linking,
+  Platform,
   Settings,
+  StyleSheet,
   Switch,
   Text,
-  View,
-  Linking,
-  Image,
-  Dimensions,
-  Platform,
-  Alert,
-  Vibration,
   TouchableOpacity,
+  Vibration,
+  View,
 } from "react-native";
+import {Header, Icon, Input} from "react-native-elements";
 
 /* 3rd party libraries */
 
-import { isURL } from "./functions";
-import { Header, Input, Icon } from "react-native-elements";
-import Clipboard from "@react-native-community/clipboard";
+import {isURL} from "./functions";
 
 /* Function and config */
-const checkError = (msg) => {
-  return msg.indexOf("Error: ") > -1;
-};
+const checkError = (msg) => { return msg.indexOf("Error: ") > -1; };
 
 const sleep = (milliseconds) => {
   return new Promise((resolve) => setTimeout(resolve, milliseconds));
@@ -49,33 +46,37 @@ const ValidationMsg = (txt) => {
 const entireScreenHeight = Dimensions.get("window").height;
 
 const config = {
-  codeMaxLength: 5, // The code's length has to be always 5 characters
-  charRegex: new RegExp("[^A-Za-z0-9]"), // Only allow ascii characters to be entered as the code
+  codeMaxLength : 5, // The code's length has to be always 5 characters
+  charRegex : new RegExp(
+      "[^A-Za-z0-9]"), // Only allow ascii characters to be entered as the code
 };
 /* Styles */
 const styles = StyleSheet.create({
-  container: {
-    alignItems: "center", // Centered horizontally
-    justifyContent: "center",
-    flex: 1,
+  container : {
+    alignItems : "center", // Centered horizontally
+    justifyContent : "center",
+    flex : 1,
   },
-  tinyLogo: {
-    width: 30,
-    height: 30,
+  tinyLogo : {
+    width : 30,
+    height : 30,
   },
 });
 /* Colors and stuff */
 const colors = {
-  bg: "white",
-  headerBg: "#333333",
-  text: "black",
-  errorColor: "#f44336",
-  light: "white",
+  bg : "white",
+  headerBg : "#333333",
+  text : "black",
+  errorColor : "#f44336",
+  light : "white",
 };
-export function HomeScreen({ navigation }) {
+export function HomeScreen({navigation}) {
   /* Variable set */
-  const [isLoading, setLoading] = useState(true); // Loading status => only show the responce of the API after the request completes
-  const [data, setData] = useState(""); // Dynamically loaded data from the Interclip REST API
+  const [isLoading, setLoading] =
+      useState(true); // Loading status => only show the responce of the API
+                      // after the request completes
+  const [data, setData] =
+      useState(""); // Dynamically loaded data from the Interclip REST API
   const [text, setText] = useState(""); // The code entered in the <Input>
   const [progress, setProgress] = useState("");
 
@@ -83,70 +84,63 @@ export function HomeScreen({ navigation }) {
     if (text.length === config.codeMaxLength) {
       setText(text.replace(" ", "").toLowerCase());
       fetch(`http://uni.hys.cz/includes/get-api?user=${text}`)
-        .then((response) => response.text())
-        .then((json) => setData(json))
-        .catch((error) => console.error(error))
-        .finally(() => setLoading(false));
+          .then((response) => response.text())
+          .then((json) => setData(json))
+          .catch((error) => console.error(error))
+          .finally(() => setLoading(false));
     } else {
       setLoading(true);
     }
-  }, [text]);
+  }, [ text ]);
   return (
-    <View style={{ backgroundColor: "" }}>
+    <View style={{
+    backgroundColor: "" }}>
       <Header
-        containerStyle={{
-          //backgroundColor: colors.headerBg,
-          backgroundColor: "white",
-          justifyContent: "space-around",
+  containerStyle = {
+    {
+      // backgroundColor: colors.headerBg,
+      backgroundColor: "white", justifyContent: "space-around",
           marginBottom: Platform.OS === "ios" ? "65%" : "25%",
-        }}
-      >
-        <Icon
-          onPress={() => navigation.navigate("QR")}
-          type="font-awesome" // The icon is loaded from the font awesome icon library
-          name="qrcode" // Icon fa-qrcode
-          color="#000" // White color for contrast on the Header
-        />
-        <View>
-        <Text style={{ fontSize: 30 }}>Interclip</Text>
-        </View>
-        <TouchableOpacity
-          activeOpacity={0.5}
-          onPress={() => navigation.navigate("Settings")}
-        >
-        <Icon
-          type="font-awesome" // The icon is loaded from the font awesome icon library
-          name="cog" // Icon fa-qrcode
-          color="#000" // White color for contrast on the Header
-        />
-        </TouchableOpacity>
+    }
+  } > < Icon
+  onPress = {() => navigation.navigate("QR")} type =
+      "font-awesome" // The icon is loaded from the font awesome icon library
+  name = "qrcode"    // Icon fa-qrcode
+  color = "#000"     // White color for contrast on the Header
+              /
+          > <View>
+          <Text style = {{ fontSize: 30 }}>Interclip</Text>
+        </View><
+          TouchableOpacity
+  activeOpacity = {0.5} onPress = {() => navigation.navigate("Settings")} > <
+                                  Icon
+  type = "font-awesome" // The icon is loaded from the font awesome icon library
+  name = "cog"          // Icon fa-qrcode
+  color = "#000"        // White color for contrast on the Header
+              /
+          > </TouchableOpacity>
       </Header>
 
-      <View>
-        <Input
-          keyboardType={
-            Platform.OS === "android" ? "email-address" : "ascii-capable"
-          }
-          style={styles.container}
-          placeholder="Your code here"
-          maxLength={config.codeMaxLength}
-          inputStyle={{ fontSize: 50 }}
-          autoCorrect={false}
-          returnKeyType={"go"}
-          onChangeText={(text) => setText(text)}
-          defaultValue={text}
-          errorStyle={{ color: "red" }}
-          autoCapitalize="none"
+          <View>< Input
+  keyboardType = {Platform.OS === "android" ? "email-address"
+                                            : "ascii-capable"} style = {
+      styles.container} placeholder = "Your code here"
+  maxLength = {config.codeMaxLength} inputStyle =
+  {
+    { fontSize: 50 }
+  } autoCorrect = {false} returnKeyType = {"go"} onChangeText = {
+      (text) => setText(text)} defaultValue = {text} errorStyle = {
+    { color: "red" }
+  } autoCapitalize = "none"
           autoFocus={true}
           value={text.replace(" ", "").toLowerCase()}
           enablesReturnKeyAutomatically={true}
-          onSubmitEditing={() => {
-            !isLoading
-              ? Linking.openURL(data)
-              : alert(
-                  `No URL set yet, make sure your code is ${config.codeMaxLength} characters long!`
-                );
-          }}
+          onSubmitEditing={
+    () => {
+      !isLoading ? Linking.openURL(data)
+                 : alert(`No URL set yet, make sure your code is ${
+                       config.codeMaxLength} characters long!`);
+    }}
         />
         {ValidationMsg(text) && (
           <View style={{ padding: 24 }}>
@@ -158,21 +152,20 @@ export function HomeScreen({ navigation }) {
             <Text></Text>
           ) : (
             <Text
-              onLongPress={() => {
-                /* Handle functionality, when user presses for a longer period of time */
-                Clipboard.setString(data);
-                alert("Copied to Clipboard!");
-              }}
-              onPress={() => {
-                Linking.openURL(data);
-              }}
+              onLongPress={
+    () => {
+      /* Handle functionality, when user presses for a longer period of time */
+      Clipboard.setString(data);
+      alert("Copied to Clipboard!");
+    }}
+              onPress={
+    () => { Linking.openURL(data); }}
               style={{
-                color: checkError(data) ? colors.light : colors.text,
-                backgroundColor:
-                  checkError(data) & !ValidationMsg(text)
-                    ? colors.errorColor
-                    : null,
-                fontSize: 20,
+    color: checkError(data) ? colors.light : colors.text,
+        backgroundColor: checkError(data)&!ValidationMsg(text)
+            ? colors.errorColor
+            : null,
+        fontSize: 20,
               }}
             >
               {!ValidationMsg(text) &&
@@ -188,24 +181,22 @@ export function HomeScreen({ navigation }) {
   );
 }
 
-export function QRScreen({ navigation }) {
+export function QRScreen({navigation}) {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
 
   useEffect(() => {
     (async () => {
-      const { status } = await BarCodeScanner.requestPermissionsAsync();
+      const {status} = await BarCodeScanner.requestPermissionsAsync();
       setHasPermission(status === "granted");
     })();
   }, []);
 
-  const handleBarCodeScanned = ({ type, data }) => {
+  const handleBarCodeScanned = ({type, data}) => {
     setScanned(true);
-    if (
-      (data.indexOf("https://iclip.netlify.com") > -1) |
-      (data.indexOf("http://iclip.netlify.app") > -1) |
-      Settings.get("data")
-    ) {
+    if ((data.indexOf("https://iclip.netlify.com") > -1) |
+        (data.indexOf("http://iclip.netlify.app") > -1) |
+        Settings.get("data")) {
       Vibration.vibrate();
       data.indexOf("http") > -1 ? Linking.openURL(data) : Link.openURL("http://"+data)
       .then(() => 
@@ -215,57 +206,42 @@ export function QRScreen({ navigation }) {
         })
       .catch(e => 
         {
-          Alert.alert(
+        Alert.alert(
             "An error has occured",
-            "This link is probably broken or isn't even a link",
-            [
-              {
-              text: "OK bro",
-              onPress: () => {
-                setScanned(false);
-              }
-              },
-              {
-                text: "Copy the error to clipboard",
-                onPress: () => {
+            "This link is probably broken or isn't even a link", [
+              {text : "OK bro", onPress : () => { setScanned(false); }}, {
+                text : "Copy the error to clipboard",
+                onPress : () => {
                   Clipboard.setString(e);
                   setScanned(false);
                 }
               }
-            ]
-          );
+            ]);
         })
 
     } else if (isURL(data)) {
-      Alert.alert("It is't even a URL", "Of a sort we know of", [
-        {
-          text: "OK then",
-          onPress: () => {
-            setScanned(false);
-          }
-        }])
-    } else {
       Alert.alert(
-        "This doesn't appear to be an Interclip URL",
-        "Do you still want to open it?",
-        [
-          {
-            text: "Cancel",
-            onPress: () => {
-              setScanned(true);
-              sleep(1000).then(setScanned(false));
-            },
-            style: "cancel",
-          },
-          {
-            text: "Sure",
-            onPress: () => {
-              Linking.openURL(data);
-              setScanned(false);
-            },
-          },
-        ]
-      );
+          "It is't even a URL", "Of a sort we know of",
+          [ {text : "OK then", onPress : () => { setScanned(false); }} ])
+    } else {
+      Alert.alert("This doesn't appear to be an Interclip URL",
+                  "Do you still want to open it?", [
+                    {
+                      text : "Cancel",
+                      onPress : () => {
+                        setScanned(true);
+                        sleep(1000).then(setScanned(false));
+                      },
+                      style : "cancel",
+                    },
+                    {
+                      text : "Sure",
+                      onPress : () => {
+                        Linking.openURL(data);
+                        setScanned(false);
+                      },
+                    },
+                  ]);
     }
   };
 
@@ -278,16 +254,12 @@ export function QRScreen({ navigation }) {
 
   return (
     <View
-      style={{
-        flex: 1,
-        flexDirection: "column",
-        justifyContent: "flex-end",
-      }}
-    >
-      <BarCodeScanner
+  style = {{ flex: 1, flexDirection: "column", justifyContent: "flex-end", }} >
+          < BarCodeScanner
         onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
         barCodeTypes={[BarCodeScanner.Constants.BarCodeType.qr]}
-        style={StyleSheet.absoluteFillObject}
+        style={
+    StyleSheet.absoluteFillObject}
       />
     </View>
   );
@@ -296,7 +268,7 @@ export function SettingsPage() {
   const [isEnabled, setIsEnabled] = useState();
   const toggleSwitch = () => {
     setIsEnabled((previousState) => !previousState);
-    storeData({ data: isEnabled });
+    storeData({data : isEnabled});
   };
   const [data, setData] = useState(Settings.get("data"));
   const storeData = (data) => {
