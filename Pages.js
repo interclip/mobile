@@ -207,7 +207,7 @@ export function QRScreen({ navigation }) {
       Settings.get("data")
     ) {
       Vibration.vibrate();
-      Linking.openURL(data)
+      data.indexOf("http") > -1 ? Linking.openURL(data) : Link.openURL("http://"+data)
       .then(() => 
         {
         navigation.navigate("Home")
