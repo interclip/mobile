@@ -92,7 +92,11 @@ export function HomeScreen({ navigation }) {
     }
   }, [text]);
   return (
-    <View style={{ backgroundColor: "" }}>
+    <View
+      style={{
+        backgroundColor: "",
+      }}
+    >
       {" "}
       <Header
         containerStyle={{
