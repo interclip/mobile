@@ -6,6 +6,7 @@ import React, { useEffect, useState } from "react";
 import {
   Alert,
   Dimensions,
+  Image,
   Linking,
   Platform,
   Settings,
@@ -31,6 +32,12 @@ const sleep = (milliseconds) => {
   return new Promise((resolve) => setTimeout(resolve, milliseconds));
 };
 
+const imgCheck = (url, inval) => {
+  if ( inval === "" ) return false;
+  if ( typeof url !== 'string' ) return false;
+  return !!url.match(/\w+\.(jpg|jpeg|gif|png|tiff|bmp)$/gi);
+};
+
 const ValidationMsg = (txt) => {
   txt = txt.replace(" ", "").toLowerCase();
   const diff = config.codeMaxLength - txt.length;
@@ -45,7 +52,8 @@ const ValidationMsg = (txt) => {
   }
 };
 
-// const entireScreenHeight = Dimensions.get("window").height;
+//const entireScreenHeight = Dimensions.get("window").height;
+const entireScreenWidth = Dimensions.get("window").width;
 
 const config = {
   codeMaxLength: 5, // The code's length has to be always 5 characters
@@ -62,6 +70,12 @@ const styles = StyleSheet.create({
     width: 30,
     height: 30,
   },
+  previewImg: {
+    width: 100,
+    height: 100,
+    marginLeft: (entireScreenWidth / 3) + 10,
+    marginBottom: "20%"
+  }
 });
 /* Colors and stuff */
 const colors = {
@@ -103,7 +117,7 @@ export function HomeScreen({ navigation }) {
           // backgroundColor: colors.headerBg,
           backgroundColor: "white",
           justifyContent: "space-around",
-          marginBottom: Platform.OS === "ios" ? "65%" : "25%",
+          marginBottom: Platform.OS === "ios" ? "20%" : "5%",
         }}
       >
         {" "}
@@ -129,6 +143,12 @@ export function HomeScreen({ navigation }) {
         </TouchableOpacity>
       </Header>
       <View>
+        <Image
+          style={styles.previewImg}
+          source={{ 
+            uri: imgCheck(data, text) ? `https://external.iclip.trnck.dev/image/?url=${data}` : "https://raw.githubusercontent.com/aperta-principium/Interclip/master/img/interclip_logo.png",
+          }}
+        />
         <Input
           keyboardType={
             Platform.OS === "android" ? "email-address" : "ascii-capable"
