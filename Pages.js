@@ -187,8 +187,8 @@ export function HomeScreen({ navigation }) {
               onLongPress={() => {
                 /* Handle functionality, when user presses for a longer period of time */
                 /*
-                Clipboard.setString(data);
-                alert("Copied to Clipboard!");
+                  Clipboard.setString(data);
+                  alert("Copied to Clipboard!");
                 */
               }}
               onPress={() => {
