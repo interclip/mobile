@@ -227,7 +227,7 @@ export function QRScreen({ navigation }) {
     })();
   }, []);
 
-  const handleBarCodeScanned = ({ type, data }) => {
+  const handleBarCodeScanned = ({ _type, data }) => {
     setScanned(true);
 
     const URLArr = data.split("/");
