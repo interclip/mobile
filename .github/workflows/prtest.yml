@@ -16,5 +16,5 @@ jobs:
       - uses: expo/expo-github-action@v5
         with:
           expo-version: 3.x
-      - run: yarn install
+      - run: npm i
       - run: expo doctor
