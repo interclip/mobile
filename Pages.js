@@ -2,10 +2,10 @@ import Clipboard from "@react-native-community/clipboard";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import { StatusBar } from "expo-status-bar";
 import React, { useEffect, useState } from "react";
+
 import {
   Alert,
   Dimensions,
-  Image,
   Linking,
   Platform,
   Settings,
@@ -45,7 +45,7 @@ const ValidationMsg = (txt) => {
   }
 };
 
-const entireScreenHeight = Dimensions.get("window").height;
+//const entireScreenHeight = Dimensions.get("window").height;
 
 const config = {
   codeMaxLength: 5, // The code's length has to be always 5 characters
@@ -97,7 +97,6 @@ export function HomeScreen({ navigation }) {
         backgroundColor: "",
       }}
     >
-      {" "}
       <Header
         containerStyle={{
           // backgroundColor: colors.headerBg,
@@ -106,13 +105,12 @@ export function HomeScreen({ navigation }) {
           marginBottom: Platform.OS === "ios" ? "65%" : "25%",
         }}
       >
-        {" "}
         <Icon
           onPress={() => navigation.navigate("QR")}
           type="font-awesome" // The icon is loaded from the font awesome icon library
           name="qrcode" // Icon fa-qrcode
           color="#000" // White color for contrast on the Header
-        />{" "}
+        />
         <View>
           <Text style={{ fontSize: 30 }}>Interclip</Text>
         </View>
@@ -120,12 +118,11 @@ export function HomeScreen({ navigation }) {
           activeOpacity={0.5}
           onPress={() => navigation.navigate("Settings")}
         >
-          {" "}
           <Icon
             type="font-awesome" // The icon is loaded from the font awesome icon library
-            name="cog" // Icon fa-qrcode
+            name="cog" // Icon fa-cog
             color="#000" // White color for contrast on the Header
-          />{" "}
+          />
         </TouchableOpacity>
       </Header>
       <View>
@@ -286,7 +283,6 @@ export function QRScreen({ navigation }) {
     <View
       style={{ flex: 1, flexDirection: "column", justifyContent: "flex-end" }}
     >
-      {" "}
       <BarCodeScanner
         onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
         barCodeTypes={[BarCodeScanner.Constants.BarCodeType.qr]}

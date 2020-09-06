@@ -21,4 +21,4 @@ const Navigator = SwipeNavigator({
 
 });
 
-export default Navigator
+export default Navigator;
