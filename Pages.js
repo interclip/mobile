@@ -45,7 +45,7 @@ const ValidationMsg = (txt) => {
   }
 };
 
-//const entireScreenHeight = Dimensions.get("window").height;
+// const entireScreenHeight = Dimensions.get("window").height;
 
 const config = {
   codeMaxLength: 5, // The code's length has to be always 5 characters
@@ -97,6 +97,7 @@ export function HomeScreen({ navigation }) {
         backgroundColor: "",
       }}
     >
+      {" "}
       <Header
         containerStyle={{
           // backgroundColor: colors.headerBg,
@@ -105,12 +106,13 @@ export function HomeScreen({ navigation }) {
           marginBottom: Platform.OS === "ios" ? "65%" : "25%",
         }}
       >
+        {" "}
         <Icon
           onPress={() => navigation.navigate("QR")}
           type="font-awesome" // The icon is loaded from the font awesome icon library
           name="qrcode" // Icon fa-qrcode
           color="#000" // White color for contrast on the Header
-        />
+        />{" "}
         <View>
           <Text style={{ fontSize: 30 }}>Interclip</Text>
         </View>
@@ -118,11 +120,12 @@ export function HomeScreen({ navigation }) {
           activeOpacity={0.5}
           onPress={() => navigation.navigate("Settings")}
         >
+          {" "}
           <Icon
             type="font-awesome" // The icon is loaded from the font awesome icon library
             name="cog" // Icon fa-cog
             color="#000" // White color for contrast on the Header
-          />
+          />{" "}
         </TouchableOpacity>
       </Header>
       <View>
@@ -164,9 +167,9 @@ export function HomeScreen({ navigation }) {
               onLongPress={() => {
                 /* Handle functionality, when user presses for a longer period of time */
                 /*
-                Clipboard.setString(data);
-                alert("Copied to Clipboard!");
-                */
+Clipboard.setString(data);
+alert("Copied to Clipboard!");
+*/
               }}
               onPress={() => {
                 Linking.openURL(data);
@@ -207,8 +210,8 @@ export function QRScreen({ navigation }) {
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true);
     if (
-      (data.indexOf("https://iclip.netlify.com") > -1) |
-      (data.indexOf("http://iclip.netlify.app") > -1) |
+      data.includes("https://iclip.netlify.com") |
+      data.includes("http://iclip.netlify.app") |
       Settings.get("data")
     ) {
       Vibration.vibrate();
@@ -285,6 +288,7 @@ export function QRScreen({ navigation }) {
     <View
       style={{ flex: 1, flexDirection: "column", justifyContent: "flex-end" }}
     >
+      {" "}
       <BarCodeScanner
         onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
         barCodeTypes={[BarCodeScanner.Constants.BarCodeType.qr]}
