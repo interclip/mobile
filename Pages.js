@@ -207,8 +207,8 @@ export function QRScreen({ navigation }) {
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true);
     if (
-      (data.indexOf("https://iclip.netlify.com") > -1) |
-      (data.indexOf("http://iclip.netlify.app") > -1) |
+      data.includes("https://iclip.netlify.com") |
+      data.includes("http://iclip.netlify.app") |
       Settings.get("data")
     ) {
       Vibration.vibrate();
