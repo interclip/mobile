@@ -32,6 +32,12 @@ const sleep = (milliseconds) => {
   return new Promise((resolve) => setTimeout(resolve, milliseconds));
 };
 
+const imgCheck = (url, inval) => {
+  if ( inval === "" ) return false;
+  if ( typeof url !== 'string' ) return false;
+  return !!url.match(/\w+\.(jpg|jpeg|gif|png|tiff|bmp)$/gi);
+};
+
 const ValidationMsg = (txt) => {
   txt = txt.replace(" ", "").toLowerCase();
   const diff = config.codeMaxLength - txt.length;
@@ -136,8 +142,8 @@ export function HomeScreen({ navigation }) {
       <View>
         <Image
           style={styles.previewImg}
-          source={{
-            uri: `https://external.iclip.trnck.dev/image/?url=${data}`,
+          source={{ 
+            uri: imgCheck(data, text) ? `https://external.iclip.trnck.dev/image/?url=${data}` : "https://raw.githubusercontent.com/aperta-principium/Interclip/master/img/interclip_logo.png",
           }}
         />
         <Input
