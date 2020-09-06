@@ -6,6 +6,7 @@ import React, { useEffect, useState } from "react";
 import {
   Alert,
   Dimensions,
+  Image,
   Linking,
   Platform,
   Settings,
@@ -46,6 +47,7 @@ const ValidationMsg = (txt) => {
 };
 
 //const entireScreenHeight = Dimensions.get("window").height;
+const entireScreenWidth = Dimensions.get("window").width;
 
 const config = {
   codeMaxLength: 5, // The code's length has to be always 5 characters
@@ -62,6 +64,12 @@ const styles = StyleSheet.create({
     width: 30,
     height: 30,
   },
+  previewImg: {
+    width: 100,
+    height: 100,
+    marginLeft: (entireScreenWidth / 3) + 10,
+    marginBottom: "20%"
+  }
 });
 /* Colors and stuff */
 const colors = {
@@ -102,7 +110,7 @@ export function HomeScreen({ navigation }) {
           // backgroundColor: colors.headerBg,
           backgroundColor: "white",
           justifyContent: "space-around",
-          marginBottom: Platform.OS === "ios" ? "65%" : "25%",
+          marginBottom: Platform.OS === "ios" ? "20%" : "5%",
         }}
       >
         <Icon
@@ -126,6 +134,12 @@ export function HomeScreen({ navigation }) {
         </TouchableOpacity>
       </Header>
       <View>
+        <Image
+          style={styles.previewImg}
+          source={{
+            uri: `https://external.iclip.trnck.dev/image/?url=${data}`,
+          }}
+        />
         <Input
           keyboardType={
             Platform.OS === "android" ? "email-address" : "ascii-capable"
