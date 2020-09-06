@@ -229,9 +229,13 @@ export function QRScreen({ navigation }) {
 
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true);
+
+    const URLArr = data.split("/");
+    const result = URLArr[0] + "//" + URLArr[2];
+
     if (
-      data.includes("https://iclip.netlify.com") |
-      data.includes("http://iclip.netlify.app") |
+      result === "https://iclip.netlify.com" |
+      result === "http://iclip.netlify.app" |
       Settings.get("data")
     ) {
       Vibration.vibrate();
