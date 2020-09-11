@@ -18,7 +18,13 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.filiptronicek.iclip",
+      "buildNumber": "0.0.2"
+    },
+    "android": {
+      "package": "com.filiptronicek.iclip",
+      "versionCode": 1
     },
     "web": {
       "favicon": "./assets/favicon.png"
