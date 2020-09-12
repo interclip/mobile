@@ -16,7 +16,7 @@ const Stack = createStackNavigator();
 
 const root = () => {
   return(
-      <Stack.Navigator>
+    <Stack.Navigator>
       <Stack.Screen name="Home" component={HomeScreen} />
       <Stack.Screen name="QR" component={QRScreen} />
     </Stack.Navigator>
