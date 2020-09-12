@@ -1,15 +1,14 @@
 /* 1st party libraries and dependencies: react, react native and Expo stuff */
 
-import React, { useState, useEffect } from 'react';
-
 /* 3rd party libraries */
 
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
+import React, {useEffect, useState} from 'react';
 
 /* Pages */
-import { HomeScreen, QRScreen, SettingsPage, SendScreen } from './Pages.js';
- 
+import {HomeScreen, QRScreen, SendScreen, SettingsPage} from './Pages.js';
+
 /* App component */
 
 const Stack = createStackNavigator();
