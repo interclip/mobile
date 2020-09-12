@@ -62,6 +62,7 @@ const urlValidation = (url) => {
   url = url.split("<").join("&gt;");
   url = url.split(">").join("&lt;");
 
+  if(url.length === 0) return "Start pasting or typing in the URL";
   if(!url.match(config.urlRegex)) {
     return `This doesn't seem to be a valid URL`;
   }
