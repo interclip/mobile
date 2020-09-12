@@ -407,7 +407,7 @@ export function SendScreen() {
          inputStyle={{ fontSize: 25 }}
          autoCorrect={false}
          autoCompleteType={"off"}
-         returnKeyType={"go"}
+         returnKeyType={Platform.OS === "android" ? "none" : "done"}
          onChangeText={(text) => setText(text)}
          defaultValue={text}
          errorStyle={{ color: "red" }}
