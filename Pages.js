@@ -147,6 +147,8 @@ export function HomeScreen({ navigation }) {
       <View>
         <Image
           style={styles.previewImg}
+          onPress={() => navigation.navigate("Send")}
+
           source={{ 
             uri: imgCheck(data, text) ? `https://external.iclip.trnck.dev/image?url=${data}` : "https://raw.githubusercontent.com/aperta-principium/Interclip/master/img/interclip_logo.png",
           }}
@@ -315,7 +317,6 @@ export function QRScreen({ navigation }) {
     <View
       style={{ flex: 1, flexDirection: "column", justifyContent: "flex-end" }}
     >
-      {" "}
       <BarCodeScanner
         onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
         barCodeTypes={[BarCodeScanner.Constants.BarCodeType.qr]}
@@ -346,6 +347,14 @@ export function SettingsPage() {
         onValueChange={toggleSwitch}
         value={data}
       />
+    </View>
+  );
+}
+
+export function SendScreen() {
+  return (
+    <View style={styles.container}>
+      <Text style={{}}>Send screen, wooow</Text>
     </View>
   );
 }

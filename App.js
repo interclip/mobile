@@ -10,7 +10,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 /* Pages */
-import { HomeScreen, QRScreen, SettingsPage } from './Pages.js';
+import { HomeScreen, QRScreen, SettingsPage, SendScreen } from './Pages.js';
  
 /* App component */
 
@@ -31,6 +31,7 @@ export default function App() {
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen name="Home" component={HomeScreen} options={{headerShown:false}} />
         <Stack.Screen name="QR" component={QRScreen} options={{ title: 'Scan QR' }} />
+        <Stack.Screen name="Send" component={SendScreen} options={{ title: 'New clip' }} />
         <Stack.Screen name="Settings" component={SettingsPage} />
       </Stack.Navigator>
     </NavigationContainer>
