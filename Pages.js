@@ -16,9 +16,12 @@ import {
   TouchableOpacity,
   Vibration,
   View,
+  Modal,
+  TouchableHighlight
 } from "react-native";
 
 import { Header, Icon, Input } from "react-native-elements";
+import QRCode from 'react-native-qrcode-svg';
 
 /* 3rd party libraries */
 
@@ -63,7 +66,7 @@ const urlValidation = (url) => {
     return `This doesn't seem to be a valid URL`;
   }
 
-}
+};
 
 //const entireScreenHeight = Dimensions.get("window").height;
 const entireScreenWidth = Dimensions.get("window").width;
@@ -90,6 +93,27 @@ const styles = StyleSheet.create({
     height: 100,
     marginLeft: (entireScreenWidth / 3) + 10,
     marginBottom: "20%"
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 22
+  },
+  openButton: {
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2,
+    marginTop: 10
+  },
+  textStyle: {
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center"
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: "center"
   }
 });
 
@@ -372,9 +396,10 @@ export function SendScreen() {
  // after the request completes
  const [data, setData] = useState(""); // Dynamically loaded data from the Interclip REST API
  const [text, setText] = useState(""); // The code entered in the <Input>
- //const [progress, setProgress] = useState("");
+ const [modalVisible, setModalVisible] = useState(false);
 
  useEffect(() => {
+   
      setText(text.replace(" ", "").toLowerCase());
      fetch(`http://uni.hys.cz/includes/api?url=${text}`)
        .then((response) => response.text())
@@ -452,13 +477,43 @@ export function SendScreen() {
                  : data)}
            </Text>
          )}
+
+      <Modal
+        animationType="slide"
+        transparent={false}
+        visible={modalVisible}
+        onRequestClose={() => {
+          Alert.alert("Modal has been closed.");
+        }}
+      >
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <QRCode
+              value={`https://iclip.netlify.app/r/${data}`}
+            />
+            <TouchableHighlight
+              style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
+              onPress={() => {
+                setModalVisible(!modalVisible);
+              }}
+            >
+              <Text style={styles.textStyle}>Hide Modal</Text>
+            </TouchableHighlight>
+          </View>
+        </View>
+      </Modal>
+      { !urlValidation(text) ? (         
         <Icon
           type="font-awesome" // The icon is loaded from the font awesome icon library
           name="qrcode" // Icon fa-qrcode
           color="#000" // White color for contrast on the Header
           style={{ width: 70 }}
+          onPress={() => {
+            setModalVisible(true);
+          }}
           size={50}
-        />
+        />) : <Text></Text>}
+
        </View>
        <StatusBar style="auto" />
      </View>
