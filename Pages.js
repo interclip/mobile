@@ -26,6 +26,7 @@ import QRCode from 'react-native-qrcode-svg';
 /* 3rd party libraries */
 
 import { isURL } from "./functions";
+import { iclipUri } from "./Vars";
 
 /* Function and config */
 const checkError = (msg) => {
@@ -492,6 +493,9 @@ export function SendScreen( {navigation} ) {
             <QRCode
               value={`https://iclip.netlify.app/r/${data}`}
               size={250}
+              logo={{uri: iclipUri}}
+              logoSize={60}
+              logoBackgroundColor='white'
             />
             <TouchableHighlight
               style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
