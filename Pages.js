@@ -53,12 +53,21 @@ const ValidationMsg = (txt) => {
   }
 };
 
+const urlValidation = (url) => {
+  url = url.replace(" ", "%20").toLowerCase();
+  if(!url.match(config.urlRegex)) {
+    return `This doesn't seem to be a valid URL`;
+  }
+
+}
+
 //const entireScreenHeight = Dimensions.get("window").height;
 const entireScreenWidth = Dimensions.get("window").width;
 
 const config = {
   codeMaxLength: 5, // The code's length has to be always 5 characters
   charRegex: new RegExp("[^A-Za-z0-9]"), // Only allow ascii characters to be entered as the code
+  urlRegex: new RegExp(/[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/gi)
 };
 
 /* Styles */
@@ -354,9 +363,93 @@ export function SettingsPage() {
 }
 
 export function SendScreen() {
-  return (
-    <View style={styles.container}>
-      <Text style={{}}>Send screen, wooow</Text>
-    </View>
-  );
+ /* Variable set */
+ const [isLoading, setLoading] = useState(true); // Loading status => only show the responce of the API
+ // after the request completes
+ const [data, setData] = useState(""); // Dynamically loaded data from the Interclip REST API
+ const [text, setText] = useState(""); // The code entered in the <Input>
+ //const [progress, setProgress] = useState("");
+
+ useEffect(() => {
+     setText(text.replace(" ", "").toLowerCase());
+     fetch(`http://uni.hys.cz/includes/api?url=${text}`)
+       .then((response) => response.text())
+       .then((json) => setData(json))
+       .catch((error) => console.error(error))
+       .finally(() => setLoading(false));
+
+     setLoading(true);
+ }, [text]);
+ return (
+   <View
+     style={{
+       backgroundColor: "",
+       marginTop: Platform.OS === "ios" ? "20%" : "5%",
+     }}
+   >
+     <View>
+       <TouchableOpacity
+       onPress={() => navigation.navigate("Send") }
+       >
+       <Image
+         style={styles.previewImg}
+         source={{ 
+           uri: imgCheck(data, text) ? `https://external.iclip.trnck.dev/image?url=${data}` : "https://raw.githubusercontent.com/aperta-principium/Interclip/master/img/interclip_logo.png",
+         }}
+       />
+       </TouchableOpacity>
+       <Input
+         keyboardType={
+           Platform.OS === "android" ? "default" : "url"
+         }
+         style={styles.container}
+         placeholder="Your URL here"
+         inputStyle={{ fontSize: 25 }}
+         autoCorrect={false}
+         autoCompleteType={"off"}
+         returnKeyType={"go"}
+         onChangeText={(text) => setText(text)}
+         defaultValue={text}
+         errorStyle={{ color: "red" }}
+         autoCapitalize="none"
+         autoFocus={true}
+         value={text.replace(" ", "%20").toLowerCase()}
+         enablesReturnKeyAutomatically={true}
+         onSubmitEditing={() => {
+           !isLoading && Linking.openURL(data)
+         }}
+       />
+       {urlValidation(text) && (
+         <View style={{ padding: 24 }}>
+           <Text>{urlValidation(text)}</Text>
+         </View>
+       )}
+       <View style={{ padding: 24 }}>
+         {isLoading ? (
+           <Text></Text>
+         ) : (
+           <Text
+             onPress={() => {
+               Linking.openURL(data);
+             }}
+             style={{
+               color: checkError(data) ? colors.light : colors.text,
+               backgroundColor:
+                 checkError(data) & !urlValidation(text)
+                   ? colors.errorColor
+                   : null,
+               fontSize: 20,
+             }}
+           >
+             {!urlValidation(text) &&
+               (checkError(data)
+                 ? "This code doesn't seem to exist 🤔"
+                 : data)}
+           </Text>
+         )}
+       </View>
+       <StatusBar style="auto" />
+     </View>
+   </View>
+ );
 }
