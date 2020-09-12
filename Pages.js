@@ -60,6 +60,7 @@ const config = {
   codeMaxLength: 5, // The code's length has to be always 5 characters
   charRegex: new RegExp("[^A-Za-z0-9]"), // Only allow ascii characters to be entered as the code
 };
+
 /* Styles */
 const styles = StyleSheet.create({
   container: {
@@ -78,6 +79,7 @@ const styles = StyleSheet.create({
     marginBottom: "20%"
   }
 });
+
 /* Colors and stuff */
 const colors = {
   bg: "white",
@@ -86,6 +88,8 @@ const colors = {
   errorColor: "#f44336",
   light: "white",
 };
+
+
 export function HomeScreen({ navigation }) {
   /* Variable set */
   const [isLoading, setLoading] = useState(true); // Loading status => only show the responce of the API
@@ -302,6 +306,7 @@ export function QRScreen({ navigation }) {
   if (hasPermission === null) {
     return <Text>Requesting for camera permission</Text>;
   }
+
   if (hasPermission === false) {
     return <Text>No access to camera</Text>;
   }
@@ -319,6 +324,7 @@ export function QRScreen({ navigation }) {
     </View>
   );
 }
+
 export function SettingsPage() {
   const [isEnabled, setIsEnabled] = useState();
   const toggleSwitch = () => {
