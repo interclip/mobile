@@ -144,7 +144,6 @@ export function HomeScreen({ navigation }) {
         backgroundColor: colorScheme === "dark" ? "#444444" : "#f4f4f4",
       }}
     >
-      {" "}
       <Header
         containerStyle={{
           // backgroundColor: colors.headerBg,
@@ -153,13 +152,12 @@ export function HomeScreen({ navigation }) {
           marginBottom: Platform.OS === "ios" ? "20%" : "5%",
         }}
       >
-        {" "}
         <Icon
           onPress={() => navigation.navigate("QR")}
           type="font-awesome" // The icon is loaded from the font awesome icon library
           name="qrcode" // Icon fa-qrcode
           color="#000" // White color for contrast on the Header
-        />{" "}
+        />
         <View>
           <Text style={{ fontSize: 30 }}>Interclip</Text>
         </View>
@@ -167,17 +165,15 @@ export function HomeScreen({ navigation }) {
           activeOpacity={0.5}
           onPress={() => navigation.navigate("Settings")}
         >
-          {" "}
           <Icon
             type="font-awesome" // The icon is loaded from the font awesome icon library
             name="cog" // Icon fa-cog
             color="#000" // White color for contrast on the Header
-          />{" "}
+          />
         </TouchableOpacity>
       </Header>
       <View>
         <TouchableOpacity onPress={() => navigation.navigate("Send")}>
-          {" "}
           <Image
             style={styles.previewImg}
             source={{
@@ -186,7 +182,7 @@ export function HomeScreen({ navigation }) {
                 : "https://raw.githubusercontent.com/aperta-principium/Interclip/master/img/interclip_logo.png",
             }}
           />
-        </TouchableOpacity>{" "}
+        </TouchableOpacity>
         <Input
           keyboardType={
             Platform.OS === "android" ? "email-address" : "ascii-capable"
@@ -360,7 +356,6 @@ export function QRScreen({ navigation }) {
         backgroundColor: colorScheme === "dark" ? "#444444" : "#f4f4f4",
       }}
     >
-      {" "}
       <BarCodeScanner
         onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
         barCodeTypes={[BarCodeScanner.Constants.BarCodeType.qr]}
@@ -436,10 +431,8 @@ export function SendScreen({ navigation }) {
         marginTop: Platform.OS === "ios" ? "20%" : "5%",
       }}
     >
-      {" "}
       <View>
         <TouchableOpacity onPress={() => navigation.navigate("Home")}>
-          {" "}
           <Image
             style={styles.previewImg}
             source={{
@@ -448,7 +441,7 @@ export function SendScreen({ navigation }) {
                 : "https://raw.githubusercontent.com/aperta-principium/Interclip/master/img/interclip_logo.png",
             }}
           />
-        </TouchableOpacity>{" "}
+        </TouchableOpacity>
         <Input
           keyboardType={Platform.OS === "android" ? "default" : "url"}
           style={styles.container}
@@ -490,9 +483,8 @@ export function SendScreen({ navigation }) {
                 marginLeft: "20%",
               }}
             >
-              {" "}
               {!urlValidation(text) &&
-                (checkError(data) ? "Something went wrong 🤔" : data)}{" "}
+                (checkError(data) ? "Something went wrong 🤔" : data)}
             </Text>
           )}
 
