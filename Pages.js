@@ -140,7 +140,7 @@ export function HomeScreen({ navigation }) {
           color="#000" // White color for contrast on the Header
         />
         <View>
-          <Text style={{ fontSize: 30 }}>Interclip</Text>
+          <Text style={{ fontSize: 30 }}> Interclip </Text>
         </View>
         <TouchableOpacity
           activeOpacity={0.5}
@@ -424,7 +424,7 @@ export function SendScreen() {
            <Text>{urlValidation(text)}</Text>
          </View>
        )}
-       <View style={{ padding: 24 }}>
+       <View style={{ padding: 24, flexDirection:"row" }}>
          {isLoading ? (
            <Text></Text>
          ) : (
@@ -448,6 +448,12 @@ export function SendScreen() {
                  : data)}
            </Text>
          )}
+        <Icon
+          type="font-awesome" // The icon is loaded from the font awesome icon library
+          name="qrcode" // Icon fa-qrcode
+          color="#000" // White color for contrast on the Header
+          style={{ width: 50 }}
+        />
        </View>
        <StatusBar style="auto" />
      </View>
