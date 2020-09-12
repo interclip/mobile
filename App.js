@@ -4,7 +4,9 @@
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import React, { useEffect, useState } from "react";
+import React from "react";
+
+import { useColorScheme } from "react-native";
 
 /* Pages */
 import { HomeScreen, QRScreen, SendScreen, SettingsPage } from "./Pages.js";
@@ -23,16 +25,18 @@ const root = () => {
 };
 
 export default function App() {
+  const colorScheme = useColorScheme();
+
   return (
     <NavigationContainer>
       <Stack.Navigator
         initialRouteName="Home"
         screenOptions={{
           headerStyle: {
-            backgroundColor: "#333333",
+            backgroundColor: colorScheme === "dark" ? "#333333" : "#ffffff",
           },
           headerTitleStyle: {
-            color: "white",
+            color: colorScheme === "dark" ? "white" : "black",
           },
         }}
       >
