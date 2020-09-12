@@ -17,6 +17,7 @@ import {
   Vibration,
   View,
 } from "react-native";
+
 import { Header, Icon, Input } from "react-native-elements";
 
 /* 3rd party libraries */
