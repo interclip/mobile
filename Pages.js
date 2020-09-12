@@ -444,7 +444,7 @@ export function SendScreen() {
            >
              {!urlValidation(text) &&
                (checkError(data)
-                 ? "This code doesn't seem to exist 🤔"
+                 ? "Something went wrong 🤔"
                  : data)}
            </Text>
          )}
