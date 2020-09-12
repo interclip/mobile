@@ -490,6 +490,7 @@ export function SendScreen() {
           <View style={styles.modalView}>
             <QRCode
               value={`https://iclip.netlify.app/r/${data}`}
+              size={250}
             />
             <TouchableHighlight
               style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
@@ -497,7 +498,7 @@ export function SendScreen() {
                 setModalVisible(!modalVisible);
               }}
             >
-              <Text style={styles.textStyle}>Hide Modal</Text>
+              <Text style={styles.textStyle}>Hide QR Code</Text>
             </TouchableHighlight>
           </View>
         </View>
