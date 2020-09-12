@@ -477,7 +477,7 @@ export function SendScreen({ navigation }) {
                 Linking.openURL(data);
               }}
               style={{
-                color: checkError(data) ? colors.light : colorScheme === "dakr" ? "white" : colors.text,
+                color: checkError(data) ? colors.light : colorScheme === "dark" ? "white" : colors.text,
                 backgroundColor:
                   checkError(data) & !urlValidation(text)
                     ? colors.errorColor
