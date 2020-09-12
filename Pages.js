@@ -54,7 +54,11 @@ const ValidationMsg = (txt) => {
 };
 
 const urlValidation = (url) => {
-  url = url.replace(" ", "%20").toLowerCase();
+  
+  url = url.replaceAll(" ", "%20").toLowerCase();
+  url = url.replaceAll("<", "&lt;");
+  url = url.replaceAll(">", "&lt;");
+
   if(!url.match(config.urlRegex)) {
     return `This doesn't seem to be a valid URL`;
   }
