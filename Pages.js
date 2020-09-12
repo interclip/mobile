@@ -141,6 +141,7 @@ export function HomeScreen({ navigation }) {
   return (
     <View
       style={{
+        flex: 1,
         backgroundColor: colorScheme === "dark" ? "#444444" : "#f4f4f4",
       }}
     >
@@ -429,6 +430,7 @@ export function SendScreen({ navigation }) {
       style={{
         backgroundColor: colorScheme === "dark" ? "#444444" : "",
         color: colorScheme === "dark" ? "#ffffff" : "#000000",
+        flex: 1
       }}
     >
       <View style={{marginBottom: Platform.OS === "ios" ? "20%" : "5%",}}>
