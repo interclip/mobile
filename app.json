@@ -18,6 +18,7 @@
       "**/*"
     ],
     "ios": {
+      "icon": "./assets/ios.png",
       "supportsTablet": true,
       "bundleIdentifier": "com.filiptronicek.iclip",
       "buildNumber": "0.0.2"
