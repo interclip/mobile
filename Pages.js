@@ -54,7 +54,7 @@ const ValidationMsg = (txt) => {
 };
 
 const urlValidation = (url) => {
-  
+
   url = url.replaceAll(" ", "%20").toLowerCase();
   url = url.replaceAll("<", "&lt;");
   url = url.replaceAll(">", "&lt;");
@@ -417,7 +417,7 @@ export function SendScreen() {
          errorStyle={{ color: "red" }}
          autoCapitalize="none"
          autoFocus={true}
-         value={text.replace(" ", "%20").toLowerCase()}
+         value={text.replaceAll(" ", "%20").toLowerCase()}
          enablesReturnKeyAutomatically={true}
          onSubmitEditing={() => {
            !isLoading && Linking.openURL(data)
