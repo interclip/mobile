@@ -92,7 +92,7 @@ export function HomeScreen({ navigation }) {
   // after the request completes
   const [data, setData] = useState(""); // Dynamically loaded data from the Interclip REST API
   const [text, setText] = useState(""); // The code entered in the <Input>
-  const [progress, setProgress] = useState("");
+  //const [progress, setProgress] = useState("");
 
   useEffect(() => {
     if (text.length === config.codeMaxLength) {
