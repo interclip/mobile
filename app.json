@@ -4,6 +4,7 @@
     "slug": "iclip",
     "version": "0.0.4",
     "orientation": "portrait",
+    "userInterfaceStyle": "automatic",
     "githubUrl": "https://github.com/filiptronicek/iclip-mobile",
     "icon": "./assets/icon.png",
     "splash": {

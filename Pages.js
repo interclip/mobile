@@ -17,7 +17,9 @@ import {
   Vibration,
   View,
   Modal,
-  TouchableHighlight
+  TouchableHighlight,
+  Appearance,
+  useColorScheme 
 } from "react-native";
 
 import { Header, Icon, Input } from "react-native-elements";
@@ -137,6 +139,9 @@ export function HomeScreen({ navigation }) {
   const [text, setText] = useState(""); // The code entered in the <Input>
   //const [progress, setProgress] = useState("");
 
+  const colorScheme = useColorScheme();
+
+
   useEffect(() => {
     if (text.length === config.codeMaxLength) {
       setText(text.replace(" ", "").toLowerCase());
@@ -152,7 +157,7 @@ export function HomeScreen({ navigation }) {
   return (
     <View
       style={{
-        backgroundColor: "",
+        backgroundColor: colorScheme === "dark" ? "#333333" : "#f4f4f4"
       }}
     >
       <Header
@@ -240,7 +245,7 @@ export function HomeScreen({ navigation }) {
                 Linking.openURL(data);
               }}
               style={{
-                color: checkError(data) ? colors.light : colors.text,
+                color: checkError(data) ? colors.light : colorScheme === "dark" ? "white" : colors.text,
                 backgroundColor:
                   checkError(data) & !ValidationMsg(text)
                     ? colors.errorColor
@@ -271,6 +276,8 @@ export function QRScreen({ navigation }) {
       setHasPermission(status === "granted");
     })();
   }, []);
+
+  const colorScheme = useColorScheme();
 
   const handleBarCodeScanned = ({ _type, data }) => {
     setScanned(true);
@@ -356,7 +363,7 @@ export function QRScreen({ navigation }) {
 
   return (
     <View
-      style={{ flex: 1, flexDirection: "column", justifyContent: "flex-end" }}
+      style={{ ...styles.container, backgroundColor: colorScheme === "dark" ? "#333333" : "#f4f4f4" }}
     >
       <BarCodeScanner
         onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
@@ -380,9 +387,11 @@ export function SettingsPage() {
     setData(Settings.get("data"));
   };
 
+  const colorScheme = useColorScheme();
+
   return (
-    <View style={styles.container}>
-      <Text style={{}}>Open all QR Codes automatically</Text>
+    <View style={{ ...styles.container, backgroundColor: colorScheme === "dark" ? "#333333" : "#f4f4f4" }}>
+      <Text style={{ color: colorScheme === "dark" ? "white" : "black" }}>Open all QR Codes automatically</Text>
       <Switch
         ios_backgroundColor="#3e3e3e"
         onValueChange={toggleSwitch}
@@ -400,6 +409,8 @@ export function SendScreen( {navigation} ) {
  const [text, setText] = useState(""); // The code entered in the <Input>
  const [modalVisible, setModalVisible] = useState(false);
 
+ const colorScheme = useColorScheme();
+
  useEffect(() => {
    
      setText(text.replace(" ", "").toLowerCase());
@@ -414,7 +425,8 @@ export function SendScreen( {navigation} ) {
  return (
    <View
      style={{
-       backgroundColor: "",
+       backgroundColor: colorScheme === "dark" ? "#333333" : "",
+       color: colorScheme === "dark" ? "#ffffff" : "#000000",
        marginTop: Platform.OS === "ios" ? "20%" : "5%",
      }}
    >
@@ -444,7 +456,6 @@ export function SendScreen( {navigation} ) {
          errorStyle={{ color: "red" }}
          autoCapitalize="none"
          autoFocus={true}
-         value={text.split(" ").join("%20").toLowerCase()}
          enablesReturnKeyAutomatically={true}
          onSubmitEditing={() => {
            !isLoading && Linking.openURL(data)
