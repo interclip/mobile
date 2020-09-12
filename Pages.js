@@ -438,7 +438,8 @@ export function SendScreen() {
                  checkError(data) & !urlValidation(text)
                    ? colors.errorColor
                    : null,
-               fontSize: 20,
+               fontSize: 40,
+               marginLeft: "20%"
              }}
            >
              {!urlValidation(text) &&
