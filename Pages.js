@@ -145,14 +145,17 @@ export function HomeScreen({ navigation }) {
         </TouchableOpacity>
       </Header>
       <View>
+        <TouchableOpacity
+        onPress={() => navigation.navigate("Send") }
+        >
         <Image
           style={styles.previewImg}
-          onPress={() => navigation.navigate("Send")}
-
+          onPress={() => navigation.navigate("Send") }
           source={{ 
             uri: imgCheck(data, text) ? `https://external.iclip.trnck.dev/image?url=${data}` : "https://raw.githubusercontent.com/aperta-principium/Interclip/master/img/interclip_logo.png",
           }}
         />
+        </TouchableOpacity>
         <Input
           keyboardType={
             Platform.OS === "android" ? "email-address" : "ascii-capable"
