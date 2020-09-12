@@ -143,7 +143,7 @@ export function HomeScreen({ navigation }) {
         <Image
           style={styles.previewImg}
           source={{ 
-            uri: imgCheck(data, text) ? `https://external.iclip.trnck.dev/image/?url=${data}` : "https://raw.githubusercontent.com/aperta-principium/Interclip/master/img/interclip_logo.png",
+            uri: imgCheck(data, text) ? `https://external.iclip.trnck.dev/image?url=${data}` : "https://raw.githubusercontent.com/aperta-principium/Interclip/master/img/interclip_logo.png",
           }}
         />
         <Input
