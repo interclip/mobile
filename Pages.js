@@ -147,7 +147,8 @@ export function HomeScreen({ navigation }) {
       <Header
         containerStyle={{
           // backgroundColor: colors.headerBg,
-          backgroundColor: "white",
+          backgroundColor: colorScheme === "dark" ? "#333333" : "#f4f4f4",
+          color: colorScheme === "dark" ? "white" : "black",
           justifyContent: "space-around",
           marginBottom: Platform.OS === "ios" ? "20%" : "5%",
         }}
@@ -156,10 +157,10 @@ export function HomeScreen({ navigation }) {
           onPress={() => navigation.navigate("QR")}
           type="font-awesome" // The icon is loaded from the font awesome icon library
           name="qrcode" // Icon fa-qrcode
-          color="#000" // White color for contrast on the Header
+          color= { colorScheme === "dark" ? "white" : "black" }// White color for contrast on the Header
         />
         <View>
-          <Text style={{ fontSize: 30 }}>Interclip</Text>
+          <Text style={{ fontSize: 30, color: colorScheme === "dark" ? "white" : "black" }}>Interclip</Text>
         </View>
         <TouchableOpacity
           activeOpacity={0.5}
@@ -168,7 +169,7 @@ export function HomeScreen({ navigation }) {
           <Icon
             type="font-awesome" // The icon is loaded from the font awesome icon library
             name="cog" // Icon fa-cog
-            color="#000" // White color for contrast on the Header
+            color= { colorScheme === "dark" ? "white" : "black" }// White color for contrast on the Header
           />
         </TouchableOpacity>
       </Header>
