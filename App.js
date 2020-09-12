@@ -1,7 +1,5 @@
 /* 1st party libraries and dependencies: react, react native and Expo stuff */
 
-import { StatusBar } from 'expo-status-bar';
-
 import React, { useState, useEffect } from 'react';
 
 /* 3rd party libraries */
