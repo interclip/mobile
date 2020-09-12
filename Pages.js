@@ -58,9 +58,9 @@ const ValidationMsg = (txt) => {
 
 const urlValidation = (url) => {
 
-  url = url.replaceAll(" ", "%20").toLowerCase();
-  url = url.replaceAll("<", "&lt;");
-  url = url.replaceAll(">", "&lt;");
+  url = url.split(" ").join("%20");
+  url = url.split("<").join("&gt;");
+  url = url.split(">").join("&lt;");
 
   if(!url.match(config.urlRegex)) {
     return `This doesn't seem to be a valid URL`;
@@ -442,7 +442,7 @@ export function SendScreen() {
          errorStyle={{ color: "red" }}
          autoCapitalize="none"
          autoFocus={true}
-         value={text.replaceAll(" ", "%20").toLowerCase()}
+         value={text.split(" ").join("%20").toLowerCase()}
          enablesReturnKeyAutomatically={true}
          onSubmitEditing={() => {
            !isLoading && Linking.openURL(data)
