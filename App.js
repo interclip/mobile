@@ -26,7 +26,17 @@ const root = () => {
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
+      <Stack.Navigator 
+      initialRouteName="Home"       
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: '#333333',
+        },
+        headerTitleStyle: {
+          color: 'white',
+        },
+      }}
+      >
         <Stack.Screen name="Home" component={HomeScreen} options={{headerShown:false}} />
         <Stack.Screen name="QR" component={QRScreen} options={{ title: 'Scan QR' }} />
         <Stack.Screen name="Send" component={SendScreen} options={{ title: 'New clip' }} />

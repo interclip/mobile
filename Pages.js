@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
 /* Colors and stuff */
 const colors = {
   bg: "white",
-  headerBg: "#333333",
+  headerBg: "#444444",
   text: "black",
   errorColor: "#f44336",
   light: "white",
@@ -157,7 +157,7 @@ export function HomeScreen({ navigation }) {
   return (
     <View
       style={{
-        backgroundColor: colorScheme === "dark" ? "#333333" : "#f4f4f4"
+        backgroundColor: colorScheme === "dark" ? "#444444" : "#f4f4f4"
       }}
     >
       <Header
@@ -363,7 +363,7 @@ export function QRScreen({ navigation }) {
 
   return (
     <View
-      style={{ ...styles.container, backgroundColor: colorScheme === "dark" ? "#333333" : "#f4f4f4" }}
+      style={{ ...styles.container, backgroundColor: colorScheme === "dark" ? "#444444" : "#f4f4f4" }}
     >
       <BarCodeScanner
         onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
@@ -390,7 +390,7 @@ export function SettingsPage() {
   const colorScheme = useColorScheme();
 
   return (
-    <View style={{ ...styles.container, backgroundColor: colorScheme === "dark" ? "#333333" : "#f4f4f4" }}>
+    <View style={{ ...styles.container, backgroundColor: colorScheme === "dark" ? "#444444" : "#f4f4f4" }}>
       <Text style={{ color: colorScheme === "dark" ? "white" : "black" }}>Open all QR Codes automatically</Text>
       <Switch
         ios_backgroundColor="#3e3e3e"
@@ -425,7 +425,7 @@ export function SendScreen( {navigation} ) {
  return (
    <View
      style={{
-       backgroundColor: colorScheme === "dark" ? "#333333" : "",
+       backgroundColor: colorScheme === "dark" ? "#444444" : "",
        color: colorScheme === "dark" ? "#ffffff" : "#000000",
        marginTop: Platform.OS === "ios" ? "20%" : "5%",
      }}
