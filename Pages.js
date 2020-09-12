@@ -390,7 +390,7 @@ export function SettingsPage() {
   );
 }
 
-export function SendScreen() {
+export function SendScreen( {navigation} ) {
  /* Variable set */
  const [isLoading, setLoading] = useState(true); // Loading status => only show the responce of the API
  // after the request completes
@@ -418,7 +418,7 @@ export function SendScreen() {
    >
      <View>
        <TouchableOpacity
-       onPress={() => navigation.navigate("Send") }
+       onPress={() => navigation.navigate("Home") }
        >
        <Image
          style={styles.previewImg}
