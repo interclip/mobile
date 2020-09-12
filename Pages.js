@@ -429,9 +429,11 @@ export function SendScreen({ navigation }) {
       style={{
         backgroundColor: colorScheme === "dark" ? "#444444" : "",
         color: colorScheme === "dark" ? "#ffffff" : "#000000",
-        marginTop: Platform.OS === "ios" ? "20%" : "5%",
       }}
     >
+      <View style={{marginBottom: Platform.OS === "ios" ? "20%" : "5%",}}>
+
+      </View>
       <View>
         <TouchableOpacity onPress={() => navigation.navigate("Home")}>
           <Image
@@ -475,7 +477,7 @@ export function SendScreen({ navigation }) {
                 Linking.openURL(data);
               }}
               style={{
-                color: checkError(data) ? colors.light : colors.text,
+                color: checkError(data) ? colors.light : colorScheme === "dakr" ? "white" : colors.text,
                 backgroundColor:
                   checkError(data) & !urlValidation(text)
                     ? colors.errorColor
