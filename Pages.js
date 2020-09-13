@@ -144,6 +144,7 @@ export function HomeScreen({ navigation }) {
     <View
       style={{
         flex: 1,
+        backgroundColor: colorScheme === "dark" ? "#444444" : "#f4f4f4",
       }}
     >
       <Header
