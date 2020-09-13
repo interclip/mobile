@@ -2,26 +2,25 @@ import Clipboard from "@react-native-community/clipboard";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import { StatusBar } from "expo-status-bar";
 import React, { useEffect, useState } from "react";
-
 import {
   Alert,
   Dimensions,
   Image,
   Linking,
+  Modal,
   Platform,
   Settings,
   StyleSheet,
   Switch,
   Text,
+  TouchableHighlight,
   TouchableOpacity,
+  useColorScheme,
   Vibration,
   View,
-  Modal,
-  TouchableHighlight
 } from "react-native";
-
 import { Header, Icon, Input } from "react-native-elements";
-import QRCode from 'react-native-qrcode-svg';
+import QRCode from "react-native-qrcode-svg";
 
 /* 3rd party libraries */
 
@@ -38,8 +37,8 @@ const sleep = (milliseconds) => {
 };
 
 const imgCheck = (url, inval) => {
-  if ( inval === "" ) return false;
-  if ( typeof url !== 'string' ) return false;
+  if (inval === "") return false;
+  if (typeof url !== "string") return false;
   return !!url.match(/\w+\.(jpg|jpeg|gif|png|tiff|bmp)$/gi);
 };
 
@@ -58,25 +57,25 @@ const ValidationMsg = (txt) => {
 };
 
 const urlValidation = (url) => {
-
   url = url.split(" ").join("%20");
   url = url.split("<").join("&gt;");
   url = url.split(">").join("&lt;");
 
-  if(url.length === 0) return "Start pasting or typing in the URL";
-  if(!url.match(config.urlRegex)) {
+  if (url.length === 0) return "Start pasting or typing in the URL";
+  if (!url.match(config.urlRegex)) {
     return `This doesn't seem to be a valid URL`;
   }
-
 };
 
-//const entireScreenHeight = Dimensions.get("window").height;
+// const entireScreenHeight = Dimensions.get("window").height;
 const entireScreenWidth = Dimensions.get("window").width;
 
 const config = {
   codeMaxLength: 5, // The code's length has to be always 5 characters
   charRegex: new RegExp("[^A-Za-z0-9]"), // Only allow ascii characters to be entered as the code
-  urlRegex: new RegExp(/[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/gi)
+  urlRegex: new RegExp(
+    /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/gi
+  ),
 };
 
 /* Styles */
@@ -93,41 +92,30 @@ const styles = StyleSheet.create({
   previewImg: {
     width: 100,
     height: 100,
-    marginLeft: (entireScreenWidth / 3) + 10,
-    marginBottom: "20%"
+    marginLeft: entireScreenWidth / 3 + 10,
+    marginBottom: "20%",
   },
   centeredView: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 22
+    marginTop: 22,
   },
-  openButton: {
-    borderRadius: 20,
-    padding: 10,
-    elevation: 2,
-    marginTop: 10
-  },
-  textStyle: {
-    color: "white",
-    fontWeight: "bold",
-    textAlign: "center"
-  },
-  modalText: {
-    marginBottom: 15,
-    textAlign: "center"
-  }
+  openButton: { borderRadius: 20, padding: 10, elevation: 2, marginTop: 10 },
+  textStyle: { color: "white", fontWeight: "bold", textAlign: "center" },
+  modalText: { marginBottom: 15, textAlign: "center" },
 });
 
 /* Colors and stuff */
 const colors = {
   bg: "white",
-  headerBg: "#333333",
+  headerBg: "#444444",
   text: "black",
   errorColor: "#f44336",
   light: "white",
+  darkHeader: "#333333",
+  lightHeader: "#f4f4f4"
 };
-
 
 export function HomeScreen({ navigation }) {
   /* Variable set */
@@ -135,7 +123,9 @@ export function HomeScreen({ navigation }) {
   // after the request completes
   const [data, setData] = useState(""); // Dynamically loaded data from the Interclip REST API
   const [text, setText] = useState(""); // The code entered in the <Input>
-  //const [progress, setProgress] = useState("");
+  // const [progress, setProgress] = useState("");
+
+  const colorScheme = useColorScheme();
 
   useEffect(() => {
     if (text.length === config.codeMaxLength) {
@@ -152,13 +142,15 @@ export function HomeScreen({ navigation }) {
   return (
     <View
       style={{
-        backgroundColor: "",
+        flex: 1,
+        backgroundColor: colorScheme === "dark" ? "#444444" : "#f4f4f4",
       }}
     >
       <Header
         containerStyle={{
           // backgroundColor: colors.headerBg,
-          backgroundColor: "white",
+          backgroundColor: colorScheme === "dark" ? colors.darkHeader : colors.lightHeader,
+          color: colorScheme === "dark" ? "white" : "black",
           justifyContent: "space-around",
           marginBottom: Platform.OS === "ios" ? "20%" : "5%",
         }}
@@ -167,10 +159,10 @@ export function HomeScreen({ navigation }) {
           onPress={() => navigation.navigate("QR")}
           type="font-awesome" // The icon is loaded from the font awesome icon library
           name="qrcode" // Icon fa-qrcode
-          color="#000" // White color for contrast on the Header
+          color= { colorScheme === "dark" ? "white" : "black" }// White color for contrast on the Header
         />
         <View>
-          <Text style={{ fontSize: 30 }}> Interclip </Text>
+          <Text style={{ fontSize: 30, color: colorScheme === "dark" ? "white" : "black" }}>Interclip</Text>
         </View>
         <TouchableOpacity
           activeOpacity={0.5}
@@ -179,26 +171,26 @@ export function HomeScreen({ navigation }) {
           <Icon
             type="font-awesome" // The icon is loaded from the font awesome icon library
             name="cog" // Icon fa-cog
-            color="#000" // White color for contrast on the Header
+            color= { colorScheme === "dark" ? "white" : "black" }// White color for contrast on the Header
           />
         </TouchableOpacity>
       </Header>
       <View>
-        <TouchableOpacity
-        onPress={() => navigation.navigate("Send") }
-        >
-        <Image
-          style={styles.previewImg}
-          source={{ 
-            uri: imgCheck(data, text) ? `https://external.iclip.trnck.dev/image?url=${data}` : "https://raw.githubusercontent.com/aperta-principium/Interclip/master/img/interclip_logo.png",
-          }}
-        />
+        <TouchableOpacity onPress={() => navigation.navigate("Send")}>
+          <Image
+            style={styles.previewImg}
+            source={{
+              uri: imgCheck(data, text)
+                ? `https://external.iclip.trnck.dev/image?url=${data}`
+                : "https://raw.githubusercontent.com/aperta-principium/Interclip/master/img/interclip_logo.png",
+            }}
+          />
         </TouchableOpacity>
         <Input
           keyboardType={
             Platform.OS === "android" ? "email-address" : "ascii-capable"
           }
-          style={styles.container}
+          style={{ ...styles.container, color: colorScheme === "dark" ? "white" : "black" }}
           placeholder="Your code here"
           maxLength={config.codeMaxLength}
           inputStyle={{ fontSize: 50 }}
@@ -221,7 +213,7 @@ export function HomeScreen({ navigation }) {
         />
         {ValidationMsg(text) && (
           <View style={{ padding: 24 }}>
-            <Text>{ValidationMsg(text)}</Text>
+            <Text style={{ color: colorScheme === "dark" ? colors.light : colors.text }}>{ValidationMsg(text)}</Text>
           </View>
         )}
         <View style={{ padding: 24 }}>
@@ -232,15 +224,19 @@ export function HomeScreen({ navigation }) {
               onLongPress={() => {
                 /* Handle functionality, when user presses for a longer period of time */
                 /*
-                  Clipboard.setString(data);
-                  alert("Copied to Clipboard!");
-                */
+        Clipboard.setString(data);
+        alert("Copied to Clipboard!");
+      */
               }}
               onPress={() => {
                 Linking.openURL(data);
               }}
               style={{
-                color: checkError(data) ? colors.light : colors.text,
+                color: checkError(data)
+                  ? colors.light
+                  : colorScheme === "dark"
+                  ? "white"
+                  : colors.text,
                 backgroundColor:
                   checkError(data) & !ValidationMsg(text)
                     ? colors.errorColor
@@ -272,6 +268,8 @@ export function QRScreen({ navigation }) {
     })();
   }, []);
 
+  const colorScheme = useColorScheme();
+
   const handleBarCodeScanned = ({ _type, data }) => {
     setScanned(true);
 
@@ -279,8 +277,8 @@ export function QRScreen({ navigation }) {
     const result = URLArr[0] + "//" + URLArr[2];
 
     if (
-      result === "https://iclip.netlify.com" |
-      result === "http://iclip.netlify.app" |
+      (result === "https://iclip.netlify.com") |
+      (result === "http://iclip.netlify.app") |
       Settings.get("data")
     ) {
       Vibration.vibrate();
@@ -356,7 +354,10 @@ export function QRScreen({ navigation }) {
 
   return (
     <View
-      style={{ flex: 1, flexDirection: "column", justifyContent: "flex-end" }}
+      style={{
+        ...styles.container,
+        backgroundColor: colorScheme === "dark" ? "#444444" : "#f4f4f4",
+      }}
     >
       <BarCodeScanner
         onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
@@ -380,9 +381,22 @@ export function SettingsPage() {
     setData(Settings.get("data"));
   };
 
+  const colorScheme = useColorScheme();
+
   return (
-    <View style={styles.container}>
-      <Text style={{}}>Open all QR Codes automatically</Text>
+    <View
+      style={{
+        ...styles.container,
+        backgroundColor: colorScheme === "dark" ? "#444444" : "#f4f4f4",
+      }}
+    >
+      <Text
+        style={{
+          color: colorScheme === "dark" ? "white" : "black",
+        }}
+      >
+        Open all QR Codes automatically
+      </Text>
       <Switch
         ios_backgroundColor="#3e3e3e"
         onValueChange={toggleSwitch}
@@ -392,137 +406,140 @@ export function SettingsPage() {
   );
 }
 
-export function SendScreen( {navigation} ) {
- /* Variable set */
- const [isLoading, setLoading] = useState(true); // Loading status => only show the responce of the API
- // after the request completes
- const [data, setData] = useState(""); // Dynamically loaded data from the Interclip REST API
- const [text, setText] = useState(""); // The code entered in the <Input>
- const [modalVisible, setModalVisible] = useState(false);
+export function SendScreen({ navigation }) {
+  /* Variable set */
+  const [isLoading, setLoading] = useState(true); // Loading status => only show the responce of the API
+  // after the request completes
+  const [data, setData] = useState(""); // Dynamically loaded data from the Interclip REST API
+  const [text, setText] = useState(""); // The code entered in the <Input>
+  const [modalVisible, setModalVisible] = useState(false);
 
- useEffect(() => {
-   
-     setText(text.replace(" ", "").toLowerCase());
-     fetch(`http://uni.hys.cz/includes/api?url=${text}`)
-       .then((response) => response.text())
-       .then((json) => setData(json))
-       .catch((error) => console.error(error))
-       .finally(() => setLoading(false));
+  const colorScheme = useColorScheme();
 
-     setLoading(true);
- }, [text]);
- return (
-   <View
-     style={{
-       backgroundColor: "",
-       marginTop: Platform.OS === "ios" ? "20%" : "5%",
-     }}
-   >
-     <View>
-       <TouchableOpacity
-       onPress={() => navigation.navigate("Home") }
-       >
-       <Image
-         style={styles.previewImg}
-         source={{ 
-           uri: imgCheck(data, text) ? `https://external.iclip.trnck.dev/image?url=${data}` : "https://raw.githubusercontent.com/aperta-principium/Interclip/master/img/interclip_logo.png",
-         }}
-       />
-       </TouchableOpacity>
-       <Input
-         keyboardType={
-           Platform.OS === "android" ? "default" : "url"
-         }
-         style={styles.container}
-         placeholder="Your URL here"
-         inputStyle={{ fontSize: 25 }}
-         autoCorrect={false}
-         autoCompleteType={"off"}
-         returnKeyType={Platform.OS === "android" ? "none" : "done"}
-         onChangeText={(text) => setText(text)}
-         defaultValue={text}
-         errorStyle={{ color: "red" }}
-         autoCapitalize="none"
-         autoFocus={true}
-         value={text.split(" ").join("%20").toLowerCase()}
-         enablesReturnKeyAutomatically={true}
-         onSubmitEditing={() => {
-           !isLoading && Linking.openURL(data)
-         }}
-       />
-       {urlValidation(text) && (
-         <View style={{ padding: 24 }}>
-           <Text>{urlValidation(text)}</Text>
-         </View>
-       )}
-       <View style={{ padding: 24, flexDirection:"row" }}>
-         {isLoading ? (
-           <Text></Text>
-         ) : (
-           <Text
-             onPress={() => {
-               Linking.openURL(data);
-             }}
-             style={{
-               color: checkError(data) ? colors.light : colors.text,
-               backgroundColor:
-                 checkError(data) & !urlValidation(text)
-                   ? colors.errorColor
-                   : null,
-               fontSize: 40,
-               marginLeft: "20%"
-             }}
-           >
-             {!urlValidation(text) &&
-               (checkError(data)
-                 ? "Something went wrong 🤔"
-                 : data)}
-           </Text>
-         )}
+  useEffect(() => {
+    setText(text.replace(" ", "").toLowerCase());
+    fetch(`http://uni.hys.cz/includes/api?url=${text}`)
+      .then((response) => response.text())
+      .then((json) => setData(json))
+      .catch((error) => console.error(error))
+      .finally(() => setLoading(false));
 
-      <Modal
-        animationType="slide"
-        transparent={false}
-        visible={modalVisible}
-        onRequestClose={() => {
-          Alert.alert("Modal has been closed.");
-        }}
-      >
-        <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-            <QRCode
-              value={`https://iclip.netlify.app/r/${data}`}
-              size={250}
-              logo={{uri: iclipUri}}
-              logoSize={60}
-              logoBackgroundColor='white'
-            />
-            <TouchableHighlight
-              style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
+    setLoading(true);
+  }, [text]);
+  return (
+    <View
+      style={{
+        backgroundColor: colorScheme === "dark" ? "#444444" : "#f2f2f2",
+        color: colorScheme === "dark" ? "#ffffff" : "#000000",
+        flex: 1
+      }}
+    >
+      <View style={{marginBottom: Platform.OS === "ios" ? "20%" : "5%",}}>
+
+      </View>
+      <View>
+        <TouchableOpacity onPress={() => navigation.navigate("Home")}>
+          <Image
+            style={styles.previewImg}
+            source={{
+              uri: imgCheck(data, text)
+                ? `https://external.iclip.trnck.dev/image?url=${data}`
+                : "https://raw.githubusercontent.com/aperta-principium/Interclip/master/img/interclip_logo.png",
+            }}
+          />
+        </TouchableOpacity>
+        <Input
+          keyboardType={Platform.OS === "android" ? "default" : "url"}
+          style={{ ...styles.container, color: colorScheme === "dark" ? "white" : "black" }}
+          placeholder="Your URL here"
+          inputStyle={{ fontSize: 25 }}
+          autoCorrect={false}
+          autoCompleteType={"off"}
+          returnKeyType={Platform.OS === "android" ? "none" : "done"}
+          onChangeText={(text) => setText(text)}
+          defaultValue={text}
+          errorStyle={{ color: "red" }}
+          autoCapitalize="none"
+          autoFocus={true}
+          enablesReturnKeyAutomatically={true}
+          onSubmitEditing={() => {
+            !isLoading && Linking.openURL(data);
+          }}
+        />
+        {urlValidation(text) && (
+          <View style={{ padding: 24 }}>
+            <Text style={{ color: colorScheme === "dark" ? colors.light : colors.text }}>{urlValidation(text)}</Text>
+          </View>
+        )}
+        <View style={{ padding: 24, flexDirection: "row" }}>
+          {isLoading ? (
+            <Text></Text>
+          ) : (
+            <Text
               onPress={() => {
-                setModalVisible(!modalVisible);
+                Linking.openURL(data);
+              }}
+              style={{
+                color: colorScheme === "dark" ? colors.light : colors.text,
+                backgroundColor:
+                  checkError(data) & !urlValidation(text)
+                    ? colors.errorColor
+                    : null,
+                fontSize: 40,
+                marginLeft: "20%",
               }}
             >
-              <Text style={styles.textStyle}>Hide QR Code</Text>
-            </TouchableHighlight>
-          </View>
-        </View>
-      </Modal>
-      { !urlValidation(text) ? (         
-        <Icon
-          type="font-awesome" // The icon is loaded from the font awesome icon library
-          name="qrcode" // Icon fa-qrcode
-          color="#000" // White color for contrast on the Header
-          style={{ width: 70 }}
-          onPress={() => {
-            setModalVisible(true);
-          }}
-          size={50}
-        />) : <Text></Text>}
+              {
+                !urlValidation(text) && data
+              }
+            </Text>
+          )}
 
-       </View>
-       <StatusBar style="auto" />
-     </View>
-   </View>
- );
+          <Modal
+            animationType="slide"
+            transparent={true}
+            visible={modalVisible}
+            onRequestClose={() => {
+              Alert.alert("Modal has been closed.");
+            }}
+          >
+            <View style={{ ...styles.centeredView, backgroundColor: colorScheme === "dark" ? "#444" : "#fff" }}>
+              <View>
+                <QRCode
+                  value={`https://iclip.netlify.app/r/${data}`}
+                  size={250}
+                  logo={{ uri: iclipUri }}
+                  logoSize={60}
+                  logoBackgroundColor="white"
+                />
+                <TouchableHighlight
+                  style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
+                  onPress={() => {
+                    setModalVisible(!modalVisible);
+                  }}
+                >
+                  <Text style={styles.textStyle}>Hide QR Code</Text>
+                </TouchableHighlight>
+              </View>
+            </View>
+          </Modal>
+          {!urlValidation(text) ? (
+            <Icon
+              type="font-awesome" // The icon is loaded from the font awesome icon library
+              name="qrcode" // Icon fa-qrcode
+              color= { colorScheme === "dark" ? "white" : "black" }// White color for contrast on the Header
+              style={{ width: 70 }}
+              onPress={() => {
+                setModalVisible(true);
+              }}
+              size={50}
+            />
+          ) : (
+            <Text></Text>
+          )}
+        </View>
+        <StatusBar style="auto" />
+      </View>
+    </View>
+  );
 }
