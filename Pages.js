@@ -496,14 +496,14 @@ export function SendScreen({ navigation }) {
 
           <Modal
             animationType="slide"
-            transparent={false}
+            transparent={true}
             visible={modalVisible}
             onRequestClose={() => {
               Alert.alert("Modal has been closed.");
             }}
           >
-            <View style={styles.centeredView}>
-              <View style={styles.modalView}>
+            <View style={{ ...styles.centeredView, backgroundColor: colorScheme === "dark" ? "#444" : "#fff" }}>
+              <View>
                 <QRCode
                   value={`https:/ /
                  iclip.netlify.app / r / $ { data } `}
