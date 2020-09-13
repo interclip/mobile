@@ -191,7 +191,7 @@ export function HomeScreen({ navigation }) {
           keyboardType={
             Platform.OS === "android" ? "email-address" : "ascii-capable"
           }
-          style={styles.container}
+          style={{ ...styles.container, color: colorScheme === "dark" ? "white" : "black" }}
           placeholder="Your code here"
           maxLength={config.codeMaxLength}
           inputStyle={{ fontSize: 50 }}
@@ -451,7 +451,7 @@ export function SendScreen({ navigation }) {
         </TouchableOpacity>
         <Input
           keyboardType={Platform.OS === "android" ? "default" : "url"}
-          style={styles.container}
+          style={{ ...styles.container, color: colorScheme === "dark" ? "white" : "black" }}
           placeholder="Your URL here"
           inputStyle={{ fontSize: 25 }}
           autoCorrect={false}
