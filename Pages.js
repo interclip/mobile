@@ -29,7 +29,7 @@ import { iclipUri } from "./Vars";
 
 /* Function and config */
 const checkError = (msg) => {
-  return msg.indexOf("Error: ") > -1;
+  return msg.includes("Error: ") || msg.includes("400 Bad Request");
 };
 
 const sleep = (milliseconds) => {
