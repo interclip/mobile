@@ -429,7 +429,7 @@ export function SendScreen({ navigation }) {
   return (
     <View
       style={{
-        backgroundColor: colorScheme === "dark" ? "#444444" : "",
+        backgroundColor: colorScheme === "dark" ? "#444444" : "#f2f2f2",
         color: colorScheme === "dark" ? "#ffffff" : "#000000",
         flex: 1
       }}
