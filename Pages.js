@@ -213,7 +213,7 @@ export function HomeScreen({ navigation }) {
         />
         {ValidationMsg(text) && (
           <View style={{ padding: 24 }}>
-            <Text>{ValidationMsg(text)}</Text>
+            <Text style={{ color: colorScheme === "dark" ? colors.light : colors.text }}>{ValidationMsg(text)}</Text>
           </View>
         )}
         <View style={{ padding: 24 }}>
@@ -468,7 +468,7 @@ export function SendScreen({ navigation }) {
         />
         {urlValidation(text) && (
           <View style={{ padding: 24 }}>
-            <Text>{urlValidation(text)}</Text>
+            <Text style={{ color: colorScheme === "dark" ? colors.light : colors.text }}>{urlValidation(text)}</Text>
           </View>
         )}
         <View style={{ padding: 24, flexDirection: "row" }}>
@@ -480,7 +480,7 @@ export function SendScreen({ navigation }) {
                 Linking.openURL(data);
               }}
               style={{
-                color: checkError(data) ? colors.light : colorScheme === "dark" ? "white" : colors.text,
+                color: colorScheme === "dark" ? colors.light : colors.text,
                 backgroundColor:
                   checkError(data) & !urlValidation(text)
                     ? colors.errorColor
@@ -489,8 +489,9 @@ export function SendScreen({ navigation }) {
                 marginLeft: "20%",
               }}
             >
-              {!urlValidation(text) &&
-                (checkError(data) ? "Something went wrong 🤔" : data)}
+              {
+                !urlValidation(text) && data
+              }
             </Text>
           )}
 
