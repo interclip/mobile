@@ -505,8 +505,7 @@ export function SendScreen({ navigation }) {
             <View style={{ ...styles.centeredView, backgroundColor: colorScheme === "dark" ? "#444" : "#fff" }}>
               <View>
                 <QRCode
-                  value={`https:/ /
-                 iclip.netlify.app / r / $ { data } `}
+                  value={`https://iclip.netlify.app/r/${data}`}
                   size={250}
                   logo={{ uri: iclipUri }}
                   logoSize={60}
