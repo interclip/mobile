@@ -526,7 +526,7 @@ export function SendScreen({ navigation }) {
             <Icon
               type="font-awesome" // The icon is loaded from the font awesome icon library
               name="qrcode" // Icon fa-qrcode
-              color="#000" // White color for contrast on the Header
+              color= { colorScheme === "dark" ? "white" : "black" }// White color for contrast on the Header
               style={{ width: 70 }}
               onPress={() => {
                 setModalVisible(true);
