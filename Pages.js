@@ -114,6 +114,8 @@ const colors = {
   text: "black",
   errorColor: "#f44336",
   light: "white",
+  darkHeader: "#333333",
+  lightHeader: "#f4f4f4"
 };
 
 export function HomeScreen({ navigation }) {
@@ -142,13 +144,12 @@ export function HomeScreen({ navigation }) {
     <View
       style={{
         flex: 1,
-        backgroundColor: colorScheme === "dark" ? "#444444" : "#f4f4f4",
       }}
     >
       <Header
         containerStyle={{
           // backgroundColor: colors.headerBg,
-          backgroundColor: colorScheme === "dark" ? "#333333" : "#f4f4f4",
+          backgroundColor: colorScheme === "dark" ? colors.darkHeader : colors.lightHeader,
           color: colorScheme === "dark" ? "white" : "black",
           justifyContent: "space-around",
           marginBottom: Platform.OS === "ios" ? "20%" : "5%",
