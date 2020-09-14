@@ -63,7 +63,7 @@ const urlValidation = (url) => {
   url = url.split(">").join("&lt;");
 
   if (url.length === 0) return "Start pasting or typing in the URL";
-  if (!url.match(config.urlRegex)) {
+  if (!isURL(url)) {
     return `This doesn't seem to be a valid URL`;
   }
 };
@@ -74,9 +74,6 @@ const entireScreenWidth = Dimensions.get("window").width;
 const config = {
   codeMaxLength: 5, // The code's length has to be always 5 characters
   charRegex: new RegExp("[^A-Za-z0-9]"), // Only allow ascii characters to be entered as the code
-  urlRegex: new RegExp(
-    /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/gi
-  ),
 };
 
 /* Styles */
@@ -484,7 +481,7 @@ export function SendScreen({ navigation }) {
           autoFocus={true}
           enablesReturnKeyAutomatically={true}
           onSubmitEditing={() => {
-            Keyboard.dismiss
+            Keyboard.dismiss;
           }}
         />
         {urlValidation(text) && (
@@ -553,7 +550,7 @@ export function SendScreen({ navigation }) {
               </View>
             </View>
           </Modal>
-          {!urlValidation(text) ? (
+          {isURL(text) && (
             <Icon
               type="font-awesome" // The icon is loaded from the font awesome icon library
               name="qrcode" // Icon fa-qrcode
@@ -564,8 +561,6 @@ export function SendScreen({ navigation }) {
               }}
               size={50}
             />
-          ) : (
-            <Text></Text>
           )}
         </View>
         <StatusBar style="auto" />
