@@ -27,7 +27,7 @@ export function QRScreen({ navigation }) {
 
   const colorScheme = useColorScheme();
 
-  const handleBarCodeScanned = ({ _type, data }) => {
+  const handleBarCodeScanned = ({ data }) => {
     setScanned(true);
 
     const URLArr = data.split("/");
