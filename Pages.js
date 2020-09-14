@@ -326,7 +326,7 @@ export function QRScreen({ navigation }) {
               );
             });
     } else if (!isURL(data)) {
-      Alert.alert("It is't even a URL", "Of a sort we know of", [
+      Alert.alert("This doesn't look like an URL", "Or it's really weird and I have no idea what you're trying to do", [
         {
           text: "OK then",
           onPress: () => {
