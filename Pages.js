@@ -234,9 +234,7 @@ export function HomeScreen({ navigation }) {
           </View>
         )}
         <View style={{ padding: 24 }}>
-          {isLoading ? (
-            <Text></Text>
-          ) : (
+          {!isLoading && (
             <Text
               onLongPress={() => {
                 /* Handle functionality, when user presses for a longer period of time */
