@@ -170,6 +170,7 @@ export function HomeScreen({ navigation }) {
             Interclip
           </Text>
         </View>
+        { Platform.OS === "ios" &&
         <TouchableOpacity
           activeOpacity={0.5}
           onPress={() => navigation.navigate("Settings")}
@@ -180,6 +181,7 @@ export function HomeScreen({ navigation }) {
             color={colorScheme === "dark" ? "white" : "black"} // White color for contrast on the Header
           />
         </TouchableOpacity>
+        }
       </Header>
       <View>
         <TouchableOpacity onPress={() => navigation.navigate("Send")}>
