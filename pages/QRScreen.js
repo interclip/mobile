@@ -12,7 +12,7 @@ import {
   View,
 } from "react-native";
 import { isURL } from "../functions";
-import { sleep, styles } from "../Pages";
+import { sleep, styles, colors } from "../Pages";
 
 export function QRScreen({ navigation }) {
   const [hasPermission, setHasPermission] = useState(null);
@@ -117,7 +117,7 @@ export function QRScreen({ navigation }) {
     <View
       style={{
         ...styles.container,
-        backgroundColor: colorScheme === "dark" ? "#444444" : "#f4f4f4",
+        backgroundColor: colorScheme === "dark" ? colors.darkContent : colors.lightContent,
       }}
     >
       <BarCodeScanner

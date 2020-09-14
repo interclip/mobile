@@ -92,4 +92,6 @@ export const colors = {
   light: "white",
   darkHeader: "#333333",
   lightHeader: "#f4f4f4",
+  darkContent: "#444444",
+  lightContent: "#f4f4f4",
 };

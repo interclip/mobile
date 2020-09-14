@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Settings, Switch, Text, useColorScheme, View } from "react-native";
-import { styles } from "../Pages";
+import { styles, colors } from "../Pages";
 
 export function SettingsPage() {
   const [isEnabled, setIsEnabled] = useState();
@@ -21,7 +21,7 @@ export function SettingsPage() {
     <View
       style={{
         ...styles.container,
-        backgroundColor: colorScheme === "dark" ? "#444444" : "#f4f4f4",
+        backgroundColor: colorScheme === "dark" ? colors.darkContent : colors.lightContent,
       }}
     >
       <Text
