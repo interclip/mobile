@@ -18,6 +18,7 @@ import {
   useColorScheme,
   Vibration,
   View,
+  Keyboard,
 } from "react-native";
 import { Header, Icon, Input } from "react-native-elements";
 import QRCode from "react-native-qrcode-svg";
@@ -483,7 +484,7 @@ export function SendScreen({ navigation }) {
           autoFocus={true}
           enablesReturnKeyAutomatically={true}
           onSubmitEditing={() => {
-            !isLoading && Linking.openURL(data);
+            Keyboard.dismiss
           }}
         />
         {urlValidation(text) && (
