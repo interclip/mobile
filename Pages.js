@@ -293,13 +293,13 @@ export function QRScreen({ navigation }) {
 
     if (
       (result === "https://iclip.netlify.com") |
-      (result === "http://iclip.netlify.app") |
+      (result === "https://iclip.netlify.app") |
       Settings.get("data")
     ) {
       Vibration.vibrate();
-      data.indexOf("http") > -1
+      data.includes("http")
         ? Linking.openURL(data)
-        : Link.openURL("http://" + data)
+        : Linking.openURL(`http://${data}`)
             .then(() => {
               navigation.navigate("Home");
               setScanned(false);
@@ -325,7 +325,7 @@ export function QRScreen({ navigation }) {
                 ]
               );
             });
-    } else if (isURL(data)) {
+    } else if (!isURL(data)) {
       Alert.alert("It is't even a URL", "Of a sort we know of", [
         {
           text: "OK then",
