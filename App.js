@@ -1,12 +1,12 @@
 /* 1st party libraries and dependencies: react, react native and Expo stuff */
 
+import React from "react";
+import { useColorScheme } from "react-native";
+
 /* 3rd party libraries */
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import React from "react";
-
-import { useColorScheme } from "react-native";
 
 /* Pages */
 import { HomeScreen, QRScreen, SendScreen, SettingsPage } from "./Pages.js";
