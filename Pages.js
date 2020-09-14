@@ -114,7 +114,7 @@ const colors = {
   errorColor: "#f44336",
   light: "white",
   darkHeader: "#333333",
-  lightHeader: "#f4f4f4"
+  lightHeader: "#f4f4f4",
 };
 
 export function HomeScreen({ navigation }) {
@@ -149,7 +149,8 @@ export function HomeScreen({ navigation }) {
       <Header
         containerStyle={{
           // backgroundColor: colors.headerBg,
-          backgroundColor: colorScheme === "dark" ? colors.darkHeader : colors.lightHeader,
+          backgroundColor:
+            colorScheme === "dark" ? colors.darkHeader : colors.lightHeader,
           color: colorScheme === "dark" ? "white" : "black",
           justifyContent: "space-around",
           marginBottom: Platform.OS === "ios" ? "20%" : "5%",
@@ -159,10 +160,17 @@ export function HomeScreen({ navigation }) {
           onPress={() => navigation.navigate("QR")}
           type="font-awesome" // The icon is loaded from the font awesome icon library
           name="qrcode" // Icon fa-qrcode
-          color= { colorScheme === "dark" ? "white" : "black" }// White color for contrast on the Header
+          color={colorScheme === "dark" ? "white" : "black"} // White color for contrast on the Header
         />
         <View>
-          <Text style={{ fontSize: 30, color: colorScheme === "dark" ? "white" : "black" }}>Interclip</Text>
+          <Text
+            style={{
+              fontSize: 30,
+              color: colorScheme === "dark" ? "white" : "black",
+            }}
+          >
+            Interclip
+          </Text>
         </View>
         <TouchableOpacity
           activeOpacity={0.5}
@@ -171,7 +179,7 @@ export function HomeScreen({ navigation }) {
           <Icon
             type="font-awesome" // The icon is loaded from the font awesome icon library
             name="cog" // Icon fa-cog
-            color= { colorScheme === "dark" ? "white" : "black" }// White color for contrast on the Header
+            color={colorScheme === "dark" ? "white" : "black"} // White color for contrast on the Header
           />
         </TouchableOpacity>
       </Header>
@@ -190,7 +198,10 @@ export function HomeScreen({ navigation }) {
           keyboardType={
             Platform.OS === "android" ? "email-address" : "ascii-capable"
           }
-          style={{ ...styles.container, color: colorScheme === "dark" ? "white" : "black" }}
+          style={{
+            ...styles.container,
+            color: colorScheme === "dark" ? "white" : "black",
+          }}
           placeholder="Your code here"
           maxLength={config.codeMaxLength}
           inputStyle={{ fontSize: 50 }}
@@ -213,7 +224,13 @@ export function HomeScreen({ navigation }) {
         />
         {ValidationMsg(text) && (
           <View style={{ padding: 24 }}>
-            <Text style={{ color: colorScheme === "dark" ? colors.light : colors.text }}>{ValidationMsg(text)}</Text>
+            <Text
+              style={{
+                color: colorScheme === "dark" ? colors.light : colors.text,
+              }}
+            >
+              {ValidationMsg(text)}
+            </Text>
           </View>
         )}
         <View style={{ padding: 24 }}>
@@ -431,12 +448,12 @@ export function SendScreen({ navigation }) {
       style={{
         backgroundColor: colorScheme === "dark" ? "#444444" : "#f2f2f2",
         color: colorScheme === "dark" ? "#ffffff" : "#000000",
-        flex: 1
+        flex: 1,
       }}
     >
-      <View style={{marginBottom: Platform.OS === "ios" ? "20%" : "5%",}}>
-
-      </View>
+      <View
+        style={{ marginBottom: Platform.OS === "ios" ? "20%" : "5%" }}
+      ></View>
       <View>
         <TouchableOpacity onPress={() => navigation.navigate("Home")}>
           <Image
@@ -450,7 +467,10 @@ export function SendScreen({ navigation }) {
         </TouchableOpacity>
         <Input
           keyboardType={Platform.OS === "android" ? "default" : "url"}
-          style={{ ...styles.container, color: colorScheme === "dark" ? "white" : "black" }}
+          style={{
+            ...styles.container,
+            color: colorScheme === "dark" ? "white" : "black",
+          }}
           placeholder="Your URL here"
           inputStyle={{ fontSize: 25 }}
           autoCorrect={false}
@@ -468,7 +488,13 @@ export function SendScreen({ navigation }) {
         />
         {urlValidation(text) && (
           <View style={{ padding: 24 }}>
-            <Text style={{ color: colorScheme === "dark" ? colors.light : colors.text }}>{urlValidation(text)}</Text>
+            <Text
+              style={{
+                color: colorScheme === "dark" ? colors.light : colors.text,
+              }}
+            >
+              {urlValidation(text)}
+            </Text>
           </View>
         )}
         <View style={{ padding: 24, flexDirection: "row" }}>
@@ -489,9 +515,7 @@ export function SendScreen({ navigation }) {
                 marginLeft: "20%",
               }}
             >
-              {
-                !urlValidation(text) && data
-              }
+              {!urlValidation(text) && data}
             </Text>
           )}
 
@@ -503,7 +527,12 @@ export function SendScreen({ navigation }) {
               Alert.alert("Modal has been closed.");
             }}
           >
-            <View style={{ ...styles.centeredView, backgroundColor: colorScheme === "dark" ? "#444" : "#fff" }}>
+            <View
+              style={{
+                ...styles.centeredView,
+                backgroundColor: colorScheme === "dark" ? "#444" : "#fff",
+              }}
+            >
               <View>
                 <QRCode
                   value={`https://iclip.netlify.app/r/${data}`}
@@ -527,7 +556,7 @@ export function SendScreen({ navigation }) {
             <Icon
               type="font-awesome" // The icon is loaded from the font awesome icon library
               name="qrcode" // Icon fa-qrcode
-              color= { colorScheme === "dark" ? "white" : "black" }// White color for contrast on the Header
+              color={colorScheme === "dark" ? "white" : "black"} // White color for contrast on the Header
               style={{ width: 70 }}
               onPress={() => {
                 setModalVisible(true);
