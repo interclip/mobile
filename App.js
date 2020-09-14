@@ -9,7 +9,10 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
 /* Pages */
-import { HomeScreen, QRScreen, SendScreen, SettingsPage } from "./Pages.js";
+import { SendScreen } from "./pages/SendScreen";
+import { QRScreen } from "./pages/QRScreen";
+import { HomeScreen } from "./pages/HomeScreen";
+import { SettingsPage } from "./pages/SettingsPage";
 
 /* App component */
 
