@@ -39,7 +39,7 @@ export function QRScreen({ navigation }) {
       Settings.get("data")
     ) {
       Vibration.vibrate();
-      data.includes("http")
+      URLArr[0].includes("http")
         ? Linking.openURL(data)
         : Linking.openURL(`http://${data}`)
             .then(() => {
@@ -69,7 +69,7 @@ export function QRScreen({ navigation }) {
             });
     } else if (!isURL(data)) {
       Alert.alert(
-        "This doesn't look like an URL",
+        "This doesn't look like a URL",
         "Or it's really weird and I have no idea what you're trying to do",
         [
           {
