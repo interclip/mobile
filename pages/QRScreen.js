@@ -31,7 +31,7 @@ export function QRScreen({ navigation }) {
     setScanned(true);
 
     const URLArr = data.split("/");
-    const result = URLArr[0] + "//" + URLArr[2];
+    const result = `${URLArr[0]}//${URLArr[2]}`;
 
     if (
       (result === "https://iclip.netlify.com") |
