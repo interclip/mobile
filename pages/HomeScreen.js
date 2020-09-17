@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   useColorScheme,
   View,
+  Alert
 } from "react-native";
 import { Header, Icon, Input } from "react-native-elements";
 import {
@@ -122,7 +123,7 @@ export function HomeScreen({ navigation }) {
           onSubmitEditing={() => {
             !isLoading
               ? Linking.openURL(data)
-              : alert(
+              : Alert.alert(
                   `No URL set yet, make sure your code is ${config.codeMaxLength} characters long!`
                 );
           }}
