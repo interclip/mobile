@@ -12,6 +12,7 @@ import {
   useColorScheme,
   View,
   Keyboard,
+  Clipboard
 } from "react-native";
 import { Icon, Input } from "react-native-elements";
 import QRCode from "react-native-qrcode-svg";
@@ -99,8 +100,8 @@ export function SendScreen({ navigation }) {
             <Text></Text>
           ) : (
             <Text
-              onPress={() => {
-                Linking.openURL(data);
+              onLongPress={() => {
+                Clipboard.setString(data)
               }}
               style={{
                 color: colorScheme === "dark" ? colors.light : colors.text,
