@@ -24,6 +24,7 @@
     },
     "android": {
       "package": "com.filiptronicek.iclip",
+      "permissions": ["CAMERA", "VIBRATE"],
       "versionCode": 5
     },
     "web": {
