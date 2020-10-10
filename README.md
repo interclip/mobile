@@ -11,3 +11,5 @@
 
 Download the newest version here: (requires the Expo mobile client)  
 https://expo.io/@filiptronicek/iclip
+
+download the .apk here: https://s.trnck.dev/iclip-mobile
