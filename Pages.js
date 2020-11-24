@@ -69,7 +69,7 @@ export const styles = StyleSheet.create({
   previewImg: {
     width: 100,
     height: 100,
-    marginLeft: entireScreenWidth / 3 + 10,
+    marginLeft: entireScreenWidth / 2 - 50,
     marginBottom: "20%",
   },
   centeredView: {
