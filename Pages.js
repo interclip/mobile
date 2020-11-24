@@ -9,7 +9,7 @@ import { isURL } from "./functions";
 
 /* Function and config */
 export const checkError = (msg) => {
-  return msg.includes("Error: ") || msg.includes("400 Bad Request");
+  return msg !== "success";
 };
 
 export const sleep = (milliseconds) => {
