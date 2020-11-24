@@ -6,7 +6,8 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "eject": "expo eject",
-    "apk": "expo build:android -t apk"
+    "apk": "expo build:android -t apk",
+    "aab": "expo build:android -t aab"
   },
   "dependencies": {
     "@react-native-community/clipboard": "^1.2.3",
