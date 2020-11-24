@@ -1,0 +1,25 @@
+# This workflow will run tests using node and then publish a package to GitHub Packages when a release is created
+# For more information see: https://help.github.com/actions/language-and-framework-guides/publishing-nodejs-packages
+
+name: Build and publish to Google Play
+
+on:
+  release:
+    types: [release]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 14
+      - run: |
+          npm i -g expo-cli
+          expo login -u ${{ secrets.EXPO_CLI_USERNAME }} -p ${{ secrets.EXPO_CLI_PASSWORD }}
+          npm i
+          npm run aab
+          #curl --user ${{ secrets.KEYS_USER }}:${{ secrets.KEYS_PASS }} ${{ secrets.KEYS_URL }} > key.json
+          #expo upload:android --use-submission-service --key key.json
+
