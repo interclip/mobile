@@ -33,8 +33,8 @@ export function SendScreen({ navigation }) {
 
   useEffect(() => {
     setText(text.replace(" ", "").toLowerCase());
-    fetch(`http://uni.hys.cz/includes/api?url=${text}`)
-      .then((response) => response.text())
+    fetch(`https://link.mannoviny.cz/includes/api?url=${text}`)
+      .then((response) => response.json())
       .then((json) => setData(json))
       .catch((error) => console.error(error))
       .finally(() => setLoading(false));
@@ -106,14 +106,14 @@ export function SendScreen({ navigation }) {
               style={{
                 color: colorScheme === "dark" ? colors.light : colors.text,
                 backgroundColor:
-                  checkError(data) & !urlValidation(text)
+                  checkError(data.status) & !urlValidation(text)
                     ? colors.errorColor
                     : null,
                 fontSize: 40,
                 marginLeft: "20%",
               }}
             >
-              {!urlValidation(text) && data}
+              {!urlValidation(text) && data.result}
             </Text>
           )}
 
@@ -133,7 +133,7 @@ export function SendScreen({ navigation }) {
             >
               <View>
                 <QRCode
-                  value={`https://iclip.netlify.app/r/${data}`}
+                  value={`https://iclip.netlify.app/r/${data.result}`}
                   size={250}
                   logo={{ uri: iclipUri }}
                   logoSize={60}

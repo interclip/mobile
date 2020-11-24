@@ -34,8 +34,8 @@ export function HomeScreen({ navigation }) {
   useEffect(() => {
     if (text.length === config.codeMaxLength) {
       setText(text.replace(" ", "").toLowerCase());
-      fetch(`http://uni.hys.cz/includes/get-api?user=${text}`)
-        .then((response) => response.text())
+      fetch(`https://link.mannoviny.cz/includes/get-api?code=${text}`)
+        .then((response) => response.json())
         .then((json) => setData(json))
         .catch((error) => console.error(error))
         .finally(() => setLoading(false));
@@ -94,8 +94,8 @@ export function HomeScreen({ navigation }) {
           <Image
             style={styles.previewImg}
             source={{
-              uri: imgCheck(data, text)
-                ? `https://external.iclip.trnck.dev/image?url=${data}`
+              uri: imgCheck(data.result, text)
+                ? `https://external.iclip.trnck.dev/image?url=${data.result}`
                 : "https://raw.githubusercontent.com/aperta-principium/Interclip/master/img/interclip_logo.png",
             }}
           />
@@ -122,7 +122,7 @@ export function HomeScreen({ navigation }) {
           enablesReturnKeyAutomatically={true}
           onSubmitEditing={() => {
             !isLoading
-              ? Linking.openURL(data)
+              ? Linking.openURL(data.result)
               : Alert.alert(
                   `No URL set yet, make sure your code is ${config.codeMaxLength} characters long!`
                 );
@@ -150,25 +150,25 @@ export function HomeScreen({ navigation }) {
       */
               }}
               onPress={() => {
-                Linking.openURL(data);
+                Linking.openURL(data.result);
               }}
               style={{
-                color: checkError(data)
+                color: checkError(data.status)
                   ? colors.light
                   : colorScheme === "dark"
                   ? "white"
                   : colors.text,
                 backgroundColor:
-                  checkError(data) & !ValidationMsg(text)
+                  checkError(data.status) & !ValidationMsg(text)
                     ? colors.errorColor
                     : null,
                 fontSize: 20,
               }}
             >
               {!ValidationMsg(text) &&
-                (checkError(data)
+                (checkError(data.status)
                   ? "This code doesn't seem to exist 🤔"
-                  : data)}
+                  : data.result)}
             </Text>
           )}
         </View>
