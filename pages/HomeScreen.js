@@ -95,7 +95,7 @@ export function HomeScreen({ navigation }) {
             style={styles.previewImg}
             source={{
               uri: imgCheck(data.result, text)
-                ? `https://external.iclip.trnck.dev/image?url=${data.result}`
+                ? `https://external.trnck.dev/api?url=${data.result}`
                 : "https://raw.githubusercontent.com/aperta-principium/Interclip/master/img/interclip_logo.png",
             }}
           />
