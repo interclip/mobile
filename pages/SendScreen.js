@@ -33,7 +33,7 @@ export function SendScreen({ navigation }) {
 
   useEffect(() => {
     setText(text.replace(" ", "").toLowerCase());
-    fetch(`https://interclip.app/includes/api?url=${text}`)
+    fetch(`https://interclip.app/api/set?url=${text}`)
       .then((response) => response.json())
       .then((json) => setData(json))
       .finally(() => setLoading(false));
