@@ -103,7 +103,7 @@ export function SendScreen({ navigation }) {
               onLongPress={() => {
                   /* Handle functionality, when user presses for a longer period of time */
                   try {
-                    Clipboard.setString(data.result)
+                    Clipboard.setString(data.result);
                     alert("Copied to Clipboard!");
                   } catch (e) {
                     alert("Couldn't copy to clipboard!");
