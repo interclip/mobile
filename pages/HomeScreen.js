@@ -1,4 +1,5 @@
 import { StatusBar } from "expo-status-bar";
+import Clipboard from 'expo-clipboard';
 import React, { useEffect, useState } from "react";
 import {
   Image,
@@ -144,10 +145,13 @@ export function HomeScreen({ navigation }) {
             <Text
               onLongPress={() => {
                 /* Handle functionality, when user presses for a longer period of time */
-                /*
-        Clipboard.setString(data);
-        alert("Copied to Clipboard!");
-      */
+                try {
+                  Clipboard.setString(data.result)
+                  alert("Copied to Clipboard!");
+                } catch (e) {
+                  alert("Couldn't copy to clipboard!");
+                }
+              
               }}
               onPress={() => {
                 Linking.openURL(data.result);
