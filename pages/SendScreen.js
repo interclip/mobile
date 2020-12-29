@@ -1,4 +1,5 @@
 import { StatusBar } from "expo-status-bar";
+import Clipboard from 'expo-clipboard';
 import React, { useEffect, useState } from "react";
 import {
   Alert,
@@ -12,7 +13,6 @@ import {
   useColorScheme,
   View,
   Keyboard,
-  Clipboard
 } from "react-native";
 import { Icon, Input } from "react-native-elements";
 import QRCode from "react-native-qrcode-svg";
@@ -101,7 +101,13 @@ export function SendScreen({ navigation }) {
           ) : (
             <Text
               onLongPress={() => {
-                Clipboard.setString(data)
+                  /* Handle functionality, when user presses for a longer period of time */
+                  try {
+                    Clipboard.setString(data.result);
+                    alert("Copied to Clipboard!");
+                  } catch (e) {
+                    alert("Couldn't copy to clipboard!");
+                  }
               }}
               style={{
                 color: colorScheme === "dark" ? colors.light : colors.text,
