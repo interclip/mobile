@@ -38,7 +38,6 @@ export function HomeScreen({ navigation }) {
       fetch(`https://link.mannoviny.cz/includes/get-api?code=${text}`)
         .then((response) => response.json())
         .then((json) => setData(json))
-        .catch((error) => console.error(error))
         .finally(() => setLoading(false));
     } else {
       setLoading(true);

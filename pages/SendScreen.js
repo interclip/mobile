@@ -36,7 +36,6 @@ export function SendScreen({ navigation }) {
     fetch(`https://link.mannoviny.cz/includes/api?url=${text}`)
       .then((response) => response.json())
       .then((json) => setData(json))
-      .catch((error) => console.error(error))
       .finally(() => setLoading(false));
 
     setLoading(true);
