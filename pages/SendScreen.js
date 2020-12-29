@@ -58,7 +58,7 @@ export function SendScreen({ navigation }) {
             style={styles.previewImg}
             source={{
               uri: imgCheck(data, text)
-                ? `https://external.iclip.trnck.dev/image?url=${data}`
+                ? `https://external.trnck.dev/api?url=${data}`
                 : "https://raw.githubusercontent.com/aperta-principium/Interclip/master/img/interclip_logo.png",
             }}
           />
