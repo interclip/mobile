@@ -17,7 +17,7 @@ import {
   colors,
   styles,
   imgCheck,
-  ValidationMsg,
+  validationMsg,
   checkError,
 } from "../Pages";
 
@@ -38,7 +38,6 @@ export function HomeScreen({ navigation }) {
       fetch(`https://link.mannoviny.cz/includes/get-api?code=${text}`)
         .then((response) => response.json())
         .then((json) => setData(json))
-        .catch((error) => console.error(error))
         .finally(() => setLoading(false));
     } else {
       setLoading(true);
@@ -129,14 +128,14 @@ export function HomeScreen({ navigation }) {
                 );
           }}
         />
-        {ValidationMsg(text) && (
+        {validationMsg(text) && (
           <View style={{ padding: 24 }}>
             <Text
               style={{
                 color: colorScheme === "dark" ? colors.light : colors.text,
               }}
             >
-              {ValidationMsg(text)}
+              {validationMsg(text)}
             </Text>
           </View>
         )}
@@ -163,13 +162,13 @@ export function HomeScreen({ navigation }) {
                   ? "white"
                   : colors.text,
                 backgroundColor:
-                  checkError(data.status) & !ValidationMsg(text)
+                  checkError(data.status) & !validationMsg(text)
                     ? colors.errorColor
                     : null,
                 fontSize: 20,
               }}
             >
-              {!ValidationMsg(text) &&
+              {!validationMsg(text) &&
                 (checkError(data.status)
                   ? "This code doesn't seem to exist 🤔"
                   : data.result)}

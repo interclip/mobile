@@ -22,7 +22,7 @@ export const imgCheck = (url, inval) => {
   return !!url.match(/\w+\.(jpg|jpeg|gif|png|tiff|bmp)$/gi);
 };
 
-export const ValidationMsg = (txt) => {
+export const validationMsg = (txt) => {
   txt = txt.replace(" ", "").toLowerCase();
   const diff = config.codeMaxLength - txt.length;
   if (txt.match(config.charRegex)) {
