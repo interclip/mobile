@@ -10,7 +10,7 @@
     "aab": "expo build:android -t app-bundle"
   },
   "dependencies": {
-    "@react-native-community/clipboard": "^1.2.3",
+    "@react-native-community/clipboard": "^1.5.1",
     "@react-native-community/masked-view": "^0.1.10",
     "@react-navigation/native": "^5.7.3",
     "@react-navigation/stack": "^5.9.0",
