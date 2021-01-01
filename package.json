@@ -30,7 +30,7 @@
     "react-native-gesture": "^0.2.0",
     "react-native-gesture-handler": "~1.9.0",
     "react-native-qrcode-svg": "^6.0.6",
-    "react-native-screens": "~2.9.0",
+    "react-native-screens": "~2.16.1",
     "react-native-svg": "^12.1.0",
     "react-native-swipe-gestures": "^1.0.5",
     "react-native-swipe-navigation": "^1.0.0-beta",
