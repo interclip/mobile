@@ -34,7 +34,7 @@
     "react-native-svg": "^12.1.0",
     "react-native-swipe-gestures": "^1.0.5",
     "react-native-swipe-navigation": "^1.0.0-beta",
-    "react-native-web": "^0.11.7",
+    "react-native-web": "^0.14.10",
     "strip-eof": "^2.0.0"
   },
   "devDependencies": {
