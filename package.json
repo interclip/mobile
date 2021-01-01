@@ -15,7 +15,7 @@
     "@react-navigation/native": "^5.7.3",
     "@react-navigation/stack": "^5.9.0",
     "expo": "^38.0.10",
-    "expo-barcode-scanner": "^8.2.1",
+    "expo-barcode-scanner": "^9.1.0",
     "expo-clipboard": "^1.0.1",
     "expo-permissions": "~9.0.1",
     "expo-splash-screen": "^0.5.0",
