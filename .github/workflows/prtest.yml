@@ -15,7 +15,7 @@ jobs:
           node-version: ${{ matrix.node }}
       - uses: expo/expo-github-action@v5
         with:
-          expo-version: 3.x
+          expo-version: 4.x
       - run: npm i
       - run: expo doctor
       - uses: actions/cache@v2
