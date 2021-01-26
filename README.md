@@ -17,7 +17,7 @@ https://expo.io/@filiptronicek/iclip
 
 [![Availible on the Google Play Store](https://files.catbox.moe/0ve0bw.png)](https://play.google.com/store/apps/details?id=com.filiptronicek.iclip)
 
-download the .apk here: https://s.trnck.dev/iclip-mobile
+download the .aab here: https://s.trnck.dev/iclip-mobile
 
 ## Attribution
 Google Play and the Google Play logo are trademarks of Google LLC.
