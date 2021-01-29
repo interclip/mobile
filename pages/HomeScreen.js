@@ -35,7 +35,7 @@ export function HomeScreen({ navigation }) {
   useEffect(() => {
     if (text.length === config.codeMaxLength) {
       setText(text.replace(" ", "").toLowerCase());
-      fetch(`https://interclip.app/api/get?code=${text}`)
+      fetch(`https://interclip.app/includes/get-api?code=${text}`)
         .then((response) => response.json())
         .then((json) => setData(json))
         .finally(() => setLoading(false));
