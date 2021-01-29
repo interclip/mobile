@@ -34,7 +34,12 @@ export function SendScreen({ navigation }) {
   useEffect(() => {
     setText(text.replace(" ", "").toLowerCase());
     fetch(`https://interclip.app/includes/api?url=${text}`)
-      .then((response) => response.json())
+      .then((response) => {
+        if(response.status === 429) {
+          alert("Slow down! We are getting too many requests from you.");
+        }
+        return response.json();
+      })
       .then((json) => setData(json))
       .finally(() => setLoading(false));
 
