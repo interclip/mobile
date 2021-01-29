@@ -41,5 +41,7 @@
     "@babel/core": "^7.12.10",
     "babel-preset-expo": "^8.3.0"
   },
-  "private": false
+  "private": false,
+  "license": "MIT",
+  "repository": "https://github.com/filiptronicek/iclip-mobile/"
 }
