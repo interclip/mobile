@@ -38,7 +38,7 @@ export function HomeScreen({ navigation }) {
       fetch(`https://interclip.app/includes/get-api?code=${text}`)
         .then((response) => {
           if(response.status === 429) {
-            alert("Slow down! We are getting too many requests from you.");
+            Alert.alert("Slow down!", "We are getting too many requests from you.");
           }
           return response.json();
         })
@@ -151,9 +151,9 @@ export function HomeScreen({ navigation }) {
                 /* Handle functionality, when user presses for a longer period of time */
                 try {
                   Clipboard.setString(data.result);
-                  alert("Copied to Clipboard!");
+                  Alert.alert("Success", "Copied to Clipboard!");
                 } catch (e) {
-                  alert("Couldn't copy to clipboard!");
+                  Alert.alert("Error", "Couldn't copy to clipboard!");
                 }
               
               }}
