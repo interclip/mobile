@@ -36,6 +36,7 @@ export function QRScreen({ navigation }) {
     if (
       (result === "https://iclip.netlify.com") |
       (result === "https://iclip.netlify.app") |
+      (result === "https://interclip.app") |
       Settings.get("data")
     ) {
       Vibration.vibrate();
