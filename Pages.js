@@ -20,6 +20,7 @@ export const sleep = (milliseconds) => {
 export const imgCheck = (url, inval) => {
   if (inval === "") return false;
   if (typeof url !== "string") return false;
+  if (inval.length !== config.codeMaxLength) return false;
   return !!url.match(/\w+\.(jpg|jpeg|gif|png|tiff|bmp)$/gi);
 };
 
