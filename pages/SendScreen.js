@@ -143,7 +143,7 @@ export function SendScreen({ navigation }) {
             >
               <View>
                 <QRCode
-                  value={`https://iclip.netlify.app/r/${data.result}`}
+                  value={`https://interclip.app/${data.result}`}
                   size={250}
                   logo={{ uri: iclipUri }}
                   logoSize={60}
