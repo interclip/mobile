@@ -38,7 +38,7 @@
     "strip-eof": "^2.0.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.10",
+    "@babel/core": "^7.12.13",
     "babel-preset-expo": "^8.3.0"
   },
   "private": false,
