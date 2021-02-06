@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import Clipboard from 'expo-clipboard';
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import {
   Image,
   Linking,
@@ -11,7 +11,7 @@ import {
   View,
   Alert
 } from "react-native";
-import { Header, Icon, Input } from "react-native-elements";
+import { Tooltip, Header, Icon, Input } from "react-native-elements";
 import {
   config,
   colors,
@@ -24,13 +24,17 @@ import {
 export function HomeScreen({ navigation }) {
   /* Variable set */
   const [isLoading, setLoading] = useState(true); // Loading status => only show the responce of the API
-
+  const tooltipRef = useRef(null);
   // after the request completes
   const [data, setData] = useState(""); // Dynamically loaded data from the Interclip REST API
   const [text, setText] = useState(""); // The code entered in the <Input>
 
   // const [progress, setProgress] = useState("");
   const colorScheme = useColorScheme();
+
+  useEffect(() => {
+    tooltipRef.current.toggleTooltip();
+  }, []);
 
   useEffect(() => {
     if (text.length === config.codeMaxLength) {
@@ -96,6 +100,7 @@ export function HomeScreen({ navigation }) {
       </Header>
       <View>
         <TouchableOpacity onPress={() => navigation.navigate("Send")}>
+        <Tooltip popover={<Text>Create a new clip</Text>} ref={tooltipRef} onClose={() => alert("Should set tutorial")}>
           <Image
             style={styles.previewImg}
             source={{
@@ -104,6 +109,8 @@ export function HomeScreen({ navigation }) {
                 : "https://raw.githubusercontent.com/aperta-principium/Interclip/master/img/interclip_logo.png",
             }}
           />
+          </Tooltip>
+
         </TouchableOpacity>
         <Input
           keyboardType={
