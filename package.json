@@ -10,12 +10,13 @@
     "aab": "expo build:android -t app-bundle"
   },
   "dependencies": {
+    "@react-native-async-storage/async-storage": "^1.13.4",
     "@react-native-community/clipboard": "^1.5.1",
     "@react-native-community/masked-view": "^0.1.10",
     "@react-navigation/native": "^5.9.2",
     "@react-navigation/stack": "^5.14.2",
-    "expo-barcode-scanner": "^10.0.0",
     "expo": "^40.0.1",
+    "expo-barcode-scanner": "^10.0.0",
     "expo-clipboard": "^1.0.1",
     "expo-permissions": "~11.0.0",
     "expo-splash-screen": "^0.9.0",
