@@ -118,6 +118,7 @@ export function HomeScreen({ navigation }) {
                   ? `https://interclip.app/proxy?url=${data.result}`
                   : "https://raw.githubusercontent.com/aperta-principium/Interclip/master/img/interclip_logo.png",
               }}
+              alt={"Interclip logo"}
             />
           </Tooltip>
         </TouchableOpacity>
