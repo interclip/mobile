@@ -20,7 +20,10 @@
       "icon": "./assets/ios.png",
       "supportsTablet": true,
       "bundleIdentifier": "com.filiptronicek.iclip",
-      "buildNumber": "0.2.3"
+      "buildNumber": "0.2.3",
+      "infoPlist": {
+        "NSCameraUsageDescription": "Interclip uses your camera to scan QR codes."
+      }
     },
     "android": {
       "package": "com.filiptronicek.iclip",
