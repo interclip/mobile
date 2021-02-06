@@ -1,6 +1,8 @@
 import { StatusBar } from "expo-status-bar";
 import Clipboard from 'expo-clipboard';
 import React, { useEffect, useState, useRef } from "react";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import {
   Image,
   Linking,
@@ -35,6 +37,14 @@ export function HomeScreen({ navigation }) {
   useEffect(() => {
     tooltipRef.current.toggleTooltip();
   }, []);
+
+  const tutorialState = async (completed = true) => {
+    try {
+      await AsyncStorage.setItem('tutorial', completed);
+    } catch (e) {
+      Alert.alert("An error has occured", e);
+    }
+  };
 
   useEffect(() => {
     if (text.length === config.codeMaxLength) {
