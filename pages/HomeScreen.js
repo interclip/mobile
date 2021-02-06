@@ -35,16 +35,13 @@ export function HomeScreen({ navigation }) {
   const colorScheme = useColorScheme();
 
   useEffect(() => {
-    tooltipRef.current.toggleTooltip();
-  }, []);
-
-  const tutorialState = async (completed = true) => {
-    try {
-      await AsyncStorage.setItem('tutorial', completed);
-    } catch (e) {
-      Alert.alert("An error has occured", e);
+    async function behave() {
+      if (await AsyncStorage.getItem('tutorial') === null) {
+        tooltipRef.current.toggleTooltip();
+      }
     }
-  };
+    behave();
+  }, []);
 
   useEffect(() => {
     if (text.length === config.codeMaxLength) {
@@ -110,7 +107,7 @@ export function HomeScreen({ navigation }) {
       </Header>
       <View>
         <TouchableOpacity onPress={() => navigation.navigate("Send")}>
-          <Tooltip popover={<Text>Create a new clip</Text>} ref={tooltipRef} onClose={() => alert("Should set tutorial")}>
+          <Tooltip toggleOnPress={false} popover={<Text>Create a new clip</Text>} ref={tooltipRef} onClose={async () => { AsyncStorage.setItem('tutorial', "seen"); }}>
             <Image
               style={styles.previewImg}
               source={{
