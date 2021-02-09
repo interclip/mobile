@@ -14,6 +14,7 @@ import {
   View,
   Keyboard,
 } from "react-native";
+import { useFocusEffect  } from "@react-navigation/native";
 import { Icon, Input } from "react-native-elements";
 import QRCode from "react-native-qrcode-svg";
 import { isURL } from "../functions";
@@ -31,14 +32,24 @@ export function SendScreen({ navigation }) {
 
   const colorScheme = useColorScheme();
 
+  const pasteFromClipboard = async () => {
+    const pasteboard = await Clipboard.getStringAsync();
+    if (isURL(pasteboard)) {
+      setText(pasteboard);
+    }
+  };
+
   useEffect(() => {
     (async () => {
-        const pasteboard = await Clipboard.getStringAsync();
-        if (isURL(pasteboard)) {
-          setText(pasteboard);
-        }
+      pasteFromClipboard();
     })();
   }, []);
+
+  useFocusEffect(() => {
+    (async () => {
+      pasteFromClipboard();
+    })();
+  });
 
   useEffect(() => {
     setText(text.replace(" ", "").toLowerCase());
