@@ -7,7 +7,7 @@
 ## Setup locally
 1.  Make sure you have Node.js installed 
 2.  do `npm i`
-3.  to start the server, `npm start`
+3.  to start the Expo server, run `npm start`
 
 ## Build the .apk
 1.  run `npm run apk`
