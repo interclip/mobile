@@ -34,7 +34,9 @@ export function SendScreen({ navigation }) {
   useEffect(() => {
     (async () => {
         const pasteboard = await Clipboard.getStringAsync();
-        setText(pasteboard);
+        if (isURL(pasteboard)) {
+          setText(pasteboard);
+        }
     })();
   }, []);
 
