@@ -32,6 +32,13 @@ export function SendScreen({ navigation }) {
   const colorScheme = useColorScheme();
 
   useEffect(() => {
+    (async () => {
+        const pasteboard = await Clipboard.getStringAsync();
+        setText(pasteboard);
+    })();
+  }, []);
+
+  useEffect(() => {
     setText(text.replace(" ", "").toLowerCase());
     fetch(`https://interclip.app/includes/api?url=${text}`)
       .then((response) => {
