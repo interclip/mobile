@@ -41,7 +41,7 @@ export function QRScreen({ navigation }) {
       ) {
         Vibration.vibrate();
         URLArr[0].includes("http")
-          ? Linking.openURL(data).catch(e => (e))
+          ? Linking.openURL(data).catch((e) => (e))
           : Linking.openURL(`http://${data}`)
               .then(() => {
                 navigation.navigate("Home");
