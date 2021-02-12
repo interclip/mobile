@@ -53,7 +53,7 @@ export function QRScreen({ navigation }) {
                   "This link is probably broken or isn't even a link",
                   [
                     {
-                      text: "OK bro",
+                      text: "OK",
                     },
                     {
                       text: "Copy the error to clipboard",
