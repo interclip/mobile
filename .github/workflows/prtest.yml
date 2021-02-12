@@ -10,6 +10,12 @@ jobs:
         node: [10, 12, 14]
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
       - uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node }}
@@ -18,9 +24,3 @@ jobs:
           expo-version: 4.x
       - run: npm i
       - run: expo doctor
-      - uses: actions/cache@v2
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
