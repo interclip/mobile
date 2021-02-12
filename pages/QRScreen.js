@@ -1,9 +1,9 @@
 import Clipboard from "@react-native-community/clipboard";
 import { BarCodeScanner } from "expo-barcode-scanner";
+import * as Linking from 'expo-linking';
 import React, { useEffect, useState } from "react";
 import {
   Alert,
-  Linking,
   Settings,
   StyleSheet,
   Text,
