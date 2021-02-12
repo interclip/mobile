@@ -7,12 +7,12 @@
 ## Setup locally
 1.  Make sure you have Node.js installed 
 2.  do `npm i`
-3.  to start the server, `npm start`
+3.  to start the Expo server, run `npm start`
 
 ## Build the .apk
 1.  run `npm run apk`
 
-Download the newest version here: (requires the Expo mobile client)  
+Download the newest version here: (requires the Expo go mobile client)  
 https://expo.io/@filiptronicek/iclip
 
 [![Availible on the Google Play Store](https://files.catbox.moe/0ve0bw.png)](https://play.google.com/store/apps/details?id=com.filiptronicek.iclip)
