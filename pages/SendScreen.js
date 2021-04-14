@@ -38,18 +38,19 @@ export function SendScreen({ navigation }) {
       setText(pasteboard);
     }
   };
-
   useEffect(() => {
     (async () => {
       pasteFromClipboard();
     })();
   }, []);
 
+  /*
   useFocusEffect(() => {
     (async () => {
       pasteFromClipboard();
     })();
   });
+  */
 
   useEffect(() => {
     setText(text.replace(" ", "").toLowerCase());
