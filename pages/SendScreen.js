@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 import {
   Alert,
   Image,
-  Linking,
   Modal,
   Platform,
   Text,
@@ -14,7 +13,7 @@ import {
   View,
   Keyboard,
 } from "react-native";
-import { useFocusEffect  } from "@react-navigation/native";
+//import { useFocusEffect  } from "@react-navigation/native";
 import { Icon, Input } from "react-native-elements";
 import QRCode from "react-native-qrcode-svg";
 import { isURL } from "../functions";
