@@ -20,7 +20,12 @@ export function SettingsPage() {
   return (
     <View
       style={{
-        ...styles.container,
+        padding: 25,
+        flex: 1,
+        flexDirection: "row",
+        flexWrap: "wrap",
+        alignItems: "center",
+        justifyContent: "space-between",
         backgroundColor: colorScheme === "dark" ? colors.darkContent : colors.lightContent,
       }}
     >
@@ -35,6 +40,8 @@ export function SettingsPage() {
         ios_backgroundColor="#3e3e3e"
         onValueChange={toggleSwitch}
         value={data}
+        style={{ 
+        }}
       />
     </View>
   );
