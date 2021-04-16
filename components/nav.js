@@ -12,7 +12,7 @@ const Navigator = SwipeNavigator({
   Settings: {
     screen: SettingsPage,
     left: 'Home'
-},
+  },
 
   QR: {
     screen: QRScreen,
