@@ -1,5 +1,5 @@
-import { StatusBar } from "expo-status-bar";
-import Clipboard from 'expo-clipboard';
+/* React, React Native imports */
+
 import React, { useEffect, useState } from "react";
 import {
   Image,
@@ -11,7 +11,17 @@ import {
   View,
   Alert
 } from "react-native";
+
+/* Components, Expo and RN libraries */
+
+import { StatusBar } from "expo-status-bar";
+import Clipboard from 'expo-clipboard';
 import { Header, Icon, Input } from "react-native-elements";
+
+/* Functional packages */
+
+import fetch from 'node-fetch';
+
 import {
   config,
   colors,
@@ -20,8 +30,6 @@ import {
   validationMsg,
   checkError,
 } from "../Pages";
-
-import fetch from 'node-fetch';
 
 export function HomeScreen({ navigation }) {
   /* Variable set */
