@@ -1,5 +1,4 @@
-import { StatusBar } from "expo-status-bar";
-import Clipboard from 'expo-clipboard';
+/* React, React Native imports */
 import React, { useEffect, useState } from "react";
 import {
   Alert,
@@ -14,12 +13,24 @@ import {
   Keyboard,
 } from "react-native";
 
-import { Icon, Input } from "react-native-elements";
+/* Components, Expo and RN libraries */
+
+import { StatusBar } from "expo-status-bar";
 import QRCode from "react-native-qrcode-svg";
+import { Icon, Input } from "react-native-elements";
+import Clipboard from 'expo-clipboard';
+
+/* Functional packages */
+
+import fetch from 'node-fetch';
 import isURL from 'validator/lib/isURL';
+
+/* Local functions and variables */
+
 import { iclipUri } from "../Vars";
 import { styles, imgCheck, urlValidation, colors, checkError } from "../Pages";
-import fetch from 'node-fetch';
+
+/* Root component */
 
 export function SendScreen({ navigation }) {
 
