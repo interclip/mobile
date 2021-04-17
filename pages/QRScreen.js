@@ -11,7 +11,7 @@ import {
   Vibration,
   View,
 } from "react-native";
-import { isURL } from "../functions";
+import isURL from 'validator/lib/isURL';
 import { sleep, styles, colors } from "../Pages";
 
 export function QRScreen({ navigation }) {

@@ -5,7 +5,7 @@ import {
 
 /* 3rd party libraries */
 
-import { isURL } from "./functions";
+import isURL from 'validator/lib/isURL';
 import { config, colors } from "./Vars";
 
 /* Function and config */

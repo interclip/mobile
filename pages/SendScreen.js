@@ -13,10 +13,10 @@ import {
   View,
   Keyboard,
 } from "react-native";
-//import { useFocusEffect  } from "@react-navigation/native";
+
 import { Icon, Input } from "react-native-elements";
 import QRCode from "react-native-qrcode-svg";
-import { isURL } from "../functions";
+import isURL from 'validator/lib/isURL';
 import { iclipUri } from "../Vars";
 import { styles, imgCheck, urlValidation, colors, checkError } from "../Pages";
 import fetch from 'node-fetch';
