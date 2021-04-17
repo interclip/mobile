@@ -19,8 +19,10 @@ import QRCode from "react-native-qrcode-svg";
 import { isURL } from "../functions";
 import { iclipUri } from "../Vars";
 import { styles, imgCheck, urlValidation, colors, checkError } from "../Pages";
+import fetch from 'node-fetch';
 
 export function SendScreen({ navigation }) {
+
   /* Variable set */
   const [isLoading, setLoading] = useState(true); // Loading status => only show the responce of the API
 

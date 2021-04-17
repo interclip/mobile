@@ -21,6 +21,8 @@ import {
   checkError,
 } from "../Pages";
 
+import fetch from 'node-fetch';
+
 export function HomeScreen({ navigation }) {
   /* Variable set */
   const [isLoading, setLoading] = useState(true); // Loading status => only show the responce of the API
