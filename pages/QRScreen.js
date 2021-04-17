@@ -1,6 +1,5 @@
-import Clipboard from "@react-native-community/clipboard";
-import { BarCodeScanner } from "expo-barcode-scanner";
-import * as Linking from 'expo-linking';
+/* React, React Native imports */
+
 import React, { useEffect, useState } from "react";
 import {
   Alert,
@@ -11,8 +10,19 @@ import {
   Vibration,
   View,
 } from "react-native";
+
+/* Components, Expo and RN libraries */
+
+import Clipboard from "@react-native-community/clipboard";
+import { BarCodeScanner } from "expo-barcode-scanner";
+import * as Linking from 'expo-linking';
+
+/* Local functions and variables */
+
 import isURL from 'validator/lib/isURL';
 import { sleep, styles, colors } from "../Pages";
+
+/* Root component */
 
 export function QRScreen({ navigation }) {
   const [hasPermission, setHasPermission] = useState(null);

@@ -31,6 +31,8 @@ import {
   checkError,
 } from "../Pages";
 
+/* Root component */
+
 export function HomeScreen({ navigation }) {
   /* Variable set */
   const [isLoading, setLoading] = useState(true); // Loading status => only show the responce of the API

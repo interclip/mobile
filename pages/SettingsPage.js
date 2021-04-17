@@ -1,3 +1,5 @@
+/* React, React Native imports */
+
 import React, { useState } from 'react';
 import {
   Settings,
@@ -7,9 +9,13 @@ import {
   View,
   Dimensions,
 } from 'react-native';
-import { colors } from '../Pages';
 
+/* Local functions and variables */
+
+import { colors } from '../Pages';
 import * as appInfo from '../app.json';
+
+/* Root component */
 
 export function SettingsPage() {
   const [isEnabled, setIsEnabled] = useState();
@@ -19,6 +25,7 @@ export function SettingsPage() {
     setIsEnabled((previousState) => !previousState);
     storeData({ data: isEnabled });
   }
+
   const [data, setData] = useState(Settings.get('data'));
   const storeData = (data) => {
     data.data = !data.data;
