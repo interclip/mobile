@@ -18,15 +18,6 @@ import { SettingsPage } from "./pages/SettingsPage";
 
 const Stack = createStackNavigator();
 
-const root = () => {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen name="Home" component={HomeScreen} />
-      <Stack.Screen name="QR" component={QRScreen} />
-    </Stack.Navigator>
-  );
-};
-
 export default function App() {
   const colorScheme = useColorScheme();
 
