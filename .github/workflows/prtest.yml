@@ -1,13 +1,23 @@
 name: Expo CI
 on: [pull_request]
 jobs:
+  lint:
+    name: Lint with ESLINT
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+      - run: npm i -g eslint
+      - run: eslint .
   ci:
     name: Continuous Integration
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
         os: [ubuntu-latest, macOS-latest, windows-latest]
-        node: [10, 12, 14]
+        node: [10, 12, 14, 15]
     steps:
       - uses: actions/checkout@v2
       - uses: actions/cache@v2
