@@ -17,6 +17,7 @@
     "expo": "^41.0.0",
     "expo-barcode-scanner": "^10.1.2",
     "expo-clipboard": "^1.0.2",
+    "expo-linking": "~2.2.3",
     "expo-permissions": "~12.0.1",
     "expo-splash-screen": "^0.10.2",
     "expo-status-bar": "^1.0.4",
@@ -40,7 +41,9 @@
   },
   "devDependencies": {
     "@babel/core": "^7.13.15",
-    "babel-preset-expo": "^8.3.0"
+    "babel-preset-expo": "^8.3.0",
+    "eslint": "^7.24.0",
+    "eslint-plugin-react": "^7.23.2"
   },
   "private": false,
   "license": "MIT",
