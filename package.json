@@ -36,7 +36,7 @@
     "react-native-svg": "^12.1.1",
     "react-native-swipe-gestures": "^1.0.5",
     "react-native-swipe-navigation": "^1.0.0-beta",
-    "react-native-web": "^0.14.13",
+    "react-native-web": "^0.15.7",
     "strip-eof": "^2.0.0",
     "validator": "^13.5.2"
   },
