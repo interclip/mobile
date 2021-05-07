@@ -3,5 +3,5 @@ image:
 ports:
   - port: 19000-19002
 tasks:
-  - before: npm install
-    command: npm start
+  - before: yarn
+    command: yarn start
