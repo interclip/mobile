@@ -10,6 +10,7 @@ jobs:
         with:
           node-version: 14.x
       - run: npm i -g eslint
+      - run: npm ci
       - run: eslint .
   ci:
     name: Continuous Integration
