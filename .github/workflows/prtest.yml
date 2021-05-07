@@ -9,7 +9,7 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 14.x
-      - run: yarn global add eslint
+      - run: npm i -g eslint
       - run: yarn
       - run: eslint .
   ci:
