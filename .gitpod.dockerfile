@@ -2,4 +2,4 @@ FROM gitpod/workspace-full-vnc
 
 USER gitpod
 
-RUN npm install expo-cli --global
+RUN yarn global add expo-cli
