@@ -8,7 +8,7 @@
     "eject": "expo eject",
     "apk": "expo build:android -t apk",
     "build:ios": "expo build:ios",
-    "aab": "expo build:android -t app-bundle"
+    "build:android": "expo build:android -t app-bundle"
   },
   "dependencies": {
     "@react-native-community/clipboard": "^1.5.1",
