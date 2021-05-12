@@ -2,7 +2,7 @@
   "expo": {
     "name": "Interclip",
     "slug": "iclip",
-    "version": "0.3.0",
+    "version": "0.4.0",
     "orientation": "portrait",
     "userInterfaceStyle": "automatic",
     "githubUrl": "https://github.com/filiptronicek/iclip-mobile",
@@ -20,7 +20,7 @@
       "icon": "./assets/ios.png",
       "supportsTablet": true,
       "bundleIdentifier": "com.filiptronicek.iclip",
-      "buildNumber": "0.3.0",
+      "buildNumber": "0.4.0",
       "infoPlist": {
         "NSCameraUsageDescription": "Interclip uses your camera to scan QR codes."
       }
@@ -28,7 +28,7 @@
     "android": {
       "package": "com.filiptronicek.iclip",
       "permissions": ["CAMERA", "VIBRATE"],
-      "versionCode": 10
+      "versionCode": 12
     },
     "web": {
       "favicon": "./assets/favicon.png"

@@ -5,6 +5,7 @@ name: Build and publish to Google Play
 
 on:
   release:
+  workflow_dispatch:
 
 jobs:
   build:
@@ -15,7 +16,7 @@ jobs:
         with:
           node-version: 14
       - run: |
-          yarn global add expo-cli
+          npm i -g expo-cli
           expo login -u ${{ secrets.EXPO_CLI_USERNAME }} -p ${{ secrets.EXPO_CLI_PASSWORD }}
           yarn
           yarn run aab
