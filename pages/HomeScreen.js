@@ -41,6 +41,8 @@ export function HomeScreen({ navigation }) {
   const [data, setData] = useState(""); // Dynamically loaded data from the Interclip REST API
   const [text, setText] = useState(""); // The code entered in the <Input>
 
+  const [popoverOpened, setPopoverOpened] = useState(false);
+
   // const [progress, setProgress] = useState("");
   const colorScheme = useColorScheme();
 
@@ -99,10 +101,69 @@ export function HomeScreen({ navigation }) {
             onPress={() => navigation.navigate("Settings")}
           >
             <Icon
-              type="font-awesome" // The icon is loaded from the font awesome icon library
-              name="cog" // Icon fa-cog
+              name='menu'
+              type='feather'
+              onPress={() => setPopoverOpened(!popoverOpened)}
               color={colorScheme === "dark" ? "white" : "black"} // White color for contrast on the Header
             />
+            { popoverOpened &&
+            <View
+              style={{
+                position: "absolute",
+                right: "10%",
+                marginTop: "70%",
+              }}
+            >
+              <View
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
+                <Icon
+                  name='settings'
+                  type='feather'
+                  color={colorScheme === "dark" ? "white" : "black"} // White color for contrast on the Header
+                  style={{
+                    marginRight: "10%",
+                  }}
+                />
+                <Text
+                  style={{
+                    color: colorScheme === "dark" ? "white" : "black",
+                  }}
+                >
+                  Settings
+                </Text>
+              </View>
+              <View
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
+                <Icon
+                  name='info'
+                  type='feather'
+                  style={{
+                    marginRight: "10%",
+                  }}
+                  color={colorScheme === "dark" ? "white" : "black"} // White color for contrast on the Header
+                />
+                <Text
+                  style={{
+                    color: colorScheme === "dark" ? "white" : "black",
+                  }}
+                >
+                  About
+                </Text>
+              </View>
+            </View>
+            }
           </TouchableOpacity>
         )}
       </Header>
