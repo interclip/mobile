@@ -5,6 +5,7 @@ name: Build and publish to Google Play
 
 on:
   release:
+  workflow_dispatch:
 
 jobs:
   build:
