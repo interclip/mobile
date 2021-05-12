@@ -108,18 +108,21 @@ export function HomeScreen({ navigation }) {
             />
             { popoverOpened &&
             <View
+              activeOpacity={0.5}
               style={{
                 position: "absolute",
-                right: "10%",
+                right: "0%",
                 marginTop: "70%",
               }}
             >
-              <View
+              <TouchableOpacity
                 style={{
                   display: "flex",
                   flexDirection: "row",
                   justifyContent: "space-between",
                   alignItems: "center",
+                  backgroundColor: "black",
+                  padding: "10%"
                 }}
               >
                 <Icon
@@ -137,13 +140,16 @@ export function HomeScreen({ navigation }) {
                 >
                   Settings
                 </Text>
-              </View>
-              <View
+              </TouchableOpacity>
+              <TouchableOpacity
+                activeOpacity={0.5}
                 style={{
                   display: "flex",
                   flexDirection: "row",
                   justifyContent: "space-between",
                   alignItems: "center",
+                  backgroundColor: "black",
+                  padding: "10%"
                 }}
               >
                 <Icon
@@ -161,7 +167,7 @@ export function HomeScreen({ navigation }) {
                 >
                   About
                 </Text>
-              </View>
+              </TouchableOpacity>
             </View>
             }
           </TouchableOpacity>
