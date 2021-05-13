@@ -217,7 +217,6 @@ export function HomeScreen({ navigation }) {
         )}
       </Header>
       <View>
-        <TouchableOpacity>
           <Image
             style={styles.previewImg}
             source={{
@@ -226,7 +225,6 @@ export function HomeScreen({ navigation }) {
                 : "https://raw.githubusercontent.com/aperta-principium/Interclip/master/img/interclip_logo.png",
             }}
           />
-        </TouchableOpacity>
         <Input
           keyboardType={
             Platform.OS === "android" ? "email-address" : "ascii-capable"
