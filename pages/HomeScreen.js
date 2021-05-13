@@ -31,6 +31,8 @@ import {
   checkError,
 } from "../Pages";
 
+import * as Haptics from 'expo-haptics';
+
 /* Root component */
 
 export function HomeScreen({ navigation }) {
@@ -103,7 +105,8 @@ export function HomeScreen({ navigation }) {
             <Icon
               name='menu'
               type='feather'
-              onPress={() => setPopoverOpened(!popoverOpened)}
+              onPressIn={() =>  {setPopoverOpened(true); Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);}}
+              onPress={() => {setPopoverOpened(!popoverOpened);}}
               color={colorScheme === "dark" ? "white" : "black"} // White color for contrast on the Header
             />
             { popoverOpened &&
