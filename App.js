@@ -13,6 +13,7 @@ import { SendScreen } from "./pages/SendScreen";
 import { QRScreen } from "./pages/QRScreen";
 import { HomeScreen } from "./pages/HomeScreen";
 import { SettingsPage } from "./pages/SettingsPage";
+import { AboutPage } from "./pages/AboutPage";
 
 /* App component */
 
@@ -48,6 +49,11 @@ export default function App() {
           name="Send"
           component={SendScreen}
           options={{ title: "New clip" }}
+        />
+        <Stack.Screen
+          name="About"
+          component={AboutPage}
+          options={{ title: "About" }}
         />
         <Stack.Screen name="Settings" component={SettingsPage} />
       </Stack.Navigator>

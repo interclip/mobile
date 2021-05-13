@@ -160,7 +160,7 @@ export function HomeScreen({ navigation }) {
                 }}
                 onPress={() => {
                   Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
-                  navigation.navigate("Settings");
+                  navigation.navigate("About");
                   setPopoverOpened(false);
                 }}
               >
