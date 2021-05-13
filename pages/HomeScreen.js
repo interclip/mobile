@@ -123,7 +123,7 @@ export function HomeScreen({ navigation }) {
                   flexDirection: "row",
                   justifyContent: "space-between",
                   alignItems: "center",
-                  backgroundColor: colorScheme === "dark" ? "black" : "#ccc",
+                  backgroundColor: colorScheme === "dark" ? "#222" : "#ccc",
                   padding: "10%"
                 }}
                 onPress={() => {
@@ -155,7 +155,7 @@ export function HomeScreen({ navigation }) {
                   flexDirection: "row",
                   justifyContent: "space-between",
                   alignItems: "center",
-                  backgroundColor: colorScheme === "dark" ? "black" : "#ccc",
+                  backgroundColor: colorScheme === "dark" ? "#222" : "#ccc",
                   padding: "10%"
                 }}
                 onPress={() => {
