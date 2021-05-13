@@ -7,19 +7,16 @@ import {
   Text,
   useColorScheme,
   View,
-  Dimensions,
 } from 'react-native';
 
 /* Local functions and variables */
 
 import { colors } from '../Pages';
-import * as appInfo from '../app.json';
 
 /* Root component */
 
 export function SettingsPage() {
   const [isEnabled, setIsEnabled] = useState();
-  const [versionWidth, setVersionWidth] = useState(0);
 
   const toggleSwitch = () => {
     setIsEnabled((previousState) => !previousState);
@@ -60,17 +57,6 @@ export function SettingsPage() {
         onValueChange={toggleSwitch}
         value={data}
       />
-      <Text
-        style={{
-          position: 'absolute',
-          bottom: '5%',
-          left: Dimensions.get('window').width / 2 - versionWidth / 2,
-          color: colorScheme === 'dark' ? '#D3D3D3' : 'grey',
-        }}
-        onLayout={(event) => setVersionWidth(event.nativeEvent.layout.width)}
-      >
-        Version: {appInfo.expo.version}{' '}
-      </Text>
     </View>
   )
 }

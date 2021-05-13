@@ -50,7 +50,7 @@ export function AboutPage() {
         }}
         onLayout={(event) => setVersionWidth(event.nativeEvent.layout.width)}
       >
-        Version: {appInfo.expo.version}{' '}
+        Interclip mobile v{appInfo.expo.version}{' '}
       </Text>
     </View>
   )
