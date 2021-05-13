@@ -3,7 +3,6 @@
 import React, { useState } from 'react';
 import {
   Settings,
-  Switch,
   Text,
   useColorScheme,
   View,
@@ -18,21 +17,7 @@ import * as appInfo from '../app.json';
 /* Root component */
 
 export function AboutPage() {
-  const [isEnabled, setIsEnabled] = useState();
   const [versionWidth, setVersionWidth] = useState(0);
-
-  const toggleSwitch = () => {
-    setIsEnabled((previousState) => !previousState);
-    storeData({ data: isEnabled });
-  };
-
-  const [data, setData] = useState(Settings.get('data'));
-  const storeData = (data) => {
-    data.data = !data.data;
-    Settings.set(data);
-    setData(Settings.get('data'));
-  };
-
   const colorScheme = useColorScheme();
 
   return (
