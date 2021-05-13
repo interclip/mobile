@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import {
+  Image,
   Text,
   useColorScheme,
   View,
@@ -14,6 +15,12 @@ import * as Linking from 'expo-linking';
 
 import { colors } from '../Pages';
 import * as appInfo from '../app.json';
+
+import { Icon } from "react-native-elements";
+
+import {
+    styles,
+} from "../Pages";
 
 /* Root component */
 
@@ -34,14 +41,41 @@ export function AboutPage() {
           colorScheme === 'dark' ? colors.darkContent : colors.lightContent,
       }}
     >
+          <Image
+            style={styles.previewImg}
+            source="https://raw.githubusercontent.com/aperta-principium/Interclip/main/img/interclip_logo.png"
+          />
       <Text
         style={{
           color: colorScheme === 'dark' ? 'white' : 'black',
+          fontSize: "20",
+          textAlign: 'center'
         }}
       >
-        Very cool stuff about Interclip
+        Interclip mobile is the mobile companion to Interclip, an awesome tool for sharing URLs and files cross-device and cross-platform
       </Text>
-
+      <View
+            style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-around"
+            }}
+        >
+            <Icon
+                onPress={() => Linking.openURL("https://github.com/filiptronicek/iclip-mobile/")}
+                type="font-awesome" // The icon is loaded from the font awesome icon library
+                name="github" // Icon fa-qrcode
+                color={colorScheme === "dark" ? "white" : "black"} // White color for contrast on the Header
+                size="50"
+            />
+            <Icon
+                onPress={() => Linking.openURL("https://twitter.com/filiptronicek")}
+                type="font-awesome" // The icon is loaded from the font awesome icon library
+                name="twitter" // Icon fa-qrcode
+                color={colorScheme === "dark" ? "white" : "black"} // White color for contrast on the Header
+                size="50"
+            />
+        </View>
       <Text
         style={{
           position: 'absolute',
