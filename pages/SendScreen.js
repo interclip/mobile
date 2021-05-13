@@ -91,7 +91,7 @@ export function SendScreen({ navigation }) {
         style={{ marginBottom: Platform.OS === "ios" ? "20%" : "5%" }}
       ></View>
       <View>
-        <TouchableOpacity onPress={() => navigation.navigate("Home")}>
+        <TouchableOpacity>
           <Image
             style={styles.previewImg}
             source={{

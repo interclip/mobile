@@ -128,6 +128,37 @@ export function HomeScreen({ navigation }) {
                 }}
                 onPress={() => {
                   Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+                  navigation.navigate("Send");
+                  setPopoverOpened(false);
+                }}
+              >
+                <Icon
+                  name='send'
+                  type='feather'
+                  color={colorScheme === "dark" ? "white" : "black"} // White color for contrast on the Header
+                  style={{
+                    marginRight: "10%",
+                  }}
+                />
+                <Text
+                  style={{
+                    color: colorScheme === "dark" ? "white" : "black",
+                  }}
+                >
+                  Send
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  backgroundColor: colorScheme === "dark" ? "#222" : "#ccc",
+                  padding: "10%"
+                }}
+                onPress={() => {
+                  Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
                   navigation.navigate("Settings");
                   setPopoverOpened(false);
                 }}
@@ -186,7 +217,7 @@ export function HomeScreen({ navigation }) {
         )}
       </Header>
       <View>
-        <TouchableOpacity onPress={() => navigation.navigate("Send")}>
+        <TouchableOpacity>
           <Image
             style={styles.previewImg}
             source={{
