@@ -216,7 +216,7 @@ export function HomeScreen({ navigation }) {
           </TouchableOpacity>
         )}
       </Header>
-      <View>
+      <View style={{zIndex: -5}}>
           <Image
             style={styles.previewImg}
             source={{
