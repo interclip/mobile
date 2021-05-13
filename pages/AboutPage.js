@@ -33,18 +33,16 @@ export function AboutPage() {
       style={{
         padding: 25,
         flex: 1,
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        alignItems: 'center',
-        justifyContent: 'space-between',
         backgroundColor:
           colorScheme === 'dark' ? colors.darkContent : colors.lightContent,
       }}
     >
-          <Image
-            style={styles.previewImg}
-            source="https://raw.githubusercontent.com/aperta-principium/Interclip/main/img/interclip_logo.png"
-          />
+      <Image
+        style={styles.aboutImg}
+        source={{
+          uri: 'https://raw.githubusercontent.com/aperta-principium/Interclip/main/img/interclip_logo.png',
+        }}
+      />
       <Text
         style={{
           color: colorScheme === 'dark' ? 'white' : 'black',
@@ -57,6 +55,7 @@ export function AboutPage() {
       <View
             style={{
                 display: "flex",
+                marginTop: "10%",
                 flexDirection: "row",
                 justifyContent: "space-around"
             }}
