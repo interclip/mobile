@@ -124,7 +124,7 @@ export function HomeScreen({ navigation }) {
                   justifyContent: "space-between",
                   alignItems: "center",
                   backgroundColor: colorScheme === "dark" ? "#222" : "#ccc",
-                  padding: "10%"
+                  padding: "10%",
                 }}
                 onPress={() => {
                   Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
@@ -155,7 +155,7 @@ export function HomeScreen({ navigation }) {
                   justifyContent: "space-between",
                   alignItems: "center",
                   backgroundColor: colorScheme === "dark" ? "#222" : "#ccc",
-                  padding: "10%"
+                  padding: "10%",
                 }}
                 onPress={() => {
                   Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
@@ -187,7 +187,7 @@ export function HomeScreen({ navigation }) {
                   justifyContent: "space-between",
                   alignItems: "center",
                   backgroundColor: colorScheme === "dark" ? "#222" : "#ccc",
-                  padding: "10%"
+                  padding: "10%",
                 }}
                 onPress={() => {
                   Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
