@@ -42,6 +42,7 @@ export function AboutPage() {
         source={{
           uri: 'https://raw.githubusercontent.com/aperta-principium/Interclip/main/img/interclip_logo.png',
         }}
+        alt="Interclip logo"
       />
       <Text
         style={{
