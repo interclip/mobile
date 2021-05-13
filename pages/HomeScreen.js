@@ -105,7 +105,6 @@ export function HomeScreen({ navigation }) {
             <Icon
               name='menu'
               type='feather'
-              onPressIn={() =>  {setPopoverOpened(true); Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);}}
               onPress={() => {setPopoverOpened(!popoverOpened);}}
               color={colorScheme === "dark" ? "white" : "black"} // White color for contrast on the Header
             />
@@ -124,8 +123,13 @@ export function HomeScreen({ navigation }) {
                   flexDirection: "row",
                   justifyContent: "space-between",
                   alignItems: "center",
-                  backgroundColor: "black",
+                  backgroundColor: colorScheme === "dark" ? "black" : "#ccc",
                   padding: "10%"
+                }}
+                onPress={() => {
+                  Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+                  navigation.navigate("Settings");
+                  setPopoverOpened(false);
                 }}
               >
                 <Icon
@@ -151,8 +155,13 @@ export function HomeScreen({ navigation }) {
                   flexDirection: "row",
                   justifyContent: "space-between",
                   alignItems: "center",
-                  backgroundColor: "black",
+                  backgroundColor: colorScheme === "dark" ? "black" : "#ccc",
                   padding: "10%"
+                }}
+                onPress={() => {
+                  Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+                  navigation.navigate("Settings");
+                  setPopoverOpened(false);
                 }}
               >
                 <Icon
