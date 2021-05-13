@@ -2,12 +2,13 @@
 
 import React, { useState } from 'react';
 import {
-  Settings,
   Text,
   useColorScheme,
   View,
   Dimensions,
 } from 'react-native';
+
+import * as Linking from 'expo-linking';
 
 /* Local functions and variables */
 
@@ -49,6 +50,7 @@ export function AboutPage() {
           color: colorScheme === 'dark' ? '#D3D3D3' : 'grey',
         }}
         onLayout={(event) => setVersionWidth(event.nativeEvent.layout.width)}
+        onPress={() => Linking.openURL(`https://github.com/filiptronicek/iclip-mobile/releases/tag/v${appInfo.expo.version}`)}
       >
         Interclip mobile v{appInfo.expo.version}{' '}
       </Text>
