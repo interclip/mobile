@@ -33,7 +33,7 @@ import { styles, imgCheck, urlValidation, colors, checkError } from "../Pages";
 
 /* Root component */
 
-export function SendScreen({ navigation }) {
+export function SendScreen() {
 
   /* Variable set */
   const [isLoading, setLoading] = useState(true); // Loading status => only show the responce of the API
@@ -91,7 +91,7 @@ export function SendScreen({ navigation }) {
         style={{ marginBottom: Platform.OS === "ios" ? "20%" : "5%" }}
       ></View>
       <View>
-        <TouchableOpacity onPress={() => navigation.navigate("Home")}>
+        <TouchableOpacity>
           <Image
             style={styles.previewImg}
             source={{

@@ -31,6 +31,8 @@ import {
   checkError,
 } from "../Pages";
 
+import * as Haptics from 'expo-haptics';
+
 /* Root component */
 
 export function HomeScreen({ navigation }) {
@@ -40,6 +42,8 @@ export function HomeScreen({ navigation }) {
   // after the request completes
   const [data, setData] = useState(""); // Dynamically loaded data from the Interclip REST API
   const [text, setText] = useState(""); // The code entered in the <Input>
+
+  const [popoverOpened, setPopoverOpened] = useState(false);
 
   // const [progress, setProgress] = useState("");
   const colorScheme = useColorScheme();
@@ -96,18 +100,153 @@ export function HomeScreen({ navigation }) {
         {Platform.OS === "ios" && (
           <TouchableOpacity
             activeOpacity={0.5}
-            onPress={() => navigation.navigate("Settings")}
-          >
+            onPress={() => {setPopoverOpened(!popoverOpened);}}
+            >
             <Icon
-              type="font-awesome" // The icon is loaded from the font awesome icon library
-              name="cog" // Icon fa-cog
+              name='menu'
+              type='feather'
               color={colorScheme === "dark" ? "white" : "black"} // White color for contrast on the Header
             />
+            { popoverOpened &&
+            <View
+              activeOpacity={0.5}
+              style={{
+                position: "absolute",
+                right: "0%",
+                marginTop: "70%",
+              }}
+            >
+              <TouchableOpacity
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  backgroundColor: colorScheme === "dark" ? "#222" : "#ccc",
+                  padding: "10%",
+                }}
+                onPress={() => {
+                  Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+                  navigation.navigate("Send");
+                  setPopoverOpened(false);
+                }}
+              >
+                <Icon
+                  name='send'
+                  type='feather'
+                  color={colorScheme === "dark" ? "white" : "black"} // White color for contrast on the Header
+                  style={{
+                    marginRight: "10%",
+                  }}
+                />
+                <Text
+                  style={{
+                    color: colorScheme === "dark" ? "white" : "black",
+                  }}
+                >
+                  Send
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  backgroundColor: colorScheme === "dark" ? "#222" : "#ccc",
+                  padding: "10%",
+                }}
+                onPress={() => {
+                  Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+                  navigation.navigate("QR");
+                  setPopoverOpened(false);
+                }}
+              >
+                <Icon
+                  name='qrcode'
+                  type='font-awesome'
+                  color={colorScheme === "dark" ? "white" : "black"} // White color for contrast on the Header
+                  style={{
+                    marginRight: "10%",
+                  }}
+                />
+                <Text
+                  style={{
+                    color: colorScheme === "dark" ? "white" : "black",
+                  }}
+                >
+                  Scan
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  backgroundColor: colorScheme === "dark" ? "#222" : "#ccc",
+                  padding: "10%",
+                }}
+                onPress={() => {
+                  Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+                  navigation.navigate("Settings");
+                  setPopoverOpened(false);
+                }}
+              >
+                <Icon
+                  name='settings'
+                  type='feather'
+                  color={colorScheme === "dark" ? "white" : "black"} // White color for contrast on the Header
+                  style={{
+                    marginRight: "10%",
+                  }}
+                />
+                <Text
+                  style={{
+                    color: colorScheme === "dark" ? "white" : "black",
+                  }}
+                >
+                  Settings
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                activeOpacity={0.5}
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  backgroundColor: colorScheme === "dark" ? "#222" : "#ccc",
+                  padding: "10%",
+                }}
+                onPress={() => {
+                  Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+                  navigation.navigate("About");
+                  setPopoverOpened(false);
+                }}
+              >
+                <Icon
+                  name='info'
+                  type='feather'
+                  style={{
+                    marginRight: "10%",
+                  }}
+                  color={colorScheme === "dark" ? "white" : "black"} // White color for contrast on the Header
+                />
+                <Text
+                  style={{
+                    color: colorScheme === "dark" ? "white" : "black",
+                  }}
+                >
+                  About
+                </Text>
+              </TouchableOpacity>
+            </View>
+            }
           </TouchableOpacity>
         )}
       </Header>
-      <View>
-        <TouchableOpacity onPress={() => navigation.navigate("Send")}>
+      <View style={{zIndex: -5}}>
           <Image
             style={styles.previewImg}
             source={{
@@ -116,7 +255,6 @@ export function HomeScreen({ navigation }) {
                 : "https://raw.githubusercontent.com/aperta-principium/Interclip/master/img/interclip_logo.png",
             }}
           />
-        </TouchableOpacity>
         <Input
           keyboardType={
             Platform.OS === "android" ? "email-address" : "ascii-capable"

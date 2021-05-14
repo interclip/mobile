@@ -69,6 +69,13 @@ export const styles = StyleSheet.create({
     marginLeft: entireScreenWidth / 2 - 50,
     marginBottom: "20%",
   },
+  aboutImg: {
+    width: entireScreenWidth / 3,
+    height:  entireScreenWidth / 3,
+    marginLeft: "auto",
+    marginRight: "auto",
+    marginBottom: "10%"
+  },
   centeredView: {
     flex: 1,
     justifyContent: "center",
