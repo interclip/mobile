@@ -6,6 +6,8 @@ import {
   TouchableOpacity,
 } from "react-native";
 
+import PropTypes from 'prop-types'; // ES6
+
 /* Components, Expo and RN libraries */
 
 import { Icon } from "react-native-elements";
@@ -47,5 +49,14 @@ const MenuItem = (props) => {
       </TouchableOpacity>
     )
 };
+
+MenuItem.propTypes = {
+    colorScheme: PropTypes.string.isRequired,
+    iconFamily: PropTypes.string.isRequired,
+    iconName: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    setPopoverOpened: PropTypes.any.isRequired,
+    destination: PropTypes.string.isRequired
+}
 
 export default MenuItem;
