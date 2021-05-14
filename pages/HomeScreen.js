@@ -33,6 +33,8 @@ import {
 
 import * as Haptics from 'expo-haptics';
 
+import MenuItem from '../components/MenuItem';
+
 /* Root component */
 
 export function HomeScreen({ navigation }) {
@@ -116,131 +118,10 @@ export function HomeScreen({ navigation }) {
                 marginTop: "70%",
               }}
             >
-              <TouchableOpacity
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  backgroundColor: colorScheme === "dark" ? "#222" : "#ccc",
-                  padding: "10%",
-                }}
-                onPress={() => {
-                  Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
-                  navigation.navigate("Send");
-                  setPopoverOpened(false);
-                }}
-              >
-                <Icon
-                  name='send'
-                  type='feather'
-                  color={colorScheme === "dark" ? "white" : "black"} // White color for contrast on the Header
-                  style={{
-                    marginRight: "10%",
-                  }}
-                />
-                <Text
-                  style={{
-                    color: colorScheme === "dark" ? "white" : "black",
-                  }}
-                >
-                  Send
-                </Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  backgroundColor: colorScheme === "dark" ? "#222" : "#ccc",
-                  padding: "10%",
-                }}
-                onPress={() => {
-                  Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
-                  navigation.navigate("QR");
-                  setPopoverOpened(false);
-                }}
-              >
-                <Icon
-                  name='qrcode'
-                  type='font-awesome'
-                  color={colorScheme === "dark" ? "white" : "black"} // White color for contrast on the Header
-                  style={{
-                    marginRight: "10%",
-                  }}
-                />
-                <Text
-                  style={{
-                    color: colorScheme === "dark" ? "white" : "black",
-                  }}
-                >
-                  Scan
-                </Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  backgroundColor: colorScheme === "dark" ? "#222" : "#ccc",
-                  padding: "10%",
-                }}
-                onPress={() => {
-                  Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
-                  navigation.navigate("Settings");
-                  setPopoverOpened(false);
-                }}
-              >
-                <Icon
-                  name='settings'
-                  type='feather'
-                  color={colorScheme === "dark" ? "white" : "black"} // White color for contrast on the Header
-                  style={{
-                    marginRight: "10%",
-                  }}
-                />
-                <Text
-                  style={{
-                    color: colorScheme === "dark" ? "white" : "black",
-                  }}
-                >
-                  Settings
-                </Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                activeOpacity={0.5}
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  backgroundColor: colorScheme === "dark" ? "#222" : "#ccc",
-                  padding: "10%",
-                }}
-                onPress={() => {
-                  Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
-                  navigation.navigate("About");
-                  setPopoverOpened(false);
-                }}
-              >
-                <Icon
-                  name='info'
-                  type='feather'
-                  style={{
-                    marginRight: "10%",
-                  }}
-                  color={colorScheme === "dark" ? "white" : "black"} // White color for contrast on the Header
-                />
-                <Text
-                  style={{
-                    color: colorScheme === "dark" ? "white" : "black",
-                  }}
-                >
-                  About
-                </Text>
-              </TouchableOpacity>
+              <MenuItem navigation={navigation} colorScheme={colorScheme} setPopoverOpened={setPopoverOpened} destination={"Send"} iconName={"send"} iconFamily={"feather"} title={"Send"} />
+              <MenuItem navigation={navigation} colorScheme={colorScheme} setPopoverOpened={setPopoverOpened} destination={"QR"} iconName={"qrcode"} iconFamily={"font-awesome"} title={"Scan"} />
+              <MenuItem navigation={navigation} colorScheme={colorScheme} setPopoverOpened={setPopoverOpened} destination={"Settings"} iconName={"settings"} iconFamily={"feather"} title={"Settings"} />
+              <MenuItem navigation={navigation} colorScheme={colorScheme} setPopoverOpened={setPopoverOpened} destination={"About"} iconName={"info"} iconFamily={"feather"} title={"About"} />
             </View>
             }
           </TouchableOpacity>
