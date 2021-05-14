@@ -97,7 +97,6 @@ export function HomeScreen({ navigation }) {
             Interclip
           </Text>
         </View>
-        {Platform.OS === "ios" && (
           <TouchableOpacity
             activeOpacity={0.5}
             onPress={() => {setPopoverOpened(!popoverOpened);}}
@@ -118,12 +117,13 @@ export function HomeScreen({ navigation }) {
             >
               <MenuItem navigation={navigation} colorScheme={colorScheme} setPopoverOpened={setPopoverOpened} destination={"Send"} iconName={"send"} iconFamily={"feather"} title={"Send"} />
               <MenuItem navigation={navigation} colorScheme={colorScheme} setPopoverOpened={setPopoverOpened} destination={"QR"} iconName={"qrcode"} iconFamily={"font-awesome"} title={"Scan"} />
+              {Platform.OS === "ios" && (
               <MenuItem navigation={navigation} colorScheme={colorScheme} setPopoverOpened={setPopoverOpened} destination={"Settings"} iconName={"settings"} iconFamily={"feather"} title={"Settings"} />
+              )}
               <MenuItem navigation={navigation} colorScheme={colorScheme} setPopoverOpened={setPopoverOpened} destination={"About"} iconName={"info"} iconFamily={"feather"} title={"About"} />
             </View>
             }
           </TouchableOpacity>
-        )}
       </Header>
       <View style={{zIndex: -5}}>
           <Image
