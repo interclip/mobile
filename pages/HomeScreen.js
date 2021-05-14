@@ -159,6 +159,37 @@ export function HomeScreen({ navigation }) {
                 }}
                 onPress={() => {
                   Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+                  navigation.navigate("QR");
+                  setPopoverOpened(false);
+                }}
+              >
+                <Icon
+                  name='qrcode'
+                  type='font-awesome'
+                  color={colorScheme === "dark" ? "white" : "black"} // White color for contrast on the Header
+                  style={{
+                    marginRight: "10%",
+                  }}
+                />
+                <Text
+                  style={{
+                    color: colorScheme === "dark" ? "white" : "black",
+                  }}
+                >
+                  Scan
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  backgroundColor: colorScheme === "dark" ? "#222" : "#ccc",
+                  padding: "10%",
+                }}
+                onPress={() => {
+                  Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
                   navigation.navigate("Settings");
                   setPopoverOpened(false);
                 }}
