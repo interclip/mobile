@@ -26,7 +26,7 @@ const MenuItem = (props) => {
           backgroundColor: props.colorScheme === "dark" ? "#222" : "#ccc",
           padding: "10%",
         }}
-        onPressIn={() => {
+        onPress={() => {
             if (Platform.OS === 'ios') {
                 Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
             }
