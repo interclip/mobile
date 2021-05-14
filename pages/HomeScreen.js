@@ -31,8 +31,6 @@ import {
   checkError,
 } from "../Pages";
 
-import * as Haptics from 'expo-haptics';
-
 import MenuItem from '../components/MenuItem';
 
 /* Root component */
