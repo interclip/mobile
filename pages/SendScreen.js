@@ -20,6 +20,7 @@ import { StatusBar } from "expo-status-bar";
 import QRCode from "react-native-qrcode-svg";
 import { Icon, Input } from "react-native-elements";
 import Clipboard from 'expo-clipboard';
+import { activateKeepAwake, deactivateKeepAwake } from 'expo-keep-awake';
 
 /* Functional packages */
 
@@ -186,6 +187,7 @@ export function SendScreen() {
                 <TouchableHighlight
                   style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
                   onPress={() => {
+                    deactivateKeepAwake();
                     setModalVisible(!modalVisible);
                   }}
                 >
@@ -202,6 +204,7 @@ export function SendScreen() {
               style={{ width: 70 }}
               onPress={() => {
                 setModalVisible(true);
+                activateKeepAwake();
               }}
               size={50}
             />
