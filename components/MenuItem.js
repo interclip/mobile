@@ -13,6 +13,7 @@ import PropTypes from 'prop-types'; // ES6
 import { Icon } from "react-native-elements";
 
 import * as Haptics from 'expo-haptics';
+import { Platform } from "react-native";
 
 const MenuItem = (props) => {
     return (
@@ -25,10 +26,12 @@ const MenuItem = (props) => {
           backgroundColor: props.colorScheme === "dark" ? "#222" : "#ccc",
           padding: "10%",
         }}
-        onPress={() => {
-          Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
-          props.navigation.navigate(props.destination);
-          props.setPopoverOpened(false);
+        onPressIn={() => {
+            if (Platform.OS === 'ios') {
+                Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+            }
+            props.navigation.navigate(props.destination);
+            props.setPopoverOpened(false);
         }}
       >
         <Icon
