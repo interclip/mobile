@@ -113,6 +113,7 @@ export function HomeScreen({ navigation }) {
                 position: "absolute",
                 right: "0%",
                 marginTop: "70%",
+                elevation: 3
               }}
             >
               <MenuItem navigation={navigation} colorScheme={colorScheme} setPopoverOpened={setPopoverOpened} destination={"Send"} iconName={"send"} iconFamily={"feather"} title={"Send"} />
@@ -125,7 +126,7 @@ export function HomeScreen({ navigation }) {
             }
           </TouchableOpacity>
       </Header>
-      <View style={{zIndex: -5}}>
+      <View style={{zIndex: -5, elevation: -5, backgroundColor: "red" }}>
           <Image
             style={styles.previewImg}
             source={{
