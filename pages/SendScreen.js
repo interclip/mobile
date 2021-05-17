@@ -30,7 +30,7 @@ import isURL from 'validator/lib/isURL';
 /* Local functions and variables */
 
 import { iclipUri } from "../Vars";
-import { styles, imgCheck, urlValidation, colors, checkError } from "../Pages";
+import { styles, urlValidation, colors, checkError } from "../Pages";
 
 /* Root component */
 
@@ -96,9 +96,7 @@ export function SendScreen() {
           <Image
             style={styles.previewImg}
             source={{
-              uri: imgCheck(data, text)
-                ? `https://interclip.app/proxy?url=${data}`
-                : "https://raw.githubusercontent.com/aperta-principium/Interclip/master/img/interclip_logo.png",
+              uri: "https://raw.githubusercontent.com/aperta-principium/Interclip/master/img/interclip_logo.png",
             }}
           />
         </TouchableOpacity>
