@@ -5,16 +5,16 @@
 [![runs with expo](https://img.shields.io/badge/Runs%20with%20Expo-4630EB.svg?style=flat-square&logo=EXPO&labelColor=f3f3f3&logoColor=000)](https://expo.io/)
 
 ## Prerequisites
-- Yarn
-- Node.js >= v12.0
+-   Yarn
+-   Node.js >= v12.0
 
 ## Setup locally
 1.  Install dependencies with `yarn`
 2.  To start the Expo server, run `yarn start`
 
 ## Build the app
--  For building for iOS and iPadOS, run `yarn run build:ios`
--  For building for Android, run `yarn run build:android`
+-   For building for iOS and iPadOS, run `yarn run build:ios`
+-   For building for Android, run `yarn run build:android`
 
 Download the newest version here: (requires the Expo go mobile client)  
 https://expo.io/@filiptronicek/iclip
