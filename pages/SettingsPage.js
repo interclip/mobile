@@ -18,16 +18,16 @@ import { colors } from '../Pages';
 export function SettingsPage() {
   const [isEnabled, setIsEnabled] = useState();
 
-  const toggleSwitch = () => {
-    setIsEnabled((previousState) => !previousState);
-    storeData({ data: isEnabled });
-  };
-
   const [data, setData] = useState(Settings.get('data'));
   const storeData = (data) => {
     data.data = !data.data;
     Settings.set(data);
     setData(Settings.get('data'));
+  };
+
+  const toggleSwitch = () => {
+    setIsEnabled((previousState) => !previousState);
+    storeData({ data: isEnabled });
   };
 
   const colorScheme = useColorScheme();
