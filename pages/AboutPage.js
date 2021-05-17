@@ -89,5 +89,5 @@ export function AboutPage() {
         Interclip mobile v{appInfo.expo.version}{' '}
       </Text>
     </View>
-  )
+  );
 }
