@@ -50,7 +50,7 @@ const MenuItem = (props) => {
           {props.title}
         </Text>
       </TouchableOpacity>
-    )
+    );
 };
 
 MenuItem.propTypes = {
@@ -60,6 +60,6 @@ MenuItem.propTypes = {
     title: PropTypes.string.isRequired,
     setPopoverOpened: PropTypes.any.isRequired,
     destination: PropTypes.string.isRequired
-}
+};
 
 export default MenuItem;
