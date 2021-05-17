@@ -27,7 +27,7 @@ export function OfflinePage({ navigation }) {
   const colorScheme = useColorScheme();
 
   useEffect(() => {
-    NetInfo.addEventListener(state => {
+    NetInfo.addEventListener((state) => {
       if (state.isConnected) {
         navigation.navigate("Home");
       }

@@ -52,7 +52,7 @@ export function HomeScreen({ navigation }) {
 
 
   useFocusEffect(() => {
-    NetInfo.fetch().then(state => {
+    NetInfo.fetch().then((state) => {
       if (!state.isConnected) {
         navigation.navigate("Offline");
       }
