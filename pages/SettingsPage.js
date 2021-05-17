@@ -58,5 +58,5 @@ export function SettingsPage() {
         value={data}
       />
     </View>
-  )
+  );
 }
