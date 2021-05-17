@@ -30,6 +30,9 @@ import {
   checkError,
 } from "../Pages";
 
+import NetInfo from "@react-native-community/netinfo";
+import { useFocusEffect } from "@react-navigation/native";
+
 import MenuItem from '../components/MenuItem';
 
 /* Root component */
@@ -47,7 +50,23 @@ export function HomeScreen({ navigation }) {
   // const [progress, setProgress] = useState("");
   const colorScheme = useColorScheme();
 
-  useEffect(() => {
+
+  useFocusEffect(() => {
+    NetInfo.fetch().then(state => {
+      if (!state.isConnected) {
+        navigation.navigate("Offline");
+      }
+    });
+  });
+
+  useEffect(() => {    
+
+    NetInfo.addEventListener(state => {
+      if (!state.isConnected) {
+        navigation.navigate("Offline");
+      }
+    });    
+
     if (text.length === config.codeMaxLength) {
       setText(text.replace(" ", "").toLowerCase());
       fetch(`https://interclip.app/includes/get-api?code=${text}`)

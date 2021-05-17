@@ -14,6 +14,7 @@ import { QRScreen } from "./pages/QRScreen";
 import { HomeScreen } from "./pages/HomeScreen";
 import { SettingsPage } from "./pages/SettingsPage";
 import { AboutPage } from "./pages/AboutPage";
+import { OfflinePage } from "./pages/OfflinePage";
 
 /* App component */
 
@@ -54,6 +55,11 @@ export default function App() {
           name="About"
           component={AboutPage}
           options={{ title: "About" }}
+        />
+        <Stack.Screen
+          name="Offline"
+          component={OfflinePage}
+          options={{ title: "Offline" }}
         />
         <Stack.Screen name="Settings" component={SettingsPage} />
       </Stack.Navigator>
