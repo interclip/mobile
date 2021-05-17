@@ -13,8 +13,8 @@
 2.  To start the Expo server, run `yarn start`
 
 ## Build the app
-*  For building for iOS and iPadOS, run `yarn run build:ios`
-*  For building for Android, run `yarn run build:android`
+-  For building for iOS and iPadOS, run `yarn run build:ios`
+-  For building for Android, run `yarn run build:android`
 
 Download the newest version here: (requires the Expo go mobile client)  
 https://expo.io/@filiptronicek/iclip
