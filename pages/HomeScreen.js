@@ -93,7 +93,7 @@ export function HomeScreen({ navigation }) {
               color: colorScheme === "dark" ? "white" : "black",
             }}
           >
-            Interclip
+
           </Text>
         </View>
           <TouchableOpacity
