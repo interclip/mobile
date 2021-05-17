@@ -26,7 +26,6 @@ import {
   config,
   colors,
   styles,
-  imgCheck,
   validationMsg,
   checkError,
 } from "../Pages";
@@ -130,9 +129,7 @@ export function HomeScreen({ navigation }) {
           <Image
             style={styles.previewImg}
             source={{
-              uri: imgCheck(data.result, text)
-                ? `https://interclip.app/proxy?url=${data.result}`
-                : "https://raw.githubusercontent.com/aperta-principium/Interclip/master/img/interclip_logo.png",
+              uri: "https://raw.githubusercontent.com/aperta-principium/Interclip/master/img/interclip_logo.png",
             }}
           />
         <Input

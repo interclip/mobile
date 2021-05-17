@@ -17,13 +17,6 @@ export const sleep = (milliseconds) => {
   return new Promise((resolve) => setTimeout(resolve, milliseconds));
 };
 
-export const imgCheck = (url, inval) => {
-  if (inval === "") return false;
-  if (typeof url !== "string") return false;
-  if (inval.length !== config.codeMaxLength) return false;
-  return !!url.match(/\w+\.(jpg|jpeg|gif|png|tiff|bmp)$/gi);
-};
-
 export const validationMsg = (txt) => {
   txt = txt.replace(" ", "").toLowerCase();
   const diff = config.codeMaxLength - txt.length;
