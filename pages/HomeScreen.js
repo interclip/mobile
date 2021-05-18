@@ -60,19 +60,19 @@ export function HomeScreen({ navigation }) {
     });
   });
 
-  useEffect(() => {    
+  useEffect(() => {
 
     NetInfo.addEventListener(state => {
       if (!state.isConnected) {
         navigation.navigate("Offline");
       }
-    });    
+    });
 
     if (text.length === config.codeMaxLength) {
       setText(text.replace(" ", "").toLowerCase());
       fetch(`https://interclip.app/includes/get-api?code=${text}`)
         .then((response) => {
-          if(response.status === 429) {
+          if (response.status === 429) {
             Alert.alert("Slow down!", "We are getting too many requests from you.");
           }
           return response.json();
@@ -116,16 +116,16 @@ export function HomeScreen({ navigation }) {
 
           </Text>
         </View>
-          <TouchableOpacity
-            activeOpacity={0.5}
-            onPress={() => {setPopoverOpened(!popoverOpened);}}
-            >
-            <Icon
-              name='menu'
-              type='feather'
-              color={colorScheme === "dark" ? "white" : "black"} // White color for contrast on the Header
-            />
-            { popoverOpened &&
+        <TouchableOpacity
+          activeOpacity={0.5}
+          onPress={() => { setPopoverOpened(!popoverOpened); }}
+        >
+          <Icon
+            name='menu'
+            type='feather'
+            color={colorScheme === "dark" ? "white" : "black"} // White color for contrast on the Header
+          />
+          {popoverOpened &&
             <View
               activeOpacity={0.5}
               style={{
@@ -138,14 +138,14 @@ export function HomeScreen({ navigation }) {
               <MenuItem navigation={navigation} colorScheme={colorScheme} setPopoverOpened={setPopoverOpened} destination={"Send"} iconName={"send"} iconFamily={"feather"} title={"Send"} />
               <MenuItem navigation={navigation} colorScheme={colorScheme} setPopoverOpened={setPopoverOpened} destination={"QR"} iconName={"qrcode"} iconFamily={"font-awesome"} title={"Scan"} />
               {Platform.OS === "ios" && (
-              <MenuItem navigation={navigation} colorScheme={colorScheme} setPopoverOpened={setPopoverOpened} destination={"Settings"} iconName={"settings"} iconFamily={"feather"} title={"Settings"} />
+                <MenuItem navigation={navigation} colorScheme={colorScheme} setPopoverOpened={setPopoverOpened} destination={"Settings"} iconName={"settings"} iconFamily={"feather"} title={"Settings"} />
               )}
               <MenuItem navigation={navigation} colorScheme={colorScheme} setPopoverOpened={setPopoverOpened} destination={"About"} iconName={"info"} iconFamily={"feather"} title={"About"} />
             </View>
-            }
-          </TouchableOpacity>
+          }
+        </TouchableOpacity>
       </Header>
-      <View style={{zIndex: -5, elevation: -5}}>
+      <View style={{ zIndex: -5, elevation: -5 }}>
         <LogoImage />
         <Input
           keyboardType={
@@ -171,8 +171,8 @@ export function HomeScreen({ navigation }) {
             !isLoading
               ? Linking.openURL(data.result)
               : Alert.alert(
-                  `No URL set yet, make sure your code is ${config.codeMaxLength} characters long!`
-                );
+                `No URL set yet, make sure your code is ${config.codeMaxLength} characters long!`
+              );
           }}
         />
         {validationMsg(text) && (
@@ -197,7 +197,6 @@ export function HomeScreen({ navigation }) {
                 } catch (e) {
                   Alert.alert("Error", "Couldn't copy to clipboard!");
                 }
-              
               }}
               onPress={() => {
                 Linking.openURL(data.result);
@@ -206,8 +205,8 @@ export function HomeScreen({ navigation }) {
                 color: checkError(data.status)
                   ? colors.light
                   : colorScheme === "dark"
-                  ? "white"
-                  : colors.text,
+                    ? "white"
+                    : colors.text,
                 backgroundColor:
                   checkError(data.status) & !validationMsg(text)
                     ? colors.errorColor
