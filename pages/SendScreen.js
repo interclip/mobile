@@ -3,7 +3,6 @@
 import React, { useEffect, useState } from "react";
 import {
   Alert,
-  Image,
   Modal,
   Platform,
   Text,
@@ -27,10 +26,11 @@ import { activateKeepAwake, deactivateKeepAwake } from 'expo-keep-awake';
 import fetch from 'node-fetch';
 import isURL from 'validator/lib/isURL';
 
-/* Local functions and variables */
+/* Local functions, components and variables */
 
 import { iclipUri } from "../Vars";
 import { styles, urlValidation, colors, checkError } from "../Pages";
+import LogoImage from "../components/LogoImage";
 
 /* Root component */
 
@@ -93,10 +93,7 @@ export function SendScreen() {
       ></View>
       <View>
         <TouchableOpacity>
-          <Image
-            style={styles.previewImg}
-            source={require('../assets/icon.png')}
-          />
+          <LogoImage />
         </TouchableOpacity>
         <Input
           keyboardType={Platform.OS === "android" ? "default" : "url"}

@@ -2,7 +2,6 @@
 
 import React, { useEffect } from 'react';
 import {
-  Image,
   Text,
   useColorScheme,
   View,
@@ -17,9 +16,7 @@ import NetInfo from "@react-native-community/netinfo";
 
 import { colors } from '../Pages';
 
-import {
-    styles,
-} from "../Pages";
+import LogoImage from "../components/LogoImage";
 
 /* Root component */
 
@@ -43,11 +40,7 @@ export function OfflinePage({ navigation }) {
           colorScheme === 'dark' ? colors.darkContent : colors.lightContent,
       }}
     >
-      <Image
-        style={styles.aboutImg}
-        source={require('../assets/icon.png')}
-        alt="Interclip logo"
-      />
+      <LogoImage />
       <Text
         style={{
           color: colorScheme === 'dark' ? 'white' : 'black',

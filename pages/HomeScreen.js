@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from "react";
 import {
-  Image,
   Linking,
   Platform,
   Text,
@@ -29,6 +28,8 @@ import {
   validationMsg,
   checkError,
 } from "../Pages";
+
+import LogoImage from "../components/LogoImage";
 
 import NetInfo from "@react-native-community/netinfo";
 import { useFocusEffect } from "@react-navigation/native";
@@ -145,12 +146,7 @@ export function HomeScreen({ navigation }) {
           </TouchableOpacity>
       </Header>
       <View style={{zIndex: -5, elevation: -5}}>
-          <Image
-            style={styles.previewImg}
-            source={{
-              uri: "https://raw.githubusercontent.com/aperta-principium/Interclip/master/img/interclip_logo.png",
-            }}
-          />
+        <LogoImage />
         <Input
           keyboardType={
             Platform.OS === "android" ? "email-address" : "ascii-capable"

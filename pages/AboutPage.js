@@ -2,7 +2,6 @@
 
 import React, { useState } from 'react';
 import {
-  Image,
   Text,
   useColorScheme,
   View,
@@ -11,16 +10,14 @@ import {
 
 import * as Linking from 'expo-linking';
 
-/* Local functions and variables */
+/* Local functions, components and variables */
 
 import { colors } from '../Pages';
 import * as appInfo from '../app.json';
 
 import { Icon } from "react-native-elements";
 
-import {
-    styles,
-} from "../Pages";
+import LogoImage from "../components/LogoImage";
 
 /* Root component */
 
@@ -37,11 +34,7 @@ export function AboutPage() {
           colorScheme === 'dark' ? colors.darkContent : colors.lightContent,
       }}
     >
-      <Image
-        style={styles.aboutImg}
-        source={require('../assets/icon.png')}
-        alt="Interclip logo"
-      />
+      <LogoImage />
       <Text
         style={{
           color: colorScheme === 'dark' ? 'white' : 'black',
