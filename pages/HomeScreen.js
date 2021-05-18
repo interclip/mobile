@@ -68,7 +68,7 @@ export function HomeScreen({ navigation }) {
       }
     });
 
-    if (text.length === config.codeMaxLength) {
+    if (text.length === config.codeLength) {
       setText(text.replace(" ", "").toLowerCase());
       fetch(`https://interclip.app/includes/get-api?code=${text}`)
         .then((response) => {
@@ -156,7 +156,7 @@ export function HomeScreen({ navigation }) {
             color: colorScheme === "dark" ? "white" : "black",
           }}
           placeholder="Your code here"
-          maxLength={config.codeMaxLength}
+          maxLength={config.codeLength}
           inputStyle={{ fontSize: 50 }}
           autoCorrect={false}
           returnKeyType={"go"}
@@ -171,7 +171,7 @@ export function HomeScreen({ navigation }) {
             !isLoading
               ? Linking.openURL(data.result)
               : Alert.alert(
-                `No URL set yet, make sure your code is ${config.codeMaxLength} characters long!`
+                `No URL set yet, make sure your code is ${config.codeLength} characters long!`
               );
           }}
         />

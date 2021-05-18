@@ -19,11 +19,11 @@ export const sleep = (milliseconds) => {
 
 export const validationMsg = (txt) => {
   txt = txt.replace(" ", "").toLowerCase();
-  const diff = config.codeMaxLength - txt.length;
+  const diff = config.codeLength - txt.length;
   if (txt.match(config.charRegex)) {
     return `There are some characters, that shouldn't be there.`;
   } else {
-    if ((txt.length < config.codeMaxLength) & (txt.length > 0)) {
+    if ((txt.length < config.codeLength) & (txt.length > 0)) {
       return `${diff} more character${diff === 1 ? "" : "s"} please`;
     } else if (txt.length === 0) {
       return `Just type in the code above and see the magic happen.`;
