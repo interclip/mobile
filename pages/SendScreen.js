@@ -173,7 +173,7 @@ export function SendScreen() {
                 <QRCode
                   value={`https://interclip.app/${data.result}`}
                   size={250}
-                  logo={{ uri: iclipUri }}
+                  logo={require('../assets/icon.png')}
                   logoSize={60}
                   logoBackgroundColor="white"
                 />
