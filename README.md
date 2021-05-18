@@ -16,12 +16,10 @@
 -   For building for iOS and iPadOS, run `yarn run build:ios`
 -   For building for Android, run `yarn run build:android`
 
-Download the newest version here: (requires the Expo go mobile client)  
-https://expo.io/@filiptronicek/iclip
+## Downloads
+- [Android (`.aab`)](https://github.com/filiptronicek/iclip-mobile/releases/latest/download/iclip.aab)
 
 [![Availible on the Google Play Store](https://files.catbox.moe/0ve0bw.png)](https://play.google.com/store/apps/details?id=com.filiptronicek.iclip)
-
-download the .aab here: https://s.trnck.dev/iclip-mobile
 
 ## Attribution
 Google Play and the Google Play logo are trademarks of Google LLC.
