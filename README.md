@@ -9,8 +9,9 @@
 -   Node.js >= v12.0
 
 ## Setup locally
-1.  Install dependencies with `yarn`
-2.  To start the Expo server, run `yarn start`
+1.  Instal the Expo CLI with `npm i -g expo-cli`
+2.  Install dependencies with `yarn`
+3.  To start the Expo server, run `yarn start`
 
 ## Build the app
 -   For building for iOS and iPadOS, run `yarn run build:ios`
