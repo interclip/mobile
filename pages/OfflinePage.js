@@ -57,7 +57,7 @@ export function OfflinePage({ navigation }) {
           textAlign: 'center'
         }}
       >
-        It looks like you're offline...
+        It looks like you&#39;re offline...
       </Text>
       <Text
         style={{
@@ -67,7 +67,7 @@ export function OfflinePage({ navigation }) {
           textAlign: 'center'
         }}
       >
-        I can't help you with that, but you can try refreshing after you're connected.
+        I can&#39;t help you with that, but you can try refreshing after you&#39;re connected.
       </Text>
       <Button title="Refresh" onPress={() => {navigation.navigate("Home")}} />
     </View>
