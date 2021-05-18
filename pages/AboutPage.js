@@ -39,9 +39,7 @@ export function AboutPage() {
     >
       <Image
         style={styles.aboutImg}
-        source={{
-          uri: 'https://raw.githubusercontent.com/aperta-principium/Interclip/main/img/interclip_logo.png',
-        }}
+        source={require('../assets/icon.png')}
         alt="Interclip logo"
       />
       <Text

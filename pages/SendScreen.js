@@ -95,9 +95,7 @@ export function SendScreen() {
         <TouchableOpacity>
           <Image
             style={styles.previewImg}
-            source={{
-              uri: "https://raw.githubusercontent.com/aperta-principium/Interclip/master/img/interclip_logo.png",
-            }}
+            source={require('../assets/icon.png')}
           />
         </TouchableOpacity>
         <Input
