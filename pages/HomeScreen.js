@@ -27,7 +27,7 @@ import {
   styles,
   validationMsg,
   checkError,
-} from "../Pages";
+} from "../lib/Pages";
 
 import LogoImage from "../components/LogoImage";
 

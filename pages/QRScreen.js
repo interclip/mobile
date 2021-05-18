@@ -20,7 +20,7 @@ import * as Linking from 'expo-linking';
 /* Local functions and variables */
 
 import isURL from 'validator/lib/isURL';
-import { sleep, styles, colors } from "../Pages";
+import { sleep, styles, colors } from "../lib/Pages";
 
 /* Root component */
 

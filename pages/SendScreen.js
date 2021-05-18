@@ -28,7 +28,7 @@ import isURL from 'validator/lib/isURL';
 
 /* Local functions, components and variables */
 
-import { styles, urlValidation, colors, checkError } from "../Pages";
+import { styles, urlValidation, colors, checkError } from "../lib/Pages";
 import LogoImage from "../components/LogoImage";
 
 /* Root component */

@@ -14,7 +14,7 @@ import NetInfo from "@react-native-community/netinfo";
 
 /* Local functions and variables */
 
-import { colors } from '../Pages';
+import { colors } from '../lib/Pages';
 
 import LogoImage from "../components/LogoImage";
 

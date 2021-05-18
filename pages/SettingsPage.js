@@ -11,7 +11,7 @@ import {
 
 /* Local functions and variables */
 
-import { colors } from '../Pages';
+import { colors } from '../lib/Pages';
 
 /* Root component */
 
