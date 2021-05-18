@@ -28,7 +28,6 @@ import isURL from 'validator/lib/isURL';
 
 /* Local functions, components and variables */
 
-import { iclipUri } from "../Vars";
 import { styles, urlValidation, colors, checkError } from "../Pages";
 import LogoImage from "../components/LogoImage";
 
