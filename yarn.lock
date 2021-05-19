@@ -7454,10 +7454,10 @@ react-native-appearance@^0.3.4:
     invariant "^2.2.4"
     use-subscription "^1.0.0"
 
-react-native-camera@^3.43.8:
-  version "3.43.8"
-  resolved "https://registry.yarnpkg.com/react-native-camera/-/react-native-camera-3.43.8.tgz#0e1f5b602417f3a79c9bb1cbb643eb9d852191bc"
-  integrity sha512-OLQ0UfYaQz7VI8yLpYHFcsfg8R+zbsnxYrFxyVjfxOagqAllkFOgPI7eCf6S5HM119RQV6a+gAK2M2ZXzv8OvA==
+react-native-camera@^3.43.9:
+  version "3.43.9"
+  resolved "https://registry.yarnpkg.com/react-native-camera/-/react-native-camera-3.43.9.tgz#026322b0a5143da1b6e622bba217713be8b830b2"
+  integrity sha512-HTXxkGdNa9G0ErVXBoqsf1lYorBXjXfVZbDeHUBVxQrOqL8CV3eJTuaY5kHH41Y7woJ8yISmklZeUwpZrskEgw==
   dependencies:
     prop-types "^15.6.2"
 
