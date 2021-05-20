@@ -17,6 +17,10 @@ import { SettingsPage } from "./pages/SettingsPage";
 import { AboutPage } from "./pages/AboutPage";
 import { OfflinePage } from "./pages/OfflinePage";
 
+// Constants
+
+import { colors } from '../lib/Pages';
+
 // App component
 
 const Stack = createStackNavigator();
@@ -30,7 +34,7 @@ export default function App() {
         initialRouteName="Home"
         screenOptions={{
           headerStyle: {
-            backgroundColor: colorScheme === "dark" ? "#333333" : "#ffffff",
+            backgroundColor: colorScheme === "dark" ? colors.darkHeader : colors.light,
           },
           headerTitleStyle: {
             color: colorScheme === "dark" ? "white" : "black",

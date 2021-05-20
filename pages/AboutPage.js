@@ -72,7 +72,7 @@ export function AboutPage() {
           position: 'absolute',
           bottom: '5%',
           left: Dimensions.get('window').width / 2 - versionWidth / 2,
-          color: colorScheme === 'dark' ? '#D3D3D3' : 'grey',
+          color: colorScheme === 'dark' ? colors.secondary : 'grey',
         }}
         onLayout={(event) => setVersionWidth(event.nativeEvent.layout.width)}
         onPress={() => Linking.openURL(`https://github.com/filiptronicek/iclip-mobile/releases/tag/v${appInfo.expo.version}`)}
