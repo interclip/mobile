@@ -1,4 +1,4 @@
-/* React, React Native imports */
+// React, React Native imports
 
 import React, { useEffect, useState } from "react";
 import {
@@ -11,13 +11,13 @@ import {
   Alert
 } from "react-native";
 
-/* Components, Expo and RN libraries */
+// Components, Expo and RN libraries
 
 import { StatusBar } from "expo-status-bar";
 import Clipboard from 'expo-clipboard';
 import { Header, Icon, Input } from "react-native-elements";
 
-/* Functional packages */
+// Functional packages
 
 import fetch from 'node-fetch';
 
@@ -36,19 +36,18 @@ import { useFocusEffect } from "@react-navigation/native";
 
 import MenuItem from '../components/MenuItem';
 
-/* Root component */
+// Root component
 
 export function HomeScreen({ navigation }) {
-  /* Variable set */
+  // Variable set
   const [isLoading, setLoading] = useState(true); // Loading status => only show the responce of the API
 
-  // after the request completes
+  // After the request completes
   const [data, setData] = useState(""); // Dynamically loaded data from the Interclip REST API
   const [text, setText] = useState(""); // The code entered in the <Input>
 
   const [popoverOpened, setPopoverOpened] = useState(false);
 
-  // const [progress, setProgress] = useState("");
   const colorScheme = useColorScheme();
 
 
@@ -92,7 +91,6 @@ export function HomeScreen({ navigation }) {
     >
       <Header
         containerStyle={{
-          // backgroundColor: colors.headerBg,
           backgroundColor:
             colorScheme === "dark" ? colors.darkHeader : colors.lightHeader,
           color: colorScheme === "dark" ? "white" : "black",
@@ -190,7 +188,7 @@ export function HomeScreen({ navigation }) {
           {!isLoading && (
             <Text
               onLongPress={() => {
-                /* Handle functionality, when user presses for a longer period of time */
+                // Handle functionality, when user presses for a longer period of time
                 try {
                   Clipboard.setString(data.result);
                   Alert.alert("Success", "Copied to Clipboard!");

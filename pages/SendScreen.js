@@ -1,4 +1,4 @@
-/* React, React Native imports */
+// React, React Native imports
 
 import React, { useEffect, useState } from "react";
 import {
@@ -13,7 +13,7 @@ import {
   Keyboard,
 } from "react-native";
 
-/* Components, Expo and RN libraries */
+// Components, Expo and RN libraries
 
 import { StatusBar } from "expo-status-bar";
 import QRCode from "react-native-qrcode-svg";
@@ -21,21 +21,21 @@ import { Icon, Input } from "react-native-elements";
 import Clipboard from 'expo-clipboard';
 import { activateKeepAwake, deactivateKeepAwake } from 'expo-keep-awake';
 
-/* Functional packages */
+// Functional packages
 
 import fetch from 'node-fetch';
 import isURL from 'validator/lib/isURL';
 
-/* Local functions, components and variables */
+// Local functions, components and variables
 
 import { styles, urlValidation, colors, checkError } from "../lib/Pages";
 import LogoImage from "../components/LogoImage";
 
-/* Root component */
+// Root component
 
 export function SendScreen() {
 
-  /* Variable set */
+  // Variable set
   const [isLoading, setLoading] = useState(true); // Loading status => only show the responce of the API
 
   // after the request completes
@@ -56,14 +56,6 @@ export function SendScreen() {
       pasteFromClipboard();
     })();
   }, []);
-
-  /*
-  useFocusEffect(() => {
-    (async () => {
-      pasteFromClipboard();
-    })();
-  });
-  */
 
   useEffect(() => {
     setText(text.replace(" ", "").toLowerCase());

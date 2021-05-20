@@ -1,4 +1,4 @@
-/* React, React Native imports */
+// React, React Native imports 
 
 import React, { useState } from 'react';
 import {
@@ -10,7 +10,7 @@ import {
 
 import * as Linking from 'expo-linking';
 
-/* Local functions, components and variables */
+// Local functions, components and variables 
 
 import { colors } from '../lib/Pages';
 import * as appInfo from '../app.json';
@@ -19,7 +19,7 @@ import { Icon } from "react-native-elements";
 
 import LogoImage from "../components/LogoImage";
 
-/* Root component */
+// Root component
 
 export function AboutPage() {
   const [versionWidth, setVersionWidth] = useState(0);
@@ -55,14 +55,14 @@ export function AboutPage() {
             <Icon
                 onPress={() => Linking.openURL("https://github.com/filiptronicek/iclip-mobile/")}
                 type="font-awesome" // The icon is loaded from the font awesome icon library
-                name="github" // Icon fa-qrcode
+                name="github" // Icon fa-github
                 color={colorScheme === "dark" ? "white" : "black"} // White color for contrast on the Header
                 size="50"
             />
             <Icon
                 onPress={() => Linking.openURL("https://twitter.com/filiptronicek")}
                 type="font-awesome" // The icon is loaded from the font awesome icon library
-                name="twitter" // Icon fa-qrcode
+                name="twitter" // Icon fa-twitter
                 color={colorScheme === "dark" ? "white" : "black"} // White color for contrast on the Header
                 size="50"
             />

@@ -1,4 +1,4 @@
-/* React, React Native imports */
+// React, React Native imports
 
 import React, { useEffect } from 'react';
 import {
@@ -8,17 +8,17 @@ import {
   Button
 } from 'react-native';
 
-/* Third party libraries */
+// Third party libraries
 
 import NetInfo from "@react-native-community/netinfo";
 
-/* Local functions and variables */
+// Local functions and variables
 
 import { colors } from '../lib/Pages';
 
 import LogoImage from "../components/LogoImage";
 
-/* Root component */
+// Root component
 
 export function OfflinePage({ navigation }) {
   const colorScheme = useColorScheme();

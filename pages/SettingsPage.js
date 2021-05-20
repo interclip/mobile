@@ -1,4 +1,4 @@
-/* React, React Native imports */
+// React, React Native imports
 
 import React, { useState } from 'react';
 import {
@@ -9,11 +9,11 @@ import {
   View,
 } from 'react-native';
 
-/* Local functions and variables */
+// Local functions and variables
 
 import { colors } from '../lib/Pages';
 
-/* Root component */
+// Root component
 
 export function SettingsPage() {
   const [isEnabled, setIsEnabled] = useState();

@@ -1,14 +1,15 @@
-/* 1st party libraries and dependencies: react, react native and Expo stuff */
+// 1st party libraries and dependencies: react, react native and Expo stuff
 
 import React from "react";
 import { useColorScheme } from "react-native";
 
-/* 3rd party libraries */
+// 3rd party libraries
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
-/* Pages */
+// Pages
+
 import { SendScreen } from "./pages/SendScreen";
 import { QRScreen } from "./pages/QRScreen";
 import { HomeScreen } from "./pages/HomeScreen";
@@ -16,7 +17,7 @@ import { SettingsPage } from "./pages/SettingsPage";
 import { AboutPage } from "./pages/AboutPage";
 import { OfflinePage } from "./pages/OfflinePage";
 
-/* App component */
+// App component
 
 const Stack = createStackNavigator();
 

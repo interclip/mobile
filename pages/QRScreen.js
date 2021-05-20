@@ -1,4 +1,4 @@
-/* React, React Native imports */
+// React, React Native imports
 
 import React, { useEffect, useState } from "react";
 import {
@@ -11,18 +11,18 @@ import {
   View,
 } from "react-native";
 
-/* Components, Expo and RN libraries */
+// Components, Expo and RN libraries
 
 import Clipboard from "@react-native-community/clipboard";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import * as Linking from 'expo-linking';
 
-/* Local functions and variables */
+// Local functions and variables
 
 import isURL from 'validator/lib/isURL';
 import { sleep, styles, colors } from "../lib/Pages";
 
-/* Root component */
+// Root component
 
 export function QRScreen({ navigation }) {
   const [hasPermission, setHasPermission] = useState(null);
