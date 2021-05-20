@@ -193,7 +193,7 @@ export function SendScreen() {
               type="font-awesome" // The icon is loaded from the font awesome icon library
               name="qrcode" // Icon fa-qrcode
               color={colorScheme === "dark" ? "white" : "black"} // White color for contrast on the Header
-              style={{ width: 70 }}
+              style={{ marginLeft: 15 }}
               onPress={() => {
                 setModalVisible(true);
                 activateKeepAwake();
