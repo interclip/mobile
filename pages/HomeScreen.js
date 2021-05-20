@@ -212,6 +212,8 @@ export function HomeScreen({ navigation }) {
                     ? colors.errorColor
                     : null,
                 fontSize: 20,
+                marginLeft: 'auto',
+                marginRight: 'auto',
               }}
             >
               {!validationMsg(text) &&
