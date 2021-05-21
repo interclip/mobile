@@ -18,7 +18,7 @@
 -   For building for Android, run `yarn run build:android`
 
 ## Downloads
-- [Android (`.aab`)](https://github.com/filiptronicek/iclip-mobile/releases/latest/download/iclip.aab)
+-   [Android (`.aab`)](https://github.com/filiptronicek/iclip-mobile/releases/latest/download/iclip.aab)
 
 [![Availible on the Google Play Store](https://files.catbox.moe/0ve0bw.png)](https://play.google.com/store/apps/details?id=com.filiptronicek.iclip)
 
