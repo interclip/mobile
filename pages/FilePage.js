@@ -37,9 +37,7 @@ export function FilePage() {
             }}
         >
             <View
-                style={{
 
-                }}
             >
                 <Button
                     title="Choose a file"
