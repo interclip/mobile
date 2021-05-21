@@ -97,7 +97,7 @@ export function FilePage() {
                             ...styles.fileItem
                         }}
                     >
-                        Uploaded file to
+                        { fileURL && "Uploaded file to" }
                     </Text>
                     <Text
                         style={{
@@ -115,7 +115,7 @@ export function FilePage() {
                             ...styles.fileItem
                         }}
                     >
-                        with code
+                        { fileURL && "with code" }
                     </Text>
                     <Text
                         style={{
