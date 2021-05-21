@@ -12,7 +12,9 @@ import {
 import Clipboard from 'expo-clipboard';
 
 import * as Linking from 'expo-linking';
+
 import * as DocumentPicker from 'expo-document-picker';
+import * as ImagePicker from 'expo-image-picker';
 
 // Local functions, components and variables 
 
@@ -49,12 +51,30 @@ export function FilePage() {
                     }}
                     onPress={() => {
                         (async () => {
-                            const res = await DocumentPicker.getDocumentAsync();
+                            const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
+
+                            if (permissionResult.granted === false) {
+                                Alert.alert('Permission to access camera roll is required!');
+                                return;
+                            }
+
+                            const pickerResult = await ImagePicker.launchImageLibraryAsync();
+                            if (pickerResult.cancelled === true) {
+                                return;
+                            }
+
+                            const blob = await (await fetch(pickerResult.uri)).blob(); 
+
                             const data = new FormData();
-                            data.append('uploaded_file', res);
+                            const uri = pickerResult.uri;
+
+                            console.log(blob.type);
+                            data.append('uploaded_file', {
+                                uri: pickerResult.uri, type: blob.type, name: `image.${uri.split(".")[uri.split(".").length - 1]}`
+                            });
 
                             fetch(
-                                'https://interclip.app/upload/?api', //upload/?api
+                                'https://interclip.app/upload/?api',
                                 {
                                     method: 'post',
                                     body: data,
@@ -79,6 +99,7 @@ export function FilePage() {
                                     })
                                     .then((objson) => setData(objson))
                             });
+
                         })();
                     }} />
                 <Text
@@ -98,7 +119,7 @@ export function FilePage() {
                             ...styles.fileItem
                         }}
                     >
-                        { fileURL && "Uploaded file to" }
+                        {fileURL && "Uploaded file to"}
                     </Text>
                     <Text
                         style={{
@@ -110,10 +131,10 @@ export function FilePage() {
                         onLongPress={() => {
                             /* Handle functionality, when user presses for a longer period of time */
                             try {
-                              Clipboard.setString(fileURL);
-                              Alert.alert("Success", "Copied to Clipboard!");
+                                Clipboard.setString(fileURL);
+                                Alert.alert("Success", "Copied to Clipboard!");
                             } catch (e) {
-                              Alert.alert("Error", "Couldn't copy to clipboard!");
+                                Alert.alert("Error", "Couldn't copy to clipboard!");
                             }
                         }}
                     >
@@ -126,7 +147,7 @@ export function FilePage() {
                             ...styles.fileItem
                         }}
                     >
-                        { fileURL && "with code" }
+                        {fileURL && "with code"}
                     </Text>
                     <Text
                         style={{
@@ -137,10 +158,10 @@ export function FilePage() {
                         onLongPress={() => {
                             /* Handle functionality, when user presses for a longer period of time */
                             try {
-                              Clipboard.setString(data.result);
-                              Alert.alert("Success", "Copied to Clipboard!");
+                                Clipboard.setString(data.result);
+                                Alert.alert("Success", "Copied to Clipboard!");
                             } catch (e) {
-                              Alert.alert("Error", "Couldn't copy to clipboard!");
+                                Alert.alert("Error", "Couldn't copy to clipboard!");
                             }
                         }}
                     >
