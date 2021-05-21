@@ -71,10 +71,15 @@ export function HomeScreen({ navigation }) {
       setText(text.replace(" ", "").toLowerCase());
       fetch(`https://interclip.app/includes/get-api?code=${text}`)
         .then((response) => {
-          if (response.status === 429) {
-            Alert.alert("Slow down!", "We are getting too many requests from you.");
+          if (response.ok) {
+            return response.json();
+          } else {
+            if (response.status === 429) {
+              Alert.alert("Slow down!", "We are getting too many requests from you.");
+            } else {
+              Alert.alert("Error!", `Got the erorr ${response.status}.`);
+            }
           }
-          return response.json();
         })
         .then((json) => setData(json))
         .finally(() => setLoading(false));
