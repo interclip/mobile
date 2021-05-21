@@ -14,7 +14,7 @@ import Clipboard from 'expo-clipboard';
 
 import * as Linking from 'expo-linking';
 
-import * as DocumentPicker from 'expo-document-picker';
+//import * as DocumentPicker from 'expo-document-picker';
 import * as ImagePicker from 'expo-image-picker';
 
 // Local functions, components and variables 
