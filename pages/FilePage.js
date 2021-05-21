@@ -100,7 +100,7 @@ export function FilePage() {
                                         'Content-Type': 'multipart/form-data;',
                                     },
                                 }
-                            ).then((res) => res.json()).then(response => {
+                            ).then((res) => res.json()).then((response) => {
                                 setFileURL(response.result);
 
                                 fetch(`https://interclip.app/includes/api?url=${response.result}`)
@@ -116,7 +116,7 @@ export function FilePage() {
                                         }
                                     })
                                     .then((objson) => setData(objson))
-                                    .finally(() => setLoading(false))
+                                    .finally(() => setLoading(false));
                             });
 
                         })();
