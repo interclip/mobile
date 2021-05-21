@@ -45,82 +45,82 @@ export function FilePage() {
         >
             <View>
                 {loading ?
-                <View>
-                    <ActivityIndicator />
-                    <Text
+                    <View>
+                        <ActivityIndicator />
+                        <Text
+                            style={{
+                                color: colorScheme === 'dark' ? 'white' : 'black',
+                                fontSize: 20,
+                                marginTop: 20,
+                                textAlign: 'center'
+                            }}
+                        >
+                            Uploading...
+                        </Text>
+                    </View>
+                    :
+                    <Button
+                        title="Choose a file"
                         style={{
-                            color: colorScheme === 'dark' ? 'white' : 'black',
-                            fontSize: 20,
-                            marginTop: 20,
                             textAlign: 'center'
                         }}
-                    >
-                        Uploading...
-                    </Text>
-                </View>
-                :
-                <Button
-                    title="Choose a file"
-                    style={{
-                        textAlign: 'center'
-                    }}
-                    onPress={() => {
-                        (async () => {
-                            const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
+                        onPress={() => {
+                            (async () => {
+                                const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
 
-                            if (permissionResult.granted === false) {
-                                Alert.alert('Permission to access camera roll is required!');
-                                return;
-                            }
-
-                            const pickerResult = await ImagePicker.launchImageLibraryAsync();
-                            if (pickerResult.cancelled === true) {
-                                return;
-                            }
-
-                            setLoading(true);
-
-                            const uri = pickerResult.uri;
-                            const extension = uri.split(".")[uri.split(".").length - 1];
-
-                            const blob = await (await fetch(uri)).blob(); 
-
-                            const data = new FormData();
-
-                            data.append('uploaded_file', {
-                                uri: pickerResult.uri, type: blob.type, name: `image.${extension}`
-                            });
-
-                            fetch(
-                                'https://interclip.app/upload/?api',
-                                {
-                                    method: 'post',
-                                    body: data,
-                                    headers: {
-                                        'Content-Type': 'multipart/form-data;',
-                                    },
+                                if (permissionResult.granted === false) {
+                                    Alert.alert('Permission to access camera roll is required!');
+                                    return;
                                 }
-                            ).then((res) => res.json()).then((response) => {
-                                setFileURL(response.result);
 
-                                fetch(`https://interclip.app/includes/api?url=${response.result}`)
-                                    .then((rs) => {
-                                        if (rs.ok) {
-                                            return rs.json();
-                                        } else {
-                                            if (rs.status === 429) {
-                                                Alert.alert("Slow down!", "We are getting too many requests from you.");
+                                const pickerResult = await ImagePicker.launchImageLibraryAsync();
+                                if (pickerResult.cancelled === true) {
+                                    return;
+                                }
+
+                                setLoading(true);
+
+                                const uri = pickerResult.uri;
+                                const extension = uri.split(".")[uri.split(".").length - 1];
+
+                                const blob = await (await fetch(uri)).blob();
+
+                                const data = new FormData();
+
+                                data.append('uploaded_file', {
+                                    uri: pickerResult.uri, type: blob.type, name: `image.${extension}`
+                                });
+
+                                fetch(
+                                    'https://interclip.app/upload/?api',
+                                    {
+                                        method: 'post',
+                                        body: data,
+                                        headers: {
+                                            'Content-Type': 'multipart/form-data;',
+                                        },
+                                    }
+                                ).then((res) => res.json()).then((response) => {
+                                    setFileURL(response.result);
+
+                                    fetch(`https://interclip.app/includes/api?url=${response.result}`)
+                                        .then((rs) => {
+                                            if (rs.ok) {
+                                                return rs.json();
                                             } else {
-                                                Alert.alert("Error!", `Got the erorr ${rs.status}.`);
+                                                if (rs.status === 429) {
+                                                    Alert.alert("Slow down!", "We are getting too many requests from you.");
+                                                } else {
+                                                    Alert.alert("Error!", `Got the erorr ${rs.status}.`);
+                                                }
                                             }
-                                        }
-                                    })
-                                    .then((objson) => setData(objson))
-                                    .finally(() => setLoading(false));
-                            });
+                                        })
+                                        .then((objson) => setData(objson))
+                                        .finally(() => setLoading(false));
+                                });
 
-                        })();
-                    }} />
+                            })();
+                        }} />
                 }
                 <Text
                     style={{
