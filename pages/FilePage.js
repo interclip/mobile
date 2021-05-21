@@ -13,7 +13,7 @@ import * as DocumentPicker from 'expo-document-picker';
 
 // Local functions, components and variables 
 
-import { colors } from '../lib/Pages';
+import { colors, styles } from '../lib/Pages';
 import LogoImage from "../components/LogoImage";
 
 import fetch from 'node-fetch';
@@ -24,7 +24,7 @@ export function FilePage() {
     const colorScheme = useColorScheme();
 
     const [fileURL, setFileURL] = useState("https://files.interclip.app/643e027852.pdf");
-    const [data, setData] = useState({result: "codea"}); // Dynamically loaded data from the Interclip REST API
+    const [data, setData] = useState({ result: "codea" }); // Dynamically loaded data from the Interclip REST API
 
     return (
         <View
@@ -88,37 +88,32 @@ export function FilePage() {
                 <Text
                     style={{
                         fontSize: 20,
-                        marginLeft: "auto",
-                        marginRight: "auto",
+                        ...styles.fileItem
                     }}
                 >
                     Uploaded file to
                 </Text>
                 <Text
-                style={{
-                    fontSize: 25,
-                    marginLeft: "auto",
-                    marginRight: "auto",
-                    textAlign: "center"
-                }}
+                    style={{
+                        fontSize: 25,
+                        ...styles.fileItem
+                    }}
                 >
                     {fileURL}
                 </Text>
                 <Text
-                style={{
-                    fontSize: 20,
-                    marginLeft: "auto",
-                    marginRight: "auto",
-                }}
+                    style={{
+                        fontSize: 20,
+                        ...styles.fileItem
+                    }}
                 >
                     with code
                 </Text>
                 <Text
-                style={{
-                    fontSize: 45,
-                    marginLeft: "auto",
-                    marginRight: "auto",
-                }}
+                    style={{
+                        fontSize: 45,
+                        ...styles.fileItem
+                    }}
                 >
                     {data.result}
                 </Text>
