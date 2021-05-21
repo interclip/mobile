@@ -11,6 +11,7 @@ import {
 
 import Clipboard from 'expo-clipboard';
 
+import * as Linking from 'expo-linking';
 import * as DocumentPicker from 'expo-document-picker';
 
 // Local functions, components and variables 
@@ -105,6 +106,7 @@ export function FilePage() {
                             color: colorScheme === 'dark' ? 'white' : 'black',
                             ...styles.fileItem
                         }}
+                        onPress={() => Linking.openURL(fileURL)}
                         onLongPress={() => {
                             /* Handle functionality, when user presses for a longer period of time */
                             try {
