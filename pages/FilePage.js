@@ -66,11 +66,13 @@ export function FilePage() {
                             const blob = await (await fetch(pickerResult.uri)).blob(); 
 
                             const data = new FormData();
+
+                            const extension = uri.split(".")[uri.split(".").length - 1];
                             const uri = pickerResult.uri;
 
                             console.log(blob.type);
                             data.append('uploaded_file', {
-                                uri: pickerResult.uri, type: blob.type, name: `image.${uri.split(".")[uri.split(".").length - 1]}`
+                                uri: pickerResult.uri, type: blob.type, name: `image.${extension}`
                             });
 
                             fetch(
