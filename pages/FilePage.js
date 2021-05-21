@@ -14,7 +14,6 @@ import * as DocumentPicker from 'expo-document-picker';
 // Local functions, components and variables 
 
 import { colors, styles } from '../lib/Pages';
-import LogoImage from "../components/LogoImage";
 
 import fetch from 'node-fetch';
 
@@ -29,18 +28,17 @@ export function FilePage() {
     return (
         <View
             style={{
-                padding: 25,
                 flex: 1,
+                alignItems: 'center',
+                justifyContent: 'center',
+                marginTop: -100,
                 backgroundColor:
                     colorScheme === 'dark' ? colors.darkContent : colors.lightContent,
             }}
         >
-            <LogoImage />
-            <Text
+            <View
                 style={{
-                    color: colorScheme === 'dark' ? 'white' : 'black',
-                    fontSize: 20,
-                    textAlign: 'center'
+
                 }}
             >
                 <Button
@@ -84,48 +82,53 @@ export function FilePage() {
                             });
                         })();
                     }} />
-            </Text>
-            <View
-                style={{
-                    marginTop: 45,
-                }}
-            >
                 <Text
                     style={{
+                        color: colorScheme === 'dark' ? 'white' : 'black',
                         fontSize: 20,
-                        color: colorScheme === 'dark' ? 'white' : 'black',
-                        ...styles.fileItem
+                        textAlign: 'center'
                     }}
                 >
-                    Uploaded file to
+
                 </Text>
-                <Text
-                    style={{
-                        fontSize: 25,
-                        color: colorScheme === 'dark' ? 'white' : 'black',
-                        ...styles.fileItem
-                    }}
-                >
-                    {fileURL}
-                </Text>
-                <Text
-                    style={{
-                        fontSize: 20,
-                        color: colorScheme === 'dark' ? 'white' : 'black',
-                        ...styles.fileItem
-                    }}
-                >
-                    with code
-                </Text>
-                <Text
-                    style={{
-                        fontSize: 45,
-                        color: colorScheme === 'dark' ? 'white' : 'black',
-                        ...styles.fileItem
-                    }}
-                >
-                    {data.result}
-                </Text>
+                <View>
+                    <Text
+                        style={{
+                            fontSize: 20,
+                            color: colorScheme === 'dark' ? 'white' : 'black',
+                            ...styles.fileItem
+                        }}
+                    >
+                        Uploaded file to
+                    </Text>
+                    <Text
+                        style={{
+                            fontSize: 25,
+                            color: colorScheme === 'dark' ? 'white' : 'black',
+                            ...styles.fileItem
+                        }}
+                    >
+                        {fileURL}
+                    </Text>
+                    <Text
+                        style={{
+                            fontSize: 20,
+                            color: colorScheme === 'dark' ? 'white' : 'black',
+                            ...styles.fileItem
+                        }}
+                    >
+                        with code
+                    </Text>
+                    <Text
+                        style={{
+                            fontSize: 45,
+                            color: colorScheme === 'dark' ? 'white' : 'black',
+                            ...styles.fileItem
+                        }}
+                    >
+                        {data.result}
+                    </Text>
+                </View>
             </View>
         </View>
     );
