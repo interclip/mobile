@@ -47,7 +47,6 @@ export function FilePage() {
                     onPress={() => {
                         (async () => {
                             const res = await DocumentPicker.getDocumentAsync();
-                            console.log(res);
                             const data = new FormData();
                             data.append('uploaded_file', res);
 
