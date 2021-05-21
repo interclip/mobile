@@ -60,7 +60,6 @@ export function FilePage() {
                                     },
                                 }
                             ).then((res) => res.json()).then(response => {
-                                console.log(response);
                                 setFileURL(response.result);
 
                                 fetch(`https://interclip.app/includes/api?url=${response.result}`)
