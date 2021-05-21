@@ -19,7 +19,7 @@ import { OfflinePage } from "./pages/OfflinePage";
 
 // Constants
 
-import { colors } from '../lib/Pages';
+import { colors } from './lib/Vars';
 
 // App component
 
