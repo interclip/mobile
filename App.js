@@ -16,6 +16,7 @@ import { HomeScreen } from "./pages/HomeScreen";
 import { SettingsPage } from "./pages/SettingsPage";
 import { AboutPage } from "./pages/AboutPage";
 import { OfflinePage } from "./pages/OfflinePage";
+import { FilePage } from "./pages/FilePage";
 
 // Constants
 
@@ -60,6 +61,11 @@ export default function App() {
           name="About"
           component={AboutPage}
           options={{ title: "About" }}
+        />
+        <Stack.Screen
+          name="File"
+          component={FilePage}
+          options={{ title: "File" }}
         />
         <Stack.Screen
           name="Offline"

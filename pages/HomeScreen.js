@@ -144,6 +144,7 @@ export function HomeScreen({ navigation }) {
                 <MenuItem navigation={navigation} colorScheme={colorScheme} setPopoverOpened={setPopoverOpened} destination={"Settings"} iconName={"settings"} iconFamily={"feather"} title={"Settings"} />
               )}
               <MenuItem navigation={navigation} colorScheme={colorScheme} setPopoverOpened={setPopoverOpened} destination={"About"} iconName={"info"} iconFamily={"feather"} title={"About"} />
+              <MenuItem navigation={navigation} colorScheme={colorScheme} setPopoverOpened={setPopoverOpened} destination={"File"} iconName={"upload"} iconFamily={"feather"} title={"File"} />
             </View>
           }
         </TouchableOpacity>
