@@ -23,8 +23,8 @@ import fetch from 'node-fetch';
 export function FilePage() {
     const colorScheme = useColorScheme();
 
-    const [fileURL, setFileURL] = useState("https://files.interclip.app/643e027852.pdf");
-    const [data, setData] = useState({ result: "codea" }); // Dynamically loaded data from the Interclip REST API
+    const [fileURL, setFileURL] = useState("");
+    const [data, setData] = useState({ result: "" }); // Dynamically loaded data from the Interclip REST API
 
     return (
         <View
@@ -43,42 +43,47 @@ export function FilePage() {
                     textAlign: 'center'
                 }}
             >
-                <Button title="Choose a file" onPress={() => {
-                    (async () => {
-                        const res = await DocumentPicker.getDocumentAsync();
-                        console.log(res);
-                        const data = new FormData();
-                        data.append('uploaded_file', res);
+                <Button
+                    title="Choose a file"
+                    style={{
+                        textAlign: 'center'
+                    }}
+                    onPress={() => {
+                        (async () => {
+                            const res = await DocumentPicker.getDocumentAsync();
+                            console.log(res);
+                            const data = new FormData();
+                            data.append('uploaded_file', res);
 
-                        fetch(
-                            'https://interclip.app/upload/?api', //upload/?api
-                            {
-                                method: 'post',
-                                body: data,
-                                headers: {
-                                    'Content-Type': 'multipart/form-data;',
-                                },
-                            }
-                        ).then((res) => res.json()).then(response => {
-                            console.log(response);
-                            setFileURL(response.result);
+                            fetch(
+                                'https://interclip.app/upload/?api', //upload/?api
+                                {
+                                    method: 'post',
+                                    body: data,
+                                    headers: {
+                                        'Content-Type': 'multipart/form-data;',
+                                    },
+                                }
+                            ).then((res) => res.json()).then(response => {
+                                console.log(response);
+                                setFileURL(response.result);
 
-                            fetch(`https://interclip.app/includes/api?url=${response.result}`)
-                                .then((rs) => {
-                                    if (rs.ok) {
-                                        return rs.json();
-                                    } else {
-                                        if (rs.status === 429) {
-                                            Alert.alert("Slow down!", "We are getting too many requests from you.");
+                                fetch(`https://interclip.app/includes/api?url=${response.result}`)
+                                    .then((rs) => {
+                                        if (rs.ok) {
+                                            return rs.json();
                                         } else {
-                                            Alert.alert("Error!", `Got the erorr ${rs.status}.`);
+                                            if (rs.status === 429) {
+                                                Alert.alert("Slow down!", "We are getting too many requests from you.");
+                                            } else {
+                                                Alert.alert("Error!", `Got the erorr ${rs.status}.`);
+                                            }
                                         }
-                                    }
-                                })
-                                .then((objson) => setData(objson))
-                        });
-                    })();
-                }} />
+                                    })
+                                    .then((objson) => setData(objson))
+                            });
+                        })();
+                    }} />
             </Text>
             <View
                 style={{
@@ -88,6 +93,7 @@ export function FilePage() {
                 <Text
                     style={{
                         fontSize: 20,
+                        color: colorScheme === 'dark' ? 'white' : 'black',
                         ...styles.fileItem
                     }}
                 >
@@ -96,6 +102,7 @@ export function FilePage() {
                 <Text
                     style={{
                         fontSize: 25,
+                        color: colorScheme === 'dark' ? 'white' : 'black',
                         ...styles.fileItem
                     }}
                 >
@@ -104,6 +111,7 @@ export function FilePage() {
                 <Text
                     style={{
                         fontSize: 20,
+                        color: colorScheme === 'dark' ? 'white' : 'black',
                         ...styles.fileItem
                     }}
                 >
@@ -112,6 +120,7 @@ export function FilePage() {
                 <Text
                     style={{
                         fontSize: 45,
+                        color: colorScheme === 'dark' ? 'white' : 'black',
                         ...styles.fileItem
                     }}
                 >
