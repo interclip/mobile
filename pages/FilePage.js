@@ -9,6 +9,8 @@ import {
     Alert
 } from 'react-native';
 
+import Clipboard from 'expo-clipboard';
+
 import * as DocumentPicker from 'expo-document-picker';
 
 // Local functions, components and variables 
@@ -103,6 +105,15 @@ export function FilePage() {
                             color: colorScheme === 'dark' ? 'white' : 'black',
                             ...styles.fileItem
                         }}
+                        onLongPress={() => {
+                            /* Handle functionality, when user presses for a longer period of time */
+                            try {
+                              Clipboard.setString(fileURL);
+                              Alert.alert("Success", "Copied to Clipboard!");
+                            } catch (e) {
+                              Alert.alert("Error", "Couldn't copy to clipboard!");
+                            }
+                        }}
                     >
                         {fileURL}
                     </Text>
@@ -120,6 +131,15 @@ export function FilePage() {
                             fontSize: 45,
                             color: colorScheme === 'dark' ? 'white' : 'black',
                             ...styles.fileItem
+                        }}
+                        onLongPress={() => {
+                            /* Handle functionality, when user presses for a longer period of time */
+                            try {
+                              Clipboard.setString(data.result);
+                              Alert.alert("Success", "Copied to Clipboard!");
+                            } catch (e) {
+                              Alert.alert("Error", "Couldn't copy to clipboard!");
+                            }
                         }}
                     >
                         {data.result}
