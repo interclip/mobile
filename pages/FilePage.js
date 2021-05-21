@@ -6,7 +6,8 @@ import {
     useColorScheme,
     View,
     Button,
-    Alert
+    Alert,
+    ActivityIndicator
 } from 'react-native';
 
 import Clipboard from 'expo-clipboard';
@@ -29,6 +30,7 @@ export function FilePage() {
 
     const [fileURL, setFileURL] = useState("");
     const [data, setData] = useState({ result: "" }); // Dynamically loaded data from the Interclip REST API
+    const [loading, setLoading] = useState(false);
 
     return (
         <View
@@ -41,9 +43,22 @@ export function FilePage() {
                     colorScheme === 'dark' ? colors.darkContent : colors.lightContent,
             }}
         >
-            <View
-
-            >
+            <View>
+                {loading ?
+                <View>
+                    <ActivityIndicator />
+                    <Text
+                        style={{
+                            color: colorScheme === 'dark' ? 'white' : 'black',
+                            fontSize: 20,
+                            marginTop: 20,
+                            textAlign: 'center'
+                        }}
+                    >
+                        Uploading...
+                    </Text>
+                </View>
+                :
                 <Button
                     title="Choose a file"
                     style={{
@@ -63,8 +78,10 @@ export function FilePage() {
                                 return;
                             }
 
-                            const extension = uri.split(".")[uri.split(".").length - 1];
+                            setLoading(true);
+
                             const uri = pickerResult.uri;
+                            const extension = uri.split(".")[uri.split(".").length - 1];
 
                             const blob = await (await fetch(uri)).blob(); 
 
@@ -99,10 +116,12 @@ export function FilePage() {
                                         }
                                     })
                                     .then((objson) => setData(objson))
+                                    .finally(() => setLoading(false))
                             });
 
                         })();
                     }} />
+                }
                 <Text
                     style={{
                         color: colorScheme === 'dark' ? 'white' : 'black',
