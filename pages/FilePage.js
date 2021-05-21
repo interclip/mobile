@@ -82,7 +82,7 @@ export function FilePage() {
             </Text>
             <View
                 style={{
-                    marginTop: 25,
+                    marginTop: 45,
                 }}
             >
                 <Text
@@ -99,6 +99,7 @@ export function FilePage() {
                     fontSize: 25,
                     marginLeft: "auto",
                     marginRight: "auto",
+                    textAlign: "center"
                 }}
                 >
                     {fileURL}
