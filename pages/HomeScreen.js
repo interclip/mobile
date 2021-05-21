@@ -61,7 +61,7 @@ export function HomeScreen({ navigation }) {
 
   useEffect(() => {
 
-    NetInfo.addEventListener(state => {
+    NetInfo.addEventListener((state) => {
       if (!state.isConnected) {
         navigation.navigate("Offline");
       }
