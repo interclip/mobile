@@ -35,6 +35,7 @@ import NetInfo from "@react-native-community/netinfo";
 import { useFocusEffect } from "@react-navigation/native";
 
 import MenuItem from '../components/MenuItem';
+import { color } from "react-native-elements/dist/helpers";
 
 // Root component
 
@@ -209,7 +210,7 @@ export function HomeScreen({ navigation }) {
                 color: checkError(data.status)
                   ? colors.light
                   : colorScheme === "dark"
-                    ? "white"
+                    ? colors.light
                     : colors.text,
                 backgroundColor:
                   checkError(data.status) & !validationMsg(text)
