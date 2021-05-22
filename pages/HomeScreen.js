@@ -77,7 +77,7 @@ export function HomeScreen({ navigation }) {
             if (response.status === 429) {
               Alert.alert("Slow down!", "We are getting too many requests from you.");
             } else {
-              Alert.alert("Error!", `Got the erorr ${response.status}.`);
+              Alert.alert("Error!", `Got the error ${response.status}.`);
             }
           }
         })
@@ -132,7 +132,7 @@ export function HomeScreen({ navigation }) {
             <View
               activeOpacity={0.5}
               style={{
-                position: "absolute",
+                //position: "absolute",
                 right: "0%",
                 marginTop: "70%",
                 elevation: 3

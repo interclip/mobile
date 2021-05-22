@@ -67,7 +67,7 @@ export function SendScreen() {
           if (response.status === 429) {
             Alert.alert("Slow down!", "We are getting too many requests from you.");
           } else {
-            Alert.alert("Error!", `Got the erorr ${response.status}.`);
+            Alert.alert("Error!", `Got the error ${response.status}.`);
           }
         }
       })
