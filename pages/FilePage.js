@@ -7,14 +7,15 @@ import {
     View,
     Button,
     Alert,
-    ActivityIndicator
+    ActivityIndicator,
+    ActionSheetIOS,
 } from 'react-native';
 
 import Clipboard from 'expo-clipboard';
 
 import * as Linking from 'expo-linking';
 
-//import * as DocumentPicker from 'expo-document-picker';
+import * as DocumentPicker from 'expo-document-picker';
 import * as ImagePicker from 'expo-image-picker';
 
 // Local functions, components and variables 
@@ -32,21 +33,47 @@ export function FilePage() {
     const [data, setData] = useState({ result: "" }); // Dynamically loaded data from the Interclip REST API
     const [loading, setLoading] = useState(false);
 
+    const chooseAction = () => {
+        ActionSheetIOS.showActionSheetWithOptions(
+            {
+                options: ['Cancel', 'Photo Library', 'Documents'],
+                cancelButtonIndex: 0,
+            },
+            buttonIndex => {
+                switch (buttonIndex) {
+                    case 1:
+                        upload();
+                        break;
+                    case 2:
+                        upload("document");
+                        break;
+                }
+            }
+        );
+    };
 
-    const upload = async () => {
-        const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
+    const upload = async (action = 'media') => {
+        let file;
+        if (action === "media") {
+            const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
 
-        if (permissionResult.granted === false) {
-            Alert.alert('Permission to access camera roll is required!');
-            return;
-        }
+            if (permissionResult.granted === false) {
+                Alert.alert('Permission to access camera roll is required!');
+                return;
+            }
 
-        const pickerResult = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes: ImagePicker.MediaTypeOptions.All
-        });
+            const pickerResult = await ImagePicker.launchImageLibraryAsync({
+                mediaTypes: ImagePicker.MediaTypeOptions.All
+            });
 
-        if (pickerResult.cancelled === true) {
-            return;
+            if (pickerResult.cancelled === true) {
+                return;
+            }
+
+            file = pickerResult;
+        } else if (action === "document") {
+            const res = await DocumentPicker.getDocumentAsync();
+            file = res;
         }
 
         // Set defaults for subsequent uploads
@@ -55,13 +82,17 @@ export function FilePage() {
         setFileURL("");
         setData({ result: "" });
 
-        const uri = pickerResult.uri;
+        const uri = file.uri;
         const extension = uri.split(".")[uri.split(".").length - 1];
 
         const fileSizeLimitInMegabytes = 100;
         const fileSizeLimitInBytes = fileSizeLimitInMegabytes * 1048576;
 
-        const blob = await (await fetch(uri)).blob();
+        let blob = file;
+
+        if (action === "media") {
+            blob = await (await fetch(uri)).blob();
+        }
 
         if (blob.size > fileSizeLimitInBytes) {
             Alert.alert(`File size limit exceeded, your file has ${formatBytes(blob.size)}, but the limit is ${fileSizeLimitInMegabytes}`);
@@ -71,7 +102,7 @@ export function FilePage() {
             const data = new FormData();
 
             data.append('uploaded_file', {
-                uri: pickerResult.uri, type: blob.type, name: `media.${extension}`
+                uri, type: blob.type, name: `media.${extension}`
             });
 
             fetch(
@@ -142,7 +173,7 @@ export function FilePage() {
                         style={{
                             textAlign: 'center'
                         }}
-                        onPress={() => upload()}
+                        onPress={() => chooseAction()}
                     />
                 }
                 <Text
