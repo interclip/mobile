@@ -132,7 +132,7 @@ export function HomeScreen({ navigation }) {
             <View
               activeOpacity={0.5}
               style={{
-                //position: "absolute",
+                position: "absolute",
                 right: "0%",
                 marginTop: "70%",
                 elevation: 3
