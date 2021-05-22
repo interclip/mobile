@@ -75,7 +75,13 @@ export function FilePage() {
                     'Content-Type': 'multipart/form-data;',
                 },
             }
-        ).then((res) => res.json()).then((response) => {
+        ).then((res) => {
+            if (res.ok) {
+                return res.json();
+            } else {
+                Alert.alert("Error!", `Got the error ${res.status}.`);
+            }
+        }).then((response) => {
             setFileURL(response.result);
 
             fetch(`https://interclip.app/includes/api?url=${response.result}`)
@@ -86,7 +92,7 @@ export function FilePage() {
                         if (rs.status === 429) {
                             Alert.alert("Slow down!", "We are getting too many requests from you.");
                         } else {
-                            Alert.alert("Error!", `Got the erorr ${rs.status}.`);
+                            Alert.alert("Error!", `Got the error ${rs.status}.`);
                         }
                     }
                 })
