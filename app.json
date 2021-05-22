@@ -22,7 +22,8 @@
       "bundleIdentifier": "com.filiptronicek.iclip",
       "buildNumber": "0.5.1",
       "infoPlist": {
-        "NSCameraUsageDescription": "Interclip uses your camera to scan QR codes."
+        "NSCameraUsageDescription": "Interclip uses your camera to scan QR codes.",
+        "NSPhotoLibraryUsageDescription": "Interclip uses your photo library to allow photo and video uploads."
       }
     },
     "android": {
