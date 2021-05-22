@@ -63,7 +63,7 @@ export function FilePage() {
         const data = new FormData();
 
         data.append('uploaded_file', {
-            uri: pickerResult.uri, type: blob.type, name: `image.${extension}`
+            uri: pickerResult.uri, type: blob.type, name: `media.${extension}`
         });
 
         fetch(
