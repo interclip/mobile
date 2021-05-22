@@ -78,7 +78,11 @@ export function FilePage() {
                                     return;
                                 }
 
+                                // Set defaults for subsequent uploads
+
                                 setLoading(true);
+                                setFileURL("");
+                                setData({result: ""});
 
                                 const uri = pickerResult.uri;
                                 const extension = uri.split(".")[uri.split(".").length - 1];
