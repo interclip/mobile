@@ -19,7 +19,7 @@ import * as ImagePicker from 'expo-image-picker';
 
 // Local functions, components and variables 
 
-import { colors, styles } from '../lib/Pages';
+import { colors, styles, formatBytes } from '../lib/Pages';
 
 import fetch from 'node-fetch';
 
@@ -44,7 +44,7 @@ export function FilePage() {
         const pickerResult = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.All
         });
-        
+
         if (pickerResult.cancelled === true) {
             return;
         }
@@ -58,48 +58,56 @@ export function FilePage() {
         const uri = pickerResult.uri;
         const extension = uri.split(".")[uri.split(".").length - 1];
 
+        const fileSizeLimitInMegabytes = 100;
+        const fileSizeLimitInBytes = fileSizeLimitInMegabytes * 1048576;
+
         const blob = await (await fetch(uri)).blob();
 
-        const data = new FormData();
+        if (blob.size > fileSizeLimitInBytes) {
+            Alert.alert(`File size limit exceeded, your file has ${formatBytes(blob.size)}, but the limit is ${fileSizeLimitInMegabytes}`);
+            setLoading(false);
+        } else {
 
-        data.append('uploaded_file', {
-            uri: pickerResult.uri, type: blob.type, name: `media.${extension}`
-        });
+            const data = new FormData();
 
-        fetch(
-            'https://interclip.app/upload/?api',
-            {
-                method: 'post',
-                body: data,
-                headers: {
-                    'Content-Type': 'multipart/form-data;',
-                },
-            }
-        ).then((res) => {
-            if (res.ok) {
-                return res.json();
-            } else {
-                Alert.alert("Error!", `Got the error ${res.status}.`);
-            }
-        }).then((response) => {
-            setFileURL(response.result);
+            data.append('uploaded_file', {
+                uri: pickerResult.uri, type: blob.type, name: `media.${extension}`
+            });
 
-            fetch(`https://interclip.app/includes/api?url=${response.result}`)
-                .then((rs) => {
-                    if (rs.ok) {
-                        return rs.json();
-                    } else {
-                        if (rs.status === 429) {
-                            Alert.alert("Slow down!", "We are getting too many requests from you.");
+            fetch(
+                'https://interclip.app/upload/?api',
+                {
+                    method: 'post',
+                    body: data,
+                    headers: {
+                        'Content-Type': 'multipart/form-data;',
+                    },
+                }
+            ).then((res) => {
+                if (res.ok) {
+                    return res.json();
+                } else {
+                    Alert.alert("Error!", `Got the error ${res.status}.`);
+                }
+            }).then((response) => {
+                setFileURL(response.result);
+
+                fetch(`https://interclip.app/includes/api?url=${response.result}`)
+                    .then((rs) => {
+                        if (rs.ok) {
+                            return rs.json();
                         } else {
-                            Alert.alert("Error!", `Got the error ${rs.status}.`);
+                            if (rs.status === 429) {
+                                Alert.alert("Slow down!", "We are getting too many requests from you.");
+                            } else {
+                                Alert.alert("Error!", `Got the error ${rs.status}.`);
+                            }
                         }
-                    }
-                })
-                .then((objson) => setData(objson))
-                .finally(() => setLoading(false));
-        });
-
+                    })
+                    .then((objson) => setData(objson))
+                    .finally(() => setLoading(false));
+            });
+        }
     };
 
     return (
@@ -134,7 +142,7 @@ export function FilePage() {
                         style={{
                             textAlign: 'center'
                         }}
-                        onPress={() => upload()} 
+                        onPress={() => upload()}
                     />
                 }
                 <Text
