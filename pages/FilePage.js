@@ -41,7 +41,10 @@ export function FilePage() {
             return;
         }
 
-        const pickerResult = await ImagePicker.launchImageLibraryAsync();
+        const pickerResult = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.All
+        });
+        
         if (pickerResult.cancelled === true) {
             return;
         }
