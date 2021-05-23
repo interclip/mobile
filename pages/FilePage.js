@@ -8,8 +8,10 @@ import {
     Button,
     Alert,
     ActivityIndicator,
-    ActionSheetIOS,
+    Platform,
 } from 'react-native';
+
+import ActionSheet from 'rn-actionsheet-module';
 
 import Clipboard from 'expo-clipboard';
 
@@ -34,19 +36,36 @@ export function FilePage() {
     const [loading, setLoading] = useState(false);
 
     const chooseAction = () => {
-        ActionSheetIOS.showActionSheetWithOptions(
+
+        ActionSheet(
             {
-                options: ['Cancel', 'Photo Library', 'Documents'],
-                cancelButtonIndex: 0,
-            },
-            buttonIndex => {
-                switch (buttonIndex) {
-                    case 1:
-                        upload();
+                title: "Select the source of your file",
+                optionsIOS: ["Cancel", "From Gallery", "From Documents"],
+                optionsAndroid: ["From Gallery", "From Documents"],
+                destructiveButtonIndex: null, // undefined // 1, 2, etc.,
+                cancelButtonIndex: 0, // 
+                onCancelAndroidIndex: 3 // android doesn't need any cancel option but back button or outside click will return onCancelAndroidIndex
+            }, (index) => {
+                let action;
+                switch (index) {
+                    case Platform.OS === "ios" ? 1 : 0:
+                        action = 'media';
                         break;
-                    case 2:
-                        upload("document");
+                    case Platform.OS === "ios" ? 2 : 1:
+                        action = 'document';
                         break;
+
+                    case Platform.OS === "ios" ? 0 : 3:
+                        action = null;
+                        break;
+
+                    default:
+                        alert("Default");
+                        break;
+                }
+
+                if (action !== null) {
+                    upload(action);
                 }
             }
         );
@@ -67,77 +86,83 @@ export function FilePage() {
             });
 
             if (pickerResult.cancelled === true) {
-                return;
+                file = null;
             }
 
             file = pickerResult;
         } else if (action === "document") {
             const res = await DocumentPicker.getDocumentAsync();
-            file = res;
+            if (res.type !== "cancel") {
+                file = res;
+            } else {
+                file = null;
+            }
         }
 
-        // Set defaults for subsequent uploads
+        if (file !== null) {
+            // Set defaults for subsequent uploads
 
-        setLoading(true);
-        setFileURL("");
-        setData({ result: "" });
+            setLoading(true);
+            setFileURL("");
+            setData({ result: "" });
 
-        const uri = file.uri;
-        const extension = uri.split(".")[uri.split(".").length - 1];
+            const uri = file.uri;
+            const extension = uri.split(".")[uri.split(".").length - 1];
 
-        const fileSizeLimitInMegabytes = 100;
-        const fileSizeLimitInBytes = fileSizeLimitInMegabytes * 1048576;
+            const fileSizeLimitInMegabytes = 100;
+            const fileSizeLimitInBytes = fileSizeLimitInMegabytes * 1048576;
 
-        let blob = file;
+            let blob = file;
 
-        if (action === "media") {
-            blob = await (await fetch(uri)).blob();
-        }
+            if (action === "media") {
+                blob = await (await fetch(uri)).blob();
+            }
 
-        if (blob.size > fileSizeLimitInBytes) {
-            Alert.alert(`File size limit exceeded, your file has ${formatBytes(blob.size)}, but the limit is ${fileSizeLimitInMegabytes}`);
-            setLoading(false);
-        } else {
+            if (blob.size > fileSizeLimitInBytes) {
+                Alert.alert(`File size limit exceeded, your file has ${formatBytes(blob.size)}, but the limit is ${fileSizeLimitInMegabytes}`);
+                setLoading(false);
+            } else {
 
-            const data = new FormData();
+                const data = new FormData();
 
-            data.append('uploaded_file', {
-                uri, type: blob.type, name: `media.${extension}`
-            });
+                data.append('uploaded_file', {
+                    uri, type: blob.type, name: `media.${extension}`
+                });
 
-            fetch(
-                'https://interclip.app/upload/?api',
-                {
-                    method: 'post',
-                    body: data,
-                    headers: {
-                        'Content-Type': 'multipart/form-data;',
-                    },
-                }
-            ).then((res) => {
-                if (res.ok) {
-                    return res.json();
-                } else {
-                    Alert.alert("Error!", `Got the error ${res.status}.`);
-                }
-            }).then((response) => {
-                setFileURL(response.result);
+                fetch(
+                    'https://interclip.app/upload/?api',
+                    {
+                        method: 'post',
+                        body: data,
+                        headers: {
+                            'Content-Type': 'multipart/form-data;',
+                        },
+                    }
+                ).then((res) => {
+                    if (res.ok) {
+                        return res.json();
+                    } else {
+                        Alert.alert("Error!", `Got the error ${res.status}.`);
+                    }
+                }).then((response) => {
+                    setFileURL(response.result);
 
-                fetch(`https://interclip.app/includes/api?url=${response.result}`)
-                    .then((rs) => {
-                        if (rs.ok) {
-                            return rs.json();
-                        } else {
-                            if (rs.status === 429) {
-                                Alert.alert("Slow down!", "We are getting too many requests from you.");
+                    fetch(`https://interclip.app/includes/api?url=${response.result}`)
+                        .then((rs) => {
+                            if (rs.ok) {
+                                return rs.json();
                             } else {
-                                Alert.alert("Error!", `Got the error ${rs.status}.`);
+                                if (rs.status === 429) {
+                                    Alert.alert("Slow down!", "We are getting too many requests from you.");
+                                } else {
+                                    Alert.alert("Error!", `Got the error ${rs.status}.`);
+                                }
                             }
-                        }
-                    })
-                    .then((objson) => setData(objson))
-                    .finally(() => setLoading(false));
-            });
+                        })
+                        .then((objson) => setData(objson))
+                        .finally(() => setLoading(false));
+                });
+            }
         }
     };
 

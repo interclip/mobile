@@ -7934,6 +7934,11 @@ rimraf@~2.2.6:
   resolved "https://registry.yarnpkg.com/rimraf/-/rimraf-2.2.8.tgz#e439be2aaee327321952730f99a8929e4fc50582"
   integrity sha1-5Dm+Kq7jJzIZUnMPmaiSnk/FBYI=
 
+rn-actionsheet-module@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/rn-actionsheet-module/-/rn-actionsheet-module-1.0.3.tgz#803857999b7a74df76eebbb36910e890c9527071"
+  integrity sha512-wm+VqcGEfmf5XcnyH7g98jqaAqj0EyjqaN1hIfip2qO/yMkg+ZX2gfus2kLJrvXRfEk9Rax40TnkzOEt6My5tA==
+
 rsvp@^3.3.3:
   version "3.6.2"
   resolved "https://registry.yarnpkg.com/rsvp/-/rsvp-3.6.2.tgz#2e96491599a96cde1b515d5674a8f7a91452926a"
