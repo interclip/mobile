@@ -57,14 +57,14 @@ export function AboutPage() {
                 type="font-awesome" // The icon is loaded from the font awesome icon library
                 name="github" // Icon fa-github
                 color={colorScheme === "dark" ? "white" : "black"} // White color for contrast on the Header
-                size="50"
+                size={50}
             />
             <Icon
                 onPress={() => Linking.openURL("https://twitter.com/filiptronicek")}
                 type="font-awesome" // The icon is loaded from the font awesome icon library
                 name="twitter" // Icon fa-twitter
                 color={colorScheme === "dark" ? "white" : "black"} // White color for contrast on the Header
-                size="50"
+                size={50}
             />
         </View>
       <Text
