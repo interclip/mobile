@@ -16,18 +16,15 @@ import { colors } from '../lib/Pages';
 // Root component
 
 export function SettingsPage() {
-  const [isEnabled, setIsEnabled] = useState();
 
   const [data, setData] = useState(Settings.get('data'));
   const storeData = (data) => {
-    data.data = !data.data;
     Settings.set(data);
-    setData(Settings.get('data'));
   };
 
   const toggleSwitch = (e) => {
-    setIsEnabled(e);
-    storeData({ data: isEnabled });
+    setData(e);
+    storeData({ data: e });
   };
 
   const colorScheme = useColorScheme();
