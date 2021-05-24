@@ -25,8 +25,8 @@ export function SettingsPage() {
     setData(Settings.get('data'));
   };
 
-  const toggleSwitch = () => {
-    setIsEnabled((previousState) => !previousState);
+  const toggleSwitch = (e) => {
+    setIsEnabled(e);
     storeData({ data: isEnabled });
   };
 
