@@ -9,7 +9,6 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 
-import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Icon } from "react-native-elements";
 
 // Pages
@@ -31,10 +30,20 @@ const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
 function Settings() {
+  const colorScheme = useColorScheme();
+
   return (
     <Stack.Navigator
       screenOptions={({ route }) => {
-        return { headerShown: route.name !== "Settings" };
+        return { 
+          headerShown: route.name !== "Settings",
+          headerStyle: {
+            backgroundColor: colorScheme === "dark" ? colors.darkHeader : colors.light,
+          },
+          headerTitleStyle: {
+            color: colorScheme === "dark" ? "white" : "black",
+          },
+        };
       }}
     >
       <Stack.Screen
