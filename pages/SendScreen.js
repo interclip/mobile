@@ -7,7 +7,6 @@ import {
   Platform,
   Text,
   TouchableHighlight,
-  TouchableOpacity,
   useColorScheme,
   View,
   Keyboard,
