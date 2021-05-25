@@ -73,6 +73,23 @@ export function SettingsPage({ navigation }) {
       <Section header="MISCELLANEOUS" {...sectionProps}>
         <Cell
           cellStyle="Basic"
+          isDisabled={true}
+          accessory="DisclosureIndicator"
+          title="Privacy policy"
+          image={
+            <Icon
+              name="lock-closed-outline"
+              type="ionicon"
+              color={textColor}
+            />
+          }
+          onPress={() =>
+            navigation.navigate("SettingsPage", { screen: "About" })
+          }
+          {...cellProps}
+        />
+        <Cell
+          cellStyle="Basic"
           accessory="DisclosureIndicator"
           title="About"
           image={
