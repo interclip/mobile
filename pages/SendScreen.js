@@ -59,22 +59,24 @@ export function SendScreen() {
 
   useEffect(() => {
     setText(text.replace(" ", "").toLowerCase());
-    fetch(`https://interclip.app/includes/api?url=${text}`)
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          if (response.status === 429) {
-            Alert.alert("Slow down!", "We are getting too many requests from you.");
+    if (text && isURL(text)) {
+      fetch(`https://interclip.app/includes/api?url=${text}`)
+        .then((response) => {
+          if (response.ok) {
+            return response.json();
           } else {
-            Alert.alert("Error!", `Got the error ${response.status}.`);
+            if (response.status === 429) {
+              Alert.alert("Slow down!", "We are getting too many requests from you.");
+            } else {
+              Alert.alert("Error!", `Got the error ${response.status}.`);
+            }
           }
-        }
-      })
-      .then((json) => setData(json))
-      .finally(() => setLoading(false));
+        })
+        .then((json) => setData(json))
+        .finally(() => setLoading(false));
 
-    setLoading(true);
+      setLoading(true);
+    }
   }, [text]);
   return (
     <View
