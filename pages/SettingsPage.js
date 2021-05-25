@@ -26,7 +26,7 @@ export function SettingsPage({ navigation }) {
     backgroundColor: colorScheme === "dark" ? "#373737" : "#FFF",
     titleTextColor: textColor,
     titleTextStyleDisabled: {
-      color: colorScheme === "dark" ? "#b5b5b5" : "",
+      color: colorScheme === "dark" ? "#b5b5b5" : "#808080",
     },
   };
 
