@@ -90,7 +90,6 @@ function MyTabs() {
         component={SettingsPage}
         options={{
           tabBarLabel: "Settings",
-          showLabel: false,
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="cog" color={color} size={size} />
           ),
@@ -103,7 +102,6 @@ function MyTabs() {
         component={AboutPage}
         options={{
           tabBarLabel: "About",
-          showLabel: false,
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons
               name="information"

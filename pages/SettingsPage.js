@@ -1,23 +1,18 @@
 // React, React Native imports
 
-import React, { useState } from 'react';
-import {
-  Settings,
-  Switch,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+import React, { useState } from "react";
+import { Settings, Switch, Text, useColorScheme, View } from "react-native";
+
+import { Cell, Section, TableView } from "react-native-tableview-simple";
+import { Icon } from "react-native-elements";
 
 // Local functions and variables
-
-import { colors } from '../lib/Pages';
+import { colors } from "../lib/Pages";
 
 // Root component
 
-export function SettingsPage() {
-
-  const [data, setData] = useState(Settings.get('data'));
+export function SettingsPage({ navigation }) {
+  const [data, setData] = useState(Settings.get("data"));
   const storeData = (data) => {
     Settings.set(data);
   };
@@ -32,28 +27,46 @@ export function SettingsPage() {
   return (
     <View
       style={{
-        padding: 25,
-        flex: 1,
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        backgroundColor:
-          colorScheme === 'dark' ? colors.darkContent : colors.lightContent,
+        marginTop: "20%",
+        padding: 20,
       }}
     >
       <Text
         style={{
-          color: colorScheme === 'dark' ? 'white' : 'black',
+          fontSize: 40,
         }}
       >
-        Open all QR Codes automatically
+        Settings
       </Text>
-      <Switch
-        ios_backgroundColor="#3e3e3e"
-        onValueChange={toggleSwitch}
-        value={data}
-      />
+      <Section header="GENERAL" roundedCorners={true}>
+        <Cell
+          cellStyle="Basic"
+          accessory="DisclosureIndicator"
+          title="QR Code scanning"
+          image={
+            <Icon name="qr-code-outline" type="ionicon" />
+          }
+        />
+        <Cell
+          cellStyle="Basic"
+          accessory="DisclosureIndicator"
+          title="Clipboard"
+          image={
+            <Icon name="clipboard-outline" type="ionicon" />
+          }
+        />
+      </Section>
+      <Section header="MISCELLANEOUS" roundedCorners={true}>
+        <Cell
+          cellStyle="Basic"
+          accessory="DisclosureIndicator"
+          title="About"
+          image={
+            <Icon name="information-circle-outline" type="ionicon" />
+          }
+          onPress={() => navigation.navigate("About")}
+        />
+      </Section>
     </View>
   );
 }
