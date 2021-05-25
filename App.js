@@ -34,6 +34,7 @@ function MyTabs() {
       showLabel={false}
       initialRouteName="Home"
       tabBarOptions={{
+        showLabel: false,
         activeTintColor: "#157EFB",
         inactiveTintColor: colorScheme === "dark" ? colors.light : colors.text,
         style: {
@@ -114,8 +115,6 @@ function MyTabs() {
 }
 
 export default function App() {
-  const colorScheme = useColorScheme();
-
   return (
     <NavigationContainer>
       <MyTabs />
