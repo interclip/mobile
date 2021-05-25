@@ -32,8 +32,16 @@ const Stack = createStackNavigator();
 
 function Settings() {
   return (
-    <Stack.Navigator>
-      <Stack.Screen name="Settings" component={SettingsPage} />
+    <Stack.Navigator
+      screenOptions={({ route }) => {
+        return { headerShown: route.name !== "Settings" };
+      }}
+    >
+      <Stack.Screen
+        headerShown={false}
+        name="Settings"
+        component={SettingsPage}
+      />
       <Stack.Screen name="QR" component={QRSettings} />
       <Stack.Screen name="About" component={AboutPage} />
     </Stack.Navigator>
