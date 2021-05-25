@@ -13,20 +13,21 @@ import { colors } from "../lib/Pages";
 
 export function SettingsPage({ navigation }) {
   const colorScheme = useColorScheme();
-  const textColor = colorScheme === "dark" ? colors.lightContent : colors.darkContent;
+  const textColor =
+    colorScheme === "dark" ? colors.lightContent : colors.darkContent;
 
   const sectionProps = {
     headerTextColor: colorScheme === "dark" ? colors.light : "#6d6d72",
     hideSurroundingSeparators: true,
-    roundedCorners: true
+    roundedCorners: true,
   };
 
   const cellProps = {
     backgroundColor: colorScheme === "dark" ? "#373737" : "#FFF",
     titleTextColor: textColor,
     titleTextStyleDisabled: {
-      color: colorScheme === "dark" ? "#b5b5b5" : ""
-    }
+      color: colorScheme === "dark" ? "#b5b5b5" : "",
+    },
   };
 
   return (
@@ -35,7 +36,8 @@ export function SettingsPage({ navigation }) {
         paddingTop: "20%",
         padding: 20,
         flex: 1,
-        backgroundColor: colorScheme === "dark" ? colors.darkContent : colors.lightContent,
+        backgroundColor:
+          colorScheme === "dark" ? colors.darkContent : colors.lightContent,
       }}
     >
       <Text
@@ -54,7 +56,7 @@ export function SettingsPage({ navigation }) {
           image={
             <Icon name="qr-code-outline" type="ionicon" color={textColor} />
           }
-          onPress={() => navigation.navigate("SettingsPage", {screen: "QR"})}
+          onPress={() => navigation.navigate("SettingsPage", { screen: "QR" })}
           {...cellProps}
         />
         <Cell
@@ -74,9 +76,15 @@ export function SettingsPage({ navigation }) {
           accessory="DisclosureIndicator"
           title="About"
           image={
-            <Icon name="information-circle-outline" type="ionicon" color={textColor} />
+            <Icon
+              name="information-circle-outline"
+              type="ionicon"
+              color={textColor}
+            />
           }
-          onPress={() => navigation.navigate("SettingsPage", {screen: "About"})}
+          onPress={() =>
+            navigation.navigate("SettingsPage", { screen: "About" })
+          }
           {...cellProps}
         />
       </Section>
@@ -85,7 +93,7 @@ export function SettingsPage({ navigation }) {
 }
 
 export function QRSettings() {
-  const [data, setData] = useState(Settings.get('data'));
+  const [data, setData] = useState(Settings.get("data"));
   const storeData = (data) => {
     Settings.set(data);
   };
@@ -102,17 +110,17 @@ export function QRSettings() {
       style={{
         padding: 25,
         flex: 1,
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        alignItems: 'center',
-        justifyContent: 'space-between',
+        flexDirection: "row",
+        flexWrap: "wrap",
+        alignItems: "center",
+        justifyContent: "space-between",
         backgroundColor:
-          colorScheme === 'dark' ? colors.darkContent : colors.lightContent,
+          colorScheme === "dark" ? colors.darkContent : colors.lightContent,
       }}
     >
       <Text
         style={{
-          color: colorScheme === 'dark' ? 'white' : 'black',
+          color: colorScheme === "dark" ? "white" : "black",
         }}
       >
         Open all QR Codes automatically
