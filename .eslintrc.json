@@ -24,6 +24,7 @@
     "rules": {
         "linebreak-style": "off",
         "no-console": "off",
-        "react/prop-types": ["error", { "ignore": ["navigation"] }]
+        "react/prop-types": ["error", { "ignore": ["navigation"] }],
+        "react/display-name": "off"
     }
 }
