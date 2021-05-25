@@ -20,12 +20,6 @@ import { AboutPage } from "./pages/AboutPage";
 import { OfflinePage } from "./pages/OfflinePage";
 import { FilePage } from "./pages/FilePage";
 
-import {
-  SFSymbol,
-  SFSymbolWeight,
-  SFSymbolScale,
-} from "react-native-sfsymbols";
-
 // Constants
 
 import { colors } from "./lib/Vars";
@@ -34,11 +28,18 @@ import { colors } from "./lib/Vars";
 const Tab = createBottomTabNavigator();
 
 function MyTabs() {
+  const colorScheme = useColorScheme();
   return (
     <Tab.Navigator
-      initialRouteName="Feed"
+      showLabel={false}
+      initialRouteName="Home"
       tabBarOptions={{
         activeTintColor: "#157EFB",
+        inactiveTintColor: colorScheme === "dark" ? colors.light : colors.text,
+        style: {
+          backgroundColor: colorScheme === "dark" ? colors.headerBg : colors.lightContent,
+          color: colorScheme === "dark" ? colors.light : colors.text
+        },
       }}
     >
       <Tab.Screen
@@ -86,6 +87,7 @@ function MyTabs() {
         component={SettingsPage}
         options={{
           tabBarLabel: "Settings",
+          showLabel: false,
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="cog" color={color} size={size} />
           ),
@@ -96,6 +98,7 @@ function MyTabs() {
         component={AboutPage}
         options={{
           tabBarLabel: "About",
+          showLabel: false,
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons
               name="information"
@@ -105,6 +108,7 @@ function MyTabs() {
           ),
         }}
       />
+
     </Tab.Navigator>
   );
 }
