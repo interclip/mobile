@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { Settings, Switch, Text, useColorScheme, View } from "react-native";
 
-import { Cell, Section, TableView } from "react-native-tableview-simple";
+import { Cell, Section } from "react-native-tableview-simple";
 import { Icon } from "react-native-elements";
 
 // Local functions and variables
