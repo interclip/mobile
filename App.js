@@ -81,7 +81,7 @@ function MyTabs() {
         options={{
           tabBarLabel: "Scan",
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="qrcode" color={color} size={size} />
+            <Icon name="qr-code-outline" type="ionicon" color={color} size={size} />
           ),
         }}
       />
@@ -112,7 +112,7 @@ function MyTabs() {
           options={{
             tabBarLabel: "Settings",
             tabBarIcon: ({ color, size }) => (
-              <MaterialCommunityIcons name="cog" color={color} size={size} />
+              <Icon name="cog-outline" type="ionicon" color={color} size={size} />
             ),
           }}
         />
