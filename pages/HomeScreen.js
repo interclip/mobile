@@ -35,7 +35,6 @@ import NetInfo from "@react-native-community/netinfo";
 import { useFocusEffect } from "@react-navigation/native";
 
 import MenuItem from '../components/MenuItem';
-import { color } from "react-native-elements/dist/helpers";
 
 // Root component
 
@@ -104,12 +103,6 @@ export function HomeScreen({ navigation }) {
           marginBottom: Platform.OS === "ios" ? "20%" : "5%",
         }}
       >
-        <Icon
-          onPress={() => navigation.navigate("QR")}
-          type="font-awesome" // The icon is loaded from the font awesome icon library
-          name="qrcode" // Icon fa-qrcode
-          color={colorScheme === "dark" ? "white" : "black"} // White color for contrast on the Header
-        />
         <View>
           <Text
             style={{
@@ -120,35 +113,6 @@ export function HomeScreen({ navigation }) {
 
           </Text>
         </View>
-        <TouchableOpacity
-          activeOpacity={0.5}
-          onPress={() => { setPopoverOpened(!popoverOpened); }}
-        >
-          <Icon
-            name='menu'
-            type='feather'
-            color={colorScheme === "dark" ? "white" : "black"} // White color for contrast on the Header
-          />
-          {popoverOpened &&
-            <View
-              activeOpacity={0.5}
-              style={{
-                position: "absolute",
-                right: "0%",
-                marginTop: "70%",
-                elevation: 3
-              }}
-            >
-              <MenuItem navigation={navigation} colorScheme={colorScheme} setPopoverOpened={setPopoverOpened} destination={"Send"} iconName={"send"} iconFamily={"feather"} title={"Send"} />
-              <MenuItem navigation={navigation} colorScheme={colorScheme} setPopoverOpened={setPopoverOpened} destination={"File"} iconName={"upload"} iconFamily={"feather"} title={"File"} />
-              <MenuItem navigation={navigation} colorScheme={colorScheme} setPopoverOpened={setPopoverOpened} destination={"QR"} iconName={"qrcode"} iconFamily={"font-awesome"} title={"Scan"} />
-              {Platform.OS === "ios" && (
-                <MenuItem navigation={navigation} colorScheme={colorScheme} setPopoverOpened={setPopoverOpened} destination={"Settings"} iconName={"settings"} iconFamily={"feather"} title={"Settings"} />
-              )}
-              <MenuItem navigation={navigation} colorScheme={colorScheme} setPopoverOpened={setPopoverOpened} destination={"About"} iconName={"info"} iconFamily={"feather"} title={"About"} />
-            </View>
-          }
-        </TouchableOpacity>
       </Header>
       <View style={{ zIndex: -5, elevation: -5 }}>
         <LogoImage />
@@ -169,7 +133,6 @@ export function HomeScreen({ navigation }) {
           defaultValue={text}
           errorStyle={{ color: "red" }}
           autoCapitalize="none"
-          autoFocus={true}
           value={text.replace(" ", "").toLowerCase()}
           enablesReturnKeyAutomatically={true}
           onSubmitEditing={() => {

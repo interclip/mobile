@@ -1283,7 +1283,7 @@
   dependencies:
     cross-spawn "^6.0.5"
 
-"@expo/vector-icons@^12.0.4":
+"@expo/vector-icons@^12.0.4", "@expo/vector-icons@^12.0.5":
   version "12.0.5"
   resolved "https://registry.yarnpkg.com/@expo/vector-icons/-/vector-icons-12.0.5.tgz#bc508ad05fb7e9a3e008704977cfec6c18aa7728"
   integrity sha512-zWvHBmkpbi1KrPma6Y+r/bsGI6MjbM1MBSe6W9A4uYMLhNI5NR4JtTnqxhf7g1XdpaDtBdv5aOWKEx4d5rxnhg==
@@ -1816,6 +1816,14 @@
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/@react-native-community/netinfo/-/netinfo-6.0.0.tgz#2a4d7190b508dd0c2293656c9c1aa068f6f60a71"
   integrity sha512-Z9M8VGcF2IZVOo2x+oUStvpCW/8HjIRi4+iQCu5n+PhC7OqCQX58KYAzdBr///alIfRXiu6oMb+lK+rXQH1FvQ==
+
+"@react-navigation/bottom-tabs@^5.11.11":
+  version "5.11.11"
+  resolved "https://registry.yarnpkg.com/@react-navigation/bottom-tabs/-/bottom-tabs-5.11.11.tgz#ad4dfee4316522d8c05b5a8ad460f597bddb9e3c"
+  integrity sha512-hThj6Vfw+ITzAVj5TgLEoxkVEcBD+gYeieWOe6FryBRgokgKNCzFQzqArJ5UCmNMxklNH0rstJfcdyHflLuPtw==
+  dependencies:
+    color "^3.1.3"
+    react-native-iphone-x-helper "^1.3.0"
 
 "@react-navigation/core@^5.15.3":
   version "5.15.3"
@@ -7550,6 +7558,11 @@ react-native-screens@~3.2.0:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/react-native-screens/-/react-native-screens-3.2.0.tgz#e2c8a4879c72f49af5b49e8859c84978a95d112b"
   integrity sha512-pV4a32neQA69xhVsL9k1J/rM/SiP5zgGHjJsnNVEcuhBu+dlsutT2YFszQN4MgpP2dhHHu1O7DyRSHti+wh7Wg==
+
+react-native-sfsymbols@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/react-native-sfsymbols/-/react-native-sfsymbols-1.0.3.tgz#2db1093820185424fc72317e275b641cc8268de1"
+  integrity sha512-hsLSDP2hpYHDtW7VbSbXrSJHkp7NImbtQ3WX4aS+3IbnFUuELIHaNlS8Uv0Rj8hWAS3iuC/ckBoQA88JY2D52A==
 
 react-native-size-matters@^0.3.1:
   version "0.3.1"
