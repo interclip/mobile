@@ -20,11 +20,19 @@ export function SettingsPage({ navigation }) {
     roundedCorners: true
   };
 
+  const cellProps = {
+    backgroundColor: colorScheme === "dark" ? "#373737" : "#FFF",
+    titleTextColor: colorScheme === "dark" ? colors.light : colors.text
+  };
+
+  const textColor = colorScheme === "dark" ? colors.lightContent : colors.darkContent;
+
   return (
     <View
       style={{
-        marginTop: "20%",
+        paddingTop: "20%",
         padding: 20,
+        flex: 1,
         backgroundColor: colorScheme === "dark" ? colors.darkContent : colors.lightContent,
       }}
     >
@@ -42,9 +50,10 @@ export function SettingsPage({ navigation }) {
           accessory="DisclosureIndicator"
           title="QR Code scanning"
           image={
-            <Icon name="qr-code-outline" type="ionicon" />
+            <Icon name="qr-code-outline" type="ionicon" color={textColor} />
           }
           onPress={() => navigation.navigate("SettingsPage", {screen: "QR"})}
+          {...cellProps}
         />
         <Cell
           isDisabled={true}
@@ -52,8 +61,9 @@ export function SettingsPage({ navigation }) {
           accessory="DisclosureIndicator"
           title="Clipboard"
           image={
-            <Icon name="clipboard-outline" type="ionicon" />
+            <Icon name="clipboard-outline" type="ionicon" color={textColor} />
           }
+          {...cellProps}
         />
       </Section>
       <Section header="MISCELLANEOUS" {...sectionProps}>
@@ -62,9 +72,10 @@ export function SettingsPage({ navigation }) {
           accessory="DisclosureIndicator"
           title="About"
           image={
-            <Icon name="information-circle-outline" type="ionicon" />
+            <Icon name="information-circle-outline" type="ionicon" color={textColor} />
           }
           onPress={() => navigation.navigate("SettingsPage", {screen: "About"})}
+          {...cellProps}
         />
       </Section>
     </View>
