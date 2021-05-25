@@ -78,7 +78,7 @@ export function SettingsPage({ navigation }) {
           title="Privacy policy"
           image={
             <Icon
-              name="lock-closed-outline"
+              name="hand-left-outline"
               type="ionicon"
               color={textColor}
             />
