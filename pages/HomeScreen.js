@@ -5,7 +5,6 @@ import {
   Linking,
   Platform,
   Text,
-  TouchableOpacity,
   useColorScheme,
   View,
   Alert
@@ -15,7 +14,7 @@ import {
 
 import { StatusBar } from "expo-status-bar";
 import Clipboard from 'expo-clipboard';
-import { Header, Icon, Input } from "react-native-elements";
+import { Header, Input } from "react-native-elements";
 
 // Functional packages
 
@@ -34,8 +33,6 @@ import LogoImage from "../components/LogoImage";
 import NetInfo from "@react-native-community/netinfo";
 import { useFocusEffect } from "@react-navigation/native";
 
-import MenuItem from '../components/MenuItem';
-
 // Root component
 
 export function HomeScreen({ navigation }) {
@@ -45,8 +42,6 @@ export function HomeScreen({ navigation }) {
   // After the request completes
   const [data, setData] = useState(""); // Dynamically loaded data from the Interclip REST API
   const [text, setText] = useState(""); // The code entered in the <Input>
-
-  const [popoverOpened, setPopoverOpened] = useState(false);
 
   const colorScheme = useColorScheme();
 
