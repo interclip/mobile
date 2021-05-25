@@ -7,6 +7,7 @@ import { useColorScheme, Platform } from "react-native";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createStackNavigator } from "@react-navigation/stack";
 
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Icon } from "react-native-elements";
@@ -16,9 +17,10 @@ import { Icon } from "react-native-elements";
 import { SendScreen } from "./pages/SendScreen";
 import { QRScreen } from "./pages/QRScreen";
 import { HomeScreen } from "./pages/HomeScreen";
-import { SettingsPage } from "./pages/SettingsPage";
+import { SettingsPage, QRSettings } from "./pages/SettingsPage";
 import { AboutPage } from "./pages/AboutPage";
 import { FilePage } from "./pages/FilePage";
+import { OfflinePage } from "./pages/OfflinePage";
 
 // Constants
 
@@ -26,6 +28,17 @@ import { colors } from "./lib/Vars";
 
 // App component
 const Tab = createBottomTabNavigator();
+const Stack = createStackNavigator();
+
+function Settings() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Settings" component={SettingsPage} />
+      <Stack.Screen name="QR" component={QRSettings} />
+      <Stack.Screen name="About" component={AboutPage} />
+    </Stack.Navigator>
+  );
+}
 
 function MyTabs() {
   const colorScheme = useColorScheme();
@@ -84,33 +97,18 @@ function MyTabs() {
           ),
         }}
       />
-      {Platform.OS === "ios" && 
+      {Platform.OS === "ios" && (
         <Tab.Screen
-        name="Settings"
-        component={SettingsPage}
-        options={{
-          tabBarLabel: "Settings",
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="cog" color={color} size={size} />
-          ),
-        }}
-      />
-      }
-
-      <Tab.Screen
-        name="About"
-        component={AboutPage}
-        options={{
-          tabBarLabel: "About",
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons
-              name="information"
-              color={color}
-              size={size}
-            />
-          ),
-        }}
-      />
+          name="SettingsPage"
+          component={Settings}
+          options={{
+            tabBarLabel: "Settings",
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons name="cog" color={color} size={size} />
+            ),
+          }}
+        />
+      )}
     </Tab.Navigator>
   );
 }

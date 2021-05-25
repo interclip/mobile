@@ -12,16 +12,6 @@ import { colors } from "../lib/Pages";
 // Root component
 
 export function SettingsPage({ navigation }) {
-  const [data, setData] = useState(Settings.get("data"));
-  const storeData = (data) => {
-    Settings.set(data);
-  };
-
-  const toggleSwitch = (e) => {
-    setData(e);
-    storeData({ data: e });
-  };
-
   const colorScheme = useColorScheme();
 
   const sectionProps = {
@@ -54,8 +44,10 @@ export function SettingsPage({ navigation }) {
           image={
             <Icon name="qr-code-outline" type="ionicon" />
           }
+          onPress={() => navigation.navigate("SettingsPage", {screen: "QR"})}
         />
         <Cell
+          isDisabled={true}
           cellStyle="Basic"
           accessory="DisclosureIndicator"
           title="Clipboard"
@@ -72,9 +64,51 @@ export function SettingsPage({ navigation }) {
           image={
             <Icon name="information-circle-outline" type="ionicon" />
           }
-          onPress={() => navigation.navigate("About")}
+          onPress={() => navigation.navigate("SettingsPage", {screen: "About"})}
         />
       </Section>
+    </View>
+  );
+}
+
+export function QRSettings() {
+  const [data, setData] = useState(Settings.get('data'));
+  const storeData = (data) => {
+    Settings.set(data);
+  };
+
+  const toggleSwitch = (e) => {
+    setData(e);
+    storeData({ data: e });
+  };
+
+  const colorScheme = useColorScheme();
+
+  return (
+    <View
+      style={{
+        padding: 25,
+        flex: 1,
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        backgroundColor:
+          colorScheme === 'dark' ? colors.darkContent : colors.lightContent,
+      }}
+    >
+      <Text
+        style={{
+          color: colorScheme === 'dark' ? 'white' : 'black',
+        }}
+      >
+        Open all QR Codes automatically
+      </Text>
+      <Switch
+        ios_backgroundColor="#3e3e3e"
+        onValueChange={toggleSwitch}
+        value={data}
+      />
     </View>
   );
 }
