@@ -13,6 +13,7 @@ import { colors } from "../lib/Pages";
 
 export function SettingsPage({ navigation }) {
   const colorScheme = useColorScheme();
+  const textColor = colorScheme === "dark" ? colors.lightContent : colors.darkContent;
 
   const sectionProps = {
     headerTextColor: colorScheme === "dark" ? colors.light : "#6d6d72",
@@ -22,10 +23,11 @@ export function SettingsPage({ navigation }) {
 
   const cellProps = {
     backgroundColor: colorScheme === "dark" ? "#373737" : "#FFF",
-    titleTextColor: colorScheme === "dark" ? colors.light : colors.text
+    titleTextColor: textColor,
+    titleTextStyleDisabled: {
+      color: colorScheme === "dark" ? "#b5b5b5" : ""
+    }
   };
-
-  const textColor = colorScheme === "dark" ? colors.lightContent : colors.darkContent;
 
   return (
     <View
