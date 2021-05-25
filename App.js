@@ -1,7 +1,7 @@
 // 1st party libraries and dependencies: react, react native and Expo stuff
 
 import React from "react";
-import { useColorScheme } from "react-native";
+import { useColorScheme, Platform } from "react-native";
 
 // 3rd party libraries
 
@@ -84,7 +84,8 @@ function MyTabs() {
           ),
         }}
       />
-      <Tab.Screen
+      {Platform.OS === "ios" && 
+        <Tab.Screen
         name="Settings"
         component={SettingsPage}
         options={{
@@ -95,6 +96,8 @@ function MyTabs() {
           ),
         }}
       />
+      }
+
       <Tab.Screen
         name="About"
         component={AboutPage}
