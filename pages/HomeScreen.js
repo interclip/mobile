@@ -10,7 +10,6 @@ import {
   Alert,
   Keyboard,
   TouchableWithoutFeedback,
-  KeyboardAvoidingView,
 } from "react-native";
 
 // Components, Expo and RN libraries

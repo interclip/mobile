@@ -7,6 +7,7 @@ import { useColorScheme } from "react-native";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Icon } from "react-native-elements";
 
@@ -17,7 +18,6 @@ import { QRScreen } from "./pages/QRScreen";
 import { HomeScreen } from "./pages/HomeScreen";
 import { SettingsPage } from "./pages/SettingsPage";
 import { AboutPage } from "./pages/AboutPage";
-import { OfflinePage } from "./pages/OfflinePage";
 import { FilePage } from "./pages/FilePage";
 
 // Constants
@@ -38,8 +38,9 @@ function MyTabs() {
         activeTintColor: "#157EFB",
         inactiveTintColor: colorScheme === "dark" ? colors.light : colors.text,
         style: {
-          backgroundColor: colorScheme === "dark" ? colors.headerBg : colors.lightContent,
-          color: colorScheme === "dark" ? colors.light : colors.text
+          backgroundColor:
+            colorScheme === "dark" ? colors.headerBg : colors.lightContent,
+          color: colorScheme === "dark" ? colors.light : colors.text,
         },
       }}
     >
@@ -109,7 +110,6 @@ function MyTabs() {
           ),
         }}
       />
-
     </Tab.Navigator>
   );
 }
