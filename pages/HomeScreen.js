@@ -89,27 +89,7 @@ export function HomeScreen({ navigation }) {
         backgroundColor: colorScheme === "dark" ? colors.darkContent : colors.lightContent,
       }}
     >
-      <Header
-        containerStyle={{
-          backgroundColor:
-            colorScheme === "dark" ? colors.darkHeader : colors.lightHeader,
-          color: colorScheme === "dark" ? "white" : "black",
-          justifyContent: "space-around",
-          marginBottom: Platform.OS === "ios" ? "20%" : "5%",
-        }}
-      >
-        <View>
-          <Text
-            style={{
-              fontSize: 30,
-              color: colorScheme === "dark" ? "white" : "black",
-            }}
-          >
-
-          </Text>
-        </View>
-      </Header>
-      <View style={{ zIndex: -5, elevation: -5 }}>
+      <View style={{ zIndex: -5, elevation: -5, marginTop: "30%", }}>
         <LogoImage />
         <Input
           keyboardType={
