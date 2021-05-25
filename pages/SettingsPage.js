@@ -24,21 +24,29 @@ export function SettingsPage({ navigation }) {
 
   const colorScheme = useColorScheme();
 
+  const sectionProps = {
+    headerTextColor: colorScheme === "dark" ? colors.light : "#6d6d72",
+    hideSurroundingSeparators: true,
+    roundedCorners: true
+  };
+
   return (
     <View
       style={{
         marginTop: "20%",
         padding: 20,
+        backgroundColor: colorScheme === "dark" ? colors.darkContent : colors.lightContent,
       }}
     >
       <Text
         style={{
           fontSize: 40,
+          color: colorScheme === "dark" ? colors.light : colors.text,
         }}
       >
         Settings
       </Text>
-      <Section header="GENERAL" roundedCorners={true}>
+      <Section header="GENERAL" {...sectionProps}>
         <Cell
           cellStyle="Basic"
           accessory="DisclosureIndicator"
@@ -56,7 +64,7 @@ export function SettingsPage({ navigation }) {
           }
         />
       </Section>
-      <Section header="MISCELLANEOUS" roundedCorners={true}>
+      <Section header="MISCELLANEOUS" {...sectionProps}>
         <Cell
           cellStyle="Basic"
           accessory="DisclosureIndicator"
