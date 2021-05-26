@@ -42,8 +42,8 @@ export function FilePage() {
         optionsIOS: ["Cancel", "From Gallery", "From Documents"],
         optionsAndroid: ["From Gallery", "From Documents"],
         destructiveButtonIndex: null, // undefined // 1, 2, etc.,
-        cancelButtonIndex: 0, //
-        onCancelAndroidIndex: 3, // android doesn't need any cancel option but back button or outside click will return onCancelAndroidIndex
+        cancelButtonIndex: 0,
+        onCancelAndroidIndex: 3, // Android doesn't need any cancel option but back button or outside click will return onCancelAndroidIndex
       },
       (index) => {
         let action;
