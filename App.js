@@ -29,6 +29,29 @@ import { colors } from "./lib/Vars";
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
+function HomePages() {
+  const colorScheme = useColorScheme();
+
+  return (
+    <Stack.Navigator
+      screenOptions={({ route }) => {
+        return { 
+          headerShown: route.name !== "Receive a clip",
+          headerStyle: {
+            backgroundColor: colorScheme === "dark" ? colors.darkHeader : colors.light,
+          },
+          headerTitleStyle: {
+            color: colorScheme === "dark" ? "white" : "black",
+          },
+        };
+      }}
+    >
+      <Stack.Screen name="Receive a clip" component={HomeScreen} />
+      <Stack.Screen name="Offline" component={OfflinePage} />
+    </Stack.Navigator>
+  );
+}
+
 function Settings() {
   const colorScheme = useColorScheme();
 
@@ -75,8 +98,8 @@ function MyTabs() {
       }}
     >
       <Tab.Screen
-        name="Home"
-        component={HomeScreen}
+        name="HomePages"
+        component={HomePages}
         options={{
           tabBarLabel: "Receive",
           tabBarIcon: ({ color, size }) => (
