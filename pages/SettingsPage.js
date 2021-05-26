@@ -45,6 +45,7 @@ export function SettingsPage({ navigation }) {
       <Text
         style={{
           fontSize: 40,
+          fontWeight: "600",
           color: colorScheme === "dark" ? colors.light : colors.text,
         }}
       >
