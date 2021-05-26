@@ -32,6 +32,7 @@ export function AboutPage() {
         flex: 1,
         backgroundColor:
           colorScheme === 'dark' ? colors.darkContent : colors.lightContent,
+        paddingTop: "10%"
       }}
     >
       <LogoImage />

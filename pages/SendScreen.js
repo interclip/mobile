@@ -7,10 +7,10 @@ import {
   Platform,
   Text,
   TouchableHighlight,
-  TouchableOpacity,
   useColorScheme,
   View,
   Keyboard,
+  TouchableWithoutFeedback,
 } from "react-native";
 
 // Components, Expo and RN libraries
@@ -18,13 +18,13 @@ import {
 import { StatusBar } from "expo-status-bar";
 import QRCode from "react-native-qrcode-svg";
 import { Icon, Input } from "react-native-elements";
-import Clipboard from 'expo-clipboard';
-import { activateKeepAwake, deactivateKeepAwake } from 'expo-keep-awake';
+import Clipboard from "expo-clipboard";
+import { activateKeepAwake, deactivateKeepAwake } from "expo-keep-awake";
 
 // Functional packages
 
-import fetch from 'node-fetch';
-import isURL from 'validator/lib/isURL';
+import fetch from "node-fetch";
+import isURL from "validator/lib/isURL";
 
 // Local functions, components and variables
 
@@ -34,7 +34,6 @@ import LogoImage from "../components/LogoImage";
 // Root component
 
 export function SendScreen() {
-
   // Variable set
   const [isLoading, setLoading] = useState(true); // Loading status => only show the responce of the API
 
@@ -66,7 +65,10 @@ export function SendScreen() {
             return response.json();
           } else {
             if (response.status === 429) {
-              Alert.alert("Slow down!", "We are getting too many requests from you.");
+              Alert.alert(
+                "Slow down!",
+                "We are getting too many requests from you."
+              );
             } else {
               Alert.alert("Error!", `Got the error ${response.status}.`);
             }
@@ -81,56 +83,56 @@ export function SendScreen() {
   return (
     <View
       style={{
-        backgroundColor: colorScheme === "dark" ? colors.darkContent : colors.lightContent,
+        backgroundColor:
+          colorScheme === "dark" ? colors.darkContent : colors.lightContent,
         color: colorScheme === "dark" ? "#ffffff" : "#000000",
         flex: 1,
       }}
     >
-      <View
-        style={{ marginBottom: Platform.OS === "ios" ? "20%" : "5%" }}
-      ></View>
-      <View>
-        <TouchableOpacity>
-          <LogoImage />
-        </TouchableOpacity>
-        <Input
-          keyboardType={Platform.OS === "android" ? "default" : "url"}
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View
           style={{
-            ...styles.container,
-            color: colorScheme === "dark" ? "white" : "black",
+            marginTop: "30%",
           }}
-          placeholder="Your URL here"
-          inputStyle={{ fontSize: 25 }}
-          autoCorrect={false}
-          autoCompleteType={"off"}
-          returnKeyType={Platform.OS === "android" ? "none" : "done"}
-          onChangeText={(text) => setText(text)}
-          defaultValue={text}
-          errorStyle={{ color: "red" }}
-          autoCapitalize="none"
-          autoFocus={true}
-          enablesReturnKeyAutomatically={true}
-          onSubmitEditing={() => {
-            Keyboard.dismiss;
-          }}
-        />
-        {urlValidation(text) && (
-          <View style={{ padding: 24 }}>
-            <Text
-              style={{
-                color: colorScheme === "dark" ? colors.light : colors.text,
-              }}
-            >
-              {urlValidation(text)}
-            </Text>
-          </View>
-        )}
-        <View style={{ padding: 24, flexDirection: "row" }}>
-          {isLoading ? (
-            <Text></Text>
-          ) : (
-            <Text
-              onLongPress={() => {
+        >
+          <LogoImage />
+          <Input
+            keyboardType={Platform.OS === "android" ? "default" : "url"}
+            style={{
+              ...styles.container,
+              color: colorScheme === "dark" ? "white" : "black",
+            }}
+            placeholder="Your URL here"
+            inputStyle={{ fontSize: 25 }}
+            autoCorrect={false}
+            autoCompleteType={"off"}
+            returnKeyType={Platform.OS === "android" ? "none" : "done"}
+            onChangeText={(text) => setText(text)}
+            defaultValue={text}
+            errorStyle={{ color: "red" }}
+            autoCapitalize="none"
+            enablesReturnKeyAutomatically={true}
+            onSubmitEditing={() => {
+              Keyboard.dismiss;
+            }}
+          />
+          {urlValidation(text) && (
+            <View style={{ padding: 24 }}>
+              <Text
+                style={{
+                  color: colorScheme === "dark" ? colors.light : colors.text,
+                }}
+              >
+                {urlValidation(text)}
+              </Text>
+            </View>
+          )}
+          <View style={{ padding: 24, flexDirection: "row" }}>
+            {isLoading ? (
+              <Text></Text>
+            ) : (
+              <Text
+                onLongPress={() => {
                   /* Handle functionality, when user presses for a longer period of time */
                   try {
                     Clipboard.setString(data.result);
@@ -138,71 +140,72 @@ export function SendScreen() {
                   } catch (e) {
                     Alert.alert("Error", "Couldn't copy to clipboard!");
                   }
-              }}
-              style={{
-                color: colorScheme === "dark" ? colors.light : colors.text,
-                backgroundColor:
-                  checkError(data.status) & !urlValidation(text)
-                    ? colors.errorColor
-                    : null,
-                fontSize: 40,
-                marginLeft: "20%",
-              }}
-            >
-              {!urlValidation(text) && data.result}
-            </Text>
-          )}
+                }}
+                style={{
+                  color: colorScheme === "dark" ? colors.light : colors.text,
+                  backgroundColor:
+                    checkError(data.status) & !urlValidation(text)
+                      ? colors.errorColor
+                      : null,
+                  fontSize: 40,
+                  marginLeft: "20%",
+                }}
+              >
+                {!urlValidation(text) && data.result}
+              </Text>
+            )}
 
-          <Modal
-            animationType="slide"
-            transparent={true}
-            visible={modalVisible}
-            onRequestClose={() => {
-              Alert.alert("Modal has been closed.");
-            }}
-          >
-            <View
-              style={{
-                ...styles.centeredView,
-                backgroundColor: colorScheme === "dark" ? "#444" : "#fff",
+            <Modal
+              animationType="slide"
+              transparent={true}
+              visible={modalVisible}
+              onRequestClose={() => {
+                Alert.alert("Modal has been closed.");
               }}
             >
-              <View>
-                <QRCode
-                  value={`https://interclip.app/${data.result}`}
-                  size={250}
-                  logo={require('../assets/icon.png')}
-                  logoSize={60}
-                  logoBackgroundColor="white"
-                />
-                <TouchableHighlight
-                  style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
-                  onPress={() => {
-                    deactivateKeepAwake();
-                    setModalVisible(!modalVisible);
-                  }}
-                >
-                  <Text style={styles.textStyle}>Hide QR Code</Text>
-                </TouchableHighlight>
+              <View
+                style={{
+                  ...styles.centeredView,
+                  backgroundColor: colorScheme === "dark" ? "#444" : "#fff",
+                }}
+              >
+                <View>
+                  <QRCode
+                    value={`https://interclip.app/${data.result}`}
+                    size={250}
+                    logo={require("../assets/icon.png")}
+                    logoSize={60}
+                    logoBackgroundColor="white"
+                  />
+                  <TouchableHighlight
+                    style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
+                    onPress={() => {
+                      deactivateKeepAwake();
+                      setModalVisible(!modalVisible);
+                    }}
+                  >
+                    <Text style={styles.textStyle}>Hide QR Code</Text>
+                  </TouchableHighlight>
+                </View>
               </View>
-            </View>
-          </Modal>
-          {isURL(text) && (
-            <Icon
-              type="font-awesome" // The icon is loaded from the font awesome icon library
-              name="qrcode" // Icon fa-qrcode
-              color={colorScheme === "dark" ? "white" : "black"} // White color for contrast on the Header
-              style={{ marginLeft: 15 }}
-              onPress={() => {
-                setModalVisible(true);
-                activateKeepAwake();
-              }}
-              size={50}
-            />
-          )}
+            </Modal>
+            {isURL(text) && (
+              <Icon
+                type="font-awesome" // The icon is loaded from the font awesome icon library
+                name="qrcode" // Icon fa-qrcode
+                color={colorScheme === "dark" ? "white" : "black"} // White color for contrast on the Header
+                style={{ marginLeft: 15 }}
+                onPress={() => {
+                  setModalVisible(true);
+                  activateKeepAwake();
+                }}
+                size={50}
+              />
+            )}
+          </View>
+          <StatusBar style="auto" />
         </View>
-        <StatusBar style="auto" />
-      </View>
+      </TouchableWithoutFeedback>
     </View>
   );
 }

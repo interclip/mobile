@@ -26,7 +26,7 @@ export function OfflinePage({ navigation }) {
   useEffect(() => {
     NetInfo.addEventListener((state) => {
       if (state.isConnected) {
-        navigation.navigate("Home");
+        navigation.navigate("HomePages", {screen: "Receive a clip"});
       }
     }); 
   });
@@ -60,7 +60,7 @@ export function OfflinePage({ navigation }) {
       >
         I can&#39;t help you with that, but you can try refreshing after you&#39;re connected.
       </Text>
-      <Button title="Refresh" onPress={() => navigation.navigate("Home")} />
+      <Button title="Refresh" onPress={() =>  navigation.navigate("HomePages", {screen: "Receive a clip"})} />
     </View>
   );
 }
