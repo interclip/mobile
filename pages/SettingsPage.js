@@ -6,6 +6,8 @@ import { Settings, Switch, Text, useColorScheme, View } from "react-native";
 import { Cell, Section } from "react-native-tableview-simple";
 import { Icon } from "react-native-elements";
 
+import * as WebBrowser from 'expo-web-browser';
+
 // Local functions and variables
 import { colors } from "../lib/Pages";
 
@@ -73,18 +75,19 @@ export function SettingsPage({ navigation }) {
       <Section header="MISCELLANEOUS" {...sectionProps}>
         <Cell
           cellStyle="Basic"
-          isDisabled={true}
-          accessory="DisclosureIndicator"
-          title="Privacy policy"
-          image={
+          cellAccessoryView={
             <Icon
-              name="hand-left-outline"
-              type="ionicon"
+              name="external-link"
+              type="feather"
               color={textColor}
             />
           }
+          title="Privacy policy"
+          image={
+            <Icon name="hand-left-outline" type="ionicon" color={textColor} />
+          }
           onPress={() =>
-            navigation.navigate("SettingsPage", { screen: "About" })
+            WebBrowser.openBrowserAsync("https://interclip.app/privacy")
           }
           {...cellProps}
         />
