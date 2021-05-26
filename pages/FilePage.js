@@ -35,42 +35,6 @@ export function FilePage() {
   const [data, setData] = useState({ result: "" }); // Dynamically loaded data from the Interclip REST API
   const [loading, setLoading] = useState(false);
 
-  const chooseAction = () => {
-    ActionSheet(
-      {
-        title: "Select the source of your file",
-        optionsIOS: ["Cancel", "From Gallery", "From Documents"],
-        optionsAndroid: ["From Gallery", "From Documents"],
-        destructiveButtonIndex: null, // undefined // 1, 2, etc.,
-        cancelButtonIndex: 0,
-        onCancelAndroidIndex: 3, // Android doesn't need any cancel option but back button or outside click will return onCancelAndroidIndex
-      },
-      (index) => {
-        let action;
-        switch (index) {
-          case Platform.OS === "ios" ? 1 : 0:
-            action = "media";
-            break;
-          case Platform.OS === "ios" ? 2 : 1:
-            action = "document";
-            break;
-
-          case Platform.OS === "ios" ? 0 : 3:
-            action = null;
-            break;
-
-          default:
-            alert("Default");
-            break;
-        }
-
-        if (action !== null) {
-          upload(action);
-        }
-      }
-    );
-  };
-
   const upload = async (action = "media") => {
     let file;
     if (action === "media") {
@@ -172,6 +136,42 @@ export function FilePage() {
           });
       }
     }
+  };
+
+  const chooseAction = () => {
+    ActionSheet(
+      {
+        title: "Select the source of your file",
+        optionsIOS: ["Cancel", "From Gallery", "From Documents"],
+        optionsAndroid: ["From Gallery", "From Documents"],
+        destructiveButtonIndex: null, // undefined // 1, 2, etc.,
+        cancelButtonIndex: 0,
+        onCancelAndroidIndex: 3, // Android doesn't need any cancel option but back button or outside click will return onCancelAndroidIndex
+      },
+      (index) => {
+        let action;
+        switch (index) {
+          case Platform.OS === "ios" ? 1 : 0:
+            action = "media";
+            break;
+          case Platform.OS === "ios" ? 2 : 1:
+            action = "document";
+            break;
+
+          case Platform.OS === "ios" ? 0 : 3:
+            action = null;
+            break;
+
+          default:
+            alert("Default");
+            break;
+        }
+
+        if (action !== null) {
+          upload(action);
+        }
+      }
+    );
   };
 
   return (
