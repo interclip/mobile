@@ -16,7 +16,7 @@ import { Icon } from "react-native-elements";
 import { SendScreen } from "./pages/SendScreen";
 import { QRScreen } from "./pages/QRScreen";
 import { HomeScreen } from "./pages/HomeScreen";
-import { SettingsPage, QRSettings } from "./pages/SettingsPage";
+import { SettingsPage, QRSettings, ClipboardSettings } from "./pages/SettingsPage";
 import { AboutPage } from "./pages/AboutPage";
 import { FilePage } from "./pages/FilePage";
 import { OfflinePage } from "./pages/OfflinePage";
@@ -75,6 +75,7 @@ function Settings() {
         component={SettingsPage}
       />
       <Stack.Screen name="QR" component={QRSettings} />
+      <Stack.Screen name="Clipboard" component={ClipboardSettings} />
       <Stack.Screen name="About" component={AboutPage} />
     </Stack.Navigator>
   );

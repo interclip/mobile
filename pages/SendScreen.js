@@ -11,6 +11,7 @@ import {
   View,
   Keyboard,
   TouchableWithoutFeedback,
+  Settings,
 } from "react-native";
 
 // Components, Expo and RN libraries
@@ -51,9 +52,11 @@ export function SendScreen() {
     }
   };
   useEffect(() => {
-    (async () => {
-      pasteFromClipboard();
-    })();
+    if (Settings.get("clipboard") === true) {
+      (async () => {
+        pasteFromClipboard();
+      })();
+    }
   }, []);
 
   useEffect(() => {

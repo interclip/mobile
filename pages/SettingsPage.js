@@ -63,7 +63,6 @@ export function SettingsPage({ navigation }) {
           {...cellProps}
         />
         <Cell
-          isDisabled={true}
           cellStyle="Basic"
           accessory="DisclosureIndicator"
           title="Clipboard"
@@ -71,6 +70,9 @@ export function SettingsPage({ navigation }) {
             <Icon name="clipboard-outline" type="ionicon" color={textColor} />
           }
           {...cellProps}
+          onPress={() =>
+            navigation.navigate("SettingsPage", { screen: "Clipboard" })
+          }
         />
       </Section>
       <Section header="MISCELLANEOUS" {...sectionProps}>
@@ -145,6 +147,48 @@ export function QRSettings() {
         }}
       >
         Open all QR Codes automatically
+      </Text>
+      <Switch
+        ios_backgroundColor="#3e3e3e"
+        onValueChange={toggleSwitch}
+        value={data}
+      />
+    </View>
+  );
+}
+
+export function ClipboardSettings() {
+  const [data, setData] = useState(Settings.get("clipboard") !== undefined ? Settings.get("clipboard") : true);
+  const storeData = (data) => {
+    Settings.set(data);
+  };
+
+  const toggleSwitch = (e) => {
+    setData(e);
+    storeData({ clipboard: e });
+  };
+
+  const colorScheme = useColorScheme();
+
+  return (
+    <View
+      style={{
+        padding: 25,
+        flex: 1,
+        flexDirection: "row",
+        flexWrap: "wrap",
+        alignItems: "center",
+        justifyContent: "space-between",
+        backgroundColor:
+          colorScheme === "dark" ? colors.darkContent : colors.lightContent,
+      }}
+    >
+      <Text
+        style={{
+          color: colorScheme === "dark" ? "white" : "black",
+        }}
+      >
+        Check your clipboard for URLs
       </Text>
       <Switch
         ios_backgroundColor="#3e3e3e"
