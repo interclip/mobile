@@ -149,7 +149,7 @@ export function QRScreen({ navigation }) {
         Center your QR code in the square below
       </Text>
       <BarCodeScanner
-        onBarCodeScanned={qrd ? console.log : handleBarCodeScanned}
+        onBarCodeScanned={qrd ? undefined : handleBarCodeScanned}
         barCodeTypes={[BarCodeScanner.Constants.BarCodeType.qr]}
         style={{
           width: width * 0.7,
