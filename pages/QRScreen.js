@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 import {
   Alert,
   Settings,
-  StyleSheet,
   Text,
   Dimensions,
   useColorScheme,
