@@ -53,8 +53,8 @@ export function QRScreen({ navigation }) {
         ? Linking.openURL(data).catch((e) => e)
         : Linking.openURL(`http://${data}`)
             .then(() => {
+              sleep(1000).then(setQrd(false));
               navigation.navigate("Home");
-              setQrd(false);
             })
             .catch((e) => {
               Alert.alert(
@@ -80,6 +80,9 @@ export function QRScreen({ navigation }) {
         [
           {
             text: "OK then",
+            onPress: () => {
+              sleep(1000).then(setQrd(false));
+            }
           },
         ]
       );
@@ -100,13 +103,11 @@ export function QRScreen({ navigation }) {
             text: "Sure",
             onPress: () => {
               Linking.openURL(data);
-              setQrd(false);
             },
           },
         ]
       );
     }
-    sleep(2000).then(setQrd(false));
   };
 
   const { width } = Dimensions.get("window");
@@ -132,7 +133,7 @@ export function QRScreen({ navigation }) {
           fontSize: 40,
           marginBottom: 20,
           color: colorScheme === "dark" ? colors.light : colors.text,
-          fontWeight: "600"
+          fontWeight: "600",
         }}
       >
         QR Code
@@ -148,7 +149,7 @@ export function QRScreen({ navigation }) {
         Center your QR code in the square below
       </Text>
       <BarCodeScanner
-        onBarCodeScanned={qrd ? undefined : handleBarCodeScanned}
+        onBarCodeScanned={qrd ? console.log : handleBarCodeScanned}
         barCodeTypes={[BarCodeScanner.Constants.BarCodeType.qr]}
         style={{
           width: width * 0.7,
