@@ -5,11 +5,13 @@ import {
   Text,
   useColorScheme,
   View,
-  Button,
   Alert,
   ActivityIndicator,
   Platform,
+  Dimensions,
 } from "react-native";
+
+import { Button, Icon } from 'react-native-elements';
 
 import ActionSheet from "rn-actionsheet-module";
 
@@ -174,6 +176,8 @@ export function FilePage() {
     );
   };
 
+  const { width } = Dimensions.get("window");
+
   return (
     <View
       style={{
@@ -203,9 +207,23 @@ export function FilePage() {
         ) : (
           <Button
             title="Choose a file"
-            style={{
+            buttonStyle={{
               textAlign: "center",
+              backgroundColor: "#367FFA",
+              paddingLeft: width * 0.15,
+              paddingRight: width * 0.15,
+              paddingTop: width * 0.05,
+              paddingBottom: width * 0.05,
+              borderRadius: 10,
             }}
+            titleStyle={{
+              fontWeight: "500", 
+            }}
+            icon={
+              <Icon name="images" type="ionicon" color="white" style={{
+                paddingRight: 15
+              }} />
+            }
             onPress={() => chooseAction()}
           />
         )}
