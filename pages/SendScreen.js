@@ -10,6 +10,7 @@ import {
   useColorScheme,
   View,
   Keyboard,
+  Dimensions,
   TouchableWithoutFeedback,
 } from "react-native";
 
@@ -17,7 +18,7 @@ import {
 
 import { StatusBar } from "expo-status-bar";
 import QRCode from "react-native-qrcode-svg";
-import { Icon, Input } from "react-native-elements";
+import { Icon, Input, Button } from "react-native-elements";
 import Clipboard from "expo-clipboard";
 import { activateKeepAwake, deactivateKeepAwake } from "expo-keep-awake";
 
@@ -43,6 +44,7 @@ export function SendScreen() {
   const [modalVisible, setModalVisible] = useState(false);
 
   const colorScheme = useColorScheme();
+  const { width } = Dimensions.get("window");
 
   const pasteFromClipboard = async () => {
     const pasteboard = await Clipboard.getStringAsync();
@@ -177,15 +179,37 @@ export function SendScreen() {
                     logoSize={60}
                     logoBackgroundColor="white"
                   />
-                  <TouchableHighlight
-                    style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
+                  <Button
+                    title="Hide QR Code"
+                    buttonStyle={{
+                      textAlign: "center",
+                      backgroundColor: colorScheme === "dark" ? "white" : "black",
+                      paddingLeft: width * 0.125,
+                      paddingRight: width * 0.125,
+                      paddingTop: width * 0.05,
+                      paddingBottom: width * 0.05,
+                      borderRadius: 10,
+                      marginTop: 50,
+                    }}
+                    titleStyle={{
+                      fontWeight: "500",
+                      color: colorScheme === "dark" ? "black" : "white"
+                    }}
+                    icon={
+                      <Icon
+                        name="close-circle-outline"
+                        type="ionicon"
+                        color={colorScheme === "dark" ? "black" : "white"}
+                        style={{
+                          paddingRight: 15,
+                        }}
+                      />
+                    }
                     onPress={() => {
                       deactivateKeepAwake();
                       setModalVisible(!modalVisible);
                     }}
-                  >
-                    <Text style={styles.textStyle}>Hide QR Code</Text>
-                  </TouchableHighlight>
+                  />
                 </View>
               </View>
             </Modal>
