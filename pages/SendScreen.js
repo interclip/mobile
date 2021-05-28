@@ -191,8 +191,8 @@ export function SendScreen() {
             </Modal>
             {isURL(text, { require_protocol: true }) && (
               <Icon
-                type="font-awesome" // The icon is loaded from the font awesome icon library
-                name="qrcode" // Icon fa-qrcode
+                type="ionicon" // The icon is loaded from the ionicons icon library
+                name="qr-code-outline"
                 color={colorScheme === "dark" ? "white" : "black"} // White color for contrast on the Header
                 style={{ marginLeft: 15 }}
                 onPress={() => {
