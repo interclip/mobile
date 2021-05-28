@@ -152,6 +152,9 @@ export function FilePage() {
                 }
               })
               .then((objson) => setData(objson))
+              .catch((err) => {
+                Alert.alert("Error", err);
+              })
               .finally(() => setLoading(false));
           });
       }
