@@ -182,7 +182,8 @@ export function SendScreen() {
                     title="Hide QR Code"
                     buttonStyle={{
                       textAlign: "center",
-                      backgroundColor: colorScheme === "dark" ? "white" : "black",
+                      backgroundColor:
+                        colorScheme === "dark" ? "white" : "black",
                       paddingLeft: width * 0.125,
                       paddingRight: width * 0.125,
                       paddingTop: width * 0.05,
@@ -192,7 +193,7 @@ export function SendScreen() {
                     }}
                     titleStyle={{
                       fontWeight: "500",
-                      color: colorScheme === "dark" ? "black" : "white"
+                      color: colorScheme === "dark" ? "black" : "white",
                     }}
                     icon={
                       <Icon
