@@ -143,6 +143,7 @@ export function QRScreen({ navigation }) {
           fontSize: 17,
           maxWidth: width * 0.7,
           marginBottom: 30,
+          textAlign: "center",
           color: colorScheme === "dark" ? colors.light : colors.text,
         }}
       >
