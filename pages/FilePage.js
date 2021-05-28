@@ -11,7 +11,7 @@ import {
   Dimensions,
 } from "react-native";
 
-import { Button, Icon } from 'react-native-elements';
+import { Button, Icon } from "react-native-elements";
 
 import ActionSheet from "rn-actionsheet-module";
 
@@ -54,15 +54,33 @@ export function FilePage() {
 
       if (pickerResult.cancelled === true) {
         file = null;
+      } else {
+        file = pickerResult;
       }
-
-      file = pickerResult;
     } else if (action === "document") {
       const res = await DocumentPicker.getDocumentAsync();
       if (res.type !== "cancel") {
         file = res;
       } else {
         file = null;
+      }
+    } else if (action === "camera") {
+      const permissionResult = await ImagePicker.getCameraPermissionsAsync();
+
+      if (permissionResult.granted === false) {
+        Alert.alert("Permission to access the camera is required!");
+        return;
+      }
+
+      const pickerResult = await ImagePicker.launchCameraAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.All,
+        quality: 1,
+      });
+
+      if (pickerResult.cancelled === true) {
+        file = null;
+      } else {
+        file = pickerResult;
       }
     }
 
@@ -144,8 +162,8 @@ export function FilePage() {
     ActionSheet(
       {
         title: "Select the source of your file",
-        optionsIOS: ["Cancel", "From Gallery", "From Documents"],
-        optionsAndroid: ["From Gallery", "From Documents"],
+        optionsIOS: ["Cancel", "From Gallery", "From Documents", "From Camera"],
+        optionsAndroid: ["From Gallery", "From Documents", "From Camera"],
         destructiveButtonIndex: null, // undefined // 1, 2, etc.,
         cancelButtonIndex: 0,
         onCancelAndroidIndex: 3, // Android doesn't need any cancel option but back button or outside click will return onCancelAndroidIndex
@@ -158,6 +176,10 @@ export function FilePage() {
             break;
           case Platform.OS === "ios" ? 2 : 1:
             action = "document";
+            break;
+
+          case Platform.OS === "ios" ? 3 : 2:
+            action = "camera";
             break;
 
           case Platform.OS === "ios" ? 0 : 3:
@@ -217,12 +239,17 @@ export function FilePage() {
               borderRadius: 10,
             }}
             titleStyle={{
-              fontWeight: "500", 
+              fontWeight: "500",
             }}
             icon={
-              <Icon name="images" type="ionicon" color="white" style={{
-                paddingRight: 15
-              }} />
+              <Icon
+                name="images"
+                type="ionicon"
+                color="white"
+                style={{
+                  paddingRight: 15,
+                }}
+              />
             }
             onPress={() => chooseAction()}
           />
