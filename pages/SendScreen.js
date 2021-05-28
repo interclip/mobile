@@ -6,7 +6,6 @@ import {
   Modal,
   Platform,
   Text,
-  TouchableHighlight,
   useColorScheme,
   View,
   Keyboard,
