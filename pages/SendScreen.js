@@ -58,7 +58,7 @@ export function SendScreen() {
 
   useEffect(() => {
     setText(text.replace(" ", "").toLowerCase());
-    if (text && isURL(text)) {
+    if (text && isURL(text, { require_protocol: true })) {
       fetch(`https://interclip.app/includes/api?url=${text}`)
         .then((response) => {
           if (response.ok) {
@@ -189,7 +189,7 @@ export function SendScreen() {
                 </View>
               </View>
             </Modal>
-            {isURL(text) && (
+            {isURL(text, { require_protocol: true }) && (
               <Icon
                 type="font-awesome" // The icon is loaded from the font awesome icon library
                 name="qrcode" // Icon fa-qrcode
