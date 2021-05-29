@@ -82,7 +82,7 @@ export function QRScreen({ navigation }) {
             text: "OK then",
             onPress: () => {
               sleep(1000).then(setQrd(false));
-            }
+            },
           },
         ]
       );
