@@ -9,6 +9,7 @@ import {
   useColorScheme,
   Vibration,
   View,
+  TouchableWithoutFeedback,
 } from "react-native";
 
 // Components, Expo and RN libraries
@@ -27,6 +28,10 @@ import { sleep, styles, colors } from "../lib/Pages";
 export function QRScreen({ navigation }) {
   const [hasPermission, setHasPermission] = useState(null);
   const [qrd, setQrd] = useState(false);
+  const [cameraRotation, setCameraRotation] = useState(
+    BarCodeScanner.Constants.Type.back
+  );
+  const [lastClick, setLastClick] = useState(null);
 
   useEffect(() => {
     (async () => {
@@ -149,16 +154,34 @@ export function QRScreen({ navigation }) {
       >
         Center your QR code in the square below
       </Text>
-      <BarCodeScanner
-        onBarCodeScanned={qrd ? undefined : handleBarCodeScanned}
-        barCodeTypes={[BarCodeScanner.Constants.BarCodeType.qr]}
-        style={{
-          width: width * 0.7,
-          height: width * 0.7,
-          marginLeft: "auto",
-          marginRight: "auto",
+      <TouchableWithoutFeedback
+        onPress={() => {
+          if (lastClick) {
+            const newRotation =
+              cameraRotation === BarCodeScanner.Constants.Type.back
+                ? BarCodeScanner.Constants.Type.front
+                : BarCodeScanner.Constants.Type.back;
+            setCameraRotation(newRotation);
+          } else {
+            setLastClick(true);
+            setTimeout(() => {
+              setLastClick(null);
+            }, 500);
+          }
         }}
-      />
+      >
+        <BarCodeScanner
+          onBarCodeScanned={qrd ? undefined : handleBarCodeScanned}
+          barCodeTypes={[BarCodeScanner.Constants.BarCodeType.qr]}
+          type={cameraRotation}
+          style={{
+            width: width * 0.7,
+            height: width * 0.7,
+            marginLeft: "auto",
+            marginRight: "auto",
+          }}
+        />
+      </TouchableWithoutFeedback>
     </View>
   );
 }
