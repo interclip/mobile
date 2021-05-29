@@ -6,15 +6,16 @@ import { Settings, Switch, Text, useColorScheme, View } from "react-native";
 import { Cell, Section } from "react-native-tableview-simple";
 import { Icon } from "react-native-elements";
 
-import * as WebBrowser from 'expo-web-browser';
+import * as WebBrowser from "expo-web-browser";
 
 // Local functions and variables
-import { colors } from "../lib/Pages";
+import { colors, sectionProps, cellProps, textColor } from "../lib/Pages";
 
 // Root component
 
 export function SettingsPage({ navigation }) {
   const colorScheme = useColorScheme();
+
   const textColor =
     colorScheme === "dark" ? colors.lightContent : colors.darkContent;
 
@@ -77,11 +78,7 @@ export function SettingsPage({ navigation }) {
         <Cell
           cellStyle="Basic"
           cellAccessoryView={
-            <Icon
-              name="external-link"
-              type="feather"
-              color={textColor}
-            />
+            <Icon name="external-link" type="feather" color={textColor} />
           }
           title="Privacy policy"
           image={
@@ -125,16 +122,28 @@ export function QRSettings() {
   };
 
   const colorScheme = useColorScheme();
+  const textColor =
+    colorScheme === "dark" ? colors.lightContent : colors.darkContent;
+
+  const sectionProps = {
+    headerTextColor: colorScheme === "dark" ? colors.light : "#6d6d72",
+    hideSurroundingSeparators: true,
+    roundedCorners: true,
+  };
+
+  const cellProps = {
+    backgroundColor: colorScheme === "dark" ? "#373737" : "#FFF",
+    titleTextColor: textColor,
+    titleTextStyleDisabled: {
+      color: colorScheme === "dark" ? "#b5b5b5" : "#808080",
+    },
+  };
 
   return (
     <View
       style={{
         padding: 25,
         flex: 1,
-        flexDirection: "row",
-        flexWrap: "wrap",
-        alignItems: "center",
-        justifyContent: "space-between",
         backgroundColor:
           colorScheme === "dark" ? colors.darkContent : colors.lightContent,
       }}
@@ -143,14 +152,21 @@ export function QRSettings() {
         style={{
           color: colorScheme === "dark" ? "white" : "black",
         }}
-      >
-        Open all QR Codes automatically
-      </Text>
-      <Switch
-        ios_backgroundColor="#3e3e3e"
-        onValueChange={toggleSwitch}
-        value={data}
-      />
+      ></Text>
+      <Section header="Link opening" {...sectionProps}>
+        <Cell
+          cellStyle="Basic"
+          title="Open all QR Codes automatically"
+          cellAccessoryView={
+            <Switch
+              ios_backgroundColor="#3e3e3e"
+              onValueChange={toggleSwitch}
+              value={data}
+            />
+          }
+          {...cellProps}
+        />
+      </Section>
     </View>
   );
 }
