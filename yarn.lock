@@ -7529,6 +7529,11 @@ react-native-appearance@^0.3.4:
     invariant "^2.2.4"
     use-subscription "^1.0.0"
 
+react-native-bottomsheet@^2.5.2:
+  version "2.5.2"
+  resolved "https://registry.yarnpkg.com/react-native-bottomsheet/-/react-native-bottomsheet-2.5.2.tgz#b89b9342e4988a9ca32b26db07f3754204338352"
+  integrity sha512-Q0INuSn1OKYj4tVv/FCuOc/NlCqH9duRk5ws4kzorxCqo1Ig5exCwOfueKsc9blGKai2j6VZfXNGmHwe5w7iIg==
+
 react-native-camera@^3.43.9:
   version "3.43.9"
   resolved "https://registry.yarnpkg.com/react-native-camera/-/react-native-camera-3.43.9.tgz#026322b0a5143da1b6e622bba217713be8b830b2"

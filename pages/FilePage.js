@@ -12,11 +12,9 @@ import {
 } from "react-native";
 
 import { Button, Icon } from "react-native-elements";
-
-import ActionSheet from "rn-actionsheet-module";
+import BottomSheet from "react-native-bottomsheet";
 
 import Clipboard from "expo-clipboard";
-
 import * as Linking from "expo-linking";
 
 import * as DocumentPicker from "expo-document-picker";
@@ -162,43 +160,44 @@ export function FilePage() {
   };
 
   const chooseAction = () => {
-    ActionSheet(
-      {
-        title: "Select the source of your file",
-        optionsIOS: ["Cancel", "From Gallery", "From Documents", "From Camera"],
-        optionsAndroid: ["From Gallery", "From Documents", "From Camera"],
-        destructiveButtonIndex: null, // undefined // 1, 2, etc.,
-        cancelButtonIndex: 0,
-        onCancelAndroidIndex: 3, // Android doesn't need any cancel option but back button or outside click will return onCancelAndroidIndex
-      },
-      (index) => {
-        let action;
-        switch (index) {
-          case Platform.OS === "ios" ? 1 : 0:
-            action = "media";
-            break;
-          case Platform.OS === "ios" ? 2 : 1:
-            action = "document";
-            break;
+    if (Platform.OS === "ios") {
+      BottomSheet.showBottomSheetWithOptions(
+        {
+          options: ["Cancel", "From Gallery", "From Documents", "From Camera"],
+          title: "Select the source of your file",
+          cancelButtonIndex: 0,
+        },
+        (index) => {
+          let action;
+          switch (index) {
+            case Platform.OS === "ios" ? 1 : 0:
+              action = "media";
+              break;
+            case Platform.OS === "ios" ? 2 : 1:
+              action = "document";
+              break;
 
-          case Platform.OS === "ios" ? 3 : 2:
-            action = "camera";
-            break;
+            case Platform.OS === "ios" ? 3 : 2:
+              action = "camera";
+              break;
 
-          case Platform.OS === "ios" ? 0 : 3:
-            action = null;
-            break;
+            case Platform.OS === "ios" ? 0 : 3:
+              action = null;
+              break;
 
-          default:
-            alert("Default");
-            break;
+            default:
+              alert("Default");
+              break;
+          }
+
+          if (action !== null) {
+            upload(action);
+          }
         }
-
-        if (action !== null) {
-          upload(action);
-        }
-      }
-    );
+      );
+    } else {
+      upload();
+    }
   };
 
   const { width } = Dimensions.get("window");
