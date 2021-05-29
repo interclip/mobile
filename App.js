@@ -133,7 +133,7 @@ function MyTabs() {
         options={{
           tabBarLabel: "File",
           tabBarIcon: ({ color, size }) => (
-            <Icon name="image" type="feather" color={color} size={size} />
+            <Icon name="image-outline" type="ionicon" color={color} size={size} />
           ),
         }}
       />
