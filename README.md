@@ -21,6 +21,7 @@
 
 ## Downloads
 -   [Android (`.aab`)](https://github.com/filiptronicek/iclip-mobile/releases/latest/download/iclip.aab)
+-   [iOS (Testflight)](https://testflight.apple.com/join/g9WUiQpm)
 
 [![Availible on the Google Play Store](https://files.catbox.moe/0ve0bw.png)](https://play.google.com/store/apps/details?id=com.filiptronicek.iclip)
 
