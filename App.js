@@ -35,10 +35,11 @@ function HomePages() {
   return (
     <Stack.Navigator
       screenOptions={({ route }) => {
-        return { 
+        return {
           headerShown: route.name !== "Receive a clip",
           headerStyle: {
-            backgroundColor: colorScheme === "dark" ? colors.darkHeader : colors.light,
+            backgroundColor:
+              colorScheme === "dark" ? colors.darkHeader : colors.light,
           },
           headerTitleStyle: {
             color: colorScheme === "dark" ? "white" : "black",
@@ -58,10 +59,11 @@ function Settings() {
   return (
     <Stack.Navigator
       screenOptions={({ route }) => {
-        return { 
+        return {
           headerShown: route.name !== "Settings",
           headerStyle: {
-            backgroundColor: colorScheme === "dark" ? colors.darkHeader : colors.light,
+            backgroundColor:
+              colorScheme === "dark" ? colors.darkHeader : colors.light,
           },
           headerTitleStyle: {
             color: colorScheme === "dark" ? "white" : "black",
@@ -113,7 +115,12 @@ function MyTabs() {
         options={{
           tabBarLabel: "Scan",
           tabBarIcon: ({ color, size }) => (
-            <Icon name="qr-code-outline" type="ionicon" color={color} size={size} />
+            <Icon
+              name="qr-code-outline"
+              type="ionicon"
+              color={color}
+              size={size}
+            />
           ),
         }}
       />
@@ -133,7 +140,12 @@ function MyTabs() {
         options={{
           tabBarLabel: "File",
           tabBarIcon: ({ color, size }) => (
-            <Icon name="image-outline" type="ionicon" color={color} size={size} />
+            <Icon
+              name="image-outline"
+              type="ionicon"
+              color={color}
+              size={size}
+            />
           ),
         }}
       />
@@ -144,7 +156,12 @@ function MyTabs() {
           options={{
             tabBarLabel: "Settings",
             tabBarIcon: ({ color, size }) => (
-              <Icon name="cog-outline" type="ionicon" color={color} size={size} />
+              <Icon
+                name="cog-outline"
+                type="ionicon"
+                color={color}
+                size={size}
+              />
             ),
           }}
         />

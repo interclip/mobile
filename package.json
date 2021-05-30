@@ -59,6 +59,7 @@
     "@babel/core": "^7.14.3",
     "babel-preset-expo": "^8.3.0",
     "eslint": "^7.27.0",
+    "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-react": "^7.23.2"
   },
   "private": false,

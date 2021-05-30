@@ -30,7 +30,12 @@
     },
     "android": {
       "package": "com.filiptronicek.iclip",
-      "permissions": ["CAMERA", "VIBRATE", "READ_EXTERNAL_STORAGE", "WRITE_EXTERNAL_STORAGE"],
+      "permissions": [
+        "CAMERA",
+        "VIBRATE",
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE"
+      ],
       "versionCode": 21
     },
     "web": {
