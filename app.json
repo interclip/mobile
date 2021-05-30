@@ -24,7 +24,8 @@
       "infoPlist": {
         "NSCameraUsageDescription": "Interclip uses your camera to scan QR codes. Interclip will also use your camera if you upload a file with the Camera source.",
         "NSMicrophoneUsageDescription": "Interclip uses your microphone to record audio when you record video through the file upload page.",
-        "NSPhotoLibraryUsageDescription": "Interclip uses your photo library to allow photo and video uploads."
+        "NSPhotoLibraryUsageDescription": "Interclip uses your photo library to allow photo and video uploads.",
+        "ITSAppUsesNonExemptEncryption": false
       }
     },
     "android": {
