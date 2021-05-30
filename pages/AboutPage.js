@@ -7,7 +7,7 @@ import * as Linking from "expo-linking";
 
 // Local functions, components and variables
 
-import { colors } from "../lib/Pages";
+import { colors } from "../lib/Vars";
 import * as appInfo from "../app.json";
 
 import { Icon } from "react-native-elements";

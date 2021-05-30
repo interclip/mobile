@@ -21,7 +21,9 @@ import * as Linking from "expo-linking";
 // Local functions and variables
 
 import isURL from "validator/lib/isURL";
-import { sleep, styles, colors } from "../lib/Pages";
+import { sleep } from "../lib/functions";
+import { colors } from "../lib/Vars";
+import { styles } from "../lib/Pages";
 
 // Root component
 

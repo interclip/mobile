@@ -16,24 +16,22 @@ import {
 
 import { StatusBar } from "expo-status-bar";
 import Clipboard from "expo-clipboard";
+
 import { Input } from "react-native-elements";
+import NetInfo from "@react-native-community/netinfo";
+import { useFocusEffect } from "@react-navigation/native";
 
 // Functional packages
 
 import fetch from "node-fetch";
 
-import {
-  config,
-  colors,
-  styles,
-  validationMsg,
-  checkError,
-} from "../lib/Pages";
+// Local functions, components and variables
+
+import { validationMsg, checkError } from "../lib/functions";
+import { styles } from "../lib/Pages";
+import { config, colors } from "../lib/Vars";
 
 import LogoImage from "../components/LogoImage";
-
-import NetInfo from "@react-native-community/netinfo";
-import { useFocusEffect } from "@react-navigation/native";
 
 // Root component
 

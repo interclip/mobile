@@ -21,8 +21,9 @@ import * as DocumentPicker from "expo-document-picker";
 import * as ImagePicker from "expo-image-picker";
 
 // Local functions, components and variables
-
-import { colors, styles, formatBytes } from "../lib/Pages";
+import { colors } from "../lib/Vars";
+import { formatBytes } from "../lib/functions";
+import { styles } from "../lib/Pages";
 
 import fetch from "node-fetch";
 
