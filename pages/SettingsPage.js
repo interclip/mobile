@@ -9,7 +9,7 @@ import { Icon } from "react-native-elements";
 import * as WebBrowser from "expo-web-browser";
 
 // Local functions and variables
-import { colors, sectionProps, cellProps, textColor } from "../lib/Pages";
+import { colors } from "../lib/Pages";
 
 // Root component
 
