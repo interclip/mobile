@@ -21,8 +21,8 @@ jobs:
           npm i -g expo-cli
           expo login -u ${{ secrets.EXPO_CLI_USERNAME }} -p ${{ secrets.EXPO_CLI_PASSWORD }}
           yarn
-          #yarn run build:android
-          #yarn run build:ios
+          yarn run build:android
+          yarn run build:ios
 
           echo "Download the latest .aab for Android: $(expo url:apk --non-interactive)"
       - name: Download the latest .ipa
