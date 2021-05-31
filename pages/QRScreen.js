@@ -9,7 +9,7 @@ import {
   useColorScheme,
   Vibration,
   View,
-  Pressable ,
+  Pressable,
 } from "react-native";
 
 // Components, Expo and RN libraries
