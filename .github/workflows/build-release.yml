@@ -9,7 +9,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
@@ -20,5 +20,9 @@ jobs:
           expo login -u ${{ secrets.EXPO_CLI_USERNAME }} -p ${{ secrets.EXPO_CLI_PASSWORD }}
           yarn
           yarn run build:android
+          yarn run build:ios
 
+          wget -O iclip.ipa $(expo url:ipa --non-interactive)
+          xcrun altool --upload-app -f iclip.ipa -u ${{ secrets.APPLE_ID_EMAIL }} -p ${{ secrets.APPLE_ID_PASSWORD }}
           echo "Download the latest .aab for Android: $(expo url:apk --non-interactive)"
+          
