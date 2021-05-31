@@ -19,8 +19,8 @@ jobs:
           npm i -g expo-cli
           expo login -u ${{ secrets.EXPO_CLI_USERNAME }} -p ${{ secrets.EXPO_CLI_PASSWORD }}
           yarn
-          #yarn run build:android
-          #yarn run build:ios
+          yarn run build:android
+          yarn run build:ios
 
           wget -O iclip.ipa $(expo url:ipa --non-interactive)
           xcrun altool --upload-app -f iclip.ipa -u ${{ secrets.APPLE_ID_EMAIL }} -p ${{ secrets.APPLE_ID_PASSWORD }}
