@@ -9,7 +9,7 @@ import {
   useColorScheme,
   Vibration,
   View,
-  TouchableWithoutFeedback,
+  Pressable,
 } from "react-native";
 
 // Components, Expo and RN libraries
@@ -156,7 +156,7 @@ export function QRScreen({ navigation }) {
       >
         Center your QR code in the square below
       </Text>
-      <TouchableWithoutFeedback
+      <Pressable
         onPress={() => {
           if (lastClick) {
             const newRotation =
@@ -183,7 +183,7 @@ export function QRScreen({ navigation }) {
             marginRight: "auto",
           }}
         />
-      </TouchableWithoutFeedback>
+      </Pressable>
     </View>
   );
 }
