@@ -17,13 +17,17 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 14
-      - run: |
-          npm i -g expo-cli
-          expo login -u ${{ secrets.EXPO_CLI_USERNAME }} -p ${{ secrets.EXPO_CLI_PASSWORD }}
-          yarn
+      - name: Install expo-cli
+        run: npm i -g expo-cli
+      - name: Authenthicate with the expo-cli
+        run: expo login -u ${{ secrets.EXPO_CLI_USERNAME }} -p ${{ secrets.EXPO_CLI_PASSWORD }}
+      - name: Install dependencies with Yarn
+        run: yarn
+      - name: Build the app for iOS
+        run: yarn run build:ios
+      - name: Build the app for Android
+        run: |
           yarn run build:android
-          yarn run build:ios
-
           echo "Download the latest .aab for Android: $(expo url:apk --non-interactive)"
       - name: Download the latest .ipa
         run: wget -O iclip.ipa $(expo url:ipa --non-interactive)
