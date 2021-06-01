@@ -61,11 +61,19 @@ export function QRScreen({ navigation }) {
     ) {
       Vibration.vibrate();
       URLArr[0].includes("http")
-        ? Linking.openURL(data).catch((e) => e)
+        ? Linking.openURL(data)
+            .catch((e) => e)
+            .then(() => {
+              sleep(1000).then(() => {
+                setQrd(false);
+              });
+            })
         : Linking.openURL(`http://${data}`)
             .then(() => {
-              sleep(1000).then(setQrd(false));
-              navigation.navigate("Home");
+              sleep(1000).then(() => {
+                setQrd(false);
+                navigation.navigate("HomePages", { screen: "Receive a clip" });
+              });
             })
             .catch((e) => {
               Alert.alert(
@@ -105,7 +113,6 @@ export function QRScreen({ navigation }) {
           {
             text: "Cancel",
             onPress: () => {
-              setQrd(true);
               sleep(1000).then(setQrd(false));
             },
             style: "cancel",
