@@ -18,6 +18,8 @@ import Clipboard from "@react-native-community/clipboard";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import * as Linking from "expo-linking";
 
+import { useIsFocused } from "@react-navigation/native";
+
 // Local functions and variables
 
 import isURL from "validator/lib/isURL";
@@ -34,6 +36,8 @@ export function QRScreen({ navigation }) {
     BarCodeScanner.Constants.Type.back
   );
   const [lastClick, setLastClick] = useState(null);
+
+  const isFocused = useIsFocused();
 
   useEffect(() => {
     (async () => {
@@ -172,17 +176,19 @@ export function QRScreen({ navigation }) {
           }
         }}
       >
-        <BarCodeScanner
-          onBarCodeScanned={qrd ? undefined : handleBarCodeScanned}
-          barCodeTypes={[BarCodeScanner.Constants.BarCodeType.qr]}
-          type={cameraRotation}
-          style={{
-            width: width * 0.7,
-            height: width * 0.7,
-            marginLeft: "auto",
-            marginRight: "auto",
-          }}
-        />
+        {isFocused && (
+          <BarCodeScanner
+            onBarCodeScanned={qrd ? undefined : handleBarCodeScanned}
+            barCodeTypes={[BarCodeScanner.Constants.BarCodeType.qr]}
+            type={cameraRotation}
+            style={{
+              width: width * 0.7,
+              height: width * 0.7,
+              marginLeft: "auto",
+              marginRight: "auto",
+            }}
+          />
+        )}
       </Pressable>
     </View>
   );
