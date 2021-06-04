@@ -9,7 +9,7 @@ import {
   useColorScheme,
   Vibration,
   View,
-  Pressable ,
+  Pressable,
 } from "react-native";
 
 // Components, Expo and RN libraries
@@ -60,7 +60,7 @@ export function QRScreen({ navigation }) {
         ? Linking.openURL(data).catch((e) => e)
         : Linking.openURL(`http://${data}`)
             .then(() => {
-              sleep(1000).then(setQrd(false));
+              sleep(500).then(setQrd(false));
               navigation.navigate("Home");
             })
             .catch((e) => {
@@ -119,6 +119,12 @@ export function QRScreen({ navigation }) {
 
   const { width } = Dimensions.get("window");
 
+  const qrStyles = {
+    borderColor: "#42C759",
+    borderWidth: 17,
+    borderRadius: "20%"
+  };
+
   if (hasPermission === null) {
     return <Text>Requesting for camera permission</Text>;
   }
@@ -157,6 +163,7 @@ export function QRScreen({ navigation }) {
         Center your QR code in the square below
       </Text>
       <Pressable
+        style={qrd ? qrStyles : {}}
         onPress={() => {
           if (lastClick) {
             const newRotation =
