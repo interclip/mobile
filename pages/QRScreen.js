@@ -130,6 +130,12 @@ export function QRScreen({ navigation }) {
 
   const { width } = Dimensions.get("window");
 
+  const qrStyles = {
+    borderColor: "#42C759",
+    borderWidth: 17,
+    borderRadius: "20%"
+  };
+
   if (hasPermission === null) {
     return <Text>Requesting for camera permission</Text>;
   }
@@ -168,6 +174,7 @@ export function QRScreen({ navigation }) {
         Center your QR code in the square below
       </Text>
       <Pressable
+        style={qrd ? qrStyles : {}}
         onPress={() => {
           if (lastClick) {
             const newRotation =
