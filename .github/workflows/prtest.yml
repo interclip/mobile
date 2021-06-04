@@ -33,5 +33,8 @@ jobs:
       - uses: expo/expo-github-action@v5
         with:
           expo-version: 4.x
-      - run: yarn
+      - name: Install dependencies with Yarn
+        run: yarn
       - run: expo doctor
+      - name: Run tests
+        run: yarn test

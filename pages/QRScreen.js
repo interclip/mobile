@@ -18,6 +18,8 @@ import Clipboard from "@react-native-community/clipboard";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import * as Linking from "expo-linking";
 
+import { useIsFocused } from "@react-navigation/native";
+
 // Local functions and variables
 
 import isURL from "validator/lib/isURL";
@@ -34,6 +36,8 @@ export function QRScreen({ navigation }) {
     BarCodeScanner.Constants.Type.back
   );
   const [lastClick, setLastClick] = useState(null);
+
+  const isFocused = useIsFocused();
 
   useEffect(() => {
     (async () => {
@@ -57,11 +61,19 @@ export function QRScreen({ navigation }) {
     ) {
       Vibration.vibrate();
       URLArr[0].includes("http")
-        ? Linking.openURL(data).catch((e) => e)
+        ? Linking.openURL(data)
+            .catch((e) => e)
+            .then(() => {
+              sleep(1000).then(() => {
+                setQrd(false);
+              });
+            })
         : Linking.openURL(`http://${data}`)
             .then(() => {
-              sleep(500).then(setQrd(false));
-              navigation.navigate("Home");
+              sleep(1000).then(() => {
+                setQrd(false);
+                navigation.navigate("HomePages", { screen: "Receive a clip" });
+              });
             })
             .catch((e) => {
               Alert.alert(
@@ -101,7 +113,6 @@ export function QRScreen({ navigation }) {
           {
             text: "Cancel",
             onPress: () => {
-              setQrd(true);
               sleep(1000).then(setQrd(false));
             },
             style: "cancel",
@@ -179,17 +190,19 @@ export function QRScreen({ navigation }) {
           }
         }}
       >
-        <BarCodeScanner
-          onBarCodeScanned={qrd ? undefined : handleBarCodeScanned}
-          barCodeTypes={[BarCodeScanner.Constants.BarCodeType.qr]}
-          type={cameraRotation}
-          style={{
-            width: width * 0.7,
-            height: width * 0.7,
-            marginLeft: "auto",
-            marginRight: "auto",
-          }}
-        />
+        {isFocused && (
+          <BarCodeScanner
+            onBarCodeScanned={qrd ? undefined : handleBarCodeScanned}
+            barCodeTypes={[BarCodeScanner.Constants.BarCodeType.qr]}
+            type={cameraRotation}
+            style={{
+              width: width * 0.7,
+              height: width * 0.7,
+              marginLeft: "auto",
+              marginRight: "auto",
+            }}
+          />
+        )}
       </Pressable>
     </View>
   );

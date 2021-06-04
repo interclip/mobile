@@ -1,33 +1,35 @@
 # This workflow will run tests using node and then publish a package to GitHub Packages when a release is created
 # For more information see: https://help.github.com/actions/language-and-framework-guides/publishing-nodejs-packages
 
-name: Build and publish to Google Play
+name: Build the app and publish it to Testflight
 
 on:
   release:
+    types:
+      - created
   workflow_dispatch:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
           node-version: 14
-      - run: |
-          npm i -g expo-cli
-          expo login -u ${{ secrets.EXPO_CLI_USERNAME }} -p ${{ secrets.EXPO_CLI_PASSWORD }}
-          yarn
-          yarn run build:android > expo.txt
-          wget -O iclip.aab "https://"$(cat expo.txt | egrep -o "expo.io\/artifacts\/.{16,64}")
-          #curl --user ${{ secrets.KEYS_USER }}:${{ secrets.KEYS_PASS }} ${{ secrets.KEYS_URL }} > key.json
-          #expo upload:android --use-submission-service --key key.json
-      - name: Release
-        uses: softprops/action-gh-release@v1
-        with:
-          files: iclip.aab
-          tag_name: $(git tag --sort=committerdate | tail -1)
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_REPOSITORY: filiptronicek/iclip-mobile
+      - name: Install expo-cli
+        run: npm i -g expo-cli
+      - name: Authenthicate with the expo-cli
+        run: expo login -u ${{ secrets.EXPO_CLI_USERNAME }} -p ${{ secrets.EXPO_CLI_PASSWORD }}
+      - name: Install dependencies with Yarn
+        run: yarn
+      - name: Build the app for iOS
+        run: yarn run build:ios
+      - name: Build the app for Android
+        run: |
+          yarn run build:android
+          echo "Download the latest .aab for Android: $(expo url:apk --non-interactive)"
+      - name: Download the latest .ipa
+        run: wget -O iclip.ipa $(expo url:ipa --non-interactive)
+      - name: Release the .ipa to App Store connect
+        run: xcrun altool --upload-app -f iclip.ipa -u ${{ secrets.APPLE_ID_EMAIL }} -p ${{ secrets.APPLE_ID_PASSWORD }}
