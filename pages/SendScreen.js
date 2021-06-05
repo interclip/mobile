@@ -154,7 +154,7 @@ export function SendScreen() {
                   marginLeft: "20%",
                 }}
               >
-                {!urlValidation(text) && data.result}
+                {data.result}
               </Text>
             )}
 
@@ -178,7 +178,9 @@ export function SendScreen() {
                     size={250}
                     logo={require("../assets/icon.png")}
                     logoSize={60}
-                    logoBackgroundColor="white"
+                    color={colorScheme === "dark" ? "#fff" : "#000"}
+                    backgroundColor={colorScheme === "dark" ? "#444" : "white"}
+                    logoBackgroundColor='white'
                   />
                   <Button
                     title="Hide QR Code"
