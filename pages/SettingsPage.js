@@ -92,6 +92,22 @@ export function SettingsPage({ navigation }) {
         <Cell
           cellStyle="Basic"
           accessory="DisclosureIndicator"
+          title="Stats"
+          image={
+            <Icon
+              name="stats-chart-outline"
+              type="ionicon"
+              color={textColor}
+            />
+          }
+          onPress={() =>
+            navigation.navigate("SettingsPage", { screen: "Stats" })
+          }
+          {...cellProps}
+        />
+        <Cell
+          cellStyle="Basic"
+          accessory="DisclosureIndicator"
           title="About"
           image={
             <Icon

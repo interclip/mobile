@@ -17,7 +17,7 @@ import { SendScreen } from "./pages/SendScreen";
 import { QRScreen } from "./pages/QRScreen";
 import { HomeScreen } from "./pages/HomeScreen";
 import { SettingsPage, QRSettings } from "./pages/SettingsPage";
-import { AboutPage } from "./pages/AboutPage";
+import { AboutPage, StatPage } from "./pages/AboutPage";
 import { FilePage } from "./pages/FilePage";
 import { OfflinePage } from "./pages/OfflinePage";
 
@@ -78,6 +78,7 @@ function Settings() {
       />
       <Stack.Screen name="QR" component={QRSettings} />
       <Stack.Screen name="About" component={AboutPage} />
+      <Stack.Screen name="Stats" component={StatPage} />
     </Stack.Navigator>
   );
 }

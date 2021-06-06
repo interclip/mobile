@@ -11,6 +11,7 @@ import { colors } from "../lib/Vars";
 import * as appInfo from "../app.json";
 
 import { Icon } from "react-native-elements";
+import { Cell, Section } from "react-native-tableview-simple";
 
 import LogoImage from "../components/LogoImage";
 
@@ -82,6 +83,71 @@ export function AboutPage() {
       >
         Interclip mobile v{appInfo.expo.version}{" "}
       </Text>
+    </View>
+  );
+}
+
+export function StatPage() {
+  const colorScheme = useColorScheme();
+
+  const textColor =
+    colorScheme === "dark" ? colors.lightContent : colors.darkContent;
+
+  const sectionProps = {
+    headerTextColor: colorScheme === "dark" ? colors.light : "#6d6d72",
+    hideSurroundingSeparators: true,
+    roundedCorners: true,
+  };
+
+  const cellProps = {
+    backgroundColor: colorScheme === "dark" ? "#373737" : "#FFF",
+    titleTextColor: textColor,
+    titleTextStyleDisabled: {
+      color: colorScheme === "dark" ? "#b5b5b5" : "#808080",
+    },
+  };
+
+  return (
+    <View
+      style={{
+        padding: 25,
+        flex: 1,
+        backgroundColor:
+          colorScheme === "dark" ? colors.darkContent : colors.lightContent,
+        paddingTop: "10%",
+      }}
+    >
+      <Section header="STATISTICS" {...sectionProps}>
+        <Cell
+          cellStyle="Basic"
+          cellAccessoryView={<Text style={{color: textColor}}> 420 </Text>}
+          title="Clips made"
+          image={
+            <Icon name="add-circle-outline" type="ionicon" color={textColor} />
+          }
+          {...cellProps}
+        />
+        <Cell
+          cellStyle="Basic"
+          cellAccessoryView={<Text style={{color: textColor}}> 69 </Text>}
+          title="Clips retrieved"
+          image={<Icon name="download" type="feather" color={textColor} />}
+          {...cellProps}
+        />
+        <Cell
+          cellStyle="Basic"
+          cellAccessoryView={<Text style={{color: textColor}}> 13 </Text>}
+          title="Files uploaded"
+          image={
+            <Icon
+              name="cloud-upload-outline"
+              type="ionicon"
+              color={textColor}
+            />
+          }
+          {...cellProps}
+        />
+      </Section>
     </View>
   );
 }
