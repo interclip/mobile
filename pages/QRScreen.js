@@ -133,7 +133,7 @@ export function QRScreen({ navigation }) {
   const qrStyles = {
     borderColor: "#42C759",
     borderWidth: 17,
-    borderRadius: "20%"
+    borderRadius: "20%",
   };
 
   if (hasPermission === null) {
