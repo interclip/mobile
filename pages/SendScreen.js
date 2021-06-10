@@ -180,7 +180,7 @@ export function SendScreen() {
                     logoSize={60}
                     color={colorScheme === "dark" ? "#fff" : "#000"}
                     backgroundColor={colorScheme === "dark" ? "#444" : "white"}
-                    logoBackgroundColor='white'
+                    logoBackgroundColor="white"
                   />
                   <Button
                     title="Hide QR Code"

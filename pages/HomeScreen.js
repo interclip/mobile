@@ -41,6 +41,7 @@ export function HomeScreen({ navigation }) {
 
   // After the request completes
   const [data, setData] = useState(""); // Dynamically loaded data from the Interclip REST API
+  const [statusCode, setStatusCode] = useState(200);
   const [text, setText] = useState(""); // The code entered in the <Input>
 
   const colorScheme = useColorScheme();
@@ -65,6 +66,7 @@ export function HomeScreen({ navigation }) {
       fetch(`https://interclip.app/includes/get-api?code=${text}`)
         .then((response) => {
           if (response.ok) {
+            setStatusCode(200);
             return response.json();
           } else {
             if (response.status === 429) {
@@ -72,8 +74,16 @@ export function HomeScreen({ navigation }) {
                 "Slow down!",
                 "We are getting too many requests from you."
               );
+              return {};
             } else {
-              Alert.alert("Error!", `Got the error ${response.status}.`);
+              if (config.exemptStatusCodes.includes(response.status)) {
+                setStatusCode(response.status);
+                return response.json();
+              } else {
+                setStatusCode(400);
+                Alert.alert("Error!", `Got the error ${response.status}.`);
+                return response.json();
+              }
             }
           }
         })
@@ -163,8 +173,10 @@ export function HomeScreen({ navigation }) {
                 }}
               >
                 {!validationMsg(text) &&
-                  (checkError(data.status)
+                  (statusCode === 404
                     ? "This code doesn't seem to exist 🤔"
+                    : statusCode === 400
+                    ? "Something went wrong..."
                     : data.result)}
               </Text>
             )}
