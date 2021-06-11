@@ -119,6 +119,7 @@ export function HomeScreen({ navigation }) {
             returnKeyType={"go"}
             onChangeText={(text) => setText(text)}
             defaultValue={text}
+            importantForAutofill={"no"}
             errorStyle={{ color: "red" }}
             autoCapitalize="none"
             value={text.replace(" ", "").toLowerCase()}

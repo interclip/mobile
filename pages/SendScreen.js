@@ -115,6 +115,7 @@ export function SendScreen() {
             errorStyle={{ color: "red" }}
             autoCapitalize="none"
             enablesReturnKeyAutomatically={true}
+            importantForAutofill={"no"}
             onSubmitEditing={() => {
               Keyboard.dismiss;
             }}
