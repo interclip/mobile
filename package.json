@@ -50,15 +50,15 @@
     "react-native-svg": "^12.1.1",
     "react-native-swipe-gestures": "^1.0.5",
     "react-native-tableview-simple": "^4.3.0",
-    "react-native-web": "^0.16.3",
+    "react-native-web": "^0.16.5",
     "rn-actionsheet-module": "^1.0.3",
     "strip-eof": "^2.0.0",
     "validator": "^13.5.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.14.3",
+    "@babel/core": "^7.14.5",
     "babel-preset-expo": "^8.3.0",
-    "eslint": "^7.27.0",
+    "eslint": "^7.28.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-react": "^7.24.0",
     "jest": "^27.0.4"
