@@ -10,7 +10,7 @@ import {
   Alert,
   Keyboard,
   TouchableWithoutFeedback,
-  ActivityIndicator
+  ActivityIndicator,
 } from "react-native";
 
 // Components, Expo and RN libraries
@@ -28,7 +28,7 @@ import fetch from "node-fetch";
 
 // Local functions, components and variables
 
-import { validationMsg, checkError } from "../lib/functions";
+import { validationMsg, checkError, truncate } from "../lib/functions";
 import { styles } from "../lib/Pages";
 import { config, colors, inputProps } from "../lib/Vars";
 
@@ -141,7 +141,7 @@ export function HomeScreen({ navigation }) {
             </View>
           )}
           <View style={{ padding: 24 }}>
-            {!isLoading && data?.result ? (
+            {!isLoading ? (
               <Text
                 onLongPress={() => {
                   // Handle functionality, when user presses for a longer period of time
@@ -175,12 +175,11 @@ export function HomeScreen({ navigation }) {
                     ? "This code doesn't seem to exist 🤔"
                     : statusCode === 400
                     ? "Something went wrong..."
-                    : data.result)}
+                    : truncate(data?.result ? data.result : "", 80))}
               </Text>
             ) : (
               <ActivityIndicator />
             )}
-
           </View>
           <StatusBar style="auto" />
         </View>
