@@ -29,7 +29,7 @@ import fetch from "node-fetch";
 
 import { validationMsg, checkError } from "../lib/functions";
 import { styles } from "../lib/Pages";
-import { config, colors } from "../lib/Vars";
+import { config, colors, inputProps } from "../lib/Vars";
 
 import LogoImage from "../components/LogoImage";
 
@@ -105,6 +105,7 @@ export function HomeScreen({ navigation }) {
         <View style={{ zIndex: -5, elevation: -5, marginTop: "30%" }}>
           <LogoImage />
           <Input
+            {...inputProps}
             keyboardType={
               Platform.OS === "android" ? "email-address" : "ascii-capable"
             }
@@ -115,15 +116,9 @@ export function HomeScreen({ navigation }) {
             placeholder="Your code here"
             maxLength={config.codeLength}
             inputStyle={{ fontSize: 50 }}
-            autoCorrect={false}
-            returnKeyType={"go"}
             onChangeText={(text) => setText(text)}
             defaultValue={text}
-            importantForAutofill={"no"}
-            errorStyle={{ color: "red" }}
-            autoCapitalize="none"
             value={text.replace(" ", "").toLowerCase()}
-            enablesReturnKeyAutomatically={true}
             onSubmitEditing={() => {
               !isLoading
                 ? Linking.openURL(data.result)

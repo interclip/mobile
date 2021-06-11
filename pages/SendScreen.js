@@ -27,7 +27,7 @@ import fetch from "node-fetch";
 import isURL from "validator/lib/isURL";
 
 // Local functions, components and variables
-import { colors } from "../lib/Vars";
+import { colors, inputProps } from "../lib/Vars";
 import { urlValidation, checkError } from "../lib/functions";
 import { styles } from "../lib/Pages";
 
@@ -100,6 +100,7 @@ export function SendScreen() {
         >
           <LogoImage />
           <Input
+            {...inputProps}
             keyboardType={Platform.OS === "android" ? "default" : "url"}
             style={{
               ...styles.container,
@@ -107,15 +108,9 @@ export function SendScreen() {
             }}
             placeholder="Your URL here"
             inputStyle={{ fontSize: 25 }}
-            autoCorrect={false}
-            autoCompleteType={"off"}
             returnKeyType={Platform.OS === "android" ? "none" : "done"}
             onChangeText={(text) => setText(text)}
             defaultValue={text}
-            errorStyle={{ color: "red" }}
-            autoCapitalize="none"
-            enablesReturnKeyAutomatically={true}
-            importantForAutofill={"no"}
             onSubmitEditing={() => {
               Keyboard.dismiss;
             }}
