@@ -35,6 +35,7 @@ jobs:
         run: yarn test
   ios:
     runs-on: macos-latest
+    name: Build for iOS
     needs: ci
     steps:
       - uses: actions/checkout@v2
@@ -55,6 +56,7 @@ jobs:
         run: xcrun altool --upload-app -f iclip.ipa -u ${{ secrets.APPLE_ID_EMAIL }} -p ${{ secrets.APPLE_ID_PASSWORD }}
   android:
     runs-on: ubuntu-latest
+    name: Build for Android
     needs: ci
     steps:
       - uses: actions/checkout@v2
