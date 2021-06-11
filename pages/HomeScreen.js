@@ -10,6 +10,7 @@ import {
   Alert,
   Keyboard,
   TouchableWithoutFeedback,
+  ActivityIndicator,
 } from "react-native";
 
 // Components, Expo and RN libraries
@@ -27,9 +28,9 @@ import fetch from "node-fetch";
 
 // Local functions, components and variables
 
-import { validationMsg, checkError } from "../lib/functions";
+import { validationMsg, checkError, truncate } from "../lib/functions";
 import { styles } from "../lib/Pages";
-import { config, colors } from "../lib/Vars";
+import { config, colors, inputProps } from "../lib/Vars";
 
 import LogoImage from "../components/LogoImage";
 
@@ -37,7 +38,7 @@ import LogoImage from "../components/LogoImage";
 
 export function HomeScreen({ navigation }) {
   // Variable set
-  const [isLoading, setLoading] = useState(true); // Loading status => only show the responce of the API
+  const [isLoading, setLoading] = useState(false); // Loading status => only show the responce of the API
 
   // After the request completes
   const [data, setData] = useState(""); // Dynamically loaded data from the Interclip REST API
@@ -63,6 +64,7 @@ export function HomeScreen({ navigation }) {
 
     if (text.length === config.codeLength) {
       setText(text.replace(" ", "").toLowerCase());
+      setLoading(true);
       fetch(`https://interclip.app/includes/get-api?code=${text}`)
         .then((response) => {
           if (response.ok) {
@@ -90,7 +92,7 @@ export function HomeScreen({ navigation }) {
         .then((json) => setData(json))
         .finally(() => setLoading(false));
     } else {
-      setLoading(true);
+      setLoading(false);
     }
   }, [text]);
   return (
@@ -105,6 +107,7 @@ export function HomeScreen({ navigation }) {
         <View style={{ zIndex: -5, elevation: -5, marginTop: "30%" }}>
           <LogoImage />
           <Input
+            {...inputProps}
             keyboardType={
               Platform.OS === "android" ? "email-address" : "ascii-capable"
             }
@@ -115,14 +118,9 @@ export function HomeScreen({ navigation }) {
             placeholder="Your code here"
             maxLength={config.codeLength}
             inputStyle={{ fontSize: 50 }}
-            autoCorrect={false}
-            returnKeyType={"go"}
             onChangeText={(text) => setText(text)}
             defaultValue={text}
-            errorStyle={{ color: "red" }}
-            autoCapitalize="none"
             value={text.replace(" ", "").toLowerCase()}
-            enablesReturnKeyAutomatically={true}
             onSubmitEditing={() => {
               !isLoading
                 ? Linking.openURL(data.result)
@@ -143,7 +141,7 @@ export function HomeScreen({ navigation }) {
             </View>
           )}
           <View style={{ padding: 24 }}>
-            {!isLoading && (
+            {!isLoading ? (
               <Text
                 onLongPress={() => {
                   // Handle functionality, when user presses for a longer period of time
@@ -177,8 +175,10 @@ export function HomeScreen({ navigation }) {
                     ? "This code doesn't seem to exist 🤔"
                     : statusCode === 400
                     ? "Something went wrong..."
-                    : data.result)}
+                    : truncate(data?.result ? data.result : "", 80))}
               </Text>
+            ) : (
+              <ActivityIndicator />
             )}
           </View>
           <StatusBar style="auto" />
