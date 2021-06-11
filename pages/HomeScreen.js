@@ -10,6 +10,7 @@ import {
   Alert,
   Keyboard,
   TouchableWithoutFeedback,
+  ActivityIndicator
 } from "react-native";
 
 // Components, Expo and RN libraries
@@ -37,7 +38,7 @@ import LogoImage from "../components/LogoImage";
 
 export function HomeScreen({ navigation }) {
   // Variable set
-  const [isLoading, setLoading] = useState(true); // Loading status => only show the responce of the API
+  const [isLoading, setLoading] = useState(false); // Loading status => only show the responce of the API
 
   // After the request completes
   const [data, setData] = useState(""); // Dynamically loaded data from the Interclip REST API
@@ -63,6 +64,7 @@ export function HomeScreen({ navigation }) {
 
     if (text.length === config.codeLength) {
       setText(text.replace(" ", "").toLowerCase());
+      setLoading(true);
       fetch(`https://interclip.app/includes/get-api?code=${text}`)
         .then((response) => {
           if (response.ok) {
@@ -90,7 +92,7 @@ export function HomeScreen({ navigation }) {
         .then((json) => setData(json))
         .finally(() => setLoading(false));
     } else {
-      setLoading(true);
+      setLoading(false);
     }
   }, [text]);
   return (
@@ -139,7 +141,7 @@ export function HomeScreen({ navigation }) {
             </View>
           )}
           <View style={{ padding: 24 }}>
-            {!isLoading && (
+            {!isLoading && data?.result ? (
               <Text
                 onLongPress={() => {
                   // Handle functionality, when user presses for a longer period of time
@@ -175,7 +177,10 @@ export function HomeScreen({ navigation }) {
                     ? "Something went wrong..."
                     : data.result)}
               </Text>
+            ) : (
+              <ActivityIndicator />
             )}
+
           </View>
           <StatusBar style="auto" />
         </View>
