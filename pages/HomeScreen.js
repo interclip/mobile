@@ -57,7 +57,7 @@ const CustomBackground = ({ animatedIndex, style }) => {
       interpolateColors(animatedIndex, {
         inputRange: [0, 1],
         outputColorRange:
-          colorScheme === "dark" ? ["#000", "#333"] : ["#fff", "#fff"],
+          colorScheme === "dark" ? ["#333", "#404040"] : ["#fff", "#fff"],
       }),
     [animatedIndex]
   );
