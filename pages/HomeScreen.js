@@ -20,6 +20,8 @@ import {
   Share,
 } from "react-native";
 
+import PropTypes from "prop-types";
+
 // Components, Expo and RN libraries
 
 import { StatusBar } from "expo-status-bar";
@@ -71,6 +73,11 @@ const CustomBackground = ({ animatedIndex, style }) => {
   );
 
   return <Animated.View style={containerStyle} />;
+};
+
+CustomBackground.propTypes = {
+  animatedIndex: PropTypes.any.isRequired,
+  style: PropTypes.any.isRequired,
 };
 
 // Root component

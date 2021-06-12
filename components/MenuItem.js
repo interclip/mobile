@@ -3,7 +3,7 @@
 import React from "react";
 import { Text, TouchableOpacity } from "react-native";
 
-import PropTypes from "prop-types"; // ES6
+import PropTypes from "prop-types";
 
 /* Components, Expo and RN libraries */
 
