@@ -5,7 +5,6 @@ import React, {
   useState,
   useRef,
   useMemo,
-  useCallback,
 } from "react";
 import {
   Platform,
