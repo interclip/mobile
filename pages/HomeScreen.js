@@ -299,7 +299,7 @@ export function HomeScreen({ navigation }) {
                 color: colorScheme === "dark" ? "white" : "black",
               }}
             >
-              {fileExtension} file
+              {fileExtension.length < 20 ? fileExtension : "arbitrary"} file
             </Text>
             {mime.lookup(fileExtension) && (
               <Text
