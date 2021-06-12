@@ -156,6 +156,7 @@ export function HomeScreen({ navigation }) {
                   Linking.openURL(data.result);
                 }}
                 style={{
+                  textAlign: "center",
                   color: checkError(data.status)
                     ? colors.light
                     : colorScheme === "dark"
