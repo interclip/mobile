@@ -181,7 +181,6 @@ export function HomeScreen({ navigation }) {
         .then((response) => {
           if (response.ok) {
             setStatusCode(200);
-            handleOpenPress();
             return response.json();
           } else {
             if (response.status === 429) {
@@ -202,7 +201,18 @@ export function HomeScreen({ navigation }) {
             }
           }
         })
-        .then((json) => setData(json))
+        .then((json) => {
+          const URLArr = json.result.split("/");
+          const result = `${URLArr[0]}//${URLArr[2]}`;
+
+          if (result === "https://files.interclip.app") {
+            handleOpenPress();
+          } else {
+            handleClosePress();
+          }
+          
+          setData(json);
+        })
         .finally(() => setLoading(false));
     } else {
       setLoading(false);
