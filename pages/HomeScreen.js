@@ -305,7 +305,6 @@ export function HomeScreen({ navigation }) {
         ref={bottomSheetRef}
         index={0}
         snapPoints={snapPoints}
-        style={{ backgroundColor: "red" }}
       >
         <View style={{ ...styles.contentContainer }}>
           <View style={{ marginBottom: "10%" }}>
