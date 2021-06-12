@@ -175,7 +175,10 @@ export function HomeScreen({ navigation }) {
                     ? "This code doesn't seem to exist 🤔"
                     : statusCode === 400
                     ? "Something went wrong..."
-                    : truncate(data?.result ? data.result : "", 80))}
+                    : truncate(
+                        data?.result ? data.result.replace("https://", "") : "",
+                        80
+                      ))}
               </Text>
             ) : (
               <ActivityIndicator />
