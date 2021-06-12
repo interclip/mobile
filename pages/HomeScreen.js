@@ -6,6 +6,7 @@ import React, {
   useRef,
   useMemo,
 } from "react";
+
 import {
   Platform,
   Text,
@@ -38,7 +39,7 @@ const mime = require("mime-types");
 
 // Local functions, components and variables
 
-import { validationMsg, checkError, truncate } from "../lib/functions";
+import { validationMsg, checkError, truncate, chooseIcon } from "../lib/functions";
 import { styles } from "../lib/Pages";
 import { config, colors, inputProps } from "../lib/Vars";
 
@@ -84,40 +85,7 @@ export function HomeScreen({ navigation }) {
   const url = data.result || "https://files.interclip.app/ecf3e43230.jpg";
   const fileExtension = url.split(".")[url.split(".").length - 1];
 
-  let fileIcon = "file";
-
-  switch (fileExtension) {
-    case "jpg":
-    case "png":
-    case "avif":
-    case "webp":
-      fileIcon = "file-image";
-      break;
-    case "mp3":
-    case "wav":
-      fileIcon = "file-audio";
-      break;
-    case "mp4":
-    case "mov":
-      fileIcon = "file-video";
-      break;
-    case "pdf":
-      fileIcon = "file-pdf";
-      break;
-    case "zip":
-    case "tar":
-    case "gz":
-      fileIcon = "file-archive";
-      break;
-    case "pptx":
-    case "ppt":
-    case "odp":
-    case "pptm":
-      fileIcon = "file-powerpoint";
-      break;
-    default:
-      fileIcon = "file";
-  }
+  const fileIcon = chooseIcon(fileExtension);
 
   const [statusCode, setStatusCode] = useState(200);
   const [text, setText] = useState(""); // The code entered in the <Input>
