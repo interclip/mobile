@@ -78,12 +78,6 @@ const CustomBackground = ({ animatedIndex, style }) => {
 export function HomeScreen({ navigation }) {
   // Variable set
   const [isLoading, setLoading] = useState(false); // Loading status => only show the responce of the API
-  const [bottomSheetIndex, setBottomSheetIndex] = useState(0);
-
-  const handleSheetChanges = useCallback((index) => {
-    console.log("handleSheetChanges", index);
-    setBottomSheetIndex(index);
-  }, []);
 
   // After the request completes
   const [data, setData] = useState(""); // Dynamically loaded data from the Interclip REST API
@@ -91,7 +85,6 @@ export function HomeScreen({ navigation }) {
   const url = data.result || "https://files.interclip.app/ecf3e43230.jpg";
   const fileExtension = url.split(".")[url.split(".").length - 1];
 
-  let filetype = "";
   let fileIcon = "file";
 
   switch (fileExtension) {
@@ -210,7 +203,7 @@ export function HomeScreen({ navigation }) {
           } else {
             handleClosePress();
           }
-          
+
           setData(json);
         })
         .finally(() => setLoading(false));
@@ -312,7 +305,6 @@ export function HomeScreen({ navigation }) {
         ref={bottomSheetRef}
         index={0}
         snapPoints={snapPoints}
-        onChange={handleSheetChanges}
         style={{ backgroundColor: "red" }}
       >
         <View style={{ ...styles.contentContainer }}>
