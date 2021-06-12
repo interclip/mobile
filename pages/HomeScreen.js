@@ -30,10 +30,7 @@ import * as Linking from "expo-linking";
 import { Input, Icon, Button } from "react-native-elements";
 import NetInfo from "@react-native-community/netinfo";
 import { useFocusEffect } from "@react-navigation/native";
-
-import Animated, {
-  interpolateColors,
-} from "react-native-reanimated";
+import Animated, { interpolateColors } from "react-native-reanimated";
 
 // Functional packages
 
