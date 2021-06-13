@@ -1,6 +1,6 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { StyleSheet, useColorScheme } from 'react-native';
-import Animated, { interpolate, Extrapolate } from 'react-native-reanimated';
+import Animated from 'react-native-reanimated';
 
 const Handle = () => {
   const colorScheme = useColorScheme();
