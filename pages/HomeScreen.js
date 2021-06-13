@@ -21,8 +21,6 @@ import {
   Share,
 } from "react-native";
 
-import PropTypes from "prop-types";
-
 // Components, Expo and RN libraries
 
 import { StatusBar } from "expo-status-bar";
@@ -34,7 +32,6 @@ import * as Haptics from "expo-haptics";
 import { Input, Icon, Button } from "react-native-elements";
 import NetInfo from "@react-native-community/netinfo";
 import { useFocusEffect } from "@react-navigation/native";
-import Animated, { interpolateColors } from "react-native-reanimated";
 
 // Functional packages
 
@@ -53,39 +50,7 @@ import { styles } from "../lib/Pages";
 import { config, colors, inputProps } from "../lib/Vars";
 
 import LogoImage from "../components/LogoImage";
-
-const CustomBackground = ({ animatedIndex, style }) => {
-  const colorScheme = useColorScheme();
-
-  // animated variables
-  const animatedBackground = useMemo(
-    () =>
-      interpolateColors(animatedIndex, {
-        inputRange: [0, 1],
-        outputColorRange:
-          colorScheme === "dark" ? ["#333", "#404040"] : ["#fff", "#fff"],
-      }),
-    [animatedIndex]
-  );
-
-  // styles
-  const containerStyle = useMemo(
-    () => [
-      style,
-      {
-        backgroundColor: animatedBackground,
-      },
-    ],
-    [style, animatedBackground]
-  );
-
-  return <Animated.View style={containerStyle} />;
-};
-
-CustomBackground.propTypes = {
-  animatedIndex: PropTypes.any.isRequired,
-  style: PropTypes.any.isRequired,
-};
+import CustomBackground from "../components/BottomSheetBackground";
 
 // Root component
 
