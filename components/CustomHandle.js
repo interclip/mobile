@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { StyleSheet, useColorScheme } from 'react-native';
 import Animated, { interpolate, Extrapolate } from 'react-native-reanimated';
 
-const Handle = ({ animatedIndex }) => {
+const Handle = () => {
   const colorScheme = useColorScheme();
   return (
     <Animated.View style={styles.header}>
