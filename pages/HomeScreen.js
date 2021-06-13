@@ -267,9 +267,7 @@ export function HomeScreen({ navigation }) {
         </View>
       </TouchableWithoutFeedback>
       <BottomSheet
-        backgroundComponent={
-          colorScheme === "dark" ? CustomBackground : undefined
-        }
+        backgroundComponent={colorScheme === "dark" && CustomBackground}
         onAnimate={handleSheetChanges}
         ref={bottomSheetRef}
         index={0}
