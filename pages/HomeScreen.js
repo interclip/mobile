@@ -45,12 +45,13 @@ import {
   checkError,
   truncate,
 } from "../lib/functions";
-import { chooseIcon } from "../lib/files/chooseIcon";
+import chooseIcon from "../lib/files/chooseIcon";
 import { styles } from "../lib/Pages";
 import { config, colors, inputProps } from "../lib/Vars";
 
 import LogoImage from "../components/LogoImage";
 import CustomBackground from "../components/BottomSheetBackground";
+import CustomHandle from "../components/CustomHandle";
 
 // Root component
 
@@ -268,6 +269,7 @@ export function HomeScreen({ navigation }) {
       </TouchableWithoutFeedback>
       <BottomSheet
         backgroundComponent={colorScheme === "dark" && CustomBackground}
+        handleComponent={CustomHandle}
         onAnimate={handleSheetChanges}
         ref={bottomSheetRef}
         index={0}
