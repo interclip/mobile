@@ -1,6 +1,12 @@
 // React, React Native imports
 
-import React, { useEffect, useState, useRef, useMemo } from "react";
+import React, {
+  useEffect,
+  useState,
+  useRef,
+  useMemo,
+  useCallback,
+} from "react";
 
 import {
   Platform,
@@ -23,6 +29,7 @@ import { StatusBar } from "expo-status-bar";
 import Clipboard from "expo-clipboard";
 import BottomSheet from "@gorhom/bottom-sheet";
 import * as Linking from "expo-linking";
+import * as Haptics from "expo-haptics";
 
 import { Input, Icon, Button } from "react-native-elements";
 import NetInfo from "@react-native-community/netinfo";
@@ -106,6 +113,22 @@ export function HomeScreen({ navigation }) {
   const handleOpenPress = () => bottomSheetRef.current.snapTo(1);
 
   const { width } = Dimensions.get("window");
+
+  const handleSheetChanges = useCallback((_fromIndex, toIndex) => {
+    if (Platform.OS === "ios") {
+      let hapticStrength = false;
+      switch (toIndex) {
+        case 0:
+          hapticStrength = Haptics.ImpactFeedbackStyle.Medium;
+          break;
+        case 1:
+        case 2:
+          hapticStrength = Haptics.ImpactFeedbackStyle.Light;
+          break;
+      }
+      hapticStrength && Haptics.impactAsync(hapticStrength);
+    }
+  }, []);
 
   const onShare = async () => {
     try {
@@ -279,9 +302,12 @@ export function HomeScreen({ navigation }) {
         </View>
       </TouchableWithoutFeedback>
       <BottomSheet
-        backgroundComponent={colorScheme === "dark" ? CustomBackground : undefined}
+        backgroundComponent={
+          colorScheme === "dark" ? CustomBackground : undefined
+        }
+        onAnimate={handleSheetChanges}
         ref={bottomSheetRef}
-        index={1}
+        index={0}
         snapPoints={snapPoints}
       >
         <View style={{ ...styles.contentContainer }}>
