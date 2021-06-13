@@ -1,11 +1,6 @@
 // React, React Native imports
 
-import React, {
-  useEffect,
-  useState,
-  useRef,
-  useMemo,
-} from "react";
+import React, { useEffect, useState, useRef, useMemo } from "react";
 
 import {
   Platform,
@@ -41,7 +36,12 @@ const mime = require("mime-types");
 
 // Local functions, components and variables
 
-import { validationMsg, checkError, truncate, chooseIcon } from "../lib/functions";
+import {
+  validationMsg,
+  checkError,
+  truncate,
+  chooseIcon,
+} from "../lib/functions";
 import { styles } from "../lib/Pages";
 import { config, colors, inputProps } from "../lib/Vars";
 
@@ -279,9 +279,9 @@ export function HomeScreen({ navigation }) {
         </View>
       </TouchableWithoutFeedback>
       <BottomSheet
-        backgroundComponent={CustomBackground}
+        backgroundComponent={colorScheme === "dark" ? CustomBackground : undefined}
         ref={bottomSheetRef}
-        index={0}
+        index={1}
         snapPoints={snapPoints}
       >
         <View style={{ ...styles.contentContainer }}>
