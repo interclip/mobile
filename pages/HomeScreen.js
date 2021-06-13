@@ -44,8 +44,8 @@ import {
   validationMsg,
   checkError,
   truncate,
-  chooseIcon,
 } from "../lib/functions";
+import { chooseIcon } from "../lib/files/chooseIcon";
 import { styles } from "../lib/Pages";
 import { config, colors, inputProps } from "../lib/Vars";
 
