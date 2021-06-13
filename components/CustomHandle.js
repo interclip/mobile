@@ -29,12 +29,4 @@ const styles = StyleSheet.create({
     height: 4,
     borderRadius: 4,
   },
-  leftIndicator: {
-    borderTopStartRadius: 2,
-    borderBottomStartRadius: 2,
-  },
-  rightIndicator: {
-    borderTopEndRadius: 2,
-    borderBottomEndRadius: 2,
-  },
 });
