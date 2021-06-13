@@ -277,12 +277,7 @@ export function HomeScreen({ navigation }) {
       >
         <View style={{ ...styles.contentContainer }}>
           <View style={{ marginBottom: "10%" }}>
-            <Icon
-              name={fileIcon}
-              type="font-awesome-5"
-              size={80}
-              color="#367FFA"
-            />
+            {fileIcon}
             <Text
               style={{
                 fontSize: 25,
