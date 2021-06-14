@@ -1,6 +1,8 @@
 import React from "react";
-import { StyleSheet, useColorScheme } from "react-native";
+import { useColorScheme } from "react-native";
 import Animated from "react-native-reanimated";
+
+import { styles } from "../lib/Pages";
 
 const Handle = () => {
   const colorScheme = useColorScheme();
@@ -18,21 +20,3 @@ const Handle = () => {
 };
 
 export default Handle;
-
-const styles = StyleSheet.create({
-  header: {
-    alignContent: "center",
-    alignItems: "center",
-    justifyContent: "center",
-    paddingVertical: 14,
-  },
-  indicator: {
-    position: "absolute",
-    alignSelf: "center",
-    marginTop: 20,
-    marginBottom: 20,
-    width: "7%",
-    height: 4,
-    borderRadius: 4,
-  },
-});
