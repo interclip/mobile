@@ -25,7 +25,7 @@ jobs:
           signoff: false
           branch: file-format
           delete-branch: true
-          title: 'refactor: Format code'
+          title: "refactor: Format code"
           body: |
             Format code
             - Updated the code with a very fancy format
