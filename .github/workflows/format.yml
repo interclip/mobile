@@ -13,11 +13,6 @@ jobs:
         with:
           node-version: 14.x
       - run: npx prettier --write .
-      - name: Push the changes to GitHub
-        uses: mikeal/publish-to-github-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH_NAME: "main"
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v3
         with:
