@@ -40,11 +40,7 @@ const mime = require("mime-types");
 
 // Local functions, components and variables
 
-import {
-  validationMsg,
-  checkError,
-  truncate,
-} from "../lib/functions";
+import { validationMsg, checkError, truncate } from "../lib/functions";
 import chooseIcon from "../lib/files/chooseIcon";
 import { styles } from "../lib/Pages";
 import { config, colors, inputProps } from "../lib/Vars";
