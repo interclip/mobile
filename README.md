@@ -20,8 +20,8 @@ An Interclip app for your phone and stuff
 
 ## Build the app
 
-- For building for iOS and iPadOS, run `yarn run build:ios`
-- For building for Android, run `yarn run build:android`
+- For building for iOS and iPadOS, run `yarn build:ios`
+- For building for Android, run `yarn build:android`
 
 ## Downloads
 
