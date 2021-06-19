@@ -20,6 +20,7 @@ import * as Linking from "expo-linking";
 
 import * as DocumentPicker from "expo-document-picker";
 import * as ImagePicker from "expo-image-picker";
+import * as Haptics from "expo-haptics";
 
 // Local functions, components and variables
 import { colors } from "../lib/Vars";
@@ -133,6 +134,7 @@ export function FilePage() {
             if (res.ok) {
               return res.json();
             } else {
+              Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
               Alert.alert("Error!", `Got the error ${res.status}.`);
             }
           })
@@ -154,8 +156,16 @@ export function FilePage() {
                   }
                 }
               })
-              .then((objson) => setData(objson))
+              .then((objson) => {
+                setData(objson);
+                Haptics.notificationAsync(
+                  Haptics.NotificationFeedbackType.Success
+                );
+              })
               .catch((err) => {
+                Haptics.notificationAsync(
+                  Haptics.NotificationFeedbackType.Error
+                );
                 Alert.alert("Error", err);
               })
               .finally(() => setLoading(false));
