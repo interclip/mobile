@@ -246,7 +246,7 @@ export function FileSettings() {
     },
     {
       label: "High",
-      value: 0.4,
+      value: 0,
     },
   ];
 
