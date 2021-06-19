@@ -12,7 +12,7 @@ import {
 
 import { Cell, Section } from "react-native-tableview-simple";
 import { Icon } from "react-native-elements";
-import RNPickerSelect, { defaultStyles } from "react-native-picker-select";
+import RNPickerSelect from "react-native-picker-select";
 
 import * as WebBrowser from "expo-web-browser";
 
