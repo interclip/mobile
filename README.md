@@ -32,7 +32,6 @@ An Interclip app for your phone and stuff
 - [Android (`.aab` direct link)](https://github.com/filiptronicek/iclip-mobile/releases/latest/download/iclip.aab)
 - [iOS (Testflight)](https://testflight.apple.com/join/g9WUiQpm)
 
-
 ## Attribution
 
 Google Play and the Google Play logo are trademarks of Google LLC.
