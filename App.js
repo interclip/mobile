@@ -77,7 +77,7 @@ function Settings() {
         component={SettingsPage}
       />
       <Stack.Screen name="QR" component={QRSettings} />
-      <Stack.Screen name="FileSettings" component={FileSettings} />
+      <Stack.Screen name="Files" component={FileSettings} />
       <Stack.Screen name="About" component={AboutPage} />
     </Stack.Navigator>
   );

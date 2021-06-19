@@ -1,7 +1,14 @@
 // React, React Native imports
 
 import React, { useState } from "react";
-import { Settings, Switch, Text, useColorScheme, View, StyleSheet } from "react-native";
+import {
+  Settings,
+  Switch,
+  Text,
+  useColorScheme,
+  View,
+  StyleSheet,
+} from "react-native";
 
 import { Cell, Section } from "react-native-tableview-simple";
 import { Icon } from "react-native-elements";
@@ -72,7 +79,7 @@ export function SettingsPage({ navigation }) {
             <Icon name="folder-outline" type="ionicon" color={textColor} />
           }
           onPress={() =>
-            navigation.navigate("SettingsPage", { screen: "FileSettings" })
+            navigation.navigate("SettingsPage", { screen: "Files" })
           }
           {...cellProps}
         />
@@ -190,9 +197,9 @@ export function FileSettings() {
     Settings.set(data);
   };
 
-  const toggleSwitch = (e) => {
+  const changeQuality = (e) => {
     setData(e);
-    storeData({ data: e });
+    storeData({ uploadquality: e });
   };
 
   const colorScheme = useColorScheme();
@@ -228,18 +235,18 @@ export function FileSettings() {
     },
   });
 
-  const sports = [
+  const qualityOpts = [
     {
-      label: 'High',
-      value: 0.4,
+      label: "None",
+      value: 1,
     },
     {
-      label: 'Medium',
+      label: "Medium",
       value: 0.7,
     },
     {
-      label: 'None',
-      value: 1,
+      label: "High",
+      value: 0.4,
     },
   ];
 
@@ -264,13 +271,13 @@ export function FileSettings() {
           cellAccessoryView={
             <RNPickerSelect
               placeholder={{
-                label: "...",
+                label: "Select one",
                 value: null,
-                color: "#9EA0A4",
+                color: textColor,
               }}
-              items={sports}
+              items={qualityOpts}
               onValueChange={(value) => {
-                setData(value);
+                changeQuality(value);
               }}
               style={{
                 ...pickerSelectStyles,
