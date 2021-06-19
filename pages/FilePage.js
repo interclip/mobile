@@ -9,7 +9,7 @@ import {
   ActivityIndicator,
   Platform,
   Dimensions,
-  Settings
+  Settings,
 } from "react-native";
 
 import { Button, Icon } from "react-native-elements";
@@ -74,7 +74,10 @@ export function FilePage() {
 
       const pickerResult = await ImagePicker.launchCameraAsync({
         mediaTypes: ImagePicker.MediaTypeOptions.All,
-        quality: Settings.get("uploadquality") === null ? 0 : Settings.get("uploadquality"),
+        quality:
+          Settings.get("uploadquality") === null
+            ? 0
+            : Settings.get("uploadquality"),
       });
 
       if (pickerResult.cancelled === true) {
@@ -86,7 +89,7 @@ export function FilePage() {
 
     if (file !== null) {
       // Set defaults for subsequent uploads
-      
+
       setLoading(true);
       setFileURL("");
       setData({ result: "" });
