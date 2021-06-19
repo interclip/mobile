@@ -176,6 +176,7 @@ export function FilePage() {
 
   const chooseAction = () => {
     if (Platform.OS === "ios") {
+      Haptics.selectionAsync();
       BottomSheet.showBottomSheetWithOptions(
         {
           options: ["Cancel", "From Gallery", "From Documents", "From Camera"],
