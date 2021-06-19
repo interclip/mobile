@@ -25,10 +25,13 @@ An Interclip app for your phone and stuff
 
 ## Downloads
 
-- [Android (`.aab`)](https://github.com/filiptronicek/iclip-mobile/releases/latest/download/iclip.aab)
+<a href="https://apps.apple.com/cz/app/interclip/id1546777494"> <img width="250" alt="Download on the App Store" src="https://files.catbox.moe/bpoouz.svg"> </a>
+
+<a href="https://play.google.com/store/apps/details?id=com.filiptronicek.iclip"> <img width="250" alt="Availible on the Google Play Store" src="https://user-images.githubusercontent.com/29888641/122639762-03dbbb00-d0fc-11eb-97b8-ace2b53ceedf.png"> </a>
+
+- [Android (`.aab` direct link)](https://github.com/filiptronicek/iclip-mobile/releases/latest/download/iclip.aab)
 - [iOS (Testflight)](https://testflight.apple.com/join/g9WUiQpm)
 
-[![Availible on the Google Play Store](https://files.catbox.moe/0ve0bw.png)](https://play.google.com/store/apps/details?id=com.filiptronicek.iclip)
 
 ## Attribution
 
