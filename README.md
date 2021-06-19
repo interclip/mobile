@@ -33,5 +33,6 @@ An Interclip app for your phone and stuff
 - [iOS (Testflight)](https://testflight.apple.com/join/g9WUiQpm)
 
 ## Attribution
+
 - App Store® and the Apple logo® are trademarks of Apple Inc.
 - Google Play and the Google Play logo are trademarks of Google LLC.
