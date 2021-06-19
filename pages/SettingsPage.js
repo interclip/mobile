@@ -176,7 +176,7 @@ export function QRSettings() {
       <Section header="Link opening" {...sectionProps}>
         <Cell
           cellStyle="Basic"
-          title="Open all QR Codes automatically"
+          title="Open non-interclip QR Codes"
           cellAccessoryView={
             <Switch
               ios_backgroundColor="#3e3e3e"
