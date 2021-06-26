@@ -17,7 +17,7 @@
     "@react-native-community/clipboard": "^1.5.1",
     "@react-native-community/masked-view": "^0.1.10",
     "@react-native-community/netinfo": "^6.0.0",
-    "@react-native-picker/picker": "1.9.11",
+    "@react-native-picker/picker": "1.16.1",
     "@react-navigation/bottom-tabs": "^5.11.11",
     "@react-navigation/native": "^5.9.4",
     "@react-navigation/stack": "^5.14.5",
@@ -56,7 +56,7 @@
     "react-native-swipe-gestures": "^1.0.5",
     "react-native-tableview-simple": "^4.3.0",
     "react-native-toast-message": "^1.4.9",
-    "react-native-web": "^0.17.0",
+    "react-native-web": "^0.17.1",
     "rn-actionsheet-module": "^1.0.3",
     "strip-eof": "^2.0.0",
     "validator": "^13.5.2"
@@ -64,10 +64,10 @@
   "devDependencies": {
     "@babel/core": "^7.14.6",
     "babel-preset-expo": "^8.3.0",
-    "eslint": "^7.28.0",
+    "eslint": "^7.29.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-react": "^7.24.0",
-    "jest": "^27.0.4"
+    "jest": "^27.0.5"
   },
   "private": false,
   "license": "MIT",
