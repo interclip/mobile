@@ -30,6 +30,7 @@ import * as Linking from "expo-linking";
 import * as Haptics from "expo-haptics";
 
 import { Input, Icon, Button } from "react-native-elements";
+import Toast from "react-native-toast-message";
 import NetInfo from "@react-native-community/netinfo";
 import { useFocusEffect } from "@react-navigation/native";
 
@@ -136,10 +137,13 @@ export function HomeScreen({ navigation }) {
             return response.json();
           } else {
             if (response.status === 429) {
-              Alert.alert(
-                "Slow down!",
-                "We are getting too many requests from you."
-              );
+              Toast.show({
+                type: "error",
+                text1: "Slow down!",
+                text2: "We are getting too many requests from you.",
+                topOffset: 50,
+                visibilityTime: 2000,
+              });
               return {};
             } else {
               if (config.exemptStatusCodes.includes(response.status)) {
@@ -147,7 +151,13 @@ export function HomeScreen({ navigation }) {
                 return response.json();
               } else {
                 setStatusCode(400);
-                Alert.alert("Error!", `Got the error ${response.status}.`);
+                Toast.show({
+                  type: "error",
+                  text1: "Request error!",
+                  text2: `Got the error ${response.status}`,
+                  topOffset: 50,
+                  visibilityTime: 2000,
+                });
                 return response.json();
               }
             }
@@ -199,9 +209,11 @@ export function HomeScreen({ navigation }) {
             onSubmitEditing={() => {
               !isLoading
                 ? Linking.openURL(data.result)
-                : Alert.alert(
-                    `No URL set yet, make sure your code is ${config.codeLength} characters long!`
-                  );
+                : Toast.show({
+                  type: "error",
+                  text1: "Error",
+                  text2: `No URL set yet, make sure your code is ${config.codeLength} characters long!`,
+                });
             }}
           />
           {validationMsg(text) && (
@@ -222,9 +234,21 @@ export function HomeScreen({ navigation }) {
                   // Handle functionality, when user presses for a longer period of time
                   try {
                     Clipboard.setString(data.result);
-                    Alert.alert("Success", "Copied to Clipboard!");
+                    Toast.show({
+                      type: "success",
+                      text1: "Awesome!",
+                      text2: "The URL has been copied to your clipboard!",
+                      topOffset: 50,
+                      visibilityTime: 2000,
+                    });
                   } catch (e) {
-                    Alert.alert("Error", "Couldn't copy to clipboard!");
+                    Toast.show({
+                      type: "error",
+                      text1: "Yikes!",
+                      text2: "Couldn't copy to clipboard!",
+                      topOffset: 50,
+                      visibilityTime: 2000,
+                    });
                   }
                 }}
                 onPress={() => {
@@ -235,8 +259,8 @@ export function HomeScreen({ navigation }) {
                   color: checkError(data.status)
                     ? colors.light
                     : colorScheme === "dark"
-                    ? colors.light
-                    : colors.text,
+                      ? colors.light
+                      : colors.text,
                   backgroundColor:
                     checkError(data.status) & !validationMsg(text)
                       ? colors.errorColor
@@ -250,8 +274,8 @@ export function HomeScreen({ navigation }) {
                   (statusCode === 404
                     ? "This code doesn't seem to exist 🤔"
                     : statusCode === 400
-                    ? "Something went wrong..."
-                    : truncate(
+                      ? "Something went wrong..."
+                      : truncate(
                         data?.result ? data.result.replace("https://", "") : "",
                         80
                       ))}

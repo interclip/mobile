@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from "react";
 import {
-  Alert,
   Modal,
   Platform,
   Text,
@@ -18,6 +17,8 @@ import {
 import { StatusBar } from "expo-status-bar";
 import QRCode from "react-native-qrcode-svg";
 import { Icon, Input, Button } from "react-native-elements";
+import Toast from "react-native-toast-message";
+
 import Clipboard from "expo-clipboard";
 import { activateKeepAwake, deactivateKeepAwake } from "expo-keep-awake";
 
@@ -68,12 +69,21 @@ export function SendScreen() {
             return response.json();
           } else {
             if (response.status === 429) {
-              Alert.alert(
-                "Slow down!",
-                "We are getting too many requests from you."
-              );
+              Toast.show({
+                type: "error",
+                text1: "Slow down!",
+                text2: "We are getting too many requests from you.",
+                topOffset: 50,
+                visibilityTime: 2000,
+              });
             } else {
-              Alert.alert("Error!", `Got the error ${response.status}.`);
+              Toast.show({
+                type: "error",
+                text1: "Error!",
+                text2: `Got the error ${response.status}.`,
+                topOffset: 50,
+                visibilityTime: 2000,
+              });
             }
           }
         })
@@ -135,9 +145,21 @@ export function SendScreen() {
                   /* Handle functionality, when user presses for a longer period of time */
                   try {
                     Clipboard.setString(data.result);
-                    Alert.alert("Success", "Copied to Clipboard!");
+                    Toast.show({
+                      type: "success",
+                      text1: "Awesome!",
+                      text2: "The code has been copied to your clipboard!",
+                      topOffset: 50,
+                      visibilityTime: 2000,
+                    });
                   } catch (e) {
-                    Alert.alert("Error", "Couldn't copy to clipboard!");
+                    Toast.show({
+                      type: "error",
+                      text1: "Yikes!",
+                      text2: "Couldn't copy to clipboard!",
+                      topOffset: 50,
+                      visibilityTime: 2000,
+                    });
                   }
                 }}
                 style={{
@@ -158,9 +180,6 @@ export function SendScreen() {
               animationType="slide"
               transparent={true}
               visible={modalVisible}
-              onRequestClose={() => {
-                Alert.alert("Modal has been closed.");
-              }}
             >
               <View
                 style={{

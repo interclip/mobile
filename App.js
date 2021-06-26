@@ -10,6 +10,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 
 import { Icon } from "react-native-elements";
+import Toast from "react-native-toast-message";
 
 // Pages
 
@@ -175,6 +176,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <MyTabs />
+      <Toast ref={(ref) => Toast.setRef(ref)} />
     </NavigationContainer>
   );
 }

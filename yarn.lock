@@ -7655,6 +7655,13 @@ react-native-tableview-simple@^4.3.0:
   resolved "https://registry.yarnpkg.com/react-native-tableview-simple/-/react-native-tableview-simple-4.3.0.tgz#e14e01b0c8150e195a18432ade19f7fbe6d80cc1"
   integrity sha512-pyFlWVjdDDbAQ0sL12CE9rxPTgjnNc2s9aW6NmTjGSLlBl1aqp3qRJTRCg7WUKPCJWug2pizyj+yPdKpvcjADA==
 
+react-native-toast-message@^1.4.9:
+  version "1.4.9"
+  resolved "https://registry.yarnpkg.com/react-native-toast-message/-/react-native-toast-message-1.4.9.tgz#47f33ac312fe2aee5dbdd4ae14745fa0d354102e"
+  integrity sha512-QhHzzsiymKpHEWz2nUKQjQMRuGN+/a8cOwDXJcz3TQFY03p20f6sJW9JKw3KkMfvWiUhGbApCPpNU6tHaAZ32w==
+  dependencies:
+    prop-types "^15.7.2"
+
 react-native-web@^0.17.0:
   version "0.17.0"
   resolved "https://registry.yarnpkg.com/react-native-web/-/react-native-web-0.17.0.tgz#a5c2765da93086fa7ac9850b784adf878ca725ca"
