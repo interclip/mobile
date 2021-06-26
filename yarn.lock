@@ -7632,11 +7632,6 @@ react-native-screens@~3.4.0:
   dependencies:
     warn-once "^0.1.0"
 
-react-native-sfsymbols@^1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/react-native-sfsymbols/-/react-native-sfsymbols-1.0.3.tgz#2db1093820185424fc72317e275b641cc8268de1"
-  integrity sha512-hsLSDP2hpYHDtW7VbSbXrSJHkp7NImbtQ3WX4aS+3IbnFUuELIHaNlS8Uv0Rj8hWAS3iuC/ckBoQA88JY2D52A==
-
 react-native-size-matters@^0.3.1:
   version "0.3.1"
   resolved "https://registry.yarnpkg.com/react-native-size-matters/-/react-native-size-matters-0.3.1.tgz#24d0cfc335a2c730f6d58bd7b43ea5a41be4b49f"
