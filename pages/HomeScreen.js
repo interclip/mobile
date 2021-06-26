@@ -13,7 +13,6 @@ import {
   Text,
   useColorScheme,
   View,
-  Alert,
   Keyboard,
   TouchableWithoutFeedback,
   ActivityIndicator,
