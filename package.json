@@ -55,7 +55,7 @@
     "react-native-svg": "^12.1.1",
     "react-native-swipe-gestures": "^1.0.5",
     "react-native-tableview-simple": "^4.3.0",
-    "react-native-web": "^0.17.0",
+    "react-native-web": "^0.17.1",
     "rn-actionsheet-module": "^1.0.3",
     "strip-eof": "^2.0.0",
     "validator": "^13.5.2"
