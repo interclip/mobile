@@ -55,7 +55,7 @@
     "react-native-svg": "^12.1.1",
     "react-native-swipe-gestures": "^1.0.5",
     "react-native-tableview-simple": "^4.3.0",
-    "react-native-web": "^0.17.0",
+    "react-native-web": "^0.17.1",
     "rn-actionsheet-module": "^1.0.3",
     "strip-eof": "^2.0.0",
     "validator": "^13.5.2"
@@ -66,7 +66,7 @@
     "eslint": "^7.29.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-react": "^7.24.0",
-    "jest": "^27.0.4"
+    "jest": "^27.0.5"
   },
   "private": false,
   "license": "MIT",
