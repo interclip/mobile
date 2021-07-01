@@ -4253,10 +4253,10 @@ expo-permissions@~12.0.1:
   resolved "https://registry.yarnpkg.com/expo-permissions/-/expo-permissions-12.0.1.tgz#5163c00d991bf565bf987354611628c298ddd0c4"
   integrity sha512-TtypNPPLG4SdVEKBlrArLLZIyhlhE+3B4dhz2HaY1Mve2rcvKE0C7z/e1WoUVU8+LgcdKoNGwg/wRVeCkxeEhg==
 
-expo-splash-screen@^0.10.2:
-  version "0.10.2"
-  resolved "https://registry.yarnpkg.com/expo-splash-screen/-/expo-splash-screen-0.10.2.tgz#3e3d7c24c4ed180a60ce3ec64a77eefd04dd0d97"
-  integrity sha512-ngelW7g5yFqk3LWbyLDDxi3LYXEfgGFCJddL/Q8S/C1pMUc5foW2j9i/q+akK8i5mjYtSx3+Bk/qbyX92QIF/w==
+expo-splash-screen@^0.10.3:
+  version "0.10.3"
+  resolved "https://registry.yarnpkg.com/expo-splash-screen/-/expo-splash-screen-0.10.3.tgz#a4fae07fc0e0c9e997d88c1174ebaa66d02c370c"
+  integrity sha512-/9YPJodKjA5/Lq/YZf2aOeIaEjwkd5UW+7mr01CwvMJnZaNCIpt7d0xglxkdhCDQooQFihI/UrUoSDRDegmyjA==
   dependencies:
     "@expo/configure-splash-screen" "0.3.4"
 
