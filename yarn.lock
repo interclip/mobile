@@ -7758,10 +7758,10 @@ react-native-bottomsheet@^2.5.2:
   resolved "https://registry.yarnpkg.com/react-native-bottomsheet/-/react-native-bottomsheet-2.5.2.tgz#b89b9342e4988a9ca32b26db07f3754204338352"
   integrity sha512-Q0INuSn1OKYj4tVv/FCuOc/NlCqH9duRk5ws4kzorxCqo1Ig5exCwOfueKsc9blGKai2j6VZfXNGmHwe5w7iIg==
 
-react-native-camera@^3.44.1:
-  version "3.44.1"
-  resolved "https://registry.yarnpkg.com/react-native-camera/-/react-native-camera-3.44.1.tgz#60e7d60fe778c1fc59d0579b64c63c3c1a59865a"
-  integrity sha512-B95RL3laK2v8R7L/37v28MYcEcwsM/mS94h6EZuRMLH5HFolkAwh7zJo+UAn7FG9eFtAdBwIM6s9OqYudTVO4Q==
+react-native-camera@^3.44.3:
+  version "3.44.3"
+  resolved "https://registry.yarnpkg.com/react-native-camera/-/react-native-camera-3.44.3.tgz#f8f35f2484e508b0694dee54a8801a1e0833d851"
+  integrity sha512-Efb5aKhFsE7qnqvTnbSEwFAom79L5BT4jMn+B2wYVUnZeRgWh45gNSG7Ou3MQ6zU2DpUHBPlBFKGVS5yOSfSZQ==
   dependencies:
     prop-types "^15.6.2"
 
