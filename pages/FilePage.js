@@ -200,10 +200,6 @@ export function FilePage() {
             case Platform.OS === "ios" ? 0 : 3:
               action = null;
               break;
-
-            default:
-              alert("Default");
-              break;
           }
 
           if (action !== null) {
