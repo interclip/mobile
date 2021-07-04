@@ -21,7 +21,7 @@
     "@react-navigation/bottom-tabs": "^5.11.11",
     "@react-navigation/native": "^5.9.4",
     "@react-navigation/stack": "^5.14.5",
-    "expo": "^41.0.0",
+    "expo": "^42.0.0",
     "expo-barcode-scanner": "^10.1.2",
     "expo-clipboard": "^1.0.2",
     "expo-document-picker": "~9.1.2",
@@ -63,7 +63,7 @@
   "devDependencies": {
     "@babel/core": "^7.14.6",
     "babel-preset-expo": "^8.3.0",
-    "eslint": "^7.29.0",
+    "eslint": "^7.30.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-react": "^7.24.0",
     "jest": "^27.0.6"
