@@ -27,7 +27,7 @@
     "expo-document-picker": "~9.1.2",
     "expo-haptics": "~10.1.0",
     "expo-image-picker": "~10.1.4",
-    "expo-keep-awake": "~9.1.2",
+    "expo-keep-awake": "~9.2.0",
     "expo-linking": "~2.2.3",
     "expo-permissions": "~12.0.1",
     "expo-splash-screen": "^0.11.2",
@@ -63,7 +63,7 @@
   "devDependencies": {
     "@babel/core": "^7.14.6",
     "babel-preset-expo": "^8.3.0",
-    "eslint": "^7.29.0",
+    "eslint": "^7.30.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-react": "^7.24.0",
     "jest": "^27.0.6"
