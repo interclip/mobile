@@ -4416,10 +4416,10 @@ expo-font@~9.2.1:
     expo-modules-core "~0.2.0"
     fontfaceobserver "^2.1.0"
 
-expo-haptics@~10.0.0:
-  version "10.0.0"
-  resolved "https://registry.yarnpkg.com/expo-haptics/-/expo-haptics-10.0.0.tgz#a2dba3995fab4774747d9f7c2b021accf9afc061"
-  integrity sha512-dfl4Fef22B8O49x5JEzILmAhathT14bkN0kic2FpuwssJDX/yZ/R2lD12Iu9XqxdgHAFQRjOSq3dFjrxDGkP6g==
+expo-haptics@~10.1.0:
+  version "10.1.0"
+  resolved "https://registry.yarnpkg.com/expo-haptics/-/expo-haptics-10.1.0.tgz#2ef5f0c3442f57844f7a7a961d922872e4ea9a71"
+  integrity sha512-2rpixkP3LSCwaJAmbbs0CSqbY7lSk7Ytay4UAYWg3YiJ05My7+MGMPbQJARyAMI5JQNuzcdsZN74btSusBvgYQ==
 
 expo-image-picker@~10.1.4:
   version "10.1.4"
