@@ -26,7 +26,7 @@
     "expo-clipboard": "^1.1.0",
     "expo-document-picker": "~9.2.4",
     "expo-haptics": "~10.1.0",
-    "expo-image-picker": "~10.1.4",
+    "expo-image-picker": "~10.2.2",
     "expo-keep-awake": "~9.2.0",
     "expo-linking": "~2.3.1",
     "expo-permissions": "~12.1.1",
