@@ -48,7 +48,7 @@ export function FilePage() {
         Toast.show({
           type: "error",
           text1: "Error!",
-          text2: `Permission to access the camera roll is required!`,
+          text2: "Permission to access the camera roll is required!",
           topOffset: 50,
           visibilityTime: 2000,
         });
@@ -78,7 +78,7 @@ export function FilePage() {
         Toast.show({
           type: "error",
           text1: "Error!",
-          text2: `Permission to access the camera is required!`,
+          text2: "Permission to access the camera is required!",
           topOffset: 50,
           visibilityTime: 2000,
         });
