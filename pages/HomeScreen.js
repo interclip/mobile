@@ -23,7 +23,7 @@ import {
 // Components, Expo and RN libraries
 
 import { StatusBar } from "expo-status-bar";
-import Clipboard from "expo-clipboard";
+import * as Clipboard from "expo-clipboard";
 import BottomSheet from "@gorhom/bottom-sheet";
 import * as Linking from "expo-linking";
 import * as Haptics from "expo-haptics";
