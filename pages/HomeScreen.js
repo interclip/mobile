@@ -209,10 +209,10 @@ export function HomeScreen({ navigation }) {
               !isLoading
                 ? Linking.openURL(data.result)
                 : Toast.show({
-                  type: "error",
-                  text1: "Error",
-                  text2: `No URL set yet, make sure your code is ${config.codeLength} characters long!`,
-                });
+                    type: "error",
+                    text1: "Error",
+                    text2: `No URL set yet, make sure your code is ${config.codeLength} characters long!`,
+                  });
             }}
           />
           {validationMsg(text) && (
@@ -258,8 +258,8 @@ export function HomeScreen({ navigation }) {
                   color: checkError(data.status)
                     ? colors.light
                     : colorScheme === "dark"
-                      ? colors.light
-                      : colors.text,
+                    ? colors.light
+                    : colors.text,
                   backgroundColor:
                     checkError(data.status) & !validationMsg(text)
                       ? colors.errorColor
@@ -273,8 +273,8 @@ export function HomeScreen({ navigation }) {
                   (statusCode === 404
                     ? "This code doesn't seem to exist 🤔"
                     : statusCode === 400
-                      ? "Something went wrong..."
-                      : truncate(
+                    ? "Something went wrong..."
+                    : truncate(
                         data?.result ? data.result.replace("https://", "") : "",
                         80
                       ))}
