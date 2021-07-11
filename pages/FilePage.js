@@ -5,7 +5,6 @@ import {
   Text,
   useColorScheme,
   View,
-  Alert,
   ActivityIndicator,
   Platform,
   Dimensions,
@@ -14,6 +13,7 @@ import {
 
 import { Button, Icon } from "react-native-elements";
 import BottomSheet from "react-native-bottomsheet";
+import Toast from "react-native-toast-message";
 
 import Clipboard from "expo-clipboard";
 import * as Linking from "expo-linking";
@@ -45,7 +45,13 @@ export function FilePage() {
         await ImagePicker.requestMediaLibraryPermissionsAsync();
 
       if (permissionResult.granted === false) {
-        Alert.alert("Permission to access camera roll is required!");
+        Toast.show({
+          type: "error",
+          text1: "Error!",
+          text2: "Permission to access the camera roll is required!",
+          topOffset: 50,
+          visibilityTime: 2000,
+        });
         return;
       }
 
@@ -69,7 +75,13 @@ export function FilePage() {
       const permissionResult = await ImagePicker.getCameraPermissionsAsync();
 
       if (permissionResult.granted === false) {
-        Alert.alert("Permission to access the camera is required!");
+        Toast.show({
+          type: "error",
+          text1: "Error!",
+          text2: "Permission to access the camera is required!",
+          topOffset: 50,
+          visibilityTime: 2000,
+        });
         return;
       }
 
@@ -108,11 +120,15 @@ export function FilePage() {
       }
 
       if (blob.size > fileSizeLimitInBytes) {
-        Alert.alert(
-          `File size limit exceeded, your file has ${formatBytes(
+        Toast.show({
+          type: "error",
+          text1: "Error!",
+          text2: `File size limit exceeded, your file has ${formatBytes(
             blob.size
-          )}, but the limit is ${fileSizeLimitInMegabytes}`
-        );
+          )}, but the limit is ${fileSizeLimitInMegabytes}`,
+          topOffset: 50,
+          visibilityTime: 2000,
+        });
         setLoading(false);
       } else {
         const data = new FormData();
@@ -135,7 +151,13 @@ export function FilePage() {
               return res.json();
             } else {
               Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
-              Alert.alert("Error!", `Got the error ${res.status}.`);
+              Toast.show({
+                type: "error",
+                text1: "Error!",
+                text2: `Got the error ${res.status}.`,
+                topOffset: 50,
+                visibilityTime: 2000,
+              });
             }
           })
           .then((response) => {
@@ -147,12 +169,21 @@ export function FilePage() {
                   return rs.json();
                 } else {
                   if (rs.status === 429) {
-                    Alert.alert(
-                      "Slow down!",
-                      "We are getting too many requests from you."
-                    );
+                    Toast.show({
+                      type: "error",
+                      text1: "Slow down!",
+                      text2: "We are getting too many requests from you.",
+                      topOffset: 50,
+                      visibilityTime: 2000,
+                    });
                   } else {
-                    Alert.alert("Error!", `Got the error ${rs.status}.`);
+                    Toast.show({
+                      type: "error",
+                      text1: "Error!",
+                      text2: `Got the error ${rs.status}.`,
+                      topOffset: 50,
+                      visibilityTime: 2000,
+                    });
                   }
                 }
               })
@@ -166,7 +197,13 @@ export function FilePage() {
                 Haptics.notificationAsync(
                   Haptics.NotificationFeedbackType.Error
                 );
-                Alert.alert("Error", err);
+                Toast.show({
+                  type: "error",
+                  text1: "Something weird happened...",
+                  text2: err,
+                  topOffset: 50,
+                  visibilityTime: 2000,
+                });
               })
               .finally(() => setLoading(false));
           });
@@ -296,9 +333,21 @@ export function FilePage() {
               /* Handle functionality, when user presses for a longer period of time */
               try {
                 Clipboard.setString(fileURL);
-                Alert.alert("Success", "Copied to Clipboard!");
+                Toast.show({
+                  type: "success",
+                  text1: "Awesome!",
+                  text2: "The URL has been copied to your clipboard!",
+                  topOffset: 50,
+                  visibilityTime: 2000,
+                });
               } catch (e) {
-                Alert.alert("Error", "Couldn't copy to clipboard!");
+                Toast.show({
+                  type: "error",
+                  text1: "Yikes!",
+                  text2: "Couldn't copy to clipboard!",
+                  topOffset: 50,
+                  visibilityTime: 2000,
+                });
               }
             }}
           >
@@ -323,9 +372,21 @@ export function FilePage() {
               /* Handle functionality, when user presses for a longer period of time */
               try {
                 Clipboard.setString(data.result);
-                Alert.alert("Success", "Copied to Clipboard!");
+                Toast.show({
+                  type: "success",
+                  text1: "Awesome!",
+                  text2: "Copied the file code to the clipboard!",
+                  topOffset: 50,
+                  visibilityTime: 2000,
+                });
               } catch (e) {
-                Alert.alert("Error", "Couldn't copy to clipboard!");
+                Toast.show({
+                  type: "error",
+                  text1: "Yikeks!",
+                  text2: "Couldn't copy the file code to the clipboard!",
+                  topOffset: 50,
+                  visibilityTime: 2000,
+                });
               }
             }}
           >
