@@ -188,25 +188,7 @@ export default function App() {
     prefixes: ["https://interclip.app/", prefix],
     config,
   };
-
-  Linking.addEventListener("url", (event) => {
-    const url = event.url;
-    console.log("Scanned", url);
-    /*
-    for (const prefix of linking.prefixes) {
-      if (url.startsWith(prefix)) {
-        const route = url.replace(prefix, "");
-        console.log(route);
-        return;
-      }
-    }
-    */
-  });
-
-  const redirectUrl = Linking.createURL("set");
-
-  console.log(redirectUrl);
-
+  const { state } = useLinking(linking);
   return (
     <NavigationContainer linking={linking} fallback={<Text>Loading...</Text>}>
       <MyTabs />
