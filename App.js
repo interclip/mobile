@@ -188,7 +188,7 @@ export default function App() {
     prefixes: ["https://interclip.app/", prefix],
     config,
   };
-  const { state } = useLinking(linking);
+
   return (
     <NavigationContainer linking={linking} fallback={<Text>Loading...</Text>}>
       <MyTabs />
