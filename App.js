@@ -174,11 +174,11 @@ function MyTabs() {
 }
 
 export default function App() {
-
   const config = {
     screens: {
-      Scan: 'feed/:sort',
-      SettingsPage: 'user',
+      Scan: "scan",
+      SettingsPage: "settings",
+      File: "file",
     },
   };
 
