@@ -1,7 +1,7 @@
 // 1st party libraries and dependencies: react, react native and Expo stuff
 
 import React from "react";
-import { useColorScheme, Platform } from "react-native";
+import { useColorScheme, Platform, Text } from "react-native";
 
 // 3rd party libraries
 
@@ -11,6 +11,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 import { Icon } from "react-native-elements";
 import Toast from "react-native-toast-message";
+import * as Linking from "expo-linking";
 
 // Pages
 
@@ -62,6 +63,7 @@ function Settings() {
       screenOptions={({ route }) => {
         return {
           headerShown: route.name !== "Settings",
+          headerMode: "float",
           headerStyle: {
             backgroundColor:
               colorScheme === "dark" ? colors.darkHeader : colors.light,
@@ -88,10 +90,9 @@ function MyTabs() {
   const colorScheme = useColorScheme();
   return (
     <Tab.Navigator
-      showLabel={false}
       initialRouteName="Home"
-      tabBarOptions={{
-        showLabel: false,
+      screenOptions={{
+        tabBarShowLabel: false,
         activeTintColor: "#157EFB",
         inactiveTintColor: colorScheme === "dark" ? colors.light : colors.text,
         style: {
@@ -173,8 +174,41 @@ function MyTabs() {
 }
 
 export default function App() {
+
+  const config = {
+    screens: {
+      Scan: 'feed/:sort',
+      SettingsPage: 'user',
+    },
+  };
+
+  const prefix = Linking.createURL("/");
+
+  const linking = {
+    prefixes: ["https://interclip.app/", prefix],
+    config,
+  };
+
+  Linking.addEventListener("url", (event) => {
+    const url = event.url;
+    console.log("Scanned", url);
+    /*
+    for (const prefix of linking.prefixes) {
+      if (url.startsWith(prefix)) {
+        const route = url.replace(prefix, "");
+        console.log(route);
+        return;
+      }
+    }
+    */
+  });
+
+  const redirectUrl = Linking.createURL("set");
+
+  console.log(redirectUrl);
+
   return (
-    <NavigationContainer>
+    <NavigationContainer linking={linking} fallback={<Text>Loading...</Text>}>
       <MyTabs />
       <Toast ref={(ref) => Toast.setRef(ref)} />
     </NavigationContainer>

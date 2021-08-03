@@ -7,6 +7,7 @@
     "userInterfaceStyle": "automatic",
     "githubUrl": "https://github.com/filiptronicek/iclip-mobile",
     "icon": "./assets/icon.png",
+    "scheme": "iclip",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
