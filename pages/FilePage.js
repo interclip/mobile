@@ -13,7 +13,7 @@ import {
 
 import { Button, Icon } from "react-native-elements";
 import BottomSheet from "react-native-bottomsheet";
-import Toast from "react-native-toast-message";
+import { Notifier, NotifierComponents } from "react-native-notifier";
 
 import * as Clipboard from "expo-clipboard";
 import * as Linking from "expo-linking";
@@ -45,12 +45,12 @@ export function FilePage() {
         await ImagePicker.requestMediaLibraryPermissionsAsync();
 
       if (permissionResult.granted === false) {
-        Toast.show({
-          type: "error",
-          text1: "Error!",
-          text2: "Permission to access the camera roll is required!",
-          topOffset: 50,
-          visibilityTime: 2000,
+        Notifier.showNotification({
+          title: "Permission to access the camera roll is required!",
+          Component: NotifierComponents.Alert,
+          componentProps: {
+            alertType: "error",
+          },
         });
         return;
       }
@@ -75,12 +75,12 @@ export function FilePage() {
       const permissionResult = await ImagePicker.getCameraPermissionsAsync();
 
       if (permissionResult.granted === false) {
-        Toast.show({
-          type: "error",
-          text1: "Error!",
-          text2: "Permission to access the camera is required!",
-          topOffset: 50,
-          visibilityTime: 2000,
+        Notifier.showNotification({
+          title: "Permission to access the camera is required!",
+          Component: NotifierComponents.Alert,
+          componentProps: {
+            alertType: "error",
+          },
         });
         return;
       }
@@ -120,14 +120,14 @@ export function FilePage() {
       }
 
       if (blob.size > fileSizeLimitInBytes) {
-        Toast.show({
-          type: "error",
-          text1: "Error!",
-          text2: `File size limit exceeded, your file has ${formatBytes(
+        Notifier.showNotification({
+          title: `File size limit exceeded, your file has ${formatBytes(
             blob.size
-          )}, but the limit is ${fileSizeLimitInMegabytes}`,
-          topOffset: 50,
-          visibilityTime: 2000,
+          )}, but the limit is ${fileSizeLimitInMegabytes} MB`,
+          Component: NotifierComponents.Alert,
+          componentProps: {
+            alertType: "error",
+          },
         });
         setLoading(false);
       } else {
@@ -169,20 +169,20 @@ export function FilePage() {
                   return rs.json();
                 } else {
                   if (rs.status === 429) {
-                    Toast.show({
-                      type: "error",
-                      text1: "Slow down!",
-                      text2: "We are getting too many requests from you.",
-                      topOffset: 50,
-                      visibilityTime: 2000,
+                    Notifier.showNotification({
+                      title: "We are getting too many requests from you.",
+                      Component: NotifierComponents.Alert,
+                      componentProps: {
+                        alertType: "error",
+                      },
                     });
                   } else {
-                    Toast.show({
-                      type: "error",
-                      text1: "Error!",
-                      text2: `Got the error ${rs.status}.`,
-                      topOffset: 50,
-                      visibilityTime: 2000,
+                    Notifier.showNotification({
+                      title: `Got the error ${rs.status}.`,
+                      Component: NotifierComponents.Alert,
+                      componentProps: {
+                        alertType: "error",
+                      },
                     });
                   }
                 }
@@ -197,12 +197,13 @@ export function FilePage() {
                 Haptics.notificationAsync(
                   Haptics.NotificationFeedbackType.Error
                 );
-                Toast.show({
-                  type: "error",
-                  text1: "Something weird happened...",
-                  text2: err,
-                  topOffset: 50,
-                  visibilityTime: 2000,
+                Notifier.showNotification({
+                  title: "Something weird happened...",
+                  description: err,
+                  Component: NotifierComponents.Alert,
+                  componentProps: {
+                    alertType: "error",
+                  },
                 });
               })
               .finally(() => setLoading(false));
@@ -333,20 +334,20 @@ export function FilePage() {
               /* Handle functionality, when user presses for a longer period of time */
               try {
                 Clipboard.setString(fileURL);
-                Toast.show({
-                  type: "success",
-                  text1: "Awesome!",
-                  text2: "The URL has been copied to your clipboard!",
-                  topOffset: 50,
-                  visibilityTime: 2000,
+                Notifier.showNotification({
+                  title: "The URL has been copied to your clipboard!",
+                  Component: NotifierComponents.Alert,
+                  componentProps: {
+                    alertType: "success",
+                  },
                 });
               } catch (e) {
-                Toast.show({
-                  type: "error",
-                  text1: "Yikes!",
-                  text2: "Couldn't copy to clipboard!",
-                  topOffset: 50,
-                  visibilityTime: 2000,
+                Notifier.showNotification({
+                  title: "Couldn't copy to clipboard!",
+                  Component: NotifierComponents.Alert,
+                  componentProps: {
+                    alertType: "error",
+                  },
                 });
               }
             }}
@@ -372,20 +373,20 @@ export function FilePage() {
               /* Handle functionality, when user presses for a longer period of time */
               try {
                 Clipboard.setString(data.result);
-                Toast.show({
-                  type: "success",
-                  text1: "Awesome!",
-                  text2: "Copied the file code to the clipboard!",
-                  topOffset: 50,
-                  visibilityTime: 2000,
+                Notifier.showNotification({
+                  title: "The file code has been copied to your clipboard!",
+                  Component: NotifierComponents.Alert,
+                  componentProps: {
+                    alertType: "success",
+                  },
                 });
               } catch (e) {
-                Toast.show({
-                  type: "error",
-                  text1: "Yikeks!",
-                  text2: "Couldn't copy the file code to the clipboard!",
-                  topOffset: 50,
-                  visibilityTime: 2000,
+                Notifier.showNotification({
+                  title: "Couldn't copy to clipboard!",
+                  Component: NotifierComponents.Alert,
+                  componentProps: {
+                    alertType: "error",
+                  },
                 });
               }
             }}
