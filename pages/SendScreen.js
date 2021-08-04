@@ -17,7 +17,7 @@ import {
 import { StatusBar } from "expo-status-bar";
 import QRCode from "react-native-qrcode-svg";
 import { Icon, Input, Button } from "react-native-elements";
-import { Notifier, NotifierComponents } from 'react-native-notifier';
+import { Notifier, NotifierComponents } from "react-native-notifier";
 
 import * as Clipboard from "expo-clipboard";
 import { activateKeepAwake, deactivateKeepAwake } from "expo-keep-awake";
