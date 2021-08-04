@@ -5,7 +5,11 @@ import { useColorScheme, Platform, Text } from "react-native";
 
 // 3rd party libraries
 
-import { NavigationContainer } from "@react-navigation/native";
+import {
+  NavigationContainer,
+  DefaultTheme,
+  DarkTheme,
+} from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 
@@ -88,6 +92,7 @@ function Settings() {
 
 function MyTabs() {
   const colorScheme = useColorScheme();
+
   return (
     <Tab.Navigator
       initialRouteName="Home"
@@ -174,6 +179,8 @@ function MyTabs() {
 }
 
 export default function App() {
+  const colorScheme = useColorScheme();
+
   const config = {
     screens: {
       Scan: "scan",
@@ -190,7 +197,11 @@ export default function App() {
   };
 
   return (
-    <NavigationContainer linking={linking} fallback={<Text>Loading...</Text>}>
+    <NavigationContainer
+      linking={linking}
+      fallback={<Text>Loading...</Text>}
+      theme={colorScheme === "dark" ? DarkTheme : DefaultTheme}
+    >
       <MyTabs />
       <Toast ref={(ref) => Toast.setRef(ref)} />
     </NavigationContainer>
