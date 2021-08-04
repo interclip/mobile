@@ -11,7 +11,6 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 import { Icon } from "react-native-elements";
 import { NotifierWrapper } from "react-native-notifier";
-import Toast from "react-native-toast-message";
 
 // Pages
 
@@ -178,7 +177,6 @@ export default function App() {
     <NotifierWrapper>
       <NavigationContainer>
         <MyTabs />
-        <Toast ref={(ref) => Toast.setRef(ref)} />
       </NavigationContainer>
     </NotifierWrapper>
   );

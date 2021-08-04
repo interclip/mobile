@@ -151,12 +151,12 @@ export function FilePage() {
               return res.json();
             } else {
               Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
-              Toast.show({
-                type: "error",
-                text1: "Error!",
-                text2: `Got the error ${res.status}.`,
-                topOffset: 50,
-                visibilityTime: 2000,
+              Notifier.showNotification({
+                title: `Got the error ${res.status}`,
+                Component: NotifierComponents.Alert,
+                componentProps: {
+                  alertType: "error",
+                },
               });
             }
           })
