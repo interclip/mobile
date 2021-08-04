@@ -17,7 +17,7 @@ import {
 import { StatusBar } from "expo-status-bar";
 import QRCode from "react-native-qrcode-svg";
 import { Icon, Input, Button } from "react-native-elements";
-import Toast from "react-native-toast-message";
+import { Notifier, NotifierComponents } from "react-native-notifier";
 
 import * as Clipboard from "expo-clipboard";
 import { activateKeepAwake, deactivateKeepAwake } from "expo-keep-awake";
@@ -69,20 +69,20 @@ export function SendScreen() {
             return response.json();
           } else {
             if (response.status === 429) {
-              Toast.show({
-                type: "error",
-                text1: "Slow down!",
-                text2: "We are getting too many requests from you.",
-                topOffset: 50,
-                visibilityTime: 2000,
+              Notifier.showNotification({
+                title: "We are getting too many requests from you.",
+                Component: NotifierComponents.Alert,
+                componentProps: {
+                  alertType: "error",
+                },
               });
             } else {
-              Toast.show({
-                type: "error",
-                text1: "Error!",
-                text2: `Got the error ${response.status}.`,
-                topOffset: 50,
-                visibilityTime: 2000,
+              Notifier.showNotification({
+                title: `Got the error ${response.status}`,
+                Component: NotifierComponents.Alert,
+                componentProps: {
+                  alertType: "error",
+                },
               });
             }
           }
@@ -145,20 +145,20 @@ export function SendScreen() {
                   /* Handle functionality, when user presses for a longer period of time */
                   try {
                     Clipboard.setString(data.result);
-                    Toast.show({
-                      type: "success",
-                      text1: "Awesome!",
-                      text2: "The code has been copied to your clipboard!",
-                      topOffset: 50,
-                      visibilityTime: 2000,
+                    Notifier.showNotification({
+                      title: "The code has been copied to your clipboard!",
+                      Component: NotifierComponents.Alert,
+                      componentProps: {
+                        alertType: "success",
+                      },
                     });
                   } catch (e) {
-                    Toast.show({
-                      type: "error",
-                      text1: "Yikes!",
-                      text2: "Couldn't copy to clipboard!",
-                      topOffset: 50,
-                      visibilityTime: 2000,
+                    Notifier.showNotification({
+                      title: "Couldn't copy to clipboard!",
+                      Component: NotifierComponents.Alert,
+                      componentProps: {
+                        alertType: "error",
+                      },
                     });
                   }
                 }}

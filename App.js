@@ -14,7 +14,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 
 import { Icon } from "react-native-elements";
-import Toast from "react-native-toast-message";
+import { NotifierWrapper } from "react-native-notifier";
 import * as Linking from "expo-linking";
 
 // Pages
@@ -197,13 +197,14 @@ export default function App() {
   };
 
   return (
-    <NavigationContainer
-      linking={linking}
-      fallback={<Text>Loading...</Text>}
-      theme={colorScheme === "dark" ? DarkTheme : DefaultTheme}
-    >
-      <MyTabs />
-      <Toast ref={(ref) => Toast.setRef(ref)} />
-    </NavigationContainer>
+     <NotifierWrapper>
+        <NavigationContainer
+          linking={linking}
+          fallback={<Text>Loading...</Text>}
+          theme={colorScheme === "dark" ? DarkTheme : DefaultTheme}
+        >
+          <MyTabs />
+        </NavigationContainer>
+    </NotifierWrapper>
   );
 }

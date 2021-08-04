@@ -29,7 +29,7 @@ import * as Linking from "expo-linking";
 import * as Haptics from "expo-haptics";
 
 import { Input, Icon, Button } from "react-native-elements";
-import Toast from "react-native-toast-message";
+import { Notifier, NotifierComponents } from "react-native-notifier";
 import NetInfo from "@react-native-community/netinfo";
 import { useFocusEffect } from "@react-navigation/native";
 
@@ -136,12 +136,13 @@ export function HomeScreen({ navigation }) {
             return response.json();
           } else {
             if (response.status === 429) {
-              Toast.show({
-                type: "error",
-                text1: "Slow down!",
-                text2: "We are getting too many requests from you.",
-                topOffset: 50,
-                visibilityTime: 2000,
+              Notifier.showNotification({
+                title: "Slow down!",
+                description: "We are getting too many requests from you.",
+                Component: NotifierComponents.Alert,
+                componentProps: {
+                  alertType: "error",
+                },
               });
               return {};
             } else {
@@ -150,12 +151,12 @@ export function HomeScreen({ navigation }) {
                 return response.json();
               } else {
                 setStatusCode(400);
-                Toast.show({
-                  type: "error",
-                  text1: "Request error!",
-                  text2: `Got the error ${response.status}`,
-                  topOffset: 50,
-                  visibilityTime: 2000,
+                Notifier.showNotification({
+                  title: `Got the error ${response.status}`,
+                  Component: NotifierComponents.Alert,
+                  componentProps: {
+                    alertType: "error",
+                  },
                 });
                 return response.json();
               }
@@ -208,10 +209,12 @@ export function HomeScreen({ navigation }) {
             onSubmitEditing={() => {
               !isLoading
                 ? Linking.openURL(data.result)
-                : Toast.show({
-                    type: "error",
-                    text1: "Error",
-                    text2: `No URL set yet, make sure your code is ${config.codeLength} characters long!`,
+                : Notifier.showNotification({
+                    title: `No URL set yet, make sure your code is ${config.codeLength} characters long!`,
+                    Component: NotifierComponents.Alert,
+                    componentProps: {
+                      alertType: "error",
+                    },
                   });
             }}
           />
@@ -233,20 +236,20 @@ export function HomeScreen({ navigation }) {
                   // Handle functionality, when user presses for a longer period of time
                   try {
                     Clipboard.setString(data.result);
-                    Toast.show({
-                      type: "success",
-                      text1: "Awesome!",
-                      text2: "The URL has been copied to your clipboard!",
-                      topOffset: 50,
-                      visibilityTime: 2000,
+                    Notifier.showNotification({
+                      title: "The URL has been copied to your clipboard!",
+                      Component: NotifierComponents.Alert,
+                      componentProps: {
+                        alertType: "success",
+                      },
                     });
                   } catch (e) {
-                    Toast.show({
-                      type: "error",
-                      text1: "Yikes!",
-                      text2: "Couldn't copy to clipboard!",
-                      topOffset: 50,
-                      visibilityTime: 2000,
+                    Notifier.showNotification({
+                      title: "Couldn't copy to clipboard!",
+                      Component: NotifierComponents.Alert,
+                      componentProps: {
+                        alertType: "error",
+                      },
                     });
                   }
                 }}
