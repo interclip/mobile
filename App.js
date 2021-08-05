@@ -1,7 +1,7 @@
 // 1st party libraries and dependencies: react, react native and Expo stuff
 
 import React from "react";
-import { useColorScheme, Platform } from "react-native";
+import { useColorScheme, Platform, Text } from "react-native";
 
 // 3rd party libraries
 
@@ -11,6 +11,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 import { Icon } from "react-native-elements";
 import { NotifierWrapper } from "react-native-notifier";
+import * as Linking from "expo-linking";
 
 // Pages
 
@@ -20,7 +21,6 @@ import { HomeScreen } from "./pages/HomeScreen";
 import { SettingsPage, QRSettings, FileSettings } from "./pages/SettingsPage";
 import { AboutPage } from "./pages/AboutPage";
 import { FilePage } from "./pages/FilePage";
-import { OfflinePage } from "./pages/OfflinePage";
 
 // Constants
 
@@ -30,30 +30,6 @@ import { colors } from "./lib/Vars";
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
-function HomePages() {
-  const colorScheme = useColorScheme();
-
-  return (
-    <Stack.Navigator
-      screenOptions={({ route }) => {
-        return {
-          headerShown: route.name !== "Receive a clip",
-          headerStyle: {
-            backgroundColor:
-              colorScheme === "dark" ? colors.darkHeader : colors.light,
-          },
-          headerTitleStyle: {
-            color: colorScheme === "dark" ? "white" : "black",
-          },
-        };
-      }}
-    >
-      <Stack.Screen name="Receive a clip" component={HomeScreen} />
-      <Stack.Screen name="Offline" component={OfflinePage} />
-    </Stack.Navigator>
-  );
-}
-
 function Settings() {
   const colorScheme = useColorScheme();
 
@@ -62,6 +38,7 @@ function Settings() {
       screenOptions={({ route }) => {
         return {
           headerShown: route.name !== "Settings",
+          headerMode: "float",
           headerStyle: {
             backgroundColor:
               colorScheme === "dark" ? colors.darkHeader : colors.light,
@@ -86,15 +63,17 @@ function Settings() {
 
 function MyTabs() {
   const colorScheme = useColorScheme();
+
   return (
     <Tab.Navigator
-      showLabel={false}
       initialRouteName="Home"
-      tabBarOptions={{
-        showLabel: false,
-        activeTintColor: "#157EFB",
-        inactiveTintColor: colorScheme === "dark" ? colors.light : colors.text,
-        style: {
+      screenOptions={{
+        headerShown: false,
+        tabBarShowLabel: false,
+        tabBarActiveTintColor: "#157EFB",
+        tabBarInactiveTintColor:
+          colorScheme === "dark" ? colors.light : colors.text,
+        tabBarStyle: {
           backgroundColor:
             colorScheme === "dark" ? colors.headerBg : colors.lightContent,
           color: colorScheme === "dark" ? colors.light : colors.text,
@@ -102,8 +81,8 @@ function MyTabs() {
       }}
     >
       <Tab.Screen
-        name="HomePages"
-        component={HomePages}
+        name="Home"
+        component={HomeScreen}
         options={{
           tabBarLabel: "Receive",
           tabBarIcon: ({ color, size }) => (
@@ -173,9 +152,32 @@ function MyTabs() {
 }
 
 export default function App() {
+  const config = {
+    screens: {
+      Scan: "scan",
+      SettingsPage: {
+        path: 'settings',
+        screens: {
+          About: 'about',
+          Files: 'settings/files',
+          QR: 'settings/qr',
+        },
+      },
+      Send: "send",
+      File: "file",
+    }
+  };
+
+  const prefix = Linking.createURL("/");
+
+  const linking = {
+    prefixes: ["https://interclip.app/", prefix],
+    config,
+  };
+
   return (
     <NotifierWrapper>
-      <NavigationContainer>
+      <NavigationContainer linking={linking} fallback={<Text>Loading...</Text>}>
         <MyTabs />
       </NavigationContainer>
     </NotifierWrapper>
