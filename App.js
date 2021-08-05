@@ -155,9 +155,17 @@ export default function App() {
   const config = {
     screens: {
       Scan: "scan",
-      SettingsPage: "settings",
+      SettingsPage: {
+        path: 'settings',
+        screens: {
+          About: 'about',
+          Files: 'settings/files',
+          QR: 'settings/qr',
+        },
+      },
+      Send: "send",
       File: "file",
-    },
+    }
   };
 
   const prefix = Linking.createURL("/");
