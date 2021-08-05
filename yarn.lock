@@ -2224,7 +2224,7 @@
   resolved "https://registry.yarnpkg.com/@react-native-community/netinfo/-/netinfo-6.0.0.tgz#2a4d7190b508dd0c2293656c9c1aa068f6f60a71"
   integrity sha512-Z9M8VGcF2IZVOo2x+oUStvpCW/8HjIRi4+iQCu5n+PhC7OqCQX58KYAzdBr///alIfRXiu6oMb+lK+rXQH1FvQ==
 
-"@react-native-picker/picker@1.16.5", "@react-native-picker/picker@^1.8.3":
+"@react-native-picker/picker@^1.8.3":
   version "1.16.5"
   resolved "https://registry.yarnpkg.com/@react-native-picker/picker/-/picker-1.16.5.tgz#f55f22bb8fcaec412170e8a1ac1c7b11818919e5"
   integrity sha512-IYfMXdUsfQe4RBLJPZq6GoPkr2otOTZqej/gU93x+oIjrR+UCcCb0fsqmXHT8qX29E+0cEQZd/4bWnzbICHNrg==
