@@ -25,7 +25,6 @@ import { HomeScreen } from "./pages/HomeScreen";
 import { SettingsPage, QRSettings, FileSettings } from "./pages/SettingsPage";
 import { AboutPage } from "./pages/AboutPage";
 import { FilePage } from "./pages/FilePage";
-import { OfflinePage } from "./pages/OfflinePage";
 
 // Constants
 
@@ -34,30 +33,6 @@ import { colors } from "./lib/Vars";
 // App component
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
-
-function HomePages() {
-  const colorScheme = useColorScheme();
-
-  return (
-    <Stack.Navigator
-      screenOptions={({ route }) => {
-        return {
-          headerShown: route.name !== "Receive a clip",
-          headerStyle: {
-            backgroundColor:
-              colorScheme === "dark" ? colors.darkHeader : colors.light,
-          },
-          headerTitleStyle: {
-            color: colorScheme === "dark" ? "white" : "black",
-          },
-        };
-      }}
-    >
-      <Stack.Screen name="Receive a clip" component={HomeScreen} />
-      <Stack.Screen name="Offline" component={OfflinePage} />
-    </Stack.Navigator>
-  );
-}
 
 function Settings() {
   const colorScheme = useColorScheme();
@@ -97,6 +72,7 @@ function MyTabs() {
     <Tab.Navigator
       initialRouteName="Home"
       screenOptions={{
+        headerShown: false,
         tabBarShowLabel: false,
         activeTintColor: "#157EFB",
         inactiveTintColor: colorScheme === "dark" ? colors.light : colors.text,
@@ -108,8 +84,8 @@ function MyTabs() {
       }}
     >
       <Tab.Screen
-        name="HomePages"
-        component={HomePages}
+        name="Home"
+        component={HomeScreen}
         options={{
           tabBarLabel: "Receive",
           tabBarIcon: ({ color, size }) => (
