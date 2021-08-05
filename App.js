@@ -74,9 +74,10 @@ function MyTabs() {
       screenOptions={{
         headerShown: false,
         tabBarShowLabel: false,
-        activeTintColor: "#157EFB",
-        inactiveTintColor: colorScheme === "dark" ? colors.light : colors.text,
-        style: {
+        tabBarActiveTintColor: "#157EFB",
+        tabBarInactiveTintColor:
+          colorScheme === "dark" ? colors.light : colors.text,
+        tabBarStyle: {
           backgroundColor:
             colorScheme === "dark" ? colors.headerBg : colors.lightContent,
           color: colorScheme === "dark" ? colors.light : colors.text,
@@ -155,8 +156,6 @@ function MyTabs() {
 }
 
 export default function App() {
-  const colorScheme = useColorScheme();
-
   const config = {
     screens: {
       Scan: "scan",
@@ -173,14 +172,10 @@ export default function App() {
   };
 
   return (
-     <NotifierWrapper>
-        <NavigationContainer
-          linking={linking}
-          fallback={<Text>Loading...</Text>}
-          theme={colorScheme === "dark" ? DarkTheme : DefaultTheme}
-        >
-          <MyTabs />
-        </NavigationContainer>
+    <NotifierWrapper>
+      <NavigationContainer linking={linking} fallback={<Text>Loading...</Text>}>
+        <MyTabs />
+      </NavigationContainer>
     </NotifierWrapper>
   );
 }
