@@ -1,5 +1,4 @@
 // React, React Native imports
-
 import React, { useState } from "react";
 import {
   Settings,
@@ -34,7 +33,7 @@ export function SettingsPage({ navigation }) {
   };
 
   const cellProps = {
-    backgroundColor: colorScheme === "dark" ? "#373737" : "#FFF",
+    backgroundColor: colorScheme === "dark" ? "#212121" : "#fff",
     titleTextColor: textColor,
     titleTextStyleDisabled: {
       color: colorScheme === "dark" ? "#b5b5b5" : "#808080",
@@ -152,7 +151,7 @@ export function QRSettings() {
   };
 
   const cellProps = {
-    backgroundColor: colorScheme === "dark" ? "#373737" : "#FFF",
+    backgroundColor: colorScheme === "dark" ? "#212121" : "#fff",
     titleTextColor: textColor,
     titleTextStyleDisabled: {
       color: colorScheme === "dark" ? "#b5b5b5" : "#808080",
@@ -213,7 +212,7 @@ export function FileSettings() {
   };
 
   const cellProps = {
-    backgroundColor: colorScheme === "dark" ? "#373737" : "#FFF",
+    backgroundColor: colorScheme === "dark" ? "#212121" : "#fff",
     titleTextColor: textColor,
     titleTextStyleDisabled: {
       color: colorScheme === "dark" ? "#b5b5b5" : "#808080",
