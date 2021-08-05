@@ -5,11 +5,7 @@ import { useColorScheme, Platform, Text } from "react-native";
 
 // 3rd party libraries
 
-import {
-  NavigationContainer,
-  DefaultTheme,
-  DarkTheme,
-} from "@react-navigation/native";
+import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 
