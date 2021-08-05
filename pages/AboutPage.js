@@ -1,9 +1,13 @@
 // React, React Native imports
 
 import React, { useState } from "react";
-import { Text, useColorScheme, View, Dimensions } from "react-native";
+import { Text, useColorScheme, View, Dimensions, Alert } from "react-native";
 
 import * as Linking from "expo-linking";
+import * as Clipboard from "expo-clipboard";
+
+import { Notifier, NotifierComponents } from "react-native-notifier";
+import { useApplicationInstallTime } from "@use-expo/application";
 
 // Local functions, components and variables
 
@@ -18,6 +22,12 @@ import LogoImage from "../components/LogoImage";
 
 export function AboutPage() {
   const [versionWidth, setVersionWidth] = useState(0);
+  const [installTime] = useApplicationInstallTime();
+
+  const debugInfo = `Version: ${appInfo.expo.version} (${
+    appInfo.expo.android.versionCode
+  }) \nInstall time: ${installTime ? installTime.toString() : "-"}`;
+
   const colorScheme = useColorScheme();
 
   return (
@@ -79,6 +89,39 @@ export function AboutPage() {
             `https://github.com/filiptronicek/iclip-mobile/releases/tag/v${appInfo.expo.version}`
           )
         }
+        onLongPress={() => {
+          Alert.alert("Debug info", debugInfo, [
+            {
+              text: "Copy to clipboard",
+              onPress: () => {
+                try {
+                  Clipboard.setString(debugInfo);
+                  Notifier.showNotification({
+                    title:
+                      "All of that awesome debug stuff has been copied to your clipboard!",
+                    Component: NotifierComponents.Alert,
+                    componentProps: {
+                      alertType: "success",
+                    },
+                  });
+                } catch (e) {
+                  Notifier.showNotification({
+                    title: "Couldn't copy to clipboard!",
+                    Component: NotifierComponents.Alert,
+                    componentProps: {
+                      alertType: "error",
+                    },
+                  });
+                }
+              },
+            },
+            {
+              text: "Cancel",
+              onPress: () => console.log("No Pressed"),
+              style: "cancel",
+            },
+          ]);
+        }}
       >
         Interclip mobile v{appInfo.expo.version}{" "}
       </Text>
