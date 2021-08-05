@@ -2458,6 +2458,11 @@
     expo-modules-autolinking "^0.0.3"
     invariant "^2.2.4"
 
+"@use-expo/application@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@use-expo/application/-/application-1.0.0.tgz#14ceac2ceec9d8994b1cd2dd2e7de5cb2342e02f"
+  integrity sha512-4ZfmzHMzZoKWbS4awBZVZboPHyCAtoCTj1aEM7Bp6qQlWXJRCbuHkAHU3MxF9nSLDpyxep0ALbzSOm1q0xvUqQ==
+
 abab@^2.0.3, abab@^2.0.5:
   version "2.0.5"
   resolved "https://registry.yarnpkg.com/abab/-/abab-2.0.5.tgz#c0b678fb32d60fc1219c784d6a826fe385aeb79a"

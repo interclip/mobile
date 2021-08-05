@@ -1,9 +1,10 @@
 // React, React Native imports
 
 import React, { useState } from "react";
-import { Text, useColorScheme, View, Dimensions } from "react-native";
+import { Text, useColorScheme, View, Dimensions, Alert } from "react-native";
 
 import * as Linking from "expo-linking";
+import { useApplicationInstallTime } from "@use-expo/application";
 
 // Local functions, components and variables
 
@@ -18,6 +19,8 @@ import LogoImage from "../components/LogoImage";
 
 export function AboutPage() {
   const [versionWidth, setVersionWidth] = useState(0);
+  const [installTime] = useApplicationInstallTime();
+
   const colorScheme = useColorScheme();
 
   return (
@@ -79,6 +82,14 @@ export function AboutPage() {
             `https://github.com/filiptronicek/iclip-mobile/releases/tag/v${appInfo.expo.version}`
           )
         }
+        onLongPress={() => {
+          Alert.alert(
+            "Debug info",
+            `Version: ${appInfo.expo.version} (${
+              appInfo.expo.android.versionCode
+            }) \nInstall time: ${installTime ? installTime.toString() : "-"}`
+          );
+        }}
       >
         Interclip mobile v{appInfo.expo.version}{" "}
       </Text>
