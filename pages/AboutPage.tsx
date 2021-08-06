@@ -11,7 +11,7 @@ import { useApplicationInstallTime } from "@use-expo/application";
 
 // Local functions, components and variables
 
-import { colors } from "../lib/Vars";
+import { colors } from "../lib/vars";
 import * as appInfo from "../app.json";
 
 import { Icon } from "react-native-elements";

@@ -42,8 +42,8 @@ const mime = require("mime-types");
 
 import { validationMsg, checkError, truncate } from "../lib/functions";
 import chooseIcon from "../lib/files/chooseIcon";
-import { styles } from "../lib/Pages";
-import { config, colors, inputProps } from "../lib/Vars";
+import { styles } from "../lib/pages";
+import { config, colors, inputProps } from "../lib/vars";
 
 import LogoImage from "../components/LogoImage";
 import CustomBackground from "../components/BottomSheetBackground";

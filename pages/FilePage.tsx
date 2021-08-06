@@ -23,9 +23,9 @@ import * as ImagePicker from "expo-image-picker";
 import * as Haptics from "expo-haptics";
 
 // Local functions, components and variables
-import { colors } from "../lib/Vars";
+import { colors } from "../lib/vars";
 import { formatBytes } from "../lib/functions";
-import { styles } from "../lib/Pages";
+import { styles } from "../lib/pages";
 
 import fetch from "node-fetch";
 

@@ -24,7 +24,7 @@ import { FilePage } from "./pages/FilePage";
 
 // Constants
 
-import { colors } from "./lib/Vars";
+import { colors } from "./lib/vars";
 
 // App component
 const Tab = createBottomTabNavigator();

@@ -2,7 +2,7 @@ import React from "react";
 import { useColorScheme } from "react-native";
 import Animated from "react-native-reanimated";
 
-import { styles } from "../lib/Pages";
+import { styles } from "../lib/pages";
 
 const Handle = () => {
   const colorScheme = useColorScheme();

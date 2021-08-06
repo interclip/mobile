@@ -9,7 +9,7 @@ import NetInfo from "@react-native-community/netinfo";
 
 // Local functions and variables
 
-import { colors } from "../lib/Vars";
+import { colors } from "../lib/vars";
 import LogoImage from "../components/LogoImage";
 
 // Root component

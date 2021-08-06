@@ -16,7 +16,7 @@ import RNPickerSelect from "react-native-picker-select";
 import * as WebBrowser from "expo-web-browser";
 
 // Local functions and variables
-import { colors } from "../lib/Vars";
+import { colors } from "../lib/vars";
 
 // Root component
 
