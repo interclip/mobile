@@ -34,9 +34,9 @@ import fetch from "node-fetch";
 export function FilePage() {
   const colorScheme = useColorScheme();
 
-  const [fileURL, setFileURL] = useState("");
-  const [data, setData] = useState({ result: "" }); // Dynamically loaded data from the Interclip REST API
-  const [loading, setLoading] = useState(false);
+  const [fileURL, setFileURL] = useState<string>("");
+  const [data, setData] = useState<{result: string}>({ result: "" }); // Dynamically loaded data from the Interclip REST API
+  const [loading, setLoading] = useState<boolean>(false);
 
   const upload = async (action = "media") => {
     let file;

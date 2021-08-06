@@ -53,21 +53,21 @@ import CustomHandle from "../components/CustomHandle";
 
 export function HomeScreen({ navigation }) {
   // Variable set
-  const [isLoading, setLoading] = useState(false); // Loading status => only show the responce of the API
+  const [isLoading, setLoading] = useState<boolean>(false); // Loading status => only show the responce of the API
 
-  // After the request completes
-  const [data, setData] = useState({
+  // Dynamically loaded data from the Interclip REST API
+  const [data, setData] = useState<{ result: string; status: string }>({
     result: "https://files.interclip.app/ecf3e43230.jpg",
     status: "success",
-  }); // Dynamically loaded data from the Interclip REST API
+  });
   const bottomSheetRef = useRef(null);
   const url = data.result;
   const fileExtension = url.split(".")[url.split(".").length - 1];
 
   const fileIcon = chooseIcon(fileExtension);
 
-  const [statusCode, setStatusCode] = useState(200);
-  const [text, setText] = useState(""); // The code entered in the <Input>
+  const [statusCode, setStatusCode] = useState<number>(200);
+  const [text, setText] = useState<string>(""); // The code entered in the <Input>
 
   const colorScheme = useColorScheme();
 

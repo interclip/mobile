@@ -30,14 +30,14 @@ import { styles } from "../lib/pages";
 // Root component
 
 export function QRScreen({ navigation }) {
-  const [hasPermission, setHasPermission] = useState(null);
-  const [qrd, setQrd] = useState(false);
+  const [hasPermission, setHasPermission] = useState<null | boolean>(null);
+  const [qrd, setQrd] = useState<boolean>(false);
   const [cameraRotation, setCameraRotation] = useState(
     BarCodeScanner.Constants.Type.back
   );
-  const [lastClick, setLastClick] = useState(null);
+  const [lastClick, setLastClick] = useState<boolean>(false);
 
-  const isFocused = useIsFocused();
+  const isFocused: boolean = useIsFocused();
 
   useEffect(() => {
     (async () => {

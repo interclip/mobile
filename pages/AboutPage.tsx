@@ -21,7 +21,7 @@ import LogoImage from "../components/LogoImage";
 // Root component
 
 export function AboutPage() {
-  const [versionWidth, setVersionWidth] = useState(0);
+  const [versionWidth, setVersionWidth] = useState<number>(0);
   const [installTime] = useApplicationInstallTime();
 
   const debugInfo = `Version: ${appInfo.expo.version} (${

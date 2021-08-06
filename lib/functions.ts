@@ -4,7 +4,7 @@ import isURL from "validator/lib/isURL";
 import { config } from "./vars";
 
 /* Function and config */
-const checkError = (msg: string) => {
+const checkError = (msg: string): boolean => {
   return msg !== "success";
 };
 
@@ -12,13 +12,13 @@ const sleep = (milliseconds: number) => {
   return new Promise((resolve) => setTimeout(resolve, milliseconds));
 };
 
-const validationMsg = (txt: string) => {
+const validationMsg = (txt: string): string => {
   txt = txt.replace(" ", "").toLowerCase();
   const diff = config.codeLength - txt.length;
   if (txt.match(config.charRegex)) {
     return `There are some characters, that shouldn't be there.`;
   } else {
-    if ((txt.length < config.codeLength) && (txt.length > 0)) {
+    if (txt.length < config.codeLength && txt.length > 0) {
       return `${diff} more character${diff === 1 ? "" : "s"} please`;
     } else if (txt.length === 0) {
       return `Just type in the code above and see the magic happen.`;
@@ -26,7 +26,7 @@ const validationMsg = (txt: string) => {
   }
 };
 
-const urlValidation = (url: string) => {
+const urlValidation = (url: string): boolean | string => {
   url = encodeURI(url);
 
   if (url.length === 0) return "Start pasting or typing in the URL";
@@ -37,7 +37,7 @@ const urlValidation = (url: string) => {
   }
 };
 
-const formatBytes = (bytes: number, decimals = 2) => {
+const formatBytes = (bytes: number, decimals = 2): string => {
   if (bytes === 0) return "0 Bytes";
 
   const k = 1024;
@@ -49,7 +49,7 @@ const formatBytes = (bytes: number, decimals = 2) => {
   return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + " " + sizes[i];
 };
 
-const truncate = (text: string, length: number) => {
+const truncate = (text: string, length: number): string => {
   if (text.length > length) {
     return `${text.substring(0, length)}...`;
   } else {
