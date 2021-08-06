@@ -100,7 +100,7 @@ export function QRScreen({ navigation }) {
           {
             text: "OK then",
             onPress: () => {
-              sleep(1000).then(setQrd(false));
+              sleep(1000).then(() => setQrd(false));
             },
           },
         ]
@@ -113,7 +113,7 @@ export function QRScreen({ navigation }) {
           {
             text: "Cancel",
             onPress: () => {
-              sleep(1000).then(setQrd(false));
+              sleep(1000).then(() => setQrd(false));
             },
             style: "cancel",
           },
@@ -133,7 +133,6 @@ export function QRScreen({ navigation }) {
   const qrStyles = {
     borderColor: "#42C759",
     borderWidth: 17,
-    borderRadius: "20%",
   };
 
   if (hasPermission === null) {
@@ -174,7 +173,7 @@ export function QRScreen({ navigation }) {
         Center your QR code in the square below
       </Text>
       <Pressable
-        style={qrd ? qrStyles : {}}
+        style={qrd ? qrStyles : undefined}
         onPress={() => {
           if (lastClick) {
             const newRotation =
