@@ -131,11 +131,11 @@ export function SettingsPage({ navigation }) {
 
 export function QRSettings() {
   const [data, setData] = useState(Settings.get("data"));
-  const storeData = (data) => {
+  const storeData = (data: Object) => {
     Settings.set(data);
   };
 
-  const toggleSwitch = (e) => {
+  const toggleSwitch = (e: any) => {
     setData(e);
     storeData({ data: e });
   };
@@ -192,11 +192,11 @@ export function QRSettings() {
 
 export function FileSettings() {
   const [data, setData] = useState(Settings.get("uploadquality"));
-  const storeData = (data) => {
+  const storeData = (data: Object) => {
     Settings.set(data);
   };
 
-  const changeQuality = (e) => {
+  const changeQuality = (e: any) => {
     setData(e);
     storeData({ uploadquality: e });
   };

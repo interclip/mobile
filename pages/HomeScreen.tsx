@@ -58,6 +58,7 @@ export function HomeScreen({ navigation }) {
   // After the request completes
   const [data, setData] = useState({
     result: "https://files.interclip.app/ecf3e43230.jpg",
+    status: "success",
   }); // Dynamically loaded data from the Interclip REST API
   const bottomSheetRef = useRef(null);
   const url = data.result;
@@ -80,7 +81,7 @@ export function HomeScreen({ navigation }) {
 
   const handleSheetChanges = useCallback((_fromIndex, toIndex) => {
     if (Platform.OS === "ios") {
-      let hapticStrength = false;
+      let hapticStrength: Haptics.ImpactFeedbackStyle | boolean = false;
       switch (toIndex) {
         case 0:
           hapticStrength = Haptics.ImpactFeedbackStyle.Medium;
@@ -90,7 +91,7 @@ export function HomeScreen({ navigation }) {
           hapticStrength = Haptics.ImpactFeedbackStyle.Light;
           break;
       }
-      hapticStrength && Haptics.impactAsync(hapticStrength);
+      hapticStrength !== false && Haptics.impactAsync(hapticStrength);
     }
   }, []);
 
@@ -132,46 +133,40 @@ export function HomeScreen({ navigation }) {
       setText(text.replace(" ", "").toLowerCase());
       setLoading(true);
       fetch(`https://interclip.app/includes/get-api?code=${text}`)
-        .then(
-          (response: {
-            ok: any;
-            json: () => any;
-            status: number;
-          }) => {
-            if (response.ok) {
-              setStatusCode(200);
-              return response.json();
+        .then((response: { ok: any; json: () => any; status: number }) => {
+          if (response.ok) {
+            setStatusCode(200);
+            return response.json();
+          } else {
+            if (response.status === 429) {
+              Notifier.showNotification({
+                title: "Slow down!",
+                description: "We are getting too many requests from you.",
+                Component: NotifierComponents.Alert,
+                componentProps: {
+                  alertType: "error",
+                },
+              });
+              return {};
             } else {
-              if (response.status === 429) {
+              if (config.exemptStatusCodes.includes(response.status)) {
+                setStatusCode(response.status);
+                return response.json();
+              } else {
+                setStatusCode(400);
                 Notifier.showNotification({
-                  title: "Slow down!",
-                  description: "We are getting too many requests from you.",
+                  title: `Got the error ${response.status}`,
                   Component: NotifierComponents.Alert,
                   componentProps: {
                     alertType: "error",
                   },
                 });
-                return {};
-              } else {
-                if (config.exemptStatusCodes.includes(response.status)) {
-                  setStatusCode(response.status);
-                  return response.json();
-                } else {
-                  setStatusCode(400);
-                  Notifier.showNotification({
-                    title: `Got the error ${response.status}`,
-                    Component: NotifierComponents.Alert,
-                    componentProps: {
-                      alertType: "error",
-                    },
-                  });
-                  return response.json();
-                }
+                return response.json();
               }
             }
           }
-        )
-        .then((json: {result: string}) => {
+        })
+        .then((json: { result: string }) => {
           const URLArr = json.result.split("/");
           const result = `${URLArr[0]}//${URLArr[2]}`;
 
@@ -272,7 +267,7 @@ export function HomeScreen({ navigation }) {
                     ? colors.light
                     : colors.text,
                   backgroundColor:
-                    checkError(data.status) & !validationMsg(text)
+                    checkError(data.status) && !validationMsg(text)
                       ? colors.errorColor
                       : null,
                   fontSize: 20,
