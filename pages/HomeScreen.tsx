@@ -36,7 +36,7 @@ import { useFocusEffect } from "@react-navigation/native";
 // Functional packages
 
 import fetch from "node-fetch";
-const mime = require("mime-types");
+import mime from "mime-types";
 
 // Local functions, components and variables
 
@@ -56,7 +56,9 @@ export function HomeScreen({ navigation }) {
   const [isLoading, setLoading] = useState(false); // Loading status => only show the responce of the API
 
   // After the request completes
-  const [data, setData] = useState({result: "https://files.interclip.app/ecf3e43230.jpg"}); // Dynamically loaded data from the Interclip REST API
+  const [data, setData] = useState({
+    result: "https://files.interclip.app/ecf3e43230.jpg",
+  }); // Dynamically loaded data from the Interclip REST API
   const bottomSheetRef = useRef(null);
   const url = data.result;
   const fileExtension = url.split(".")[url.split(".").length - 1];
@@ -130,40 +132,46 @@ export function HomeScreen({ navigation }) {
       setText(text.replace(" ", "").toLowerCase());
       setLoading(true);
       fetch(`https://interclip.app/includes/get-api?code=${text}`)
-        .then((response) => {
-          if (response.ok) {
-            setStatusCode(200);
-            return response.json();
-          } else {
-            if (response.status === 429) {
-              Notifier.showNotification({
-                title: "Slow down!",
-                description: "We are getting too many requests from you.",
-                Component: NotifierComponents.Alert,
-                componentProps: {
-                  alertType: "error",
-                },
-              });
-              return {};
+        .then(
+          (response: {
+            ok: any;
+            json: () => any;
+            status: number;
+          }) => {
+            if (response.ok) {
+              setStatusCode(200);
+              return response.json();
             } else {
-              if (config.exemptStatusCodes.includes(response.status)) {
-                setStatusCode(response.status);
-                return response.json();
-              } else {
-                setStatusCode(400);
+              if (response.status === 429) {
                 Notifier.showNotification({
-                  title: `Got the error ${response.status}`,
+                  title: "Slow down!",
+                  description: "We are getting too many requests from you.",
                   Component: NotifierComponents.Alert,
                   componentProps: {
                     alertType: "error",
                   },
                 });
-                return response.json();
+                return {};
+              } else {
+                if (config.exemptStatusCodes.includes(response.status)) {
+                  setStatusCode(response.status);
+                  return response.json();
+                } else {
+                  setStatusCode(400);
+                  Notifier.showNotification({
+                    title: `Got the error ${response.status}`,
+                    Component: NotifierComponents.Alert,
+                    componentProps: {
+                      alertType: "error",
+                    },
+                  });
+                  return response.json();
+                }
               }
             }
           }
-        })
-        .then((json) => {
+        )
+        .then((json: {result: string}) => {
           const URLArr = json.result.split("/");
           const result = `${URLArr[0]}//${URLArr[2]}`;
 
