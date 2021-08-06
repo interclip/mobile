@@ -107,8 +107,8 @@ export function FilePage() {
       setFileURL("");
       setData({ result: "" });
 
-      const uri = file.uri;
-      const extension = uri.split(".")[uri.split(".").length - 1];
+      const uri : string = file.uri;
+      const extension : string = uri.split(".")[uri.split(".").length - 1];
 
       const fileSizeLimitInMegabytes = 100;
       const fileSizeLimitInBytes = fileSizeLimitInMegabytes * 1048576;
@@ -146,7 +146,7 @@ export function FilePage() {
             "Content-Type": "multipart/form-data;",
           },
         })
-          .then((res) => {
+          .then((res: { ok: any; json: () => any; status: any; }) => {
             if (res.ok) {
               return res.json();
             } else {
@@ -160,11 +160,11 @@ export function FilePage() {
               });
             }
           })
-          .then((response) => {
+          .then((response: { result: React.SetStateAction<string>; }) => {
             setFileURL(response.result);
 
             fetch(`https://interclip.app/includes/api?url=${response.result}`)
-              .then((rs) => {
+              .then((rs: { ok: any; json: () => any; status: number; }) => {
                 if (rs.ok) {
                   return rs.json();
                 } else {
@@ -187,13 +187,13 @@ export function FilePage() {
                   }
                 }
               })
-              .then((objson) => {
+              .then((objson: React.SetStateAction<{ result: string; }>) => {
                 setData(objson);
                 Haptics.notificationAsync(
                   Haptics.NotificationFeedbackType.Success
                 );
               })
-              .catch((err) => {
+              .catch((err: any) => {
                 Haptics.notificationAsync(
                   Haptics.NotificationFeedbackType.Error
                 );
@@ -222,7 +222,7 @@ export function FilePage() {
           cancelButtonIndex: 0,
         },
         (index) => {
-          let action;
+          let action: string;
           switch (index) {
             case Platform.OS === "ios" ? 1 : 0:
               action = "media";

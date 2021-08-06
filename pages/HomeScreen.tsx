@@ -56,9 +56,9 @@ export function HomeScreen({ navigation }) {
   const [isLoading, setLoading] = useState(false); // Loading status => only show the responce of the API
 
   // After the request completes
-  const [data, setData] = useState(""); // Dynamically loaded data from the Interclip REST API
+  const [data, setData] = useState({result: "https://files.interclip.app/ecf3e43230.jpg"}); // Dynamically loaded data from the Interclip REST API
   const bottomSheetRef = useRef(null);
-  const url = data.result || "https://files.interclip.app/ecf3e43230.jpg";
+  const url = data.result;
   const fileExtension = url.split(".")[url.split(".").length - 1];
 
   const fileIcon = chooseIcon(fileExtension);
