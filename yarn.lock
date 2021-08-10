@@ -2229,12 +2229,12 @@
   resolved "https://registry.yarnpkg.com/@react-native-picker/picker/-/picker-1.16.5.tgz#f55f22bb8fcaec412170e8a1ac1c7b11818919e5"
   integrity sha512-IYfMXdUsfQe4RBLJPZq6GoPkr2otOTZqej/gU93x+oIjrR+UCcCb0fsqmXHT8qX29E+0cEQZd/4bWnzbICHNrg==
 
-"@react-navigation/bottom-tabs@^6.0.1":
-  version "6.0.1"
-  resolved "https://registry.yarnpkg.com/@react-navigation/bottom-tabs/-/bottom-tabs-6.0.1.tgz#bd2b481d0671a7c2443525ea92f788b7cd9699e3"
-  integrity sha512-abbT132aFTAIRcRu7rrnZViNFTdJwZzZr9WQ3ZepuVVn+EzSBveaqrSWnEdIDyuex3XR69V7Fuadzpjt+Cf2oQ==
+"@react-navigation/bottom-tabs@^6.0.3":
+  version "6.0.3"
+  resolved "https://registry.yarnpkg.com/@react-navigation/bottom-tabs/-/bottom-tabs-6.0.3.tgz#bd1069bea62913b77bf820adc128ce9484e13be0"
+  integrity sha512-F7sR3oPet5av2boszWIo04P1Vc/ZUb9HiWZJWGFj/prZAW8nuHsQl+J/0xN2PTI1BqMhga/n6ZUPf4EEUaS9/A==
   dependencies:
-    "@react-navigation/elements" "^1.0.1"
+    "@react-navigation/elements" "^1.0.3"
     color "^3.1.3"
     warn-once "^0.1.0"
 
@@ -2249,10 +2249,10 @@
     query-string "^7.0.0"
     react-is "^16.13.0"
 
-"@react-navigation/elements@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@react-navigation/elements/-/elements-1.0.1.tgz#effcdb59aa5cf64445ff2ca7f50ee35df484fa72"
-  integrity sha512-KU6DPqmFmD4E+AwXOBzrqVBYG1Gd8HzPfbCk1PGzUjIiQOg6xv1pyfJ/d2x6aEOzxX5jtuNVCx6S553ZLkJP9Q==
+"@react-navigation/elements@^1.0.1", "@react-navigation/elements@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@react-navigation/elements/-/elements-1.0.3.tgz#23052dc9c9766614c629a400fc96a600176ab1a3"
+  integrity sha512-hDf55C65kD7X09r4p9Z74xuCLe2damL+i7v0YLM3AFD0TEkDiGwRczhsoZFm8gg/TIJpLqa+CjqX2gvrdQyQ+A==
 
 "@react-navigation/native@^6.0.1":
   version "6.0.1"
