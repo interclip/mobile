@@ -20,6 +20,7 @@ import * as Linking from "expo-linking";
 
 import * as DocumentPicker from "expo-document-picker";
 import * as ImagePicker from "expo-image-picker";
+import { ImageInfo } from "expo-image-picker/build/ImagePicker.types";
 import * as Haptics from "expo-haptics";
 
 // Local functions, components and variables
@@ -35,7 +36,7 @@ export function FilePage() {
   const colorScheme = useColorScheme();
 
   const [fileURL, setFileURL] = useState<string>("");
-  const [data, setData] = useState<{result: string}>({ result: "" }); // Dynamically loaded data from the Interclip REST API
+  const [data, setData] = useState<{ result: string }>({ result: "" }); // Dynamically loaded data from the Interclip REST API
   const [loading, setLoading] = useState<boolean>(false);
 
   const upload = async (action = "media") => {
@@ -107,8 +108,8 @@ export function FilePage() {
       setFileURL("");
       setData({ result: "" });
 
-      const uri : string = file.uri;
-      const extension : string = uri.split(".")[uri.split(".").length - 1];
+      const uri: string = file.uri;
+      const extension: string = uri.split(".")[uri.split(".").length - 1];
 
       const fileSizeLimitInMegabytes = 100;
       const fileSizeLimitInBytes = fileSizeLimitInMegabytes * 1048576;
@@ -146,7 +147,7 @@ export function FilePage() {
             "Content-Type": "multipart/form-data;",
           },
         })
-          .then((res: { ok: any; json: () => any; status: any; }) => {
+          .then((res: { ok: any; json: () => any; status: any }) => {
             if (res.ok) {
               return res.json();
             } else {
@@ -160,11 +161,11 @@ export function FilePage() {
               });
             }
           })
-          .then((response: { result: React.SetStateAction<string>; }) => {
+          .then((response: { result: React.SetStateAction<string> }) => {
             setFileURL(response.result);
 
             fetch(`https://interclip.app/includes/api?url=${response.result}`)
-              .then((rs: { ok: any; json: () => any; status: number; }) => {
+              .then((rs: { ok: any; json: () => any; status: number }) => {
                 if (rs.ok) {
                   return rs.json();
                 } else {
@@ -187,7 +188,7 @@ export function FilePage() {
                   }
                 }
               })
-              .then((objson: React.SetStateAction<{ result: string; }>) => {
+              .then((objson: React.SetStateAction<{ result: string }>) => {
                 setData(objson);
                 Haptics.notificationAsync(
                   Haptics.NotificationFeedbackType.Success
