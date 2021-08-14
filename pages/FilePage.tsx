@@ -132,9 +132,9 @@ export function FilePage() {
         });
         setLoading(false);
       } else {
-        const data = new FormData();
+        const formData = new FormData();
 
-        data.append("uploaded_file", {
+        formData.append("uploaded_file", {
           uri,
           type: blob.type,
           name: `media.${extension}`,
@@ -142,7 +142,7 @@ export function FilePage() {
 
         fetch("https://interclip.app/upload/?api", {
           method: "post",
-          body: data,
+          body: formData,
           headers: {
             "Content-Type": "multipart/form-data;",
           },
@@ -188,8 +188,8 @@ export function FilePage() {
                   }
                 }
               })
-              .then((objson: React.SetStateAction<{ result: string }>) => {
-                setData(objson);
+              .then((data: React.SetStateAction<{ result: string }>) => {
+                setData(data);
                 Haptics.notificationAsync(
                   Haptics.NotificationFeedbackType.Success
                 );
