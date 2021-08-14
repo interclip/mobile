@@ -41,7 +41,7 @@ export function SendScreen() {
   const [isLoading, setLoading] = useState(true); // Loading status => only show the responce of the API
 
   // after the request completes
-  const [data, setData] = useState(""); // Dynamically loaded data from the Interclip REST API
+  const [data, setData] = useState({ result: "" }); // Dynamically loaded data from the Interclip REST API
   const [text, setText] = useState(""); // The code entered in the <Input>
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -88,6 +88,17 @@ export function SendScreen() {
           }
         })
         .then((json) => setData(json))
+        .catch((error: { message: string }) => {
+          Notifier.showNotification({
+            title: "Error",
+            description: error.message,
+            Component: NotifierComponents.Alert,
+            componentProps: {
+              alertType: "error",
+            },
+          });
+          setData({ result: "Something went wrong..." });
+        })
         .finally(() => setLoading(false));
 
       setLoading(true);
