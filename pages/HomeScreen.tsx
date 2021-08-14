@@ -30,8 +30,6 @@ import * as Haptics from "expo-haptics";
 
 import { Input, Icon, Button } from "react-native-elements";
 import { Notifier, NotifierComponents } from "react-native-notifier";
-import NetInfo from "@react-native-community/netinfo";
-import { useFocusEffect } from "@react-navigation/native";
 
 // Functional packages
 
@@ -51,7 +49,7 @@ import CustomHandle from "../components/CustomHandle";
 
 // Root component
 
-export function HomeScreen({ navigation }) {
+export function HomeScreen() {
   // Variable set
   const [isLoading, setLoading] = useState<boolean>(false); // Loading status => only show the responce of the API
 
@@ -114,21 +112,7 @@ export function HomeScreen({ navigation }) {
     }
   };
 
-  useFocusEffect(() => {
-    NetInfo.fetch().then((state) => {
-      if (!state.isConnected) {
-        navigation.navigate("Offline");
-      }
-    });
-  });
-
   useEffect(() => {
-    NetInfo.addEventListener((state) => {
-      if (!state.isConnected) {
-        navigation.navigate("Offline");
-      }
-    });
-
     if (text.length === config.codeLength) {
       setText(text.replace(" ", "").toLowerCase());
       setLoading(true);
