@@ -162,6 +162,17 @@ export function HomeScreen() {
 
           setData(json);
         })
+        .catch((error: { message: string }) => {
+         Notifier.showNotification({
+            title: "Error",
+            description: error.message,
+            Component: NotifierComponents.Alert,
+            componentProps: {
+              alertType: "error",
+            },
+          });
+          setStatusCode(400);
+        })
         .finally(() => setLoading(false));
     } else {
       setLoading(false);
