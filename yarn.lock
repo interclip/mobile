@@ -7606,10 +7606,10 @@ react-native-gesture@^0.2.0:
     rx "^4.0.6"
     transducers.js "^0.3.2"
 
-react-native-notifier@^1.6.1:
-  version "1.6.1"
-  resolved "https://registry.yarnpkg.com/react-native-notifier/-/react-native-notifier-1.6.1.tgz#eec07bdebed6c22cd22f5167555b7762e4119552"
-  integrity sha512-uq58vefWCmgk9B/GU0Z9P6M8Su5IuRBtKmroSX7luISEdh3r8QvJo/G6jgK2sO0QhM5QvJOGWBDm1JGEkYL4IQ==
+react-native-notifier@^1.7.1:
+  version "1.7.1"
+  resolved "https://registry.yarnpkg.com/react-native-notifier/-/react-native-notifier-1.7.1.tgz#3dd214ad3ab6cdc4eec7b65cadffafa062399565"
+  integrity sha512-mhMVScuJILuljOn/S8uclwe4gbymMmVD8QvdYW+ir7G3CakjHNERIh41nAJeAtvoFdh69PYLqXdnOnXGRYuY8w==
 
 react-native-picker-select@^8.0.4:
   version "8.0.4"
