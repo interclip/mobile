@@ -133,7 +133,7 @@ export function HomeScreen({ navigation }) {
       setText(text.replace(" ", "").toLowerCase());
       setLoading(true);
       fetch(`https://interclip.app/includes/get-api?code=${text}`)
-        .then((response: { ok: any; json: () => any; status: number }) => {
+        .then((response: { ok: boolean; json: () => any; status: number }) => {
           if (response.ok) {
             setStatusCode(200);
             return response.json();
