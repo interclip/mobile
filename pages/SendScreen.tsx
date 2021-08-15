@@ -41,7 +41,7 @@ export function SendScreen() {
   const [isLoading, setLoading] = useState(true); // Loading status => only show the responce of the API
 
   // after the request completes
-  const [data, setData] = useState({ result: "" }); // Dynamically loaded data from the Interclip REST API
+  const [data, setData] = useState<{ result: string }>({ result: "" }); // Dynamically loaded data from the Interclip REST API
   const [text, setText] = useState(""); // The code entered in the <Input>
   const [modalVisible, setModalVisible] = useState(false);
 
