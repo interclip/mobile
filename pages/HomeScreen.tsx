@@ -163,7 +163,7 @@ const HomeScreen: React.FC = () => {
           setData(json);
         })
         .catch((error: { message: string }) => {
-         Notifier.showNotification({
+          Notifier.showNotification({
             title: "Error",
             description: error.message,
             Component: NotifierComponents.Alert,
@@ -387,6 +387,6 @@ const HomeScreen: React.FC = () => {
       </BottomSheet>
     </View>
   );
-}
+};
 
 export default HomeScreen;
