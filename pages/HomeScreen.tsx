@@ -49,7 +49,7 @@ import CustomHandle from "../components/CustomHandle";
 
 // Root component
 
-export function HomeScreen() {
+const HomeScreen: React.FC = () => {
   // Variable set
   const [isLoading, setLoading] = useState<boolean>(false); // Loading status => only show the responce of the API
 
@@ -388,3 +388,5 @@ export function HomeScreen() {
     </View>
   );
 }
+
+export default HomeScreen;

@@ -20,7 +20,7 @@ import { colors } from "../lib/vars";
 
 // Root component
 
-export function SettingsPage({ navigation }) {
+const SettingsPage: React.FC = ({ navigation }) => {
   const colorScheme = useColorScheme();
 
   const textColor =
@@ -295,3 +295,5 @@ export function FileSettings() {
     </View>
   );
 }
+
+export default SettingsPage;

@@ -29,7 +29,7 @@ import { styles } from "../lib/pages";
 
 // Root component
 
-export function QRScreen({ navigation }) {
+const QRScreen: React.FC = ({ navigation }) => {
   const [hasPermission, setHasPermission] = useState<null | boolean>(null);
   const [qrd, setQrd] = useState<boolean>(false);
   const [cameraRotation, setCameraRotation] = useState(
@@ -206,3 +206,5 @@ export function QRScreen({ navigation }) {
     </View>
   );
 }
+
+export default QRScreen;

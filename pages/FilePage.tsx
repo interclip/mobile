@@ -32,7 +32,7 @@ import fetch from "node-fetch";
 
 // Root component
 
-export function FilePage() {
+const FilePage: React.FC = () => {
   const colorScheme = useColorScheme();
 
   const [fileURL, setFileURL] = useState<string>("");
@@ -399,3 +399,5 @@ export function FilePage() {
     </View>
   );
 }
+
+export default FilePage;

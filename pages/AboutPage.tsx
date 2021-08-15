@@ -20,7 +20,7 @@ import LogoImage from "../components/LogoImage";
 
 // Root component
 
-export function AboutPage() {
+const AboutPage: React.FC = () => {
   const [versionWidth, setVersionWidth] = useState<number>(0);
   const [installTime] = useApplicationInstallTime();
 
@@ -128,3 +128,5 @@ export function AboutPage() {
     </View>
   );
 }
+
+export default AboutPage;
