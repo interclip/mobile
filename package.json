@@ -45,7 +45,7 @@
     "react-native": "https://github.com/expo/react-native/archive/sdk-39.0.2.tar.gz",
     "react-native-appearance": "^0.3.4",
     "react-native-bottomsheet": "^2.5.2",
-    "react-native-camera": "^4.0.1",
+    "react-native-camera": "^4.0.2",
     "react-native-elements": "^3.4.2",
     "react-native-gesture": "^0.2.0",
     "react-native-gesture-handler": "^1.10.3",
