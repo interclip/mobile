@@ -21,15 +21,10 @@ jobs:
         node: [12, 14, 15, 16]
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/cache@v2
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
-      - uses: actions/setup-node@v1
+      - uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node }}
+          cache: 'yarn'
       - uses: expo/expo-github-action@v5
         with:
           expo-version: 4.x
