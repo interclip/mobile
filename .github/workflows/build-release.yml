@@ -34,7 +34,7 @@ jobs:
       - name: Run tests
         run: yarn test
   ios:
-    runs-on: macos-latest
+    runs-on: macos-11
     name: Build for iOS
     needs: ci
     steps:
