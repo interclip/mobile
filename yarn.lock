@@ -2249,7 +2249,7 @@
     query-string "^7.0.0"
     react-is "^16.13.0"
 
-"@react-navigation/elements@^1.0.4", "@react-navigation/elements@^1.1.0":
+"@react-navigation/elements@^1.1.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@react-navigation/elements/-/elements-1.1.0.tgz#483155ccf5a8f18d015db283bed34cc2255e2e9e"
   integrity sha512-jZncciZPGuoP6B6f+Wpf6MYSSYy86B2HJDbFTCtT5xZV0w6V9GgCeqvSTOEAxifZrmKl8uDxsr0GrIxgQE8NxA==
@@ -7562,10 +7562,10 @@ react-native-bottomsheet@^2.5.2:
   resolved "https://registry.yarnpkg.com/react-native-bottomsheet/-/react-native-bottomsheet-2.5.2.tgz#b89b9342e4988a9ca32b26db07f3754204338352"
   integrity sha512-Q0INuSn1OKYj4tVv/FCuOc/NlCqH9duRk5ws4kzorxCqo1Ig5exCwOfueKsc9blGKai2j6VZfXNGmHwe5w7iIg==
 
-react-native-camera@^4.0.3:
-  version "4.0.3"
-  resolved "https://registry.yarnpkg.com/react-native-camera/-/react-native-camera-4.0.3.tgz#a75ab913db96604a2b4c62d392e0537e5f71f4bf"
-  integrity sha512-5mGZDuzo7X3MbH3Z9vdkvz8tOAc1JqL3k0ldm9afCmwzN6JBMXYhMomnki6E8OrF+OE45sDpQURsozg2qO/k9A==
+react-native-camera@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/react-native-camera/-/react-native-camera-4.1.0.tgz#166bce4d10775adafb7bdc52156194c47f8b79d8"
+  integrity sha512-I8cRzBXH7FznnQn1nWpuaM3HBHtiMS3L+lLp4MDODfxniF3UB7xiT6BoFC0qnM3irIhsM4QbNL5EemHMyNt4hw==
   dependencies:
     prop-types "^15.6.2"
 
