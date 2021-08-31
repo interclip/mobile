@@ -2219,10 +2219,10 @@
   resolved "https://registry.yarnpkg.com/@react-native-community/masked-view/-/masked-view-0.1.11.tgz#2f4c6e10bee0786abff4604e39a37ded6f3980ce"
   integrity sha512-rQfMIGSR/1r/SyN87+VD8xHHzDYeHaJq6elOSCAD+0iLagXkSI2pfA0LmSXP21uw5i3em7GkkRjfJ8wpqWXZNw==
 
-"@react-native-community/netinfo@^6.0.0":
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/@react-native-community/netinfo/-/netinfo-6.0.0.tgz#2a4d7190b508dd0c2293656c9c1aa068f6f60a71"
-  integrity sha512-Z9M8VGcF2IZVOo2x+oUStvpCW/8HjIRi4+iQCu5n+PhC7OqCQX58KYAzdBr///alIfRXiu6oMb+lK+rXQH1FvQ==
+"@react-native-community/netinfo@^6.0.1":
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/@react-native-community/netinfo/-/netinfo-6.0.1.tgz#7d0adaf5cd8b7f77561a8e2d534cc61d6c25a0f6"
+  integrity sha512-hajGhBGr4QsC6/mclyb2TlBBY8D3wiMxskO4u7zcQoYtX3CHrYjRJjgQFOwOIxLU+HaK1d7Kdk+kSxMlnMs4Kg==
 
 "@react-native-picker/picker@^1.8.3":
   version "1.16.5"
@@ -2249,7 +2249,7 @@
     query-string "^7.0.0"
     react-is "^16.13.0"
 
-"@react-navigation/elements@^1.0.4", "@react-navigation/elements@^1.1.0":
+"@react-navigation/elements@^1.1.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@react-navigation/elements/-/elements-1.1.0.tgz#483155ccf5a8f18d015db283bed34cc2255e2e9e"
   integrity sha512-jZncciZPGuoP6B6f+Wpf6MYSSYy86B2HJDbFTCtT5xZV0w6V9GgCeqvSTOEAxifZrmKl8uDxsr0GrIxgQE8NxA==
@@ -7613,10 +7613,10 @@ react-native-bottomsheet@^2.5.2:
   resolved "https://registry.yarnpkg.com/react-native-bottomsheet/-/react-native-bottomsheet-2.5.2.tgz#b89b9342e4988a9ca32b26db07f3754204338352"
   integrity sha512-Q0INuSn1OKYj4tVv/FCuOc/NlCqH9duRk5ws4kzorxCqo1Ig5exCwOfueKsc9blGKai2j6VZfXNGmHwe5w7iIg==
 
-react-native-camera@^4.0.3:
-  version "4.0.3"
-  resolved "https://registry.yarnpkg.com/react-native-camera/-/react-native-camera-4.0.3.tgz#a75ab913db96604a2b4c62d392e0537e5f71f4bf"
-  integrity sha512-5mGZDuzo7X3MbH3Z9vdkvz8tOAc1JqL3k0ldm9afCmwzN6JBMXYhMomnki6E8OrF+OE45sDpQURsozg2qO/k9A==
+react-native-camera@^4.1.1:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/react-native-camera/-/react-native-camera-4.1.1.tgz#294a7c9818b571a06d304c7736fc57ec8876ed1a"
+  integrity sha512-ENlQ3NXxhyL/zNJNB3RYrxsES3TYF+ouOMxlp0E4aUVwwc9KY7cK7FT3ZjAwl7NGJ13etaGqZc4vaKWqrgn8Eg==
   dependencies:
     prop-types "^15.6.2"
 
@@ -7708,10 +7708,10 @@ react-native-safe-area-context@3.2.0:
   resolved "https://registry.yarnpkg.com/react-native-safe-area-context/-/react-native-safe-area-context-3.2.0.tgz#06113c6b208f982d68ab5c3cebd199ca93db6941"
   integrity sha512-k2Nty4PwSnrg9HwrYeeE+EYqViYJoOFwEy9LxL5RIRfoqxAq/uQXNGwpUg2/u4gnKpBbEPa9eRh15KKMe/VHkA==
 
-react-native-screens@~3.5.0:
-  version "3.5.0"
-  resolved "https://registry.yarnpkg.com/react-native-screens/-/react-native-screens-3.5.0.tgz#c40be78dff8e2dff1b00ba8fa670b2e429e632d2"
-  integrity sha512-xew4x0YX0RaDduNYM4gZXkphPwGZIbbu9fTU85xOtT1tOUPm3OU4pFMiN6PF54haMCsaMQRvdOXvLicUVRiptA==
+react-native-screens@~3.6.0:
+  version "3.6.0"
+  resolved "https://registry.yarnpkg.com/react-native-screens/-/react-native-screens-3.6.0.tgz#054af728e50c06bff6b3b4fa7b4b656b70f247cd"
+  integrity sha512-emQmSu+B6cOIjJH2OIgpuxd9zCD6xz7/oo5GCetyjsM5qR3sMnVgOxqtK99xPu9XJH/8k7MplXbtJgtk/PHXwA==
   dependencies:
     warn-once "^0.1.0"
 
