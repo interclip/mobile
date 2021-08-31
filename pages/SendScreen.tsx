@@ -36,7 +36,7 @@ import LogoImage from "../components/LogoImage";
 
 // Root component
 
-export function SendScreen() {
+const SendScreen: React.FC = () => {
   // Variable set
   const [isLoading, setLoading] = useState(true); // Loading status => only show the responce of the API
 
@@ -262,4 +262,6 @@ export function SendScreen() {
       </TouchableWithoutFeedback>
     </View>
   );
-}
+};
+
+export default SendScreen;
