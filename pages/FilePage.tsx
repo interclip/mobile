@@ -164,7 +164,7 @@ const FilePage: React.FC = () => {
           .then((response: { result: React.SetStateAction<string> }) => {
             setFileURL(response.result);
 
-            fetch(`https://interclip.app/includes/api?url=${response.result}`)
+            fetch(`https://interclip.app/api/set?url=${response.result}`)
               .then((rs: { ok: any; json: () => any; status: number }) => {
                 if (rs.ok) {
                   return rs.json();

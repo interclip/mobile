@@ -116,7 +116,7 @@ const HomeScreen: React.FC = () => {
     if (text.length === config.codeLength) {
       setText(text.replace(" ", "").toLowerCase());
       setLoading(true);
-      fetch(`https://interclip.app/includes/get-api?code=${text}`)
+      fetch(`https://interclip.app/api/get?code=${text}`)
         .then((response: { ok: boolean; json: () => any; status: number }) => {
           if (response.ok) {
             setStatusCode(200);

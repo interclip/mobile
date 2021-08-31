@@ -63,7 +63,7 @@ export function SendScreen() {
   useEffect(() => {
     setText(text.replace(" ", "").toLowerCase());
     if (text && isURL(text, { require_protocol: true })) {
-      fetch(`https://interclip.app/includes/api?url=${text}`)
+      fetch(`https://interclip.app/api/set?url=${text}`)
         .then((response) => {
           if (response.ok) {
             return response.json();
