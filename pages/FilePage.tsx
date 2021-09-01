@@ -398,6 +398,6 @@ const FilePage: React.FC = () => {
       </View>
     </View>
   );
-}
+};
 
 export default FilePage;

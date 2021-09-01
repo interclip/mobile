@@ -127,6 +127,6 @@ const AboutPage: React.FC = () => {
       </Text>
     </View>
   );
-}
+};
 
 export default AboutPage;

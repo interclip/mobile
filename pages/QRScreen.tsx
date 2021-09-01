@@ -54,9 +54,9 @@ const QRScreen: React.FC = ({ navigation }) => {
     const result = `${URLArr[0]}//${URLArr[2]}`;
 
     if (
-      (result === "https://iclip.netlify.com") ||
-      (result === "https://iclip.netlify.app") ||
-      (result === "https://interclip.app") ||
+      result === "https://iclip.netlify.com" ||
+      result === "https://iclip.netlify.app" ||
+      result === "https://interclip.app" ||
       Settings.get("data")
     ) {
       Vibration.vibrate();
@@ -205,6 +205,6 @@ const QRScreen: React.FC = ({ navigation }) => {
       </Pressable>
     </View>
   );
-}
+};
 
 export default QRScreen;
