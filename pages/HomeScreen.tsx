@@ -70,10 +70,10 @@ const HomeScreen: React.FC = () => {
   const colorScheme = useColorScheme();
 
   // variables
-  const snapPoints = useMemo(() => [0, "22%", "65%"], []);
+  const snapPoints = useMemo(() => ["22%", "65%"], []);
 
   const handleClosePress = () => bottomSheetRef.current.close();
-  const handleOpenPress = () => bottomSheetRef.current.snapTo(1);
+  const handleOpenPress = () => bottomSheetRef.current.snapToIndex(1);
 
   const { width } = Dimensions.get("window");
 
@@ -291,12 +291,13 @@ const HomeScreen: React.FC = () => {
         backgroundComponent={colorScheme === "dark" && CustomBackground}
         handleComponent={CustomHandle}
         onAnimate={handleSheetChanges}
+        enablePanDownToClose
         ref={bottomSheetRef}
-        index={0}
         snapPoints={snapPoints}
+        index={-1}
       >
         <View style={{ ...styles.contentContainer }}>
-          <View style={{ marginBottom: "10%" }}>
+          <View style={{ marginBottom: "10%" }}>  
             {fileIcon}
             <Text
               style={{
