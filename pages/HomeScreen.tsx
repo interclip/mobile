@@ -297,7 +297,7 @@ const HomeScreen: React.FC = () => {
         index={-1}
       >
         <View style={{ ...styles.contentContainer }}>
-          <View style={{ marginBottom: "10%" }}>  
+          <View style={{ marginBottom: "10%" }}>
             {fileIcon}
             <Text
               style={{
