@@ -127,7 +127,7 @@ const SettingsPage: React.FC = ({ navigation }) => {
       </Section>
     </View>
   );
-}
+};
 
 export function QRSettings() {
   const [data, setData] = useState(Settings.get("data"));
