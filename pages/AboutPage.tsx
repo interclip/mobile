@@ -61,7 +61,7 @@ const AboutPage: React.FC = () => {
       >
         <Icon
           onPress={() =>
-            Linking.openURL("https://github.com/filiptronicek/iclip-mobile/")
+            Linking.openURL("https://github.com/interclip/mobile/")
           }
           type="font-awesome" // The icon is loaded from the font awesome icon library
           name="github" // Icon fa-github
@@ -86,7 +86,7 @@ const AboutPage: React.FC = () => {
         onLayout={(event) => setVersionWidth(event.nativeEvent.layout.width)}
         onPress={() =>
           Linking.openURL(
-            `https://github.com/filiptronicek/iclip-mobile/releases/tag/v${appInfo.expo.version}`
+            `https://github.com/interclip/mobile/releases/tag/v${appInfo.expo.version}`
           )
         }
         onLongPress={() => {

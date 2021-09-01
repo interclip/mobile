@@ -5,7 +5,7 @@
     "version": "0.11.0",
     "orientation": "portrait",
     "userInterfaceStyle": "automatic",
-    "githubUrl": "https://github.com/filiptronicek/iclip-mobile",
+    "githubUrl": "https://github.com/interclip/mobile",
     "icon": "./assets/icon.png",
     "scheme": "iclip",
     "splash": {

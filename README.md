@@ -29,7 +29,7 @@ An Interclip app for your phone and stuff
 
 <a href="https://play.google.com/store/apps/details?id=com.filiptronicek.iclip"> <img width="250" alt="Availible on the Google Play Store" src="https://user-images.githubusercontent.com/29888641/122639762-03dbbb00-d0fc-11eb-97b8-ace2b53ceedf.png"> </a>
 
-- [Android (`.aab` direct link)](https://github.com/filiptronicek/iclip-mobile/releases/latest/download/iclip.aab)
+- [Android (`.aab` direct link)](https://github.com/interclip/mobile/releases/latest/download/iclip.aab)
 - [iOS (Testflight)](https://testflight.apple.com/join/g9WUiQpm)
 
 ## Attribution
