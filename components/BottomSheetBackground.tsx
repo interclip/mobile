@@ -11,38 +11,6 @@ import Animated, {
 
 import PropTypes from "prop-types";
 
-// Components, Expo and RN libraries
-
-/*
-const CustomBackground = ({ animatedIndex, style }) => {
-  const colorScheme = useColorScheme();
-
-  // animated variables
-  const animatedBackground = useMemo(
-    () =>
-      interpolateColors(animatedIndex, {
-        inputRange: [0, 1],
-        outputColorRange:
-          colorScheme === "dark" ? ["#333", "#404040"] : ["#fff", "#fff"],
-      }),
-    [animatedIndex]
-  );
-
-  // styles
-  const containerStyle = useMemo(
-    () => [
-      style,
-      {
-        backgroundColor: animatedBackground,
-      },
-    ],
-    [style, animatedBackground]
-  );
-
-  return <Animated.View style={containerStyle} />;
-};
-*/
-
 const CustomBackground: React.FC<BottomSheetBackgroundProps> = ({
   style,
   animatedIndex,
@@ -55,7 +23,7 @@ const CustomBackground: React.FC<BottomSheetBackgroundProps> = ({
     backgroundColor: interpolateColor(
       animatedIndex.value,
       [0, 1],
-      colorScheme === "dark" ? ["#333", "#404040"] : ["#fff", "#fff"]
+      colorScheme === "dark" ? ["#404040", "#404040"] : ["#fff", "#fff"]
     ),
   }));
   const containerStyle = useMemo(
