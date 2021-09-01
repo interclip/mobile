@@ -30,20 +30,18 @@ import * as Haptics from "expo-haptics";
 
 import { Input, Icon, Button } from "react-native-elements";
 import { Notifier, NotifierComponents } from "react-native-notifier";
-import NetInfo from "@react-native-community/netinfo";
-import { useFocusEffect } from "@react-navigation/native";
 
 // Functional packages
 
 import fetch from "node-fetch";
-const mime = require("mime-types");
+import mime from "mime-types";
 
 // Local functions, components and variables
 
 import { validationMsg, checkError, truncate } from "../lib/functions";
 import chooseIcon from "../lib/files/chooseIcon";
-import { styles } from "../lib/Pages";
-import { config, colors, inputProps } from "../lib/Vars";
+import { styles } from "../lib/pages";
+import { config, colors, inputProps } from "../lib/vars";
 
 import LogoImage from "../components/LogoImage";
 import CustomBackground from "../components/BottomSheetBackground";
@@ -51,20 +49,23 @@ import CustomHandle from "../components/CustomHandle";
 
 // Root component
 
-export function HomeScreen({ navigation }) {
+const HomeScreen: React.FC = () => {
   // Variable set
-  const [isLoading, setLoading] = useState(false); // Loading status => only show the responce of the API
+  const [isLoading, setLoading] = useState<boolean>(false); // Loading status => only show the responce of the API
 
-  // After the request completes
-  const [data, setData] = useState(""); // Dynamically loaded data from the Interclip REST API
+  // Dynamically loaded data from the Interclip REST API
+  const [data, setData] = useState<{ result: string; status: string }>({
+    result: "https://files.interclip.app/ecf3e43230.jpg",
+    status: "success",
+  });
   const bottomSheetRef = useRef(null);
-  const url = data.result || "https://files.interclip.app/ecf3e43230.jpg";
+  const url = data.result;
   const fileExtension = url.split(".")[url.split(".").length - 1];
 
   const fileIcon = chooseIcon(fileExtension);
 
-  const [statusCode, setStatusCode] = useState(200);
-  const [text, setText] = useState(""); // The code entered in the <Input>
+  const [statusCode, setStatusCode] = useState<number>(200);
+  const [text, setText] = useState<string>(""); // The code entered in the <Input>
 
   const colorScheme = useColorScheme();
 
@@ -78,7 +79,7 @@ export function HomeScreen({ navigation }) {
 
   const handleSheetChanges = useCallback((_fromIndex, toIndex) => {
     if (Platform.OS === "ios") {
-      let hapticStrength = false;
+      let hapticStrength: Haptics.ImpactFeedbackStyle | boolean = false;
       switch (toIndex) {
         case 0:
           hapticStrength = Haptics.ImpactFeedbackStyle.Medium;
@@ -88,7 +89,7 @@ export function HomeScreen({ navigation }) {
           hapticStrength = Haptics.ImpactFeedbackStyle.Light;
           break;
       }
-      hapticStrength && Haptics.impactAsync(hapticStrength);
+      hapticStrength !== false && Haptics.impactAsync(hapticStrength);
     }
   }, []);
 
@@ -111,26 +112,12 @@ export function HomeScreen({ navigation }) {
     }
   };
 
-  useFocusEffect(() => {
-    NetInfo.fetch().then((state) => {
-      if (!state.isConnected) {
-        navigation.navigate("Offline");
-      }
-    });
-  });
-
   useEffect(() => {
-    NetInfo.addEventListener((state) => {
-      if (!state.isConnected) {
-        navigation.navigate("Offline");
-      }
-    });
-
     if (text.length === config.codeLength) {
       setText(text.replace(" ", "").toLowerCase());
       setLoading(true);
-      fetch(`https://interclip.app/includes/get-api?code=${text}`)
-        .then((response) => {
+      fetch(`https://interclip.app/api/get?code=${text}`)
+        .then((response: { ok: boolean; json: () => any; status: number }) => {
           if (response.ok) {
             setStatusCode(200);
             return response.json();
@@ -163,7 +150,7 @@ export function HomeScreen({ navigation }) {
             }
           }
         })
-        .then((json) => {
+        .then((json: { result: string }) => {
           const URLArr = json.result.split("/");
           const result = `${URLArr[0]}//${URLArr[2]}`;
 
@@ -174,6 +161,17 @@ export function HomeScreen({ navigation }) {
           }
 
           setData(json);
+        })
+        .catch((error: { message: string }) => {
+          Notifier.showNotification({
+            title: "Error",
+            description: error.message,
+            Component: NotifierComponents.Alert,
+            componentProps: {
+              alertType: "error",
+            },
+          });
+          setStatusCode(400);
         })
         .finally(() => setLoading(false));
     } else {
@@ -264,7 +262,7 @@ export function HomeScreen({ navigation }) {
                     ? colors.light
                     : colors.text,
                   backgroundColor:
-                    checkError(data.status) & !validationMsg(text)
+                    checkError(data.status) && !validationMsg(text)
                       ? colors.errorColor
                       : null,
                   fontSize: 20,
@@ -389,4 +387,6 @@ export function HomeScreen({ navigation }) {
       </BottomSheet>
     </View>
   );
-}
+};
+
+export default HomeScreen;

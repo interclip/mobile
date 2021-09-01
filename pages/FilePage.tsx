@@ -20,23 +20,24 @@ import * as Linking from "expo-linking";
 
 import * as DocumentPicker from "expo-document-picker";
 import * as ImagePicker from "expo-image-picker";
+import { ImageInfo } from "expo-image-picker/build/ImagePicker.types";
 import * as Haptics from "expo-haptics";
 
 // Local functions, components and variables
-import { colors } from "../lib/Vars";
+import { colors } from "../lib/vars";
 import { formatBytes } from "../lib/functions";
-import { styles } from "../lib/Pages";
+import { styles } from "../lib/pages";
 
 import fetch from "node-fetch";
 
 // Root component
 
-export function FilePage() {
+const FilePage: React.FC = () => {
   const colorScheme = useColorScheme();
 
-  const [fileURL, setFileURL] = useState("");
-  const [data, setData] = useState({ result: "" }); // Dynamically loaded data from the Interclip REST API
-  const [loading, setLoading] = useState(false);
+  const [fileURL, setFileURL] = useState<string>("");
+  const [data, setData] = useState<{ result: string }>({ result: "" }); // Dynamically loaded data from the Interclip REST API
+  const [loading, setLoading] = useState<boolean>(false);
 
   const upload = async (action = "media") => {
     let file;
@@ -107,8 +108,8 @@ export function FilePage() {
       setFileURL("");
       setData({ result: "" });
 
-      const uri = file.uri;
-      const extension = uri.split(".")[uri.split(".").length - 1];
+      const uri: string = file.uri;
+      const extension: string = uri.split(".")[uri.split(".").length - 1];
 
       const fileSizeLimitInMegabytes = 100;
       const fileSizeLimitInBytes = fileSizeLimitInMegabytes * 1048576;
@@ -131,9 +132,9 @@ export function FilePage() {
         });
         setLoading(false);
       } else {
-        const data = new FormData();
+        const formData = new FormData();
 
-        data.append("uploaded_file", {
+        formData.append("uploaded_file", {
           uri,
           type: blob.type,
           name: `media.${extension}`,
@@ -141,12 +142,12 @@ export function FilePage() {
 
         fetch("https://interclip.app/upload/?api", {
           method: "post",
-          body: data,
+          body: formData,
           headers: {
             "Content-Type": "multipart/form-data;",
           },
         })
-          .then((res) => {
+          .then((res: { ok: any; json: () => any; status: any }) => {
             if (res.ok) {
               return res.json();
             } else {
@@ -160,11 +161,11 @@ export function FilePage() {
               });
             }
           })
-          .then((response) => {
+          .then((response: { result: React.SetStateAction<string> }) => {
             setFileURL(response.result);
 
-            fetch(`https://interclip.app/includes/api?url=${response.result}`)
-              .then((rs) => {
+            fetch(`https://interclip.app/api/set?url=${response.result}`)
+              .then((rs: { ok: any; json: () => any; status: number }) => {
                 if (rs.ok) {
                   return rs.json();
                 } else {
@@ -187,13 +188,13 @@ export function FilePage() {
                   }
                 }
               })
-              .then((objson) => {
-                setData(objson);
+              .then((data: React.SetStateAction<{ result: string }>) => {
+                setData(data);
                 Haptics.notificationAsync(
                   Haptics.NotificationFeedbackType.Success
                 );
               })
-              .catch((err) => {
+              .catch((err: any) => {
                 Haptics.notificationAsync(
                   Haptics.NotificationFeedbackType.Error
                 );
@@ -222,7 +223,7 @@ export function FilePage() {
           cancelButtonIndex: 0,
         },
         (index) => {
-          let action;
+          let action: string;
           switch (index) {
             case Platform.OS === "ios" ? 1 : 0:
               action = "media";
@@ -398,3 +399,5 @@ export function FilePage() {
     </View>
   );
 }
+
+export default FilePage;

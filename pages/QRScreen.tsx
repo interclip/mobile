@@ -24,20 +24,20 @@ import { useIsFocused } from "@react-navigation/native";
 
 import isURL from "validator/lib/isURL";
 import { sleep } from "../lib/functions";
-import { colors } from "../lib/Vars";
-import { styles } from "../lib/Pages";
+import { colors } from "../lib/vars";
+import { styles } from "../lib/pages";
 
 // Root component
 
-export function QRScreen({ navigation }) {
-  const [hasPermission, setHasPermission] = useState(null);
-  const [qrd, setQrd] = useState(false);
+const QRScreen: React.FC = ({ navigation }) => {
+  const [hasPermission, setHasPermission] = useState<null | boolean>(null);
+  const [qrd, setQrd] = useState<boolean>(false);
   const [cameraRotation, setCameraRotation] = useState(
     BarCodeScanner.Constants.Type.back
   );
-  const [lastClick, setLastClick] = useState(null);
+  const [lastClick, setLastClick] = useState<boolean>(false);
 
-  const isFocused = useIsFocused();
+  const isFocused: boolean = useIsFocused();
 
   useEffect(() => {
     (async () => {
@@ -54,9 +54,9 @@ export function QRScreen({ navigation }) {
     const result = `${URLArr[0]}//${URLArr[2]}`;
 
     if (
-      (result === "https://iclip.netlify.com") |
-      (result === "https://iclip.netlify.app") |
-      (result === "https://interclip.app") |
+      (result === "https://iclip.netlify.com") ||
+      (result === "https://iclip.netlify.app") ||
+      (result === "https://interclip.app") ||
       Settings.get("data")
     ) {
       Vibration.vibrate();
@@ -100,7 +100,7 @@ export function QRScreen({ navigation }) {
           {
             text: "OK then",
             onPress: () => {
-              sleep(1000).then(setQrd(false));
+              sleep(1000).then(() => setQrd(false));
             },
           },
         ]
@@ -113,7 +113,7 @@ export function QRScreen({ navigation }) {
           {
             text: "Cancel",
             onPress: () => {
-              sleep(1000).then(setQrd(false));
+              sleep(1000).then(() => setQrd(false));
             },
             style: "cancel",
           },
@@ -133,7 +133,6 @@ export function QRScreen({ navigation }) {
   const qrStyles = {
     borderColor: "#42C759",
     borderWidth: 17,
-    borderRadius: "20%",
   };
 
   if (hasPermission === null) {
@@ -174,7 +173,7 @@ export function QRScreen({ navigation }) {
         Center your QR code in the square below
       </Text>
       <Pressable
-        style={qrd ? qrStyles : {}}
+        style={qrd ? qrStyles : undefined}
         onPress={() => {
           if (lastClick) {
             const newRotation =
@@ -207,3 +206,5 @@ export function QRScreen({ navigation }) {
     </View>
   );
 }
+
+export default QRScreen;

@@ -28,20 +28,20 @@ import fetch from "node-fetch";
 import isURL from "validator/lib/isURL";
 
 // Local functions, components and variables
-import { colors, inputProps } from "../lib/Vars";
+import { colors, inputProps } from "../lib/vars";
 import { urlValidation, checkError } from "../lib/functions";
-import { styles } from "../lib/Pages";
+import { styles } from "../lib/pages";
 
 import LogoImage from "../components/LogoImage";
 
 // Root component
 
-export function SendScreen() {
+const SendScreen: React.FC = () => {
   // Variable set
   const [isLoading, setLoading] = useState(true); // Loading status => only show the responce of the API
 
   // after the request completes
-  const [data, setData] = useState(""); // Dynamically loaded data from the Interclip REST API
+  const [data, setData] = useState<{ result: string }>({ result: "" }); // Dynamically loaded data from the Interclip REST API
   const [text, setText] = useState(""); // The code entered in the <Input>
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -63,7 +63,7 @@ export function SendScreen() {
   useEffect(() => {
     setText(text.replace(" ", "").toLowerCase());
     if (text && isURL(text, { require_protocol: true })) {
-      fetch(`https://interclip.app/includes/api?url=${text}`)
+      fetch(`https://interclip.app/api/set?url=${text}`)
         .then((response) => {
           if (response.ok) {
             return response.json();
@@ -88,6 +88,17 @@ export function SendScreen() {
           }
         })
         .then((json) => setData(json))
+        .catch((error: { message: string }) => {
+          Notifier.showNotification({
+            title: "Error",
+            description: error.message,
+            Component: NotifierComponents.Alert,
+            componentProps: {
+              alertType: "error",
+            },
+          });
+          setData({ result: "Something went wrong..." });
+        })
         .finally(() => setLoading(false));
 
       setLoading(true);
@@ -251,4 +262,6 @@ export function SendScreen() {
       </TouchableWithoutFeedback>
     </View>
   );
-}
+};
+
+export default SendScreen;

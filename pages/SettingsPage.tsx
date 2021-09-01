@@ -1,5 +1,4 @@
 // React, React Native imports
-
 import React, { useState } from "react";
 import {
   Settings,
@@ -17,11 +16,11 @@ import RNPickerSelect from "react-native-picker-select";
 import * as WebBrowser from "expo-web-browser";
 
 // Local functions and variables
-import { colors } from "../lib/Vars";
+import { colors } from "../lib/vars";
 
 // Root component
 
-export function SettingsPage({ navigation }) {
+const SettingsPage: React.FC = ({ navigation }) => {
   const colorScheme = useColorScheme();
 
   const textColor =
@@ -34,7 +33,7 @@ export function SettingsPage({ navigation }) {
   };
 
   const cellProps = {
-    backgroundColor: colorScheme === "dark" ? "#373737" : "#FFF",
+    backgroundColor: colorScheme === "dark" ? "#212121" : "#fff",
     titleTextColor: textColor,
     titleTextStyleDisabled: {
       color: colorScheme === "dark" ? "#b5b5b5" : "#808080",
@@ -132,11 +131,11 @@ export function SettingsPage({ navigation }) {
 
 export function QRSettings() {
   const [data, setData] = useState(Settings.get("data"));
-  const storeData = (data) => {
+  const storeData = (data: Object) => {
     Settings.set(data);
   };
 
-  const toggleSwitch = (e) => {
+  const toggleSwitch = (e: any) => {
     setData(e);
     storeData({ data: e });
   };
@@ -152,7 +151,7 @@ export function QRSettings() {
   };
 
   const cellProps = {
-    backgroundColor: colorScheme === "dark" ? "#373737" : "#FFF",
+    backgroundColor: colorScheme === "dark" ? "#212121" : "#fff",
     titleTextColor: textColor,
     titleTextStyleDisabled: {
       color: colorScheme === "dark" ? "#b5b5b5" : "#808080",
@@ -193,11 +192,11 @@ export function QRSettings() {
 
 export function FileSettings() {
   const [data, setData] = useState(Settings.get("uploadquality"));
-  const storeData = (data) => {
+  const storeData = (data: Object) => {
     Settings.set(data);
   };
 
-  const changeQuality = (e) => {
+  const changeQuality = (e: any) => {
     setData(e);
     storeData({ uploadquality: e });
   };
@@ -213,7 +212,7 @@ export function FileSettings() {
   };
 
   const cellProps = {
-    backgroundColor: colorScheme === "dark" ? "#373737" : "#FFF",
+    backgroundColor: colorScheme === "dark" ? "#212121" : "#fff",
     titleTextColor: textColor,
     titleTextStyleDisabled: {
       color: colorScheme === "dark" ? "#b5b5b5" : "#808080",
@@ -296,3 +295,5 @@ export function FileSettings() {
     </View>
   );
 }
+
+export default SettingsPage;

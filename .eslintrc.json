@@ -5,6 +5,7 @@
     "node": true,
     "browser": true
   },
+  "plugins": ["unused-imports", "simple-import-sort"],
   "extends": ["eslint:recommended", "plugin:react/recommended", "prettier"],
   "parserOptions": {
     "ecmaVersion": 11,

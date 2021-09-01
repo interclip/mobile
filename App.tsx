@@ -15,16 +15,16 @@ import * as Linking from "expo-linking";
 
 // Pages
 
-import { SendScreen } from "./pages/SendScreen";
-import { QRScreen } from "./pages/QRScreen";
-import { HomeScreen } from "./pages/HomeScreen";
-import { SettingsPage, QRSettings, FileSettings } from "./pages/SettingsPage";
-import { AboutPage } from "./pages/AboutPage";
-import { FilePage } from "./pages/FilePage";
+import SendScreen from "./pages/SendScreen";
+import QRScreen from "./pages/QRScreen";
+import HomeScreen from "./pages/HomeScreen";
+import SettingsPage, { QRSettings, FileSettings } from "./pages/SettingsPage";
+import AboutPage from "./pages/AboutPage";
+import FilePage from "./pages/FilePage";
 
 // Constants
 
-import { colors } from "./lib/Vars";
+import { colors } from "./lib/vars";
 
 // App component
 const Tab = createBottomTabNavigator();

@@ -3,7 +3,7 @@
 import React from "react";
 import { Image } from "react-native";
 
-import { styles } from "../lib/Pages";
+import { styles } from "../lib/pages";
 
 const LogoImage = () => {
   return (

@@ -11,7 +11,7 @@ import { useApplicationInstallTime } from "@use-expo/application";
 
 // Local functions, components and variables
 
-import { colors } from "../lib/Vars";
+import { colors } from "../lib/vars";
 import * as appInfo from "../app.json";
 
 import { Icon } from "react-native-elements";
@@ -20,8 +20,8 @@ import LogoImage from "../components/LogoImage";
 
 // Root component
 
-export function AboutPage() {
-  const [versionWidth, setVersionWidth] = useState(0);
+const AboutPage: React.FC = () => {
+  const [versionWidth, setVersionWidth] = useState<number>(0);
   const [installTime] = useApplicationInstallTime();
 
   const debugInfo = `Version: ${appInfo.expo.version} (${
@@ -128,3 +128,5 @@ export function AboutPage() {
     </View>
   );
 }
+
+export default AboutPage;
