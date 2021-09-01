@@ -73,7 +73,7 @@ const HomeScreen: React.FC = () => {
   const snapPoints = useMemo(() => ["22%", "65%"], []);
 
   const handleClosePress = () => bottomSheetRef.current.close();
-  const handleOpenPress = () => bottomSheetRef.current.snapToIndex(1);
+  const handleOpenPress = () => bottomSheetRef.current.snapToIndex(0);
 
   const { width } = Dimensions.get("window");
 
