@@ -1464,9 +1464,9 @@
     lodash.template "^4.5.0"
 
 "@gorhom/bottom-sheet@^4":
-  version "4.0.2"
-  resolved "https://registry.yarnpkg.com/@gorhom/bottom-sheet/-/bottom-sheet-4.0.2.tgz#0956d3e50338959ec2966315945644a151a13e60"
-  integrity sha512-5JB8Pz/oqAnDKLW1nXrAYOKmJ+6vqxBish5HceZpmeHeI6kFKWXfNws/6cahowkXlbCJklBtZMgx/n1W9kgqWg==
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/@gorhom/bottom-sheet/-/bottom-sheet-4.0.3.tgz#465d28bd39ff19e8ba248b514427c0d790d5de30"
+  integrity sha512-aIStbi8FxquhH4FRuzyQBau8QUPWQljkrq7kaSo+BFanuAoO0B/YpfakxlDSgum+m7p5jXDopj2GU6cLzw9+qw==
   dependencies:
     "@gorhom/portal" "^1.0.7"
     invariant "^2.2.4"
