@@ -72,4 +72,10 @@ jobs:
       - name: Build the app for Android
         run: |
           yarn run build:android
-          echo "Download the latest .aab for Android: $(expo url:apk --non-interactive)"
+      - name: Download the app from Expo
+        run: wget -O iclip.aab $(expo url:apk --non-interactive)
+      - name: Upload the .aab as an action artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: android
+          path: iclip.aab
