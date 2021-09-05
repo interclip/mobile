@@ -39,7 +39,7 @@ const AboutPage: React.FC = () => {
         backgroundColor:
           colorScheme === "dark" ? colors.darkContent : colors.lightContent,
         paddingTop: "10%",
-        justifyContent: "space-evenly"
+        justifyContent: "space-evenly",
       }}
     >
       <LogoImage />
