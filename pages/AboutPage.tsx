@@ -17,6 +17,7 @@ import * as appInfo from "../app.json";
 import { Icon } from "react-native-elements";
 
 import LogoImage from "../components/LogoImage";
+import ContributorList from "../components/ContributorList";
 
 // Root component
 
@@ -38,9 +39,11 @@ const AboutPage: React.FC = () => {
         backgroundColor:
           colorScheme === "dark" ? colors.darkContent : colors.lightContent,
         paddingTop: "10%",
+        justifyContent: "space-evenly"
       }}
     >
       <LogoImage />
+
       <Text
         style={{
           color: colorScheme === "dark" ? "white" : "black",
@@ -51,10 +54,12 @@ const AboutPage: React.FC = () => {
         Interclip mobile is the mobile companion to Interclip, an awesome tool
         for sharing URLs and files cross-device and cross-platform
       </Text>
+      <ContributorList />
+
       <View
         style={{
           display: "flex",
-          marginTop: "10%",
+          marginBottom: "40%",
           flexDirection: "row",
           justifyContent: "space-around",
         }}
