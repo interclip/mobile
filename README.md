@@ -1,4 +1,4 @@
-# Iclip mobile
+# Interclip mobile
 
 An Interclip app for your phone and stuff
 

@@ -268,6 +268,8 @@ const HomeScreen: React.FC = () => {
                   fontSize: 20,
                   marginLeft: "auto",
                   marginRight: "auto",
+                  padding: 5,
+                  borderRadius: 10,
                 }}
               >
                 {!validationMsg(text) &&
