@@ -135,7 +135,7 @@ export function QRSettings() {
     Settings.set(data);
   };
 
-  const toggleSwitch = (e: any) => {
+  const toggleSwitch = (e: string | boolean | number | BigInt) => {
     setData(e);
     storeData({ data: e });
   };
