@@ -101,7 +101,7 @@ const chooseIcon = (extension: string) => {
           size={80}
           color="#367FFA"
         />
-      ); // THe default icon
+      ); // The default icon
     default:
       return (
         <Icon name="file" type="font-awesome-5" size={80} color="#367FFA" />
