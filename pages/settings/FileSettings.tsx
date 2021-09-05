@@ -8,7 +8,7 @@ import RNPickerSelect from "react-native-picker-select";
 // Local functions and variables
 import { colors } from "../../lib/vars";
 
-function FileSettings() : JSX.Element {
+function FileSettings(): JSX.Element {
   const [data, setData] = useState(Settings.get("uploadquality"));
   const storeData = (data: Object) => {
     Settings.set(data);
