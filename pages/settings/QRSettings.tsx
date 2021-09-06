@@ -9,7 +9,7 @@ import { colors } from "../../lib/vars";
 
 // Root component
 
-function QRSettings() : JSX.Element {
+function QRSettings(): JSX.Element {
   const [data, setData] = useState(Settings.get("data"));
   const storeData = (data: Object) => {
     Settings.set(data);
