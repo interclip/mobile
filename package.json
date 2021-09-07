@@ -23,7 +23,7 @@
     "@types/mime-types": "^2.1.1",
     "@types/node-fetch": "^2.5.12",
     "@types/react": "^17.0.19",
-    "@types/react-native": "^0.64.13",
+    "@types/react-native": "^0.64.14",
     "@types/validator": "^13.6.3",
     "@use-expo/application": "^1.0.0",
     "expo": "^42.0.3",
