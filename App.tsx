@@ -19,7 +19,7 @@ import SendScreen from "./pages/SendScreen";
 import QRScreen from "./pages/QRScreen";
 import HomeScreen from "./pages/HomeScreen";
 import SettingsPage, { QRSettings, FileSettings } from "./pages/SettingsPage";
-import AboutPage from "./pages/AboutPage";
+import AboutPage from "./pages/settings/AboutPage";
 import FilePage from "./pages/FilePage";
 
 // Constants

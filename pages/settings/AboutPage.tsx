@@ -11,13 +11,13 @@ import { useApplicationInstallTime } from "@use-expo/application";
 
 // Local functions, components and variables
 
-import { colors } from "../lib/vars";
-import * as appInfo from "../app.json";
+import { colors } from "../../lib/vars";
+import * as appInfo from "../../app.json";
 
 import { Icon } from "react-native-elements";
 
-import LogoImage from "../components/LogoImage";
-import ContributorList from "../components/ContributorList";
+import LogoImage from "../../components/LogoImage";
+import ContributorList from "../../components/ContributorList";
 
 // Root component
 
@@ -39,7 +39,7 @@ const AboutPage: React.FC = () => {
         backgroundColor:
           colorScheme === "dark" ? colors.darkContent : colors.lightContent,
         paddingTop: "10%",
-        justifyContent: "space-evenly"
+        justifyContent: "space-evenly",
       }}
     >
       <LogoImage />

@@ -11,38 +11,65 @@ import {
 
 import * as Linking from "expo-linking";
 import { Image } from "react-native-elements";
+import { Notifier, NotifierComponents } from "react-native-notifier";
 
 import { colors } from "../lib/vars";
 
 type contributorType = {
   login: string;
   type: "Bot" | "User" | "Organization";
+  avatar_url: string;
+  html_url: string;
 };
 
 const ContributorList = () => {
-  const [contributors, setContributors] = useState(["interclip"]);
+  const [contributors, setContributors] = useState<[contributorType]>([
+    {
+      login: "interclip",
+      type: "User",
+      avatar_url: "https://avatars.githubusercontent.com/u/87187104?v=4",
+      html_url: "https://github.com/interclip",
+    },
+  ]);
   const colorScheme = useColorScheme();
 
   // Fetch the contributors from the GitHub API
   useEffect(() => {
     fetch("https://api.github.com/repos/interclip/mobile/contributors")
-      .then((response) => response.json())
+      .then((response) => {
+        // Check for errors
+        if (!response.ok) {
+          Notifier.showNotification({
+            title: "Sheeesh",
+            description: `Encountered an error while fetching contributors: (${response.status})`,
+            Component: NotifierComponents.Alert,
+            componentProps: {
+              alertType: "error",
+            },
+          });
+          return [{ login: "interclip", type: "Bot" }];
+        }
+        return response.json();
+      })
       .then((responseJson) => {
         const exemptUsers = ["restyled-commits", "codacy-badger"];
-        const contributorLogins = responseJson
-          .filter(
-            (contributor: contributorType) =>
-              contributor.type !== "Bot" &&
-              !exemptUsers.includes(contributor.login)
-          )
-          .map((contributor: contributorType) => contributor.login);
+        const contributorLogins = responseJson.filter(
+          (contributor: contributorType) =>
+            contributor.type !== "Bot" &&
+            !exemptUsers.includes(contributor.login)
+        );
         setContributors(contributorLogins);
       })
       .catch((_error) => {
-        Alert.alert(
-          "Error",
-          "There was an error fetching the contributors. Please try again later."
-        );
+        Notifier.showNotification({
+          title: "Error",
+          description:
+            "There was an error fetching the contributors. Please try again later.",
+          Component: NotifierComponents.Alert,
+          componentProps: {
+            alertType: "error",
+          },
+        });
       });
   }, []);
 
@@ -61,15 +88,15 @@ const ContributorList = () => {
             colorScheme === "dark" ? colors.lightContent : colors.darkContent,
         }}
       >
-        Made by:{" "}
+        {contributors.length > 0 ? "Made by: " : ""}
       </Text>
       {contributors.map((contributor) => {
         return (
           <Image
-            key={contributor}
-            onPress={() => Linking.openURL(`https://github.com/${contributor}`)}
+            key={contributor.login}
+            onPress={() => Linking.openURL(contributor.html_url)}
             source={{
-              uri: `https://github.com/${contributor}.png`,
+              uri: contributor.avatar_url,
             }}
             style={{
               width: 35,

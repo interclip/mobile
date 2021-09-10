@@ -1,22 +1,18 @@
 // React, React Native imports
-import React, { useState } from "react";
-import {
-  Settings,
-  Switch,
-  Text,
-  useColorScheme,
-  View,
-  StyleSheet,
-} from "react-native";
+import React from "react";
+import { Text, useColorScheme, View } from "react-native";
 
 import { Cell, Section } from "react-native-tableview-simple";
 import { Icon } from "react-native-elements";
-import RNPickerSelect from "react-native-picker-select";
 
 import * as WebBrowser from "expo-web-browser";
 
 // Local functions and variables
 import { colors } from "../lib/vars";
+
+// Import sub-pages
+import FilePage from "./settings/FileSettings";
+import QRSettings from "./settings/QRSettings";
 
 // Root component
 
@@ -129,171 +125,4 @@ const SettingsPage: React.FC = ({ navigation }) => {
   );
 };
 
-export function QRSettings() {
-  const [data, setData] = useState(Settings.get("data"));
-  const storeData = (data: Object) => {
-    Settings.set(data);
-  };
-
-  const toggleSwitch = (e: string | boolean | number | BigInt) => {
-    setData(e);
-    storeData({ data: e });
-  };
-
-  const colorScheme = useColorScheme();
-  const textColor =
-    colorScheme === "dark" ? colors.lightContent : colors.darkContent;
-
-  const sectionProps = {
-    headerTextColor: colorScheme === "dark" ? colors.light : "#6d6d72",
-    hideSurroundingSeparators: true,
-    roundedCorners: true,
-  };
-
-  const cellProps = {
-    backgroundColor: colorScheme === "dark" ? "#212121" : "#fff",
-    titleTextColor: textColor,
-    titleTextStyleDisabled: {
-      color: colorScheme === "dark" ? "#b5b5b5" : "#808080",
-    },
-  };
-
-  return (
-    <View
-      style={{
-        padding: 25,
-        flex: 1,
-        backgroundColor:
-          colorScheme === "dark" ? colors.darkContent : colors.lightContent,
-      }}
-    >
-      <Text
-        style={{
-          color: colorScheme === "dark" ? "white" : "black",
-        }}
-      ></Text>
-      <Section header="Link opening" {...sectionProps}>
-        <Cell
-          cellStyle="Basic"
-          title="Open non-interclip QR Codes"
-          cellAccessoryView={
-            <Switch
-              ios_backgroundColor="#3e3e3e"
-              onValueChange={toggleSwitch}
-              value={data}
-            />
-          }
-          {...cellProps}
-        />
-      </Section>
-    </View>
-  );
-}
-
-export function FileSettings() {
-  const [data, setData] = useState(Settings.get("uploadquality"));
-  const storeData = (data: Object) => {
-    Settings.set(data);
-  };
-
-  const changeQuality = (e: any) => {
-    setData(e);
-    storeData({ uploadquality: e });
-  };
-
-  const colorScheme = useColorScheme();
-  const textColor =
-    colorScheme === "dark" ? colors.lightContent : colors.darkContent;
-
-  const sectionProps = {
-    headerTextColor: colorScheme === "dark" ? colors.light : "#6d6d72",
-    hideSurroundingSeparators: true,
-    roundedCorners: true,
-  };
-
-  const cellProps = {
-    backgroundColor: colorScheme === "dark" ? "#212121" : "#fff",
-    titleTextColor: textColor,
-    titleTextStyleDisabled: {
-      color: colorScheme === "dark" ? "#b5b5b5" : "#808080",
-    },
-  };
-
-  const pickerSelectStyles = StyleSheet.create({
-    inputIOS: {
-      fontSize: 16,
-      paddingVertical: 12,
-      paddingHorizontal: 10,
-      color: "black",
-    },
-    inputAndroid: {
-      fontSize: 16,
-      paddingHorizontal: 10,
-      paddingVertical: 8,
-      color: "black",
-    },
-  });
-
-  const qualityOpts = [
-    {
-      label: "None",
-      value: 1,
-    },
-    {
-      label: "Medium",
-      value: 0.7,
-    },
-    {
-      label: "High",
-      value: 0,
-    },
-  ];
-
-  return (
-    <View
-      style={{
-        padding: 25,
-        flex: 1,
-        backgroundColor:
-          colorScheme === "dark" ? colors.darkContent : colors.lightContent,
-      }}
-    >
-      <Text
-        style={{
-          color: colorScheme === "dark" ? "white" : "black",
-        }}
-      ></Text>
-      <Section header="File uploads" {...sectionProps}>
-        <Cell
-          cellStyle="Basic"
-          title="Media compression"
-          cellAccessoryView={
-            <RNPickerSelect
-              placeholder={{
-                label: "Select one",
-                value: null,
-                color: textColor,
-              }}
-              items={qualityOpts}
-              onValueChange={(value) => {
-                changeQuality(value);
-              }}
-              style={{
-                ...pickerSelectStyles,
-                iconContainer: {
-                  top: 10,
-                  right: 12,
-                },
-              }}
-              value={data}
-              useNativeAndroidPickerStyle={false}
-            />
-          }
-          {...cellProps}
-        />
-      </Section>
-    </View>
-  );
-}
-
-export default SettingsPage;
+export { SettingsPage as default, FilePage, QRSettings };
