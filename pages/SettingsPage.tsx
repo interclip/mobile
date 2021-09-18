@@ -125,4 +125,4 @@ const SettingsPage: React.FC = ({ navigation }) => {
   );
 };
 
-export { SettingsPage as default, FilePage, QRSettings };
+export { SettingsPage as default, FilePage as FileSettings, QRSettings };
