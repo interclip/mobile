@@ -1,10 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  Text,
-  View,
-  ActivityIndicator,
-  useColorScheme,
-} from "react-native";
+import { Text, View, ActivityIndicator, useColorScheme } from "react-native";
 
 import * as Linking from "expo-linking";
 import { Image } from "react-native-elements";
