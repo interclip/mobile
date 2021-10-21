@@ -26,7 +26,7 @@
     "@types/react-native": "^0.65.0",
     "@types/validator": "^13.6.3",
     "@use-expo/application": "^1.0.0",
-    "expo": "^42.0.3",
+    "expo": "^42.0.4",
     "expo-application": "~3.2.0",
     "expo-barcode-scanner": "^10.2.2",
     "expo-clipboard": "^1.1.0",
