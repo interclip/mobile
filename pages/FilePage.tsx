@@ -20,26 +20,25 @@ import * as Linking from "expo-linking";
 
 import * as DocumentPicker from "expo-document-picker";
 import * as ImagePicker from "expo-image-picker";
-import { ImageInfo } from "expo-image-picker/build/ImagePicker.types";
 import * as Haptics from "expo-haptics";
 
 // Local functions, components and variables
 import { colors } from "../lib/vars";
 import { formatBytes } from "../lib/functions";
 import { styles } from "../lib/pages";
+import { ClipData, ClipResponse, UploadActionType } from "../typings/interclip";
 
 import fetch from "node-fetch";
-
-// Root component
 
 const FilePage: React.FC = () => {
   const colorScheme = useColorScheme();
 
   const [fileURL, setFileURL] = useState<string>("");
-  const [data, setData] = useState<{ result: string }>({ result: "" }); // Dynamically loaded data from the Interclip REST API
+  // Dynamically loaded data from the Interclip REST API
+  const [data, setData] = useState<ClipData>({ result: "", status: "success" }); 
   const [loading, setLoading] = useState<boolean>(false);
 
-  const upload = async (action = "media") => {
+  const upload = async (action: UploadActionType = "media") => {
     let file;
     if (action === "media") {
       const permissionResult =
@@ -147,7 +146,7 @@ const FilePage: React.FC = () => {
             "Content-Type": "multipart/form-data;",
           },
         })
-          .then((res: { ok: any; json: () => any; status: any }) => {
+          .then((res: ClipResponse) => {
             if (res.ok) {
               return res.json();
             } else {
@@ -161,15 +160,14 @@ const FilePage: React.FC = () => {
               });
             }
           })
-          .then((response: { result: React.SetStateAction<string> }) => {
+          .then((response) => {
             setFileURL(response.result);
-
             fetch(`https://interclip.app/api/set?url=${response.result}`)
-              .then((rs: { ok: any; json: () => any; status: number }) => {
-                if (rs.ok) {
-                  return rs.json();
+              .then((response: ClipResponse) => {
+                if (response.ok) {
+                  return response.json();
                 } else {
-                  if (rs.status === 429) {
+                  if (response.status === 429) {
                     Notifier.showNotification({
                       title: "We are getting too many requests from you.",
                       Component: NotifierComponents.Alert,
@@ -179,7 +177,7 @@ const FilePage: React.FC = () => {
                     });
                   } else {
                     Notifier.showNotification({
-                      title: `Got the error ${rs.status}.`,
+                      title: `Got the error ${response.status}.`,
                       Component: NotifierComponents.Alert,
                       componentProps: {
                         alertType: "error",
@@ -188,7 +186,7 @@ const FilePage: React.FC = () => {
                   }
                 }
               })
-              .then((data: React.SetStateAction<{ result: string }>) => {
+              .then((data) => {
                 setData(data);
                 Haptics.notificationAsync(
                   Haptics.NotificationFeedbackType.Success
@@ -223,7 +221,7 @@ const FilePage: React.FC = () => {
           cancelButtonIndex: 0,
         },
         (index) => {
-          let action: string;
+          let action: UploadActionType;
           switch (index) {
             case Platform.OS === "ios" ? 1 : 0:
               action = "media";
