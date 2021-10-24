@@ -5,7 +5,7 @@ import { Icon } from "react-native-elements";
 
 import fileTypes from "./filetypes";
 
-const chooseIcon = (extension: string) => {
+const chooseIcon = (extension: string): JSX.Element => {
   var fileCat = [];
   for (const key of Object.keys(fileTypes)) {
     if (fileTypes[key].includes(extension)) {

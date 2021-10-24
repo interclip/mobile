@@ -1,13 +1,5 @@
-// React, React Native imports
-
 import React, { useState, useEffect } from "react";
-import {
-  Text,
-  View,
-  Alert,
-  ActivityIndicator,
-  useColorScheme,
-} from "react-native";
+import { Text, View, ActivityIndicator, useColorScheme } from "react-native";
 
 import * as Linking from "expo-linking";
 import { Image } from "react-native-elements";
@@ -15,7 +7,7 @@ import { Notifier, NotifierComponents } from "react-native-notifier";
 
 import { colors } from "../lib/vars";
 
-type contributorType = {
+type Contributor = {
   login: string;
   type: "Bot" | "User" | "Organization";
   avatar_url: string;
@@ -23,7 +15,7 @@ type contributorType = {
 };
 
 const ContributorList = () => {
-  const [contributors, setContributors] = useState<[contributorType]>([
+  const [contributors, setContributors] = useState<Contributor[]>([
     {
       login: "interclip",
       type: "User",
@@ -51,10 +43,10 @@ const ContributorList = () => {
         }
         return response.json();
       })
-      .then((responseJson) => {
+      .then((responseJson: Contributor[]) => {
         const exemptUsers = ["restyled-commits", "codacy-badger"];
         const contributorLogins = responseJson.filter(
-          (contributor: contributorType) =>
+          (contributor: Contributor) =>
             contributor.type !== "Bot" &&
             !exemptUsers.includes(contributor.login)
         );
