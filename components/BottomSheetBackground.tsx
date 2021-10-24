@@ -9,8 +9,6 @@ import Animated, {
   interpolateColor,
 } from "react-native-reanimated";
 
-import PropTypes from "prop-types";
-
 const CustomBackground: React.FC<BottomSheetBackgroundProps> = ({
   style,
   animatedIndex,
@@ -34,11 +32,6 @@ const CustomBackground: React.FC<BottomSheetBackgroundProps> = ({
 
   // render
   return <Animated.View pointerEvents="none" style={containerStyle} />;
-};
-
-CustomBackground.propTypes = {
-  animatedIndex: PropTypes.any.isRequired,
-  style: PropTypes.any.isRequired,
 };
 
 export default CustomBackground;

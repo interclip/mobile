@@ -1,6 +1,9 @@
 name: Yarn Lock Changes
 on: [pull_request]
-
+permissions:
+  checks: write
+  issues: write
+  pull-requests: write
 jobs:
   check:
     runs-on: ubuntu-latest
