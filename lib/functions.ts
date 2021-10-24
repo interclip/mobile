@@ -37,6 +37,15 @@ const urlValidation = (url: string): boolean | string => {
   }
 };
 
+/**
+ * Format bytes into a human readable format
+ * @example
+ * ```ts
+ * formatBytes(45_000_000_000) // "41.91 GB"
+ * ```
+ * @param bytes the number of bytes to format
+ * @param decimals the amount of decimal points 
+ */
 const formatBytes = (bytes: number, decimals = 2): string => {
   if (bytes === 0) return "0 Bytes";
 
@@ -49,6 +58,9 @@ const formatBytes = (bytes: number, decimals = 2): string => {
   return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + " " + sizes[i];
 };
 
+/**
+ * Makes sure a string doesn't surpass a certain length, and if it does, truncate it
+ */
 const truncate = (text: string, length: number): string => {
   if (text.length > length) {
     return `${text.substring(0, length)}...`;
