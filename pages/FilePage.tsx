@@ -35,7 +35,7 @@ const FilePage: React.FC = () => {
 
   const [fileURL, setFileURL] = useState<string>("");
   // Dynamically loaded data from the Interclip REST API
-  const [data, setData] = useState<ClipData>({ result: "", status: "success" }); 
+  const [data, setData] = useState<ClipData>({ result: "", status: "success" });
   const [loading, setLoading] = useState<boolean>(false);
 
   const upload = async (action: UploadActionType = "media") => {
