@@ -44,7 +44,7 @@ const urlValidation = (url: string): boolean | string => {
  * formatBytes(45_000_000_000) // "41.91 GB"
  * ```
  * @param bytes the number of bytes to format
- * @param decimals the amount of decimal points 
+ * @param decimals the amount of decimal points
  */
 const formatBytes = (bytes: number, decimals = 2): string => {
   if (bytes === 0) return "0 Bytes";
