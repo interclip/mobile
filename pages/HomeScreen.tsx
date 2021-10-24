@@ -46,6 +46,7 @@ import { config, colors, inputProps } from "../lib/vars";
 import LogoImage from "../components/LogoImage";
 import CustomBackground from "../components/BottomSheetBackground";
 import CustomHandle from "../components/CustomHandle";
+import { ClipData, ClipResponse } from "../typings/interclip";
 
 // Root component
 
@@ -54,7 +55,7 @@ const HomeScreen: React.FC = () => {
   const [isLoading, setLoading] = useState<boolean>(false); // Loading status => only show the responce of the API
 
   // Dynamically loaded data from the Interclip REST API
-  const [data, setData] = useState<{ result: string; status: string }>({
+  const [data, setData] = useState<ClipData>({
     result: "https://files.interclip.app/ecf3e43230.jpg",
     status: "success",
   });
@@ -117,7 +118,7 @@ const HomeScreen: React.FC = () => {
       setText(text.replace(" ", "").toLowerCase());
       setLoading(true);
       fetch(`https://interclip.app/api/get?code=${text}`)
-        .then((response: { ok: boolean; json: () => any; status: number }) => {
+        .then((response: ClipResponse) => {
           if (response.ok) {
             setStatusCode(200);
             return response.json();
@@ -150,8 +151,8 @@ const HomeScreen: React.FC = () => {
             }
           }
         })
-        .then((json: { result: string }) => {
-          const URLArr = json.result.split("/");
+        .then((clipData: ClipData) => {
+          const URLArr = clipData.result.split("/");
           const result = `${URLArr[0]}//${URLArr[2]}`;
 
           if (result === "https://files.interclip.app") {
@@ -160,7 +161,7 @@ const HomeScreen: React.FC = () => {
             handleClosePress();
           }
 
-          setData(json);
+          setData(clipData);
         })
         .catch((error: { message: string }) => {
           Notifier.showNotification({
