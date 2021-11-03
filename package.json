@@ -65,7 +65,7 @@
     "react-native-web": "^0.17.1",
     "rn-actionsheet-module": "^1.0.3",
     "strip-eof": "^2.0.0",
-    "validator": "^13.5.2"
+    "validator": "^13.7.0"
   },
   "devDependencies": {
     "@babel/core": "^7.15.8",
