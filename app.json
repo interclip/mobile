@@ -2,7 +2,7 @@
   "expo": {
     "name": "Interclip",
     "slug": "iclip",
-    "version": "1.1.1",
+    "version": "1.1.2",
     "orientation": "portrait",
     "userInterfaceStyle": "automatic",
     "githubUrl": "https://github.com/interclip/mobile",
@@ -21,7 +21,7 @@
       "icon": "./assets/ios.png",
       "supportsTablet": true,
       "bundleIdentifier": "com.filiptronicek.iclip",
-      "buildNumber": "1.1.1",
+      "buildNumber": "1.1.2",
       "infoPlist": {
         "NSCameraUsageDescription": "Interclip uses your camera to scan QR codes. Interclip will also use your camera if you upload a file with the Camera source.",
         "NSMicrophoneUsageDescription": "Interclip uses your microphone to record audio when you record video through the file upload page.",
@@ -37,7 +37,7 @@
         "READ_EXTERNAL_STORAGE",
         "WRITE_EXTERNAL_STORAGE"
       ],
-      "versionCode": 39
+      "versionCode": 40
     },
     "web": {
       "favicon": "./assets/favicon.png"
