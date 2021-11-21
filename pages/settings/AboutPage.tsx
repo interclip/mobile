@@ -121,8 +121,7 @@ const AboutPage: React.FC = () => {
               },
             },
             {
-              text: "Cancel",
-              onPress: () => console.log("No Pressed"),
+              text: "Close",
               style: "cancel",
             },
           ]);
