@@ -3060,10 +3060,10 @@
   resolved "https://registry.yarnpkg.com/@react-native-community/masked-view/-/masked-view-0.1.11.tgz#2f4c6e10bee0786abff4604e39a37ded6f3980ce"
   integrity sha512-rQfMIGSR/1r/SyN87+VD8xHHzDYeHaJq6elOSCAD+0iLagXkSI2pfA0LmSXP21uw5i3em7GkkRjfJ8wpqWXZNw==
 
-"@react-native-community/netinfo@^6.0.4":
-  version "6.0.4"
-  resolved "https://registry.yarnpkg.com/@react-native-community/netinfo/-/netinfo-6.0.4.tgz#8add3f31b38f60307bc6982badf09b751d09a692"
-  integrity sha512-hZ9phcQr8Q4IT70KRMBRMXaNebwJErLcbPvprynwSlvekus7khnnkUsBGqMxuz5ZDDd8JXDbU+0UO+2dZSZ/qw==
+"@react-native-community/netinfo@^7.1.2":
+  version "7.1.2"
+  resolved "https://registry.yarnpkg.com/@react-native-community/netinfo/-/netinfo-7.1.2.tgz#992d1d92e946d6fbfc5024207bff2af2ef8d5b76"
+  integrity sha512-QknIAs1rNUwkBotOHZb+uKZ12cHk/aBJjNaf/oGO9PnguEkHAXLKpHcbvw3ZTk/Dr5cCKxaEEIsgYxgSU1IBfQ==
 
 "@react-native-picker/picker@^1.8.3":
   version "1.16.5"
