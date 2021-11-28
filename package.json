@@ -37,7 +37,7 @@
     "expo-linking": "~2.3.1",
     "expo-permissions": "~12.1.1",
     "expo-splash-screen": "^0.11.4",
-    "expo-status-bar": "^1.0.4",
+    "expo-status-bar": "^1.1.0",
     "expo-web-browser": "~9.2.0",
     "fbjs": "^3.0.1",
     "handler": "^0.1.3",
