@@ -5266,12 +5266,12 @@ expo-modules-core@~0.4.4, expo-modules-core@~0.4.8:
     compare-versions "^3.4.0"
     invariant "^2.2.4"
 
-expo-permissions@~12.1.1:
-  version "12.1.1"
-  resolved "https://registry.yarnpkg.com/expo-permissions/-/expo-permissions-12.1.1.tgz#93fd8569d4106ff9dd66d67619cb69a0aa895482"
-  integrity sha512-fHBB4A/aWMcvdmDY79gpgQt0ufKG8F1gwTgO3+RjjudVe5kovNy5TeXdHrCa0MksFVKjktqLjJrgiBITJXjg+g==
+expo-permissions@~13.0.3:
+  version "13.0.3"
+  resolved "https://registry.yarnpkg.com/expo-permissions/-/expo-permissions-13.0.3.tgz#93d4395658d9967d257faa31bbec096551654aaf"
+  integrity sha512-bVjdnhYDZy06jX0J+0fGuXzEJ7r+ibl9yCAsumd3S/ELrs1wbR8/zOkQBaSyoYk0z9MiGCC4ul6UB10wEiMPmw==
   dependencies:
-    expo-modules-core "~0.2.0"
+    expo-modules-core "~0.4.4"
 
 expo-splash-screen@^0.11.4:
   version "0.11.4"
