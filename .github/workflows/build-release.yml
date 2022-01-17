@@ -19,7 +19,7 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
           cache: yarn
-      - uses: expo/expo-github-action@6.0.0
+      - uses: expo/expo-github-action@7.0.1
         with:
           expo-version: 4.x
           expo-cache: true
