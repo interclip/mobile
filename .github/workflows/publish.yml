@@ -15,7 +15,7 @@ jobs:
           cache: yarn
       - uses: expo/expo-github-action@7.0.3
         with:
-          expo-version: 4.x
+          expo-version: latest
           token: ${{ secrets.EXPO_TOKEN }}
           expo-cache: true
       - run: yarn
