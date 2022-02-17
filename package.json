@@ -17,7 +17,7 @@
     "@react-native-community/clipboard": "^1.5.1",
     "@react-native-community/masked-view": "^0.1.10",
     "@react-native-community/netinfo": "^8.0.0",
-    "@react-navigation/bottom-tabs": "^6.0.9",
+    "@react-navigation/bottom-tabs": "^6.2.0",
     "@react-navigation/native": "^6.0.8",
     "@react-navigation/stack": "^6.1.1",
     "@types/mime-types": "^2.1.1",
@@ -69,15 +69,15 @@
     "validator": "^13.7.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.15.8",
-    "babel-preset-expo": "^8.5.1",
+    "@babel/core": "^7.17.4",
+    "babel-preset-expo": "^9.0.2",
     "eslint": "^8.1.0",
     "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-react": "^7.26.1",
+    "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-simple-import-sort": "^7.0.0",
-    "eslint-plugin-unused-imports": "^1.1.5",
-    "jest": "^27.3.1",
-    "typescript": "^4.5.2"
+    "eslint-plugin-unused-imports": "^2.0.0",
+    "jest": "^27.5.1",
+    "typescript": "^4.5.5"
   },
   "private": false,
   "license": "MIT",
