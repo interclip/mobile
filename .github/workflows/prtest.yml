@@ -1,5 +1,6 @@
 name: Expo CI
 on: [pull_request]
+
 permissions:
   actions: write
   checks: write
@@ -11,6 +12,7 @@ permissions:
   repository-projects: write
   security-events: write
   statuses: write
+
 jobs:
   lint:
     name: Lint with ESLINT
@@ -23,6 +25,7 @@ jobs:
       - run: npm i -g eslint
       - run: yarn
       - run: eslint .
+
   ci:
     name: Continuous Integration
     runs-on: ${{ matrix.os }}
