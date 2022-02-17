@@ -38,7 +38,10 @@ jobs:
           cache: "yarn"
       - uses: expo/expo-github-action@6.0.0
         with:
-          expo-version: 4.x
+          expo-version: latest
+          eas-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
+
       - name: Install dependencies with Yarn
         run: yarn
       - run: expo doctor
