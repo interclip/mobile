@@ -5,7 +5,7 @@ import { Settings, Switch, Text, useColorScheme, View } from "react-native";
 import { Cell, Section } from "react-native-tableview-simple";
 
 // Local functions and variables
-import { colors } from "../../lib/vars";
+import { colors } from "../../lib/constants";
 
 // Root component
 

@@ -1,7 +1,7 @@
 /* 3rd party libraries */
 
 import isURL from "validator/lib/isURL";
-import { config } from "./vars";
+import { config } from "./constants";
 
 /* Function and config */
 const checkError = (msg: string): boolean => {

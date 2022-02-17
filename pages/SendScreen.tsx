@@ -28,7 +28,7 @@ import fetch from "node-fetch";
 import isURL from "validator/lib/isURL";
 
 // Local functions, components and variables
-import { colors, inputProps } from "../lib/vars";
+import { colors, inputProps } from "../lib/constants";
 import { urlValidation, checkError } from "../lib/functions";
 import { styles } from "../lib/pages";
 

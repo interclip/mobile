@@ -6,7 +6,7 @@ import { Cell, Section } from "react-native-tableview-simple";
 import RNPickerSelect from "react-native-picker-select";
 
 // Local functions and variables
-import { colors } from "../../lib/vars";
+import { colors } from "../../lib/constants";
 
 function FileSettings(): JSX.Element {
   const [data, setData] = useState(Settings.get("uploadquality"));

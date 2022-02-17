@@ -5,7 +5,7 @@ import * as Linking from "expo-linking";
 import { Image } from "react-native-elements";
 import { Notifier, NotifierComponents } from "react-native-notifier";
 
-import { colors } from "../lib/vars";
+import { colors } from "../lib/constants";
 
 type Contributor = {
   login: string;

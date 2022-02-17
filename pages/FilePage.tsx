@@ -23,7 +23,7 @@ import * as ImagePicker from "expo-image-picker";
 import * as Haptics from "expo-haptics";
 
 // Local functions, components and variables
-import { colors } from "../lib/vars";
+import { colors } from "../lib/constants";
 import { formatBytes } from "../lib/functions";
 import { styles } from "../lib/pages";
 import { ClipData, ClipResponse, UploadActionType } from "../typings/interclip";

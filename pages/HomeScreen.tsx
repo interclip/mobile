@@ -41,7 +41,7 @@ import mime from "mime-types";
 import { validationMsg, checkError, truncate } from "../lib/functions";
 import chooseIcon from "../lib/files/chooseIcon";
 import { styles } from "../lib/pages";
-import { config, colors, inputProps } from "../lib/vars";
+import { config, colors, inputProps } from "../lib/constants";
 
 import LogoImage from "../components/LogoImage";
 import CustomBackground from "../components/BottomSheetBackground";

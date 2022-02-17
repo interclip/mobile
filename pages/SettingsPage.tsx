@@ -8,7 +8,7 @@ import { Icon } from "react-native-elements";
 import * as WebBrowser from "expo-web-browser";
 
 // Local functions and variables
-import { colors } from "../lib/vars";
+import { colors } from "../lib/constants";
 
 // Import sub-pages
 import FilePage from "./settings/FileSettings";

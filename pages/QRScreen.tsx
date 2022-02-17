@@ -24,7 +24,7 @@ import { useIsFocused } from "@react-navigation/native";
 
 import isURL from "validator/lib/isURL";
 import { sleep } from "../lib/functions";
-import { colors } from "../lib/vars";
+import { colors } from "../lib/constants";
 import { styles } from "../lib/pages";
 
 // Root component
