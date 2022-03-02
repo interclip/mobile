@@ -14,7 +14,7 @@ jobs:
     name: Continuous Integration
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: actions/setup-node@v2.5.1
         with:
           node-version: ${{ matrix.node }}
@@ -34,7 +34,7 @@ jobs:
     name: Build for iOS
     needs: ci
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: actions/setup-node@v2.5.1
         with:
           node-version: 14
@@ -55,7 +55,7 @@ jobs:
     name: Build for Android
     needs: ci
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: actions/setup-node@v2.5.1
         with:
           node-version: 14
