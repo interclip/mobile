@@ -18,7 +18,7 @@ jobs:
     name: Lint with ESLINT
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: actions/setup-node@v2.5.1
         with:
           node-version: 14.x
@@ -33,7 +33,7 @@ jobs:
       matrix:
         os: [ubuntu-latest, macOS-latest, windows-latest]
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: actions/setup-node@v2.5.1
         with:
           node-version: 16
