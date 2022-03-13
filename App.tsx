@@ -24,7 +24,7 @@ import FilePage from "./pages/FilePage";
 
 // Constants
 
-import { colors } from "./lib/constants";
+import { apiEndpoint, colors } from "./lib/constants";
 
 // App component
 const Tab = createBottomTabNavigator();
@@ -171,7 +171,7 @@ export default function App() {
   const prefix = Linking.createURL("/");
 
   const linking = {
-    prefixes: ["https://interclip.app/", prefix],
+    prefixes: [apiEndpoint, prefix],
     config,
   };
 

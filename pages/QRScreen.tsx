@@ -24,7 +24,7 @@ import { useIsFocused } from "@react-navigation/native";
 
 import isURL from "validator/lib/isURL";
 import { sleep } from "../lib/functions";
-import { colors } from "../lib/constants";
+import { apiEndpoint, colors } from "../lib/constants";
 import { styles } from "../lib/pages";
 
 // Root component
@@ -56,7 +56,7 @@ const QRScreen: React.FC = ({ navigation }) => {
     if (
       result === "https://iclip.netlify.com" ||
       result === "https://iclip.netlify.app" ||
-      result === "https://interclip.app" ||
+      result === apiEndpoint ||
       Settings.get("data")
     ) {
       Vibration.vibrate();

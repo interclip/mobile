@@ -8,7 +8,7 @@ import { Icon } from "react-native-elements";
 import * as WebBrowser from "expo-web-browser";
 
 // Local functions and variables
-import { colors } from "../lib/constants";
+import { apiEndpoint, colors } from "../lib/constants";
 
 // Import sub-pages
 import FilePage from "./settings/FileSettings";
@@ -99,8 +99,9 @@ const SettingsPage: React.FC = ({ navigation }) => {
           image={
             <Icon name="hand-left-outline" type="ionicon" color={textColor} />
           }
-          onPress={() =>
-            WebBrowser.openBrowserAsync("https://interclip.app/privacy")
+          onPress={() => {
+            WebBrowser.openBrowserAsync(`${apiEndpoint}/privacy`)
+          }
           }
           {...cellProps}
         />

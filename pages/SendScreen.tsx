@@ -200,7 +200,7 @@ const SendScreen: React.FC = () => {
               >
                 <View>
                   <QRCode
-                    value={`https://interclip.app/${data.result}`}
+                    value={`${apiEndpoint}/${data.result}`}
                     size={250}
                     logo={require("../assets/icon.png")}
                     logoSize={60}

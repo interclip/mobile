@@ -2,7 +2,7 @@ import { validationMsg, urlValidation } from "../lib/functions";
 import { test, expect } from "@jest/globals";
 
 test("checks if Interclip's URL is a valid one", () => {
-  expect(urlValidation("https://interclip.app/")).toBe(true);
+  expect(urlValidation(apiEndpoint)).toBe(true);
 });
 
 test("checks if a malformed URL is a valid one", () => {
