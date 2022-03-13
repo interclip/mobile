@@ -100,9 +100,8 @@ const SettingsPage: React.FC = ({ navigation }) => {
             <Icon name="hand-left-outline" type="ionicon" color={textColor} />
           }
           onPress={() => {
-            WebBrowser.openBrowserAsync(`${apiEndpoint}/privacy`)
-          }
-          }
+            WebBrowser.openBrowserAsync(`${apiEndpoint}/privacy`);
+          }}
           {...cellProps}
         />
         <Cell
