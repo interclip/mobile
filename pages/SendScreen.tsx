@@ -28,7 +28,7 @@ import fetch from "node-fetch";
 import isURL from "validator/lib/isURL";
 
 // Local functions, components and variables
-import { colors, inputProps } from "../lib/constants";
+import { apiEndpoint, colors, inputProps } from "../lib/constants";
 import { urlValidation, checkError } from "../lib/functions";
 import { styles } from "../lib/pages";
 
@@ -63,7 +63,7 @@ const SendScreen: React.FC = () => {
   useEffect(() => {
     setText(text.replace(" ", "").toLowerCase());
     if (text && isURL(text, { require_protocol: true })) {
-      fetch(`https://interclip.app/api/set?url=${text}`)
+      fetch(`${apiEndpoint}/api/set?url=${text}`)
         .then((response) => {
           if (response.ok) {
             return response.json();

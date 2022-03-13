@@ -41,7 +41,7 @@ import mime from "mime-types";
 import { validationMsg, checkError, truncate } from "../lib/functions";
 import chooseIcon from "../lib/files/chooseIcon";
 import { styles } from "../lib/pages";
-import { config, colors, inputProps } from "../lib/constants";
+import { config, colors, inputProps, apiEndpoint } from "../lib/constants";
 
 import LogoImage from "../components/LogoImage";
 import CustomBackground from "../components/BottomSheetBackground";
@@ -117,7 +117,7 @@ const HomeScreen: React.FC = () => {
     if (text.length === config.codeLength) {
       setText(text.replace(" ", "").toLowerCase());
       setLoading(true);
-      fetch(`https://interclip.app/api/get?code=${text}`)
+      fetch(`${apiEndpoint}/api/get?code=${text}`)
         .then((response: ClipResponse) => {
           if (response.ok) {
             setStatusCode(200);

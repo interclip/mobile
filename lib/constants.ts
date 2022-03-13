@@ -1,3 +1,5 @@
+export const apiEndpoint = 'https://interclip.app/';
+
 export const config = {
   codeLength: 5, // The code's length has to be always 5 characters
   charRegex: new RegExp("[^A-Za-z0-9]"), // Only allow ascii characters to be entered as the code

@@ -23,7 +23,7 @@ import * as ImagePicker from "expo-image-picker";
 import * as Haptics from "expo-haptics";
 
 // Local functions, components and variables
-import { colors } from "../lib/constants";
+import { apiEndpoint, colors } from "../lib/constants";
 import { formatBytes } from "../lib/functions";
 import { styles } from "../lib/pages";
 import { ClipData, ClipResponse, UploadActionType } from "../typings/interclip";
@@ -105,7 +105,7 @@ const FilePage: React.FC = () => {
 
       setLoading(true);
       setFileURL("");
-      setData({ result: "" });
+      setData({ result: "", status: "success" });
 
       const uri: string = file.uri;
       const extension: string = uri.split(".")[uri.split(".").length - 1];
@@ -162,7 +162,7 @@ const FilePage: React.FC = () => {
           })
           .then((response) => {
             setFileURL(response.result);
-            fetch(`https://interclip.app/api/set?url=${response.result}`)
+            fetch(`${apiEndpoint}/api/set?url=${response.result}`)
               .then((response: ClipResponse) => {
                 if (response.ok) {
                   return response.json();
