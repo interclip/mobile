@@ -1,6 +1,6 @@
 import { validationMsg, urlValidation } from "../lib/functions";
 import { test, expect } from "@jest/globals";
-import { apiEndpoint } from '../lib/constants';
+import { apiEndpoint } from "../lib/constants";
 
 test("checks if Interclip's URL is a valid one", () => {
   expect(urlValidation(apiEndpoint)).toBe(true);
