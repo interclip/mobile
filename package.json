@@ -25,6 +25,7 @@
     "@types/react": "^17.0.39",
     "@types/react-native": "^0.66.16",
     "@types/validator": "^13.7.1",
+    "@types/whatwg-url": "^8.2.1",
     "@use-expo/application": "^1.0.0",
     "expo": "^44.0.6",
     "expo-application": "~4.0.2",
@@ -67,7 +68,8 @@
     "rn-actionsheet-module": "^1.0.3",
     "simple-xml-to-json": "^1.0.9",
     "strip-eof": "^2.0.0",
-    "validator": "^13.7.0"
+    "validator": "^13.7.0",
+    "whatwg-url": "^11.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.17.4",

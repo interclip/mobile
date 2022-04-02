@@ -35,6 +35,7 @@ interface ErrorResponse {
    * The error message to be displayed
    */
   result: string;
+  code?: number;
 }
 
 interface SuccessResponse<T> {
