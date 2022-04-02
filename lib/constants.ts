@@ -1,4 +1,5 @@
 export const apiEndpoint = "https://beta.interclip.app/";
+export const filesEndpoint = 'https://files.interclip.app';
 
 export const config = {
   codeLength: 5, // The code's length has to be always 5 characters
