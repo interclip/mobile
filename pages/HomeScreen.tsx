@@ -53,7 +53,7 @@ import URL from "whatwg-url";
 const HomeScreen: React.FC = () => {
   // Variable set
   const [isLoading, setLoading] = useState<boolean>(false); // Loading status => only show the response of the API
-  const [isError, setError] = useState<boolean>(false);
+  const [isError, setError] = useState<string | false>(false);
 
   // Dynamically loaded data from the Interclip REST API
   const [url, setURL] = useState<string | null>(null);
@@ -111,7 +111,7 @@ const HomeScreen: React.FC = () => {
   };
 
   useEffect(() => {
-    if (text.length === config.minimumCodeLength) {
+    if (text.length >= config.minimumCodeLength && text.length <= config.maximumCodeLength) {
       setText(text.replace(" ", "").toLowerCase());
       setLoading(true);
       getClip(text)
@@ -129,15 +129,19 @@ const HomeScreen: React.FC = () => {
             }
           } else {
             setStatusCode(data.code);
-            setError(true);
-            Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
-            Notifier.showNotification({
-              title: `${data.result} (HTTP ${data.code})`,
-              Component: NotifierComponents.Alert,
-              componentProps: {
-                alertType: "error",
-              },
-            });
+            setError(data.result);
+            if (data.code !== 404) {
+              Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
+              Notifier.showNotification({
+                title: `${data.result} (HTTP ${data.code})`,
+                Component: NotifierComponents.Alert,
+                componentProps: {
+                  alertType: "error",
+                },
+              });
+            } else {
+              setError("This code doesn't seem to exist 🤔");
+            }
           }
         })
         .catch((e) => alert(e))
@@ -201,7 +205,7 @@ const HomeScreen: React.FC = () => {
                 onLongPress={() => {
                   // Handle functionality, when user presses for a longer period of time
                   try {
-                    Clipboard.setString(url);
+                    Clipboard.setString(isError || url);
                     Notifier.showNotification({
                       title: "The URL has been copied to your clipboard!",
                       Component: NotifierComponents.Alert,
@@ -230,9 +234,7 @@ const HomeScreen: React.FC = () => {
                     ? colors.light
                     : colors.text,
                   backgroundColor:
-                    isError && isValidClipCode(text)
-                      ? colors.errorColor
-                      : null,
+                    isError && isValidClipCode(text) ? colors.errorColor : null,
                   fontSize: 20,
                   marginLeft: "auto",
                   marginRight: "auto",
@@ -241,11 +243,8 @@ const HomeScreen: React.FC = () => {
                 }}
               >
                 {isValidClipCode(text) &&
-                  (statusCode === 404
-                    ? "This code doesn't seem to exist 🤔"
-                    : statusCode === 400
-                    ? "Something went wrong..."
-                    : truncate(url ? url.replace("https://", "") : "", 80))}
+                  (isError ||
+                    truncate(url ? url.replace("https://", "") : "", 80))}
               </Text>
             ) : (
               <ActivityIndicator />
@@ -359,3 +358,4 @@ const HomeScreen: React.FC = () => {
 };
 
 export default HomeScreen;
+
