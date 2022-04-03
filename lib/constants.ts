@@ -1,7 +1,9 @@
 export const apiEndpoint = "https://beta.interclip.app/";
+export const filesEndpoint = 'https://files.interclip.app';
 
 export const config = {
-  codeLength: 5, // The code's length has to be always 5 characters
+  minimumCodeLength: 5, // The code's length has to always be at least 5 characters
+  maximumCodeLength: 99, // The code's length has to always be at least 5 characters
   charRegex: new RegExp("[^A-Za-z0-9]"), // Only allow ascii characters to be entered as the code
   exemptStatusCodes: [400, 404],
 };

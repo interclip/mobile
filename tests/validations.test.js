@@ -1,4 +1,4 @@
-import { validationMsg, urlValidation } from "../lib/functions";
+import { urlValidation, isValidClipCode } from "../lib/functions";
 import { test, expect } from "@jest/globals";
 import { apiEndpoint } from "../lib/constants";
 
@@ -17,11 +17,21 @@ test("checks if an empty string is a valid URL", () => {
 });
 
 test("checks if a string with # is valid", () => {
-  expect(validationMsg("yes#f")).toBe(
-    "There are some characters, that shouldn't be there."
-  );
+  expect(isValidClipCode("yes#f")).toBe(false);
 });
 
 test("checks if a short code outputs correctly", () => {
-  expect(validationMsg("task")).toBe("1 more character please");
+  expect(isValidClipCode('haha')).toBe(false);
+});
+
+test("checks if a valid clip code is handled correctly", () => {
+  expect(isValidClipCode('gamer')).toBe(true);
+});
+
+test("checks if longer clip codes are handled correctly", () => {
+  expect(isValidClipCode('gamersarecoolaretheynot')).toBe(true);
+});
+
+test("checks if longer clip codes with unsupported characters are handled correctly", () => {
+  expect(isValidClipCode('gamersa4recool$$$÷×aretheynot')).toBe(false);
 });

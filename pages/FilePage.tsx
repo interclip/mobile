@@ -23,19 +23,22 @@ import * as ImagePicker from "expo-image-picker";
 import * as Haptics from "expo-haptics";
 
 // Local functions, components and variables
-import { apiEndpoint, colors } from "../lib/constants";
+import { apiEndpoint, colors, filesEndpoint } from "../lib/constants";
 import { formatBytes } from "../lib/functions";
 import { styles } from "../lib/pages";
 import { ClipData, ClipResponse, UploadActionType } from "../typings/interclip";
 
 import fetch from "node-fetch";
+import { APIError } from "./APIError";
+import { convertXML } from "simple-xml-to-json";
+import { requestClip } from "../lib/requestClip";
 
 const FilePage: React.FC = () => {
   const colorScheme = useColorScheme();
 
   const [fileURL, setFileURL] = useState<string>("");
   // Dynamically loaded data from the Interclip REST API
-  const [data, setData] = useState<ClipData>({ result: "", status: "success" });
+  const [data, setData] = useState<ClipData | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
 
   const upload = async (action: UploadActionType = "media") => {
@@ -105,10 +108,12 @@ const FilePage: React.FC = () => {
 
       setLoading(true);
       setFileURL("");
-      setData({ result: "", status: "success" });
+      setData(null);
 
       const uri: string = file.uri;
-      const extension: string = uri.split(".")[uri.split(".").length - 1];
+      const extension: string = uri.slice(
+        ((uri.lastIndexOf(".") - 1) >>> 0) + 2
+      );
 
       const fileSizeLimitInMegabytes = 100;
       const fileSizeLimitInBytes = fileSizeLimitInMegabytes * 1048576;
@@ -131,82 +136,85 @@ const FilePage: React.FC = () => {
         });
         setLoading(false);
       } else {
-        const formData = new FormData();
+        const fileType = encodeURIComponent((blob as Blob).type);
+        const fileName = `media.${extension}`;
 
-        formData.append("uploaded_file", {
-          uri,
-          type: blob.type,
-          name: `media.${extension}`,
-        });
+        const res = await fetch(
+          `${apiEndpoint}api/uploadFile?name=${fileName}&type=${fileType}`
+        );
 
-        fetch("https://interclip.app/upload/?api", {
-          method: "post",
-          body: formData,
-          headers: {
-            "Content-Type": "multipart/form-data;",
-          },
-        })
-          .then((res: ClipResponse) => {
-            if (res.ok) {
-              return res.json();
-            } else {
-              Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
-              Notifier.showNotification({
-                title: `Got the error ${res.status}`,
-                Component: NotifierComponents.Alert,
-                componentProps: {
-                  alertType: "error",
-                },
-              });
+        try {
+          if (!res.ok) {
+            switch (res.status) {
+              case 404:
+                throw new APIError("API Endpoint not found");
+              case 500:
+                throw new APIError("Generic fail");
+              case 503:
+                throw new APIError((await res.json()).result);
             }
-          })
-          .then((response) => {
-            setFileURL(response.result);
-            fetch(`${apiEndpoint}/api/set?url=${response.result}`)
-              .then((response: ClipResponse) => {
-                if (response.ok) {
-                  return response.json();
-                } else {
-                  if (response.status === 429) {
-                    Notifier.showNotification({
-                      title: "We are getting too many requests from you.",
-                      Component: NotifierComponents.Alert,
-                      componentProps: {
-                        alertType: "error",
-                      },
-                    });
-                  } else {
-                    Notifier.showNotification({
-                      title: `Got the error ${response.status}.`,
-                      Component: NotifierComponents.Alert,
-                      componentProps: {
-                        alertType: "error",
-                      },
-                    });
-                  }
-                }
-              })
-              .then((data) => {
-                setData(data);
-                Haptics.notificationAsync(
-                  Haptics.NotificationFeedbackType.Success
-                );
-              })
-              .catch((err: any) => {
-                Haptics.notificationAsync(
-                  Haptics.NotificationFeedbackType.Error
-                );
-                Notifier.showNotification({
-                  title: "Something weird happened...",
-                  description: err,
-                  Component: NotifierComponents.Alert,
-                  componentProps: {
-                    alertType: "error",
-                  },
-                });
-              })
-              .finally(() => setLoading(false));
+
+            throw new APIError(await res.text());
+          }
+
+          const { url, fields } = await res.json();
+          const formData = new FormData();
+          // eslint-disable-next-line unicorn/no-array-for-each
+          Object.entries({ ...fields, file }).forEach(
+            ([key, value]: [key: string, value: any]) => {
+              formData.append(key, value);
+            }
+          );
+          const upload = await fetch(url, {
+            method: "POST",
+            //@ts-ignore
+            body: formData,
           });
+
+          let fileURL;
+
+          if (upload.ok) {
+            fileURL = `${filesEndpoint}/${fields.key}`;
+            setFileURL(fileURL);
+          } else {
+            const plainText = await upload.text();
+            const jsonResponse = convertXML(plainText);
+            const erorrMsg = jsonResponse.Error.children[0].Code.content;
+
+            switch (erorrMsg) {
+              case "EntityTooLarge":
+                const fileSize =
+                  jsonResponse.Error.children[2].ProposedSize.content;
+                throw new APIError(`File too large (${formatBytes(fileSize)})`);
+              case "AccessDenied":
+                throw new APIError("Access Denied to the bucket");
+              default:
+                throw new APIError("Upload failed.");
+            }
+          }
+
+          const codeRequest = await requestClip(fileURL);
+
+          if (codeRequest.status === "error") {
+            throw new APIError(`Clip creation failed: ${codeRequest.result}`);
+          }
+
+          Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+          setData(codeRequest);
+        } catch (error) {
+          if (error instanceof APIError) {
+            Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
+            Notifier.showNotification({
+              title: `Got the error ${error.message}`,
+              Component: NotifierComponents.Alert,
+              componentProps: {
+                alertType: "error",
+              },
+            });
+          }
+        } finally {
+          setLoading(false);
+        }
       }
     }
   };
@@ -281,6 +289,7 @@ const FilePage: React.FC = () => {
           <Button
             title="Choose a file"
             buttonStyle={{
+              //@ts-ignore
               textAlign: "center",
               backgroundColor: "#367FFA",
               paddingLeft: width * 0.15,
@@ -300,6 +309,7 @@ const FilePage: React.FC = () => {
                 style={{
                   paddingRight: 15,
                 }}
+                tvParallaxProperties={undefined}
               />
             }
             onPress={() => chooseAction()}
@@ -371,14 +381,16 @@ const FilePage: React.FC = () => {
             onLongPress={() => {
               /* Handle functionality, when user presses for a longer period of time */
               try {
-                Clipboard.setString(data.result);
-                Notifier.showNotification({
-                  title: "The file code has been copied to your clipboard!",
-                  Component: NotifierComponents.Alert,
-                  componentProps: {
-                    alertType: "success",
-                  },
-                });
+                if (data.status === "success") {
+                  Clipboard.setString(data.result.code.slice(0, data.result.hashLength));
+                  Notifier.showNotification({
+                    title: "The file code has been copied to your clipboard!",
+                    Component: NotifierComponents.Alert,
+                    componentProps: {
+                      alertType: "success",
+                    },
+                  });
+                }
               } catch (e) {
                 Notifier.showNotification({
                   title: "Couldn't copy to clipboard!",
@@ -390,7 +402,9 @@ const FilePage: React.FC = () => {
               }
             }}
           >
-            {data.result}
+            {data &&
+              data.status === "success" &&
+              data.result.code.slice(0, data.result.hashLength)}
           </Text>
         </View>
       </View>
@@ -399,3 +413,4 @@ const FilePage: React.FC = () => {
 };
 
 export default FilePage;
+

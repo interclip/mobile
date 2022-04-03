@@ -12,18 +12,13 @@ const sleep = (milliseconds: number) => {
   return new Promise((resolve) => setTimeout(resolve, milliseconds));
 };
 
-const validationMsg = (txt: string): string => {
-  txt = txt.replace(" ", "").toLowerCase();
-  const diff = config.codeLength - txt.length;
-  if (txt.match(config.charRegex)) {
-    return `There are some characters, that shouldn't be there.`;
-  } else {
-    if (txt.length < config.codeLength && txt.length > 0) {
-      return `${diff} more character${diff === 1 ? "" : "s"} please`;
-    } else if (txt.length === 0) {
-      return `Just type in the code above and see the magic happen.`;
-    }
+const isValidClipCode = (code: string): boolean => {
+  if (code.length < config.minimumCodeLength || code.length > config.maximumCodeLength) {
+    return false;
+  } else if (!code.match(new RegExp(/^[\dA-Za-z]{5,99}$/))) {
+    return false;
   }
+  return true;
 };
 
 const urlValidation = (url: string): boolean | string => {
@@ -72,7 +67,7 @@ const truncate = (text: string, length: number): string => {
 export {
   checkError,
   sleep,
-  validationMsg,
+  isValidClipCode,
   urlValidation,
   formatBytes,
   truncate,

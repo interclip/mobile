@@ -33,35 +33,32 @@ import { Notifier, NotifierComponents } from "react-native-notifier";
 
 // Functional packages
 
-import fetch from "node-fetch";
 import mime from "mime-types";
 
 // Local functions, components and variables
 
-import { validationMsg, checkError, truncate } from "../lib/functions";
+import { truncate, isValidClipCode } from "../lib/functions";
 import chooseIcon from "../lib/files/chooseIcon";
 import { styles } from "../lib/pages";
-import { config, colors, inputProps, apiEndpoint } from "../lib/constants";
+import { config, colors, inputProps } from "../lib/constants";
 
 import LogoImage from "../components/LogoImage";
 import CustomBackground from "../components/BottomSheetBackground";
 import CustomHandle from "../components/CustomHandle";
-import { ClipData, ClipResponse } from "../typings/interclip";
+import { getClip } from "../lib/requestClip";
+import URL from 'whatwg-url';
 
 // Root component
 
 const HomeScreen: React.FC = () => {
   // Variable set
-  const [isLoading, setLoading] = useState<boolean>(false); // Loading status => only show the responce of the API
+  const [isLoading, setLoading] = useState<boolean>(false); // Loading status => only show the response of the API
+  const [isError, setError] = useState<boolean>(false);
 
   // Dynamically loaded data from the Interclip REST API
-  const [data, setData] = useState<ClipData>({
-    result: "https://files.interclip.app/ecf3e43230.jpg",
-    status: "success",
-  });
+  const [url, setURL] = useState<string | null>(null);
   const bottomSheetRef = useRef(null);
-  const url = data.result;
-  const fileExtension = url.split(".")[url.split(".").length - 1];
+  const fileExtension = url && url.split(".")[url.split(".").length - 1];
 
   const fileIcon = chooseIcon(fileExtension);
 
@@ -114,66 +111,36 @@ const HomeScreen: React.FC = () => {
   };
 
   useEffect(() => {
-    if (text.length === config.codeLength) {
+    if (text.length === config.minimumCodeLength) {
       setText(text.replace(" ", "").toLowerCase());
       setLoading(true);
-      fetch(`${apiEndpoint}/api/get?code=${text}`)
-        .then((response: ClipResponse) => {
-          if (response.ok) {
+      getClip(text)
+        .then((data) => {
+          if (data.status === "success") {
+            setError(false);
             setStatusCode(200);
-            return response.json();
-          } else {
-            if (response.status === 429) {
-              Notifier.showNotification({
-                title: "Slow down!",
-                description: "We are getting too many requests from you.",
-                Component: NotifierComponents.Alert,
-                componentProps: {
-                  alertType: "error",
-                },
-              });
-              return {};
+            setURL(data.result.url);
+
+            const host = URL.serializeHost(data.result.url);
+            if (host === "files.interclip.app") {
+              handleOpenPress();
             } else {
-              if (config.exemptStatusCodes.includes(response.status)) {
-                setStatusCode(response.status);
-                return response.json();
-              } else {
-                setStatusCode(400);
-                Notifier.showNotification({
-                  title: `Got the error ${response.status}`,
-                  Component: NotifierComponents.Alert,
-                  componentProps: {
-                    alertType: "error",
-                  },
-                });
-                return response.json();
-              }
+              handleClosePress();
             }
-          }
-        })
-        .then((clipData: ClipData) => {
-          const URLArr = clipData.result.split("/");
-          const result = `${URLArr[0]}//${URLArr[2]}`;
-
-          if (result === "https://files.interclip.app") {
-            handleOpenPress();
           } else {
-            handleClosePress();
+            setStatusCode(data.code);
+            setError(true);
+            Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
+            Notifier.showNotification({
+              title: `Got the error ${data.result} (${text})`,
+              Component: NotifierComponents.Alert,
+              componentProps: {
+                alertType: "error",
+              },
+            });
           }
-
-          setData(clipData);
         })
-        .catch((error: { message: string }) => {
-          Notifier.showNotification({
-            title: "Error",
-            description: error.message,
-            Component: NotifierComponents.Alert,
-            componentProps: {
-              alertType: "error",
-            },
-          });
-          setStatusCode(400);
-        })
+        .catch((e) => alert(e))
         .finally(() => setLoading(false));
     } else {
       setLoading(false);
@@ -200,16 +167,16 @@ const HomeScreen: React.FC = () => {
               color: colorScheme === "dark" ? "white" : "black",
             }}
             placeholder="Your code here"
-            maxLength={config.codeLength}
+            maxLength={config.minimumCodeLength}
             inputStyle={{ fontSize: 50 }}
             onChangeText={(text) => setText(text)}
             defaultValue={text}
             value={text.replace(" ", "").toLowerCase()}
             onSubmitEditing={() => {
               !isLoading
-                ? Linking.openURL(data.result)
+                ? Linking.openURL(url)
                 : Notifier.showNotification({
-                    title: `No URL set yet, make sure your code is ${config.codeLength} characters long!`,
+                    title: `No URL set yet, make sure your code is at least ${config.minimumCodeLength} characters long!`,
                     Component: NotifierComponents.Alert,
                     componentProps: {
                       alertType: "error",
@@ -217,14 +184,14 @@ const HomeScreen: React.FC = () => {
                   });
             }}
           />
-          {validationMsg(text) && (
+          {isValidClipCode(text) && (
             <View style={{ padding: 24 }}>
               <Text
                 style={{
                   color: colorScheme === "dark" ? colors.light : colors.text,
                 }}
               >
-                {validationMsg(text)}
+                {isValidClipCode(text)}
               </Text>
             </View>
           )}
@@ -234,7 +201,7 @@ const HomeScreen: React.FC = () => {
                 onLongPress={() => {
                   // Handle functionality, when user presses for a longer period of time
                   try {
-                    Clipboard.setString(data.result);
+                    Clipboard.setString(url);
                     Notifier.showNotification({
                       title: "The URL has been copied to your clipboard!",
                       Component: NotifierComponents.Alert,
@@ -253,17 +220,17 @@ const HomeScreen: React.FC = () => {
                   }
                 }}
                 onPress={() => {
-                  Linking.openURL(data.result);
+                  Linking.openURL(url);
                 }}
                 style={{
                   textAlign: "center",
-                  color: checkError(data.status)
+                  color: isError
                     ? colors.light
                     : colorScheme === "dark"
                     ? colors.light
                     : colors.text,
                   backgroundColor:
-                    checkError(data.status) && !validationMsg(text)
+                    isError && !isValidClipCode(text)
                       ? colors.errorColor
                       : null,
                   fontSize: 20,
@@ -273,15 +240,12 @@ const HomeScreen: React.FC = () => {
                   borderRadius: 10,
                 }}
               >
-                {!validationMsg(text) &&
+                {isValidClipCode(text) &&
                   (statusCode === 404
                     ? "This code doesn't seem to exist 🤔"
                     : statusCode === 400
                     ? "Something went wrong..."
-                    : truncate(
-                        data?.result ? data.result.replace("https://", "") : "",
-                        80
-                      ))}
+                    : truncate(url ? url.replace("https://", "") : "", 80))}
               </Text>
             ) : (
               <ActivityIndicator />
@@ -309,7 +273,8 @@ const HomeScreen: React.FC = () => {
                 color: colorScheme === "dark" ? "white" : "black",
               }}
             >
-              {fileExtension.length < 20 ? fileExtension : "arbitrary"} file
+              {url && fileExtension.length < 20 ? fileExtension : "arbitrary"}{" "}
+              file
             </Text>
             {mime.lookup(fileExtension) && (
               <Text
@@ -394,3 +359,4 @@ const HomeScreen: React.FC = () => {
 };
 
 export default HomeScreen;
+

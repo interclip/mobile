@@ -24,7 +24,6 @@ import { activateKeepAwake, deactivateKeepAwake } from "expo-keep-awake";
 
 // Functional packages
 
-import fetch from "node-fetch";
 import isURL from "validator/lib/isURL";
 
 // Local functions, components and variables
@@ -33,16 +32,19 @@ import { urlValidation, checkError } from "../lib/functions";
 import { styles } from "../lib/pages";
 
 import LogoImage from "../components/LogoImage";
+import { requestClip } from "../lib/requestClip";
+import { Clip, SuccessResponse } from "../typings/interclip";
 
 // Root component
 
 const SendScreen: React.FC = () => {
   // Variable set
-  const [isLoading, setLoading] = useState(true); // Loading status => only show the responce of the API
+  const [isLoading, setLoading] = useState<boolean>(false); // Loading status => only show the response of the API
+  const [isError, setError] = useState<string | null>(null);
 
   // after the request completes
-  const [data, setData] = useState<{ result: string }>({ result: "" }); // Dynamically loaded data from the Interclip REST API
-  const [text, setText] = useState(""); // The code entered in the <Input>
+  const [data, setData] = useState<SuccessResponse<Clip> | null>(null); // Dynamically loaded data from the Interclip REST API
+  const [enteredUrl, setEnteredUrl] = useState(""); // The code entered in the <Input>
   const [modalVisible, setModalVisible] = useState(false);
 
   const colorScheme = useColorScheme();
@@ -51,7 +53,7 @@ const SendScreen: React.FC = () => {
   const pasteFromClipboard = async () => {
     const pasteboard = await Clipboard.getStringAsync();
     if (isURL(pasteboard)) {
-      setText(pasteboard);
+      setEnteredUrl(pasteboard);
     }
   };
   useEffect(() => {
@@ -61,49 +63,29 @@ const SendScreen: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    setText(text.replace(" ", "").toLowerCase());
-    if (text && isURL(text, { require_protocol: true })) {
-      fetch(`${apiEndpoint}/api/set?url=${text}`)
-        .then((response) => {
-          if (response.ok) {
-            return response.json();
+    setEnteredUrl(enteredUrl.trim().toLowerCase());
+    if (enteredUrl && isURL(enteredUrl, { require_protocol: true })) {
+      requestClip(enteredUrl)
+        .then(async (result) => {
+          if (result.status === "success") {
+            setData(result);
           } else {
-            if (response.status === 429) {
-              Notifier.showNotification({
-                title: "We are getting too many requests from you.",
-                Component: NotifierComponents.Alert,
-                componentProps: {
-                  alertType: "error",
-                },
-              });
-            } else {
-              Notifier.showNotification({
-                title: `Got the error ${response.status}`,
-                Component: NotifierComponents.Alert,
-                componentProps: {
-                  alertType: "error",
-                },
-              });
-            }
+            Notifier.showNotification({
+              title: `Error (HTTP ${result.code})`,
+              description: result.result,
+              Component: NotifierComponents.Alert,
+              componentProps: {
+                alertType: "error",
+              },
+            });
+            setError(result.result);
           }
-        })
-        .then((json) => setData(json))
-        .catch((error: { message: string }) => {
-          Notifier.showNotification({
-            title: "Error",
-            description: error.message,
-            Component: NotifierComponents.Alert,
-            componentProps: {
-              alertType: "error",
-            },
-          });
-          setData({ result: "Something went wrong..." });
         })
         .finally(() => setLoading(false));
 
       setLoading(true);
     }
-  }, [text]);
+  }, [enteredUrl]);
   return (
     <View
       style={{
@@ -130,20 +112,20 @@ const SendScreen: React.FC = () => {
             placeholder="Your URL here"
             inputStyle={{ fontSize: 25 }}
             returnKeyType={Platform.OS === "android" ? "none" : "done"}
-            onChangeText={(text) => setText(text)}
-            defaultValue={text}
+            onChangeText={(text) => setEnteredUrl(text)}
+            defaultValue={enteredUrl}
             onSubmitEditing={() => {
               Keyboard.dismiss;
             }}
           />
-          {urlValidation(text) && (
+          {urlValidation(enteredUrl) && (
             <View style={{ padding: 24 }}>
               <Text
                 style={{
                   color: colorScheme === "dark" ? colors.light : colors.text,
                 }}
               >
-                {urlValidation(text)}
+                {urlValidation(enteredUrl)}
               </Text>
             </View>
           )}
@@ -155,7 +137,7 @@ const SendScreen: React.FC = () => {
                 onLongPress={() => {
                   /* Handle functionality, when user presses for a longer period of time */
                   try {
-                    Clipboard.setString(data.result);
+                    Clipboard.setString(data.result.code);
                     Notifier.showNotification({
                       title: "The code has been copied to your clipboard!",
                       Component: NotifierComponents.Alert,
@@ -176,14 +158,14 @@ const SendScreen: React.FC = () => {
                 style={{
                   color: colorScheme === "dark" ? colors.light : colors.text,
                   backgroundColor:
-                    checkError(data.status) & !urlValidation(text)
+                    isError && !urlValidation(enteredUrl)
                       ? colors.errorColor
                       : null,
                   fontSize: 40,
                   marginLeft: "20%",
                 }}
               >
-                {data.result}
+                {data && data.result.code.slice(0, data.result.hashLength)}
               </Text>
             )}
 
@@ -200,7 +182,7 @@ const SendScreen: React.FC = () => {
               >
                 <View>
                   <QRCode
-                    value={`${apiEndpoint}/${data.result}`}
+                    value={data && `${apiEndpoint}/${data.result.code}`}
                     size={250}
                     logo={require("../assets/icon.png")}
                     logoSize={60}
@@ -243,7 +225,7 @@ const SendScreen: React.FC = () => {
                 </View>
               </View>
             </Modal>
-            {isURL(text, { require_protocol: true }) && (
+            {isURL(enteredUrl, { require_protocol: true }) && (
               <Icon
                 type="ionicon" // The icon is loaded from the ionicons icon library
                 name="qr-code-outline"
@@ -265,3 +247,4 @@ const SendScreen: React.FC = () => {
 };
 
 export default SendScreen;
+
