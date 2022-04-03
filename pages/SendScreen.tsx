@@ -247,4 +247,3 @@ const SendScreen: React.FC = () => {
 };
 
 export default SendScreen;
-

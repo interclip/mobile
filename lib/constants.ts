@@ -1,5 +1,5 @@
 export const apiEndpoint = "https://beta.interclip.app/";
-export const filesEndpoint = 'https://files.interclip.app';
+export const filesEndpoint = "https://files.interclip.app";
 
 export const config = {
   minimumCodeLength: 5, // The code's length has to always be at least 5 characters

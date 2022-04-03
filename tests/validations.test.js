@@ -21,17 +21,17 @@ test("checks if a string with # is valid", () => {
 });
 
 test("checks if a short code outputs correctly", () => {
-  expect(isValidClipCode('haha')).toBe(false);
+  expect(isValidClipCode("haha")).toBe(false);
 });
 
 test("checks if a valid clip code is handled correctly", () => {
-  expect(isValidClipCode('gamer')).toBe(true);
+  expect(isValidClipCode("gamer")).toBe(true);
 });
 
 test("checks if longer clip codes are handled correctly", () => {
-  expect(isValidClipCode('gamersarecoolaretheynot')).toBe(true);
+  expect(isValidClipCode("gamersarecoolaretheynot")).toBe(true);
 });
 
 test("checks if longer clip codes with unsupported characters are handled correctly", () => {
-  expect(isValidClipCode('gamersa4recool$$$÷×aretheynot')).toBe(false);
+  expect(isValidClipCode("gamersa4recool$$$÷×aretheynot")).toBe(false);
 });

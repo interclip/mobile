@@ -30,7 +30,7 @@ interface Clip {
 }
 
 interface ErrorResponse {
-  status: 'error';
+  status: "error";
   /**
    * The error message to be displayed
    */
@@ -39,7 +39,7 @@ interface ErrorResponse {
 }
 
 interface SuccessResponse<T> {
-  status: 'success';
+  status: "success";
   result: T;
 }
 
