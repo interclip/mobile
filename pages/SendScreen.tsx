@@ -159,14 +159,14 @@ const SendScreen: React.FC = () => {
                 style={{
                   color: colorScheme === "dark" ? colors.light : colors.text,
                   backgroundColor:
-                    checkError(data.status) && !urlValidation(enteredUrl)
+                    isError && !urlValidation(enteredUrl)
                       ? colors.errorColor
                       : null,
                   fontSize: 40,
                   marginLeft: "20%",
                 }}
               >
-                {data.result}
+                {data && data.result.code.slice(0, data.result.hashLength)}
               </Text>
             )}
 
@@ -183,7 +183,7 @@ const SendScreen: React.FC = () => {
               >
                 <View>
                   <QRCode
-                    value={`${apiEndpoint}/${data.result.code}`}
+                    value={data && `${apiEndpoint}/${data.result.code}`}
                     size={250}
                     logo={require("../assets/icon.png")}
                     logoSize={60}
