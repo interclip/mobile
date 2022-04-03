@@ -24,7 +24,6 @@ import { activateKeepAwake, deactivateKeepAwake } from "expo-keep-awake";
 
 // Functional packages
 
-import fetch from "node-fetch";
 import isURL from "validator/lib/isURL";
 
 // Local functions, components and variables
