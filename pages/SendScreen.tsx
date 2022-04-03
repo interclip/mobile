@@ -42,7 +42,7 @@ const SendScreen: React.FC = () => {
 
   // after the request completes
   const [data, setData] = useState<{ result: string }>({ result: "" }); // Dynamically loaded data from the Interclip REST API
-  const [text, setText] = useState(""); // The code entered in the <Input>
+  const [enteredUrl, setEnteredUrl] = useState(""); // The code entered in the <Input>
   const [modalVisible, setModalVisible] = useState(false);
 
   const colorScheme = useColorScheme();
@@ -51,7 +51,7 @@ const SendScreen: React.FC = () => {
   const pasteFromClipboard = async () => {
     const pasteboard = await Clipboard.getStringAsync();
     if (isURL(pasteboard)) {
-      setText(pasteboard);
+      setEnteredUrl(pasteboard);
     }
   };
   useEffect(() => {
@@ -61,9 +61,9 @@ const SendScreen: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    setText(text.replace(" ", "").toLowerCase());
-    if (text && isURL(text, { require_protocol: true })) {
-      fetch(`${apiEndpoint}/api/set?url=${text}`)
+    setEnteredUrl(enteredUrl.replace(" ", "").toLowerCase());
+    if (enteredUrl && isURL(enteredUrl, { require_protocol: true })) {
+      fetch(`${apiEndpoint}/api/set?url=${enteredUrl}`)
         .then((response) => {
           if (response.ok) {
             return response.json();
@@ -103,7 +103,7 @@ const SendScreen: React.FC = () => {
 
       setLoading(true);
     }
-  }, [text]);
+  }, [enteredUrl]);
   return (
     <View
       style={{
@@ -130,20 +130,20 @@ const SendScreen: React.FC = () => {
             placeholder="Your URL here"
             inputStyle={{ fontSize: 25 }}
             returnKeyType={Platform.OS === "android" ? "none" : "done"}
-            onChangeText={(text) => setText(text)}
-            defaultValue={text}
+            onChangeText={(text) => setEnteredUrl(text)}
+            defaultValue={enteredUrl}
             onSubmitEditing={() => {
               Keyboard.dismiss;
             }}
           />
-          {urlValidation(text) && (
+          {urlValidation(enteredUrl) && (
             <View style={{ padding: 24 }}>
               <Text
                 style={{
                   color: colorScheme === "dark" ? colors.light : colors.text,
                 }}
               >
-                {urlValidation(text)}
+                {urlValidation(enteredUrl)}
               </Text>
             </View>
           )}
@@ -176,7 +176,7 @@ const SendScreen: React.FC = () => {
                 style={{
                   color: colorScheme === "dark" ? colors.light : colors.text,
                   backgroundColor:
-                    checkError(data.status) & !urlValidation(text)
+                    checkError(data.status) & !urlValidation(enteredUrl)
                       ? colors.errorColor
                       : null,
                   fontSize: 40,
@@ -243,7 +243,7 @@ const SendScreen: React.FC = () => {
                 </View>
               </View>
             </Modal>
-            {isURL(text, { require_protocol: true }) && (
+            {isURL(enteredUrl, { require_protocol: true }) && (
               <Icon
                 type="ionicon" // The icon is loaded from the ionicons icon library
                 name="qr-code-outline"
