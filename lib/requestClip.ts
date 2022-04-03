@@ -23,7 +23,7 @@ export const requestClip = async (
     if (clipResponse.status === 500) {
         return { status: 'error', result: await clipResponse.text() };
     }
-    return await clipResponse.json();
+    return { ...(await clipResponse.json()), code: clipResponse.status };
 };
 
 /**

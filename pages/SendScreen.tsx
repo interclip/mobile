@@ -33,15 +33,18 @@ import { urlValidation, checkError } from "../lib/functions";
 import { styles } from "../lib/pages";
 
 import LogoImage from "../components/LogoImage";
+import { requestClip } from "../lib/requestClip";
+import { Clip, SuccessResponse } from "../typings/interclip";
 
 // Root component
 
 const SendScreen: React.FC = () => {
   // Variable set
-  const [isLoading, setLoading] = useState(true); // Loading status => only show the responce of the API
+  const [isLoading, setLoading] = useState<boolean>(false); // Loading status => only show the response of the API
+  const [isError, setError] = useState<string | null>(null);
 
   // after the request completes
-  const [data, setData] = useState<{ result: string }>({ result: "" }); // Dynamically loaded data from the Interclip REST API
+  const [data, setData] = useState<SuccessResponse<Clip> | null>(null); // Dynamically loaded data from the Interclip REST API
   const [enteredUrl, setEnteredUrl] = useState(""); // The code entered in the <Input>
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -61,43 +64,23 @@ const SendScreen: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    setEnteredUrl(enteredUrl.replace(" ", "").toLowerCase());
+    setEnteredUrl(enteredUrl.trim().toLowerCase());
     if (enteredUrl && isURL(enteredUrl, { require_protocol: true })) {
-      fetch(`${apiEndpoint}/api/set?url=${enteredUrl}`)
-        .then((response) => {
-          if (response.ok) {
-            return response.json();
+      requestClip(enteredUrl)
+        .then(async (result) => {
+          if (result.status === "success") {
+            setData(result);
           } else {
-            if (response.status === 429) {
-              Notifier.showNotification({
-                title: "We are getting too many requests from you.",
-                Component: NotifierComponents.Alert,
-                componentProps: {
-                  alertType: "error",
-                },
-              });
-            } else {
-              Notifier.showNotification({
-                title: `Got the error ${response.status}`,
-                Component: NotifierComponents.Alert,
-                componentProps: {
-                  alertType: "error",
-                },
-              });
-            }
+            Notifier.showNotification({
+              title: `Error (HTTP ${result.code})`,
+              description: result.result,
+              Component: NotifierComponents.Alert,
+              componentProps: {
+                alertType: "error",
+              },
+            });
+            setError(result.result);
           }
-        })
-        .then((json) => setData(json))
-        .catch((error: { message: string }) => {
-          Notifier.showNotification({
-            title: "Error",
-            description: error.message,
-            Component: NotifierComponents.Alert,
-            componentProps: {
-              alertType: "error",
-            },
-          });
-          setData({ result: "Something went wrong..." });
         })
         .finally(() => setLoading(false));
 
@@ -155,7 +138,7 @@ const SendScreen: React.FC = () => {
                 onLongPress={() => {
                   /* Handle functionality, when user presses for a longer period of time */
                   try {
-                    Clipboard.setString(data.result);
+                    Clipboard.setString(data.result.code);
                     Notifier.showNotification({
                       title: "The code has been copied to your clipboard!",
                       Component: NotifierComponents.Alert,
@@ -176,7 +159,7 @@ const SendScreen: React.FC = () => {
                 style={{
                   color: colorScheme === "dark" ? colors.light : colors.text,
                   backgroundColor:
-                    checkError(data.status) & !urlValidation(enteredUrl)
+                    checkError(data.status) && !urlValidation(enteredUrl)
                       ? colors.errorColor
                       : null,
                   fontSize: 40,
@@ -200,7 +183,7 @@ const SendScreen: React.FC = () => {
               >
                 <View>
                   <QRCode
-                    value={`${apiEndpoint}/${data.result}`}
+                    value={`${apiEndpoint}/${data.result.code}`}
                     size={250}
                     logo={require("../assets/icon.png")}
                     logoSize={60}
@@ -265,3 +248,4 @@ const SendScreen: React.FC = () => {
 };
 
 export default SendScreen;
+
