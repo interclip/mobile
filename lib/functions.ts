@@ -13,7 +13,10 @@ const sleep = (milliseconds: number) => {
 };
 
 const isValidClipCode = (code: string): boolean => {
-  if (code.length < config.minimumCodeLength || code.length > config.maximumCodeLength) {
+  if (
+    code.length < config.minimumCodeLength ||
+    code.length > config.maximumCodeLength
+  ) {
     return false;
   } else if (!code.match(new RegExp(/^[\dA-Za-z]{5,99}$/))) {
     return false;

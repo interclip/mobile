@@ -46,7 +46,7 @@ import LogoImage from "../components/LogoImage";
 import CustomBackground from "../components/BottomSheetBackground";
 import CustomHandle from "../components/CustomHandle";
 import { getClip } from "../lib/requestClip";
-import URL from 'whatwg-url';
+import URL from "whatwg-url";
 
 // Root component
 
@@ -359,4 +359,3 @@ const HomeScreen: React.FC = () => {
 };
 
 export default HomeScreen;
-
