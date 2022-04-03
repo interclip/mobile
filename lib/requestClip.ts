@@ -46,5 +46,5 @@ export const getClip = async (code: string): Promise<ClipData> => {
             code: clipResponse.status
         };
     }
-    return await clipResponse.json();
+    return { ...await clipResponse.json(), code: clipResponse.status };
 };

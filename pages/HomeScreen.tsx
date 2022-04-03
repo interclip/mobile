@@ -132,7 +132,7 @@ const HomeScreen: React.FC = () => {
             setError(true);
             Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
             Notifier.showNotification({
-              title: `Got the error ${data.result} (${text})`,
+              title: `${data.result} (HTTP ${data.code})`,
               Component: NotifierComponents.Alert,
               componentProps: {
                 alertType: "error",
@@ -167,7 +167,7 @@ const HomeScreen: React.FC = () => {
               color: colorScheme === "dark" ? "white" : "black",
             }}
             placeholder="Your code here"
-            maxLength={config.minimumCodeLength}
+            maxLength={config.maximumCodeLength}
             inputStyle={{ fontSize: 50 }}
             onChangeText={(text) => setText(text)}
             defaultValue={text}
@@ -230,7 +230,7 @@ const HomeScreen: React.FC = () => {
                     ? colors.light
                     : colors.text,
                   backgroundColor:
-                    isError && !isValidClipCode(text)
+                    isError && isValidClipCode(text)
                       ? colors.errorColor
                       : null,
                   fontSize: 20,
