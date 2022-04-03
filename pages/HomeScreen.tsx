@@ -111,7 +111,10 @@ const HomeScreen: React.FC = () => {
   };
 
   useEffect(() => {
-    if (text.length >= config.minimumCodeLength && text.length <= config.maximumCodeLength) {
+    if (
+      text.length >= config.minimumCodeLength &&
+      text.length <= config.maximumCodeLength
+    ) {
       setText(text.replace(" ", "").toLowerCase());
       setLoading(true);
       getClip(text)
@@ -358,4 +361,3 @@ const HomeScreen: React.FC = () => {
 };
 
 export default HomeScreen;
-
