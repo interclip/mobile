@@ -72,7 +72,7 @@
     "whatwg-url": "^11.0.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.17.4",
+    "@babel/core": "^7.17.8",
     "babel-preset-expo": "^9.0.2",
     "eslint": "^8.12.0",
     "eslint-config-prettier": "^8.3.0",
