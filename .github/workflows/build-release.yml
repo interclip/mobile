@@ -71,7 +71,7 @@ jobs:
       - name: Download the app from Expo
         run: wget -O iclip.aab $(expo url:apk --non-interactive)
       - name: Upload the .aab as an action artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: android
           path: iclip.aab
