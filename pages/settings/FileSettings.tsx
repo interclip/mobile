@@ -121,4 +121,3 @@ function FileSettings(): JSX.Element {
 }
 
 export default FileSettings;
-

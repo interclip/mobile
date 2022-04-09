@@ -190,4 +190,3 @@ const QRScreen: React.FC = () => {
 };
 
 export default QRScreen;
-
