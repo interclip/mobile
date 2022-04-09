@@ -47,7 +47,7 @@ const FilePage: React.FC = () => {
       const permissionResult =
         await ImagePicker.requestMediaLibraryPermissionsAsync();
 
-      if (permissionResult.granted === false) {
+      if (!permissionResult.granted) {
         Notifier.showNotification({
           title: "Permission to access the camera roll is required!",
           Component: NotifierComponents.Alert,
@@ -62,11 +62,8 @@ const FilePage: React.FC = () => {
         mediaTypes: ImagePicker.MediaTypeOptions.All,
       });
 
-      if (pickerResult.cancelled === true) {
-        file = null;
-      } else {
-        file = pickerResult;
-      }
+      file = pickerResult.cancelled ? null : pickerResult;
+  
     } else if (action === "document") {
       const res = await DocumentPicker.getDocumentAsync();
       if (res.type !== "cancel") {
@@ -77,7 +74,7 @@ const FilePage: React.FC = () => {
     } else if (action === "camera") {
       const permissionResult = await ImagePicker.getCameraPermissionsAsync();
 
-      if (permissionResult.granted === false) {
+      if (!permissionResult.granted) {
         Notifier.showNotification({
           title: "Permission to access the camera is required!",
           Component: NotifierComponents.Alert,
@@ -96,11 +93,7 @@ const FilePage: React.FC = () => {
             : Settings.get("uploadquality"),
       });
 
-      if (pickerResult.cancelled === true) {
-        file = null;
-      } else {
-        file = pickerResult;
-      }
+      file = pickerResult.cancelled ? null : pickerResult;
     }
 
     if (file !== null) {

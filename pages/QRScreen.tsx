@@ -121,7 +121,7 @@ const QRScreen: React.FC = () => {
     return <Text>Requesting for camera permission</Text>;
   }
 
-  if (hasPermission === false) {
+  if (!hasPermission) {
     return <Text>No access to camera</Text>;
   }
 
