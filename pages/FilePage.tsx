@@ -63,7 +63,6 @@ const FilePage: React.FC = () => {
       });
 
       file = pickerResult.cancelled ? null : pickerResult;
-  
     } else if (action === "document") {
       const res = await DocumentPicker.getDocumentAsync();
       if (res.type !== "cancel") {
