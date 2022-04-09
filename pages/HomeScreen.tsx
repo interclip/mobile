@@ -30,7 +30,7 @@ import * as Haptics from "expo-haptics";
 
 import { Input, Icon, Button } from "react-native-elements";
 import { Notifier, NotifierComponents } from "react-native-notifier";
-import URL from 'url-parse';
+import URL from "url-parse";
 
 // Functional packages
 
