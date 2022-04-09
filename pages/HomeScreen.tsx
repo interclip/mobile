@@ -30,6 +30,7 @@ import * as Haptics from "expo-haptics";
 
 import { Input, Icon, Button } from "react-native-elements";
 import { Notifier, NotifierComponents } from "react-native-notifier";
+import URL from 'url-parse';
 
 // Functional packages
 
@@ -46,7 +47,6 @@ import LogoImage from "../components/LogoImage";
 import CustomBackground from "../components/BottomSheetBackground";
 import CustomHandle from "../components/CustomHandle";
 import { getClip } from "../lib/requestClip";
-import URL from "whatwg-url";
 
 // Root component
 
@@ -124,7 +124,7 @@ const HomeScreen: React.FC = () => {
             setStatusCode(200);
             setURL(data.result.url);
 
-            const host = URL.serializeHost(data.result.url);
+            const host = new URL(data.result.url).hostname;
             if (host === "files.interclip.app") {
               handleOpenPress();
             } else {
