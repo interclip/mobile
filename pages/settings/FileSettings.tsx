@@ -81,12 +81,18 @@ function FileSettings(): JSX.Element {
           color: colorScheme === "dark" ? "white" : "black",
         }}
       ></Text>
+      <Text>
+        This option is disabled for the time being because of it crashing the
+        whole app
+      </Text>
+
       <Section header="File uploads" {...sectionProps}>
         <Cell
           cellStyle="Basic"
           title="Media compression"
           cellAccessoryView={
             <RNPickerSelect
+              disabled
               placeholder={{
                 label: "Select one",
                 value: null,
@@ -115,3 +121,4 @@ function FileSettings(): JSX.Element {
 }
 
 export default FileSettings;
+
