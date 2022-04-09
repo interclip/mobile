@@ -27,9 +27,11 @@ import { sleep } from "../lib/functions";
 import { apiEndpoint, colors } from "../lib/constants";
 import { styles } from "../lib/pages";
 
+import URL from "url-parse";
+
 // Root component
 
-const QRScreen: React.FC = ({ navigation }) => {
+const QRScreen: React.FC = () => {
   const [hasPermission, setHasPermission] = useState<null | boolean>(null);
   const [qrd, setQrd] = useState<boolean>(false);
   const [cameraRotation, setCameraRotation] = useState(
@@ -50,49 +52,8 @@ const QRScreen: React.FC = ({ navigation }) => {
 
   const handleBarCodeScanned = ({ data }) => {
     setQrd(true);
-    const URLArr = data.split("/");
-    const result = `${URLArr[0]}//${URLArr[2]}`;
 
-    if (
-      result === "https://iclip.netlify.com" ||
-      result === "https://iclip.netlify.app" ||
-      result === apiEndpoint ||
-      Settings.get("data")
-    ) {
-      Vibration.vibrate();
-      URLArr[0].includes("http")
-        ? Linking.openURL(data)
-            .catch((e) => e)
-            .then(() => {
-              sleep(1000).then(() => {
-                setQrd(false);
-              });
-            })
-        : Linking.openURL(`http://${data}`)
-            .then(() => {
-              sleep(1000).then(() => {
-                setQrd(false);
-                navigation.navigate("HomePages", { screen: "Receive a clip" });
-              });
-            })
-            .catch((e) => {
-              Alert.alert(
-                "An error has occured",
-                "This link is probably broken or isn't even a link",
-                [
-                  {
-                    text: "OK",
-                  },
-                  {
-                    text: "Copy the error to clipboard",
-                    onPress: () => {
-                      Clipboard.setString(e);
-                    },
-                  },
-                ]
-              );
-            });
-    } else if (!isURL(data)) {
+    if (typeof data !== "string" || !isURL(data)) {
       Alert.alert(
         "This doesn't look like a URL",
         "Or it's really weird and I have no idea what you're trying to do",
@@ -105,6 +66,27 @@ const QRScreen: React.FC = ({ navigation }) => {
           },
         ]
       );
+      return;
+    }
+
+    const url = new URL(data);
+    const { hostname } = url;
+
+    if (
+      (hostname === "iclip.netlify.com" ||
+        hostname === "iclip.netlify.app" ||
+        hostname === new URL(apiEndpoint).hostname ||
+        Settings.get("data")) &&
+      isURL(data)
+    ) {
+      Vibration.vibrate();
+      Linking.openURL(data)
+        .catch((e) => e)
+        .then(() => {
+          sleep(1000).then(() => {
+            setQrd(false);
+          });
+        });
     } else {
       Alert.alert(
         "This doesn't appear to be an Interclip URL",
@@ -208,3 +190,4 @@ const QRScreen: React.FC = ({ navigation }) => {
 };
 
 export default QRScreen;
+
