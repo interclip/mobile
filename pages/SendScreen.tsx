@@ -225,7 +225,7 @@ const SendScreen: React.FC = () => {
                 </View>
               </View>
             </Modal>
-            {isURL(enteredUrl, { require_protocol: true }) && (
+            {isURL(enteredUrl, { require_protocol: true }) && data.result.code && (
               <Icon
                 type="ionicon" // The icon is loaded from the ionicons icon library
                 name="qr-code-outline"
