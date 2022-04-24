@@ -6,6 +6,7 @@ import { Image } from "react-native-elements";
 import { Notifier, NotifierComponents } from "react-native-notifier";
 
 import { colors } from "../lib/constants";
+import { proxied } from "../lib/image";
 
 type Contributor = {
   login: string;
@@ -19,7 +20,7 @@ const ContributorList = () => {
     {
       login: "interclip",
       type: "User",
-      avatar_url: "https://avatars.githubusercontent.com/u/87187104?v=4",
+      avatar_url: proxied("https://avatars.githubusercontent.com/u/87187104?v=4"),
       html_url: "https://github.com/interclip",
     },
   ]);
@@ -88,7 +89,7 @@ const ContributorList = () => {
             key={contributor.login}
             onPress={() => Linking.openURL(contributor.html_url)}
             source={{
-              uri: contributor.avatar_url,
+              uri: proxied(contributor.avatar_url, 30, 30),
             }}
             style={{
               width: 35,
