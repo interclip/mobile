@@ -20,7 +20,9 @@ const ContributorList = () => {
     {
       login: "interclip",
       type: "User",
-      avatar_url: proxied("https://avatars.githubusercontent.com/u/87187104?v=4"),
+      avatar_url: proxied(
+        "https://avatars.githubusercontent.com/u/87187104?v=4"
+      ),
       html_url: "https://github.com/interclip",
     },
   ]);
