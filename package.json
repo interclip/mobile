@@ -72,7 +72,7 @@
     "validator": "^13.7.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.17.4",
+    "@babel/core": "^7.18.13",
     "@types/url-parse": "^1.4.8",
     "babel-preset-expo": "^9.0.2",
     "eslint": "^8.12.0",
