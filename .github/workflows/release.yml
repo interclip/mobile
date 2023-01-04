@@ -10,7 +10,7 @@ jobs:
         with:
           node-version: 14.x
           cache: yarn
-      - uses: expo/expo-github-action@7.0.3
+      - uses: expo/expo-github-action@7.2.1
         with:
           expo-version: 4.x
           token: ${{ secrets.EXPO_TOKEN }}
