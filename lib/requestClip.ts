@@ -7,13 +7,9 @@ import { apiEndpoint } from "./constants";
  */
 export const requestClip = async (
   url: string,
-  sig?: {
-    signature: string;
-    address?: string;
-  }
 ): Promise<ClipData> => {
-  const query = sig ? { url, sig: sig.signature, addr: sig.address } : { url };
-  const clipResponse = await fetch(`${apiEndpoint}/api/clip/set`, {
+  const query = { url };
+  const clipResponse = await fetch(`${apiEndpoint}/api/set`, {
     method: "POST",
     body: JSON.stringify(query),
     headers: {

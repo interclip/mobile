@@ -33,7 +33,7 @@ import { styles } from "../lib/pages";
 
 import LogoImage from "../components/LogoImage";
 import { requestClip } from "../lib/requestClip";
-import { Clip, SuccessResponse } from "../typings/interclip";
+import { SuccessResponse } from "../typings/interclip";
 
 // Root component
 
@@ -43,7 +43,7 @@ const SendScreen: React.FC = () => {
   const [isError, setError] = useState<string | null>(null);
 
   // after the request completes
-  const [data, setData] = useState<SuccessResponse<Clip> | null>(null); // Dynamically loaded data from the Interclip REST API
+  const [data, setData] = useState<SuccessResponse<string> | null>(null); // Dynamically loaded data from the Interclip REST API
   const [enteredUrl, setEnteredUrl] = useState(""); // The code entered in the <Input>
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -137,7 +137,7 @@ const SendScreen: React.FC = () => {
                 onLongPress={() => {
                   /* Handle functionality, when user presses for a longer period of time */
                   try {
-                    Clipboard.setString(data.result.code);
+                    Clipboard.setString(data.result);
                     Notifier.showNotification({
                       title: "The code has been copied to your clipboard!",
                       Component: NotifierComponents.Alert,
@@ -165,7 +165,7 @@ const SendScreen: React.FC = () => {
                   marginLeft: "20%",
                 }}
               >
-                {data && data.result.code.slice(0, data.result.hashLength)}
+                {data && data.result}
               </Text>
             )}
 
@@ -182,7 +182,7 @@ const SendScreen: React.FC = () => {
               >
                 <View>
                   <QRCode
-                    value={data && `${apiEndpoint}/${data.result.code}`}
+                    value={data && `${apiEndpoint}/${data.result}`}
                     size={250}
                     logo={require("../assets/icon.png")}
                     logoSize={60}
@@ -225,7 +225,7 @@ const SendScreen: React.FC = () => {
                 </View>
               </View>
             </Modal>
-            {isURL(enteredUrl, { require_protocol: true }) && data.result.code && (
+            {isURL(enteredUrl, { require_protocol: true }) && data.result && (
               <Icon
                 type="ionicon" // The icon is loaded from the ionicons icon library
                 name="qr-code-outline"
@@ -247,3 +247,4 @@ const SendScreen: React.FC = () => {
 };
 
 export default SendScreen;
+

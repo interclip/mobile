@@ -374,9 +374,7 @@ const FilePage: React.FC = () => {
               /* Handle functionality, when user presses for a longer period of time */
               try {
                 if (data.status === "success") {
-                  Clipboard.setString(
-                    data.result.code.slice(0, data.result.hashLength)
-                  );
+                  Clipboard.setString(data.result);
                   Notifier.showNotification({
                     title: "The file code has been copied to your clipboard!",
                     Component: NotifierComponents.Alert,
@@ -396,9 +394,7 @@ const FilePage: React.FC = () => {
               }
             }}
           >
-            {data &&
-              data.status === "success" &&
-              data.result.code.slice(0, data.result.hashLength)}
+            {data && data.status === "success" && data.result}
           </Text>
         </View>
       </View>
@@ -407,3 +403,4 @@ const FilePage: React.FC = () => {
 };
 
 export default FilePage;
+

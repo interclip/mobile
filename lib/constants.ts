@@ -1,4 +1,4 @@
-export const apiEndpoint = "https://beta.interclip.app/";
+export const apiEndpoint = "https://interclip.app/";
 export const filesEndpoint = "https://files.interclip.app";
 
 export const config = {

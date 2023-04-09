@@ -122,9 +122,9 @@ const HomeScreen: React.FC = () => {
           if (data.status === "success") {
             setError(false);
             setStatusCode(200);
-            setURL(data.result.url);
+            setURL(data.result);
 
-            const host = new URL(data.result.url).hostname;
+            const host = new URL(data.result).hostname;
             if (host === "files.interclip.app") {
               handleOpenPress();
             } else {
